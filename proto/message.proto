@@ -5,11 +5,12 @@ message Message {
   Envelope envelope = 2;
   oneof payload {
     bytes generic = 3;
-    NearBlock near_block = 4;
-    RpcRequest rpc_request = 5;
-    RpcResponse rpc_response = 6;
-    GetAccountStatusRequest get_account_status_request = 7;
-    GetAccountStatusResponse get_account_status_response = 8;
+    RpcRequest rpc_request = 4;
+    RpcResponse rpc_response = 5;
+    GetAccountStatusRequest get_account_status_request = 6;
+    GetAccountStatusResponse get_account_status_response = 7;
+    BlockView near_block_header = 8;
+    Shard near_block_shard = 9;
   }
 }
 
@@ -19,11 +20,6 @@ message Envelope {
   uint32 timestamp_s = 3;
   uint32 timestamp_ms = 4;
   bytes unique_id = 5;
-}
-
-message NearBlock {
-  BlockView block = 1;
-  repeated Shard shards = 2;
 }
 
 message BlockView {
