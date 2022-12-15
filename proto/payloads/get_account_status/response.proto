@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+message GetAccountStatusResponse {
+  string account = 1;
+  GetAccountStatusResponseQuota api_quota = 2;
+  repeated string api_tokens = 3;
+}
+
+message GetAccountStatusResponseQuota {
+  uint64 transaction_count = 1;
+  uint64 transaction_limit = 2;
+}

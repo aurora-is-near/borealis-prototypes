@@ -1,0 +1,73 @@
+syntax = "proto3";
+import "errors/execution.proto";
+import "receipt.proto";
+
+message ExecutionOutcomeWithOptionalReceipt {
+  ExecutionOutcomeWithIdView execution_outcome = 1;
+  optional ReceiptView receipt = 2;
+}
+
+message ExecutionOutcomeWithReceipt {
+  ExecutionOutcomeWithIdView execution_outcome = 1;
+  ReceiptView receipt = 2;
+}
+
+message ExecutionOutcomeWithIdView {
+  repeated MerklePathItem proof = 1;
+  bytes block_hash = 2;
+  bytes id = 3;
+  ExecutionOutcomeView outcome = 4;
+}
+
+message ExecutionOutcomeView {
+  repeated string logs = 1;
+  repeated bytes receipt_ids = 2;
+  uint64 gas_burnt = 3;
+  bytes tokens_burnt = 4;
+  string executor_id = 5;
+  ExecutionStatusView status = 6;
+  ExecutionMetadataView metadata = 7;
+}
+
+message ExecutionStatusView {
+  message Unknown {}
+  message Failure {
+    TxExecutionError error = 1;
+  }
+  message SuccessValue {
+    bytes value = 1;
+  }
+  message SuccessReceiptId {
+    bytes receipt_hash = 1;
+  }
+  oneof variant {
+    Unknown unknown = 1;
+    Failure failure = 2;
+    SuccessValue success_value = 3;
+    SuccessReceiptId success_receipt_id = 4;
+  }
+}
+
+message ExecutionMetadataView {
+  message RepeatedCostGasUsed {
+    repeated CostGasUsed gas_profile = 2;
+  }
+  uint32 version = 1;
+  optional RepeatedCostGasUsed gas_profile = 2;
+}
+
+message MerklePathItem {
+  bytes hash = 1;
+  Direction direction = 2;
+}
+
+enum Direction {
+  LEFT = 0;
+  RIGHT = 1;
+}
+
+message CostGasUsed {
+  string cost_category = 1;
+  string cost = 2;
+  uint64 gas_used = 3;
+}
