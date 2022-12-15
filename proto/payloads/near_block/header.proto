@@ -2,7 +2,7 @@ syntax = "proto3";
 import "common.proto";
 import "stake.proto";
 
-message BlockView {
+message BlockHeaderView {
   string author = 1;
   IndexerBlockHeaderView header = 2;
 }

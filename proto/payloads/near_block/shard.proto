@@ -6,7 +6,7 @@ import "state_change.proto";
 import "transaction.proto";
 import "receipt.proto";
 
-message Shard {
+message ShardBlock {
   uint64 shard_id = 1;
   optional ChunkView chunk = 2;
   repeated ExecutionOutcomeWithReceipt receipt_execution_outcomes = 3;
