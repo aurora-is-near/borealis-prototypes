@@ -16,7 +16,7 @@ message Message {
     GetAccountStatusRequest get_account_status_request = 6;
     GetAccountStatusResponse get_account_status_response = 7;
     BlockHeaderView near_block_header = 8;
-    ShardBlock near_shard_block = 9;
+    BlockShard near_block_shard = 9;
   }
 }
 
