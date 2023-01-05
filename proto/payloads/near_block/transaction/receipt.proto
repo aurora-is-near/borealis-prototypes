@@ -5,7 +5,7 @@ import "access_key.proto";
 message ReceiptView {
   string predecessor_id = 1;
   string receiver_id = 2;
-  bytes receipt_id = 3;
+  bytes h256_receipt_id = 3;
   ReceiptEnumView receipt = 4;
 }
 
@@ -13,13 +13,13 @@ message ReceiptEnumView {
   message Action {
     string signer_id = 1;
     PublicKey signer_public_key = 2;
-    bytes gas_price = 3;
+    bytes u128_gas_price = 3;
     repeated DataReceiverView output_data_receivers = 4;
-    repeated bytes input_data_ids = 5;
+    repeated bytes h256_input_data_ids = 5;
     repeated ActionView actions = 6;
   }
   message Data {
-    bytes data_id = 1;
+    bytes h256_data_id = 1;
     optional bytes data = 2;
   }
   oneof variant {
@@ -29,7 +29,7 @@ message ReceiptEnumView {
 }
 
 message DataReceiverView {
-  bytes data_id = 1;
+  bytes h256_data_id = 1;
   string receiver_id = 2;
 }
 
@@ -42,13 +42,13 @@ message ActionView {
     string method_name = 1;
     bytes args = 2;
     uint64 gas = 3;
-    bytes deposit = 4;
+    bytes u128_deposit = 4;
   }
   message Transfer {
-    bytes deposit = 1;
+    bytes u128_deposit = 1;
   }
   message Stake {
-    bytes stake = 1;
+    bytes u128_stake = 1;
     PublicKey public_key = 2;
   }
   message AddKey {

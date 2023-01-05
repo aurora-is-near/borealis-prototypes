@@ -14,16 +14,16 @@ message ExecutionOutcomeWithReceipt {
 
 message ExecutionOutcomeWithIdView {
   repeated MerklePathItem proof = 1;
-  bytes block_hash = 2;
-  bytes id = 3;
+  bytes h256_block_hash = 2;
+  bytes h256_id = 3;
   ExecutionOutcomeView outcome = 4;
 }
 
 message ExecutionOutcomeView {
   repeated string logs = 1;
-  repeated bytes receipt_ids = 2;
+  repeated bytes h256_receipt_ids = 2;
   uint64 gas_burnt = 3;
-  bytes tokens_burnt = 4;
+  bytes u128_tokens_burnt = 4;
   string executor_id = 5;
   ExecutionStatusView status = 6;
   ExecutionMetadataView metadata = 7;
@@ -38,7 +38,7 @@ message ExecutionStatusView {
     bytes value = 1;
   }
   message SuccessReceiptId {
-    bytes receipt_hash = 1;
+    bytes h256_receipt_hash = 1;
   }
   oneof variant {
     Unknown unknown = 1;
@@ -57,7 +57,7 @@ message ExecutionMetadataView {
 }
 
 message MerklePathItem {
-  bytes hash = 1;
+  bytes h256_hash = 1;
   Direction direction = 2;
 }
 

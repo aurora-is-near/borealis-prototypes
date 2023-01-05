@@ -50,7 +50,7 @@ message TxExecutionError {
         // An account which needs balance
         string account_id = 1;
         // Balance required to complete an action.
-        bytes amount = 2;
+        bytes u128_amount = 2;
       }
       // Account is not yet staked, but tries to unstake
       message TriesToUnstake {
@@ -59,14 +59,14 @@ message TxExecutionError {
       // The account doesn't have enough balance to increase the stake.
       message TriesToStake {
         string account_id = 1;
-        bytes stake = 2;
-        bytes locked = 3;
-        bytes balance = 4;
+        bytes u128_stake = 2;
+        bytes u128_locked = 3;
+        bytes u128_balance = 4;
       }
       message InsufficientStake {
         string account_id = 1;
-        bytes stake = 2;
-        bytes minimum_stake = 3;
+        bytes u128_stake = 2;
+        bytes u128_minimum_stake = 3;
       }
       // An error occurred during a `FunctionCall` Action, parameter is debug message.
       message FunctionCallError {
@@ -126,8 +126,8 @@ message TxExecutionError {
       message NotEnoughAllowance {
         string account_id = 1;
         PublicKey public_key = 2;
-        bytes allowance = 3;
-        bytes cost = 4;
+        bytes u128_allowance = 3;
+        bytes u128_cost = 4;
       }
       message DepositWithFunctionCall {}
       oneof variant {
@@ -159,12 +159,12 @@ message TxExecutionError {
     message InvalidSignature {}
     message NotEnoughBalance {
       string signer_id = 1;
-      bytes balance = 2;
-      bytes cost = 3;
+      bytes u128_balance = 2;
+      bytes u128_cost = 3;
     }
     message LackBalanceForState {
       string signer_id = 1;
-      bytes amount = 2;
+      bytes u128_amount = 2;
     }
     message CostOverflow {}
     message InvalidChain {}

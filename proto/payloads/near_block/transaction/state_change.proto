@@ -11,19 +11,19 @@ message StateChangeCauseView {
   message NotWritableToDisk {}
   message InitialState {}
   message TransactionProcessing {
-    bytes tx_hash = 1;
+    bytes h256_tx_hash = 1;
   }
   message ActionReceiptProcessingStarted {
-    bytes receipt_hash = 1;
+    bytes h256_receipt_hash = 1;
   }
   message ActionReceiptGasReward {
-    bytes receipt_hash = 1;
+    bytes h256_receipt_hash = 1;
   }
   message ReceiptProcessing {
-    bytes receipt_hash = 1;
+    bytes h256_receipt_hash = 1;
   }
   message PostponedReceipt {
-    bytes receipt_hash = 1;
+    bytes h256_receipt_hash = 1;
   }
   message UpdatedDelayedReceipts {}
   message ValidatorAccountsUpdate {}
@@ -90,9 +90,9 @@ message StateChangeValueView {
 }
 
 message AccountView {
-  bytes amount = 1;
-  bytes locked = 2;
-  bytes code_hash = 3;
+  bytes u128_amount = 1;
+  bytes u128_locked = 2;
+  bytes h256_code_hash = 3;
   uint64 storage_usage = 4;
   uint64 storage_paid_at = 5;
 }

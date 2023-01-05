@@ -7,7 +7,7 @@ message AccessKeyView {
 
 message AccessKeyPermissionView {
   message FunctionCall {
-    optional bytes allowance = 1;
+    optional bytes u128_allowance = 1;
     string receiver_id = 2;
     repeated string method_names = 3;
   }

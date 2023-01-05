@@ -25,5 +25,5 @@ message Envelope {
   uint64 sequential_id = 2;
   uint32 timestamp_s = 3;
   uint32 timestamp_ms = 4;
-  bytes unique_id = 5;
+  bytes u128_unique_id = 5;
 }

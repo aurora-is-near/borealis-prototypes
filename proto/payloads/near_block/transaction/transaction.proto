@@ -15,5 +15,5 @@ message SignedTransactionView {
   string receiver_id = 4;
   repeated ActionView actions = 5;
   Signature signature = 6;
-  bytes hash = 7;
+  bytes h256_hash = 7;
 }
