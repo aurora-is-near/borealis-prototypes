@@ -84,7 +84,7 @@ impl From<ExecutionOutcomeView> for proto::ExecutionOutcomeView {
         Self {
             logs: value.logs,
             h256_receipt_ids: value.receipt_ids.into_iter().map(|v| v.0.to_vec()).collect(),
-            gas_burnt: value.gas_burnt.into(),
+            gas_burnt: value.gas_burnt,
             u128_tokens_burnt: value.tokens_burnt.to_be_bytes().to_vec(),
             executor_id: value.executor_id.into(),
             status: Some(value.status.into()),
@@ -653,7 +653,7 @@ impl From<InvalidAccessKeyError> for proto::tx_execution_error::invalid_tx_error
                     proto::tx_execution_error::invalid_tx_error::invalid_access_key_error::Variant::ReceiverMismatch(
                         proto::tx_execution_error::invalid_tx_error::invalid_access_key_error::ReceiverMismatch {
                             tx_receiver: tx_receiver.to_string(),
-                            ak_receiver: ak_receiver.to_string(),
+                            ak_receiver,
                         }
                     )
                 }
@@ -882,7 +882,7 @@ impl From<CostGasUsed> for proto::CostGasUsed {
             cost_category: match value.cost_category.as_str() {
                 "ACTION_COST" => proto::CostCategory::ActionCost,
                 "WASM_HOST_COST" => proto::CostCategory::WasmHostCost,
-                v => panic!("Unknown variant {}", v),
+                v => panic!("Unknown variant {v}"),
             } as i32,
             cost: Some(proto::Cost {
                 variant: Some(match value.cost.as_str() {
@@ -1094,7 +1094,7 @@ impl From<CostGasUsed> for proto::CostGasUsed {
                         value: proto::ExtCosts::AltBn128G1SumElement as i32,
                     }),
                     "WASM_INSTRUCTION" => proto::cost::Variant::WasmInstruction(proto::cost::WasmInstruction {}),
-                    v => panic!("Unknown variant {}", v),
+                    v => panic!("Unknown variant {v}"),
                 }),
             }),
             gas_used: value.gas_used,
