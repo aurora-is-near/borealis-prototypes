@@ -8,7 +8,7 @@ import "payloads/get_account_status/response.proto";
 
 message Message {
   uint32 version = 1;
-  Envelope envelope = 2;
+  string id = 2;
   oneof payload {
     bytes generic = 3;
     RpcRequest rpc_request = 4;
@@ -18,12 +18,4 @@ message Message {
     BlockHeaderView near_block_header = 8;
     BlockShard near_block_shard = 9;
   }
-}
-
-message Envelope {
-  uint32 event_type = 1;
-  uint64 sequential_id = 2;
-  uint32 timestamp_s = 3;
-  uint32 timestamp_ms = 4;
-  bytes u128_unique_id = 5;
 }

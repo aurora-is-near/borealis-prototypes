@@ -1,5 +1,4 @@
 use crate::proto;
-use borealis_types::message::Envelope;
 use borealis_types::message::Message;
 use borealis_types::payloads::events::{
     BlockView, ChunkHeaderView, ChunkView, ExecutionOutcomeWithOptionalReceipt, ExecutionOutcomeWithReceipt,
@@ -27,6 +26,8 @@ use std::iter::once;
 
 impl From<Message<NEARBlock>> for proto::Messages {
     fn from(value: Message<NEARBlock>) -> Self {
+        let height = value.payload.block.header.height;
+
         value
             .payload
             .shards
@@ -34,28 +35,16 @@ impl From<Message<NEARBlock>> for proto::Messages {
             .map(proto::BlockShard::from)
             .map(|v| proto::Message {
                 version: value.version as u32,
-                envelope: Some(value.envelope.clone().into()),
+                id: format!("{}.{}", height, v.shard_id),
                 payload: Some(proto::message::Payload::NearBlockShard(v)),
             })
             .chain(once(proto::Message {
                 version: value.version as u32,
-                envelope: Some(value.envelope.clone().into()),
+                id: height.to_string(),
                 payload: Some(proto::message::Payload::NearBlockHeader(value.payload.block.into())),
             }))
             .collect::<Vec<proto::Message>>()
             .into()
-    }
-}
-
-impl From<Envelope> for proto::Envelope {
-    fn from(value: Envelope) -> Self {
-        Self {
-            event_type: value.event_type as u32,
-            sequential_id: value.sequential_id,
-            timestamp_s: value.timestamp_s,
-            timestamp_ms: value.timestamp_ms as u32,
-            u128_unique_id: value.unique_id.to_vec(),
-        }
     }
 }
 
