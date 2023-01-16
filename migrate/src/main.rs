@@ -1,10 +1,8 @@
-mod conversions;
-mod proto;
-
 use anyhow::anyhow;
 use async_nats::jetstream::consumer::{Consumer, DeliverPolicy};
 use async_nats::jetstream::{consumer, Context};
 use async_nats::ConnectOptions;
+use borealis_proto_types as proto;
 use borealis_types::payloads::NEARBlock;
 use clap::Parser;
 use futures_util::TryStreamExt;

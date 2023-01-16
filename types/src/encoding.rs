@@ -908,10 +908,10 @@ impl From<CostGasUsed> for proto::CostGasUsed {
                     "BASE" => proto::cost::Variant::ExtCost(proto::cost::ExtCost {
                         value: proto::ExtCosts::Base as i32,
                     }),
-                    "CONTRACT_LOADING_BASE" => proto::cost::Variant::ExtCost(proto::cost::ExtCost {
+                    "CONTRACT_LOADING_BASE" | "CONTRACT_COMPILE_BASE" => proto::cost::Variant::ExtCost(proto::cost::ExtCost {
                         value: proto::ExtCosts::ContractLoadingBase as i32,
                     }),
-                    "CONTRACT_LOADING_BYTES" => proto::cost::Variant::ExtCost(proto::cost::ExtCost {
+                    "CONTRACT_LOADING_BYTES" | "CONTRACT_COMPILE_BYTES" => proto::cost::Variant::ExtCost(proto::cost::ExtCost {
                         value: proto::ExtCosts::ContractLoadingBytes as i32,
                     }),
                     "READ_MEMORY_BASE" => proto::cost::Variant::ExtCost(proto::cost::ExtCost {

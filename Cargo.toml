@@ -1,31 +1,5 @@
-[package]
-name = "borealis-proto"
-version = "0.1.0"
-edition = "2021"
-
-[dependencies]
-anyhow = "1"
-async-nats = { version = "0.26" }
-borealis-types = { git = "ssh://git@github.com/aurora-is-near/borealis.rs.git", tag = "borealis-rs-v0.2.0" }
-bs58 = "0.4"
-bytes = "1"
-chrono = "0.4"
-clap = { version = "4", features = ["derive"] }
-env_logger = "0.10"
-futures-util = "0.3"
-log = "0.4"
-near-crypto = { git = "https://github.com/near/nearcore", tag = "1.29.0-rc.1" }
-near-primitives = { git = "https://github.com/near/nearcore", tag = "1.29.0-rc.1" }
-near-vm-errors = { git = "https://github.com/near/nearcore", tag = "1.29.0-rc.1" }
-prost = "0.11"
-thiserror = "1"
-time = { version = "0.3", features = ["macros"] }
-tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
-zstd = "0.12"
-
-[dev-dependencies]
-ed25519-dalek = "1"
-sha2 = "0.10"
-
-[build-dependencies]
-prost-build = { version = "0.11" }
+[workspace]
+members = [
+    "types",
+    "migrate",
+]
