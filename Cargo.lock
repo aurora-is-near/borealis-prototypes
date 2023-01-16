@@ -152,19 +152,34 @@ dependencies = [
 ]
 
 [[package]]
-name = "borealis-proto"
+name = "borealis-proto-migrate"
 version = "0.1.0"
 dependencies = [
  "anyhow",
  "async-nats",
+ "borealis-proto-types",
+ "borealis-types",
+ "chrono",
+ "clap",
+ "env_logger",
+ "futures-util",
+ "log",
+ "prost",
+ "thiserror",
+ "tokio",
+ "zstd",
+]
+
+[[package]]
+name = "borealis-proto-types"
+version = "0.1.0"
+dependencies = [
  "borealis-types",
  "bs58",
  "bytes",
  "chrono",
- "clap",
  "ed25519-dalek",
- "env_logger",
- "futures-util",
+ "itertools",
  "log",
  "near-crypto",
  "near-primitives",
@@ -173,9 +188,6 @@ dependencies = [
  "prost-build",
  "sha2 0.10.6",
  "thiserror",
- "time 0.3.17",
- "tokio",
- "zstd",
 ]
 
 [[package]]
@@ -546,9 +558,9 @@ checksum = "53aff6fdc1b181225acdcb5b14c47106726fd8e486707315b1b138baed68ee31"
 
 [[package]]
 name = "ed25519"
-version = "1.5.2"
+version = "1.5.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1e9c280362032ea4203659fc489832d0204ef09f247a0506f170dafcac08c369"
+checksum = "91cff35c70bba8a626e3185d8cd48cc11b5437e1a5bcd15b9b5fa3c64b6dfee7"
 dependencies = [
  "signature",
 ]
