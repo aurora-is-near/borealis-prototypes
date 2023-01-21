@@ -1,0 +1,46 @@
+syntax = "proto3";
+import "common.proto";
+import "stake.proto";
+
+message BlockHeaderView {
+  string author = 1;
+  IndexerBlockHeaderView header = 2;
+}
+
+message IndexerBlockHeaderView {
+  uint64 height = 1;
+  optional uint64 prev_height = 2;
+  bytes h256_epoch_id = 3;
+  bytes h256_next_epoch_id = 4;
+  bytes h256_hash = 5;
+  bytes h256_prev_hash = 6;
+  bytes h256_prev_state_root = 7;
+  bytes h256_chunk_receipts_root = 8;
+  bytes h256_chunk_headers_root = 9;
+  bytes h256_chunk_tx_root = 10;
+  bytes h256_outcome_root = 11;
+  uint64 chunks_included = 12;
+  bytes h256_challenges_root = 13;
+  uint64 timestamp = 14;
+  uint64 timestamp_nanosec = 15;
+  bytes h256_random_value = 16;
+  repeated ValidatorStakeView validator_proposals = 17;
+  repeated bool chunk_mask = 18;
+  bytes u128_gas_price = 19;
+  optional uint64 block_ordinal = 20;
+  bytes u128_total_supply = 21;
+  repeated SlashedValidator challenges_result = 22;
+  bytes h256_last_final_block = 23;
+  bytes h256_last_ds_final_block = 24;
+  bytes h256_next_bp_hash = 25;
+  bytes h256_block_merkle_root = 26;
+  optional bytes h256_epoch_sync_data_hash = 27;
+  repeated OptionalSignature approvals = 28;
+  Signature signature = 29;
+  uint32 latest_protocol_version = 30;
+}
+
+message SlashedValidator {
+  string account_id = 1;
+  bool is_double_sign = 2;
+}

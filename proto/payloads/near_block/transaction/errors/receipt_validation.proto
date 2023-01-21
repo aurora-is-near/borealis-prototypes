@@ -1,0 +1,46 @@
+syntax = "proto3";
+import "common.proto";
+import "errors/actions_validation.proto";
+
+// Describes the error for validating a receipt.
+message ReceiptValidationError {
+  // The `predecessor_id` of a Receipt is not valid.
+  message InvalidPredecessorId {
+    string account_id = 1;
+  }
+  // The `receiver_id` of a Receipt is not valid.
+  message InvalidReceiverId {
+    string account_id = 1;
+  }
+  // The `signer_id` of an ActionReceipt is not valid.
+  message InvalidSignerId {
+    string account_id = 1;
+  }
+  // The `receiver_id` of a DataReceiver within an ActionReceipt is not valid.
+  message InvalidDataReceiverId {
+    string account_id = 1;
+  }
+  // The length of the returned data exceeded the limit in a DataReceipt.
+  message ReturnedValueLengthExceeded {
+    uint64 length = 1;
+    uint64 limit = 2;
+  }
+  // The number of input data dependencies exceeds the limit in an ActionReceipt.
+  message NumberInputDataDependenciesExceeded {
+    uint64 number_of_input_data_dependencies = 1;
+    uint64 limit = 2;
+  }
+  // An error occurred while validating actions of an ActionReceipt.
+  message ActionsValidation {
+    ActionsValidationError error = 1;
+  }
+  oneof variant {
+    InvalidPredecessorId invalid_predecessor_id = 1;
+    InvalidReceiverId invalid_receiver_id = 2;
+    InvalidSignerId invalid_signer_id = 3;
+    InvalidDataReceiverId invalid_data_receiver_id = 4;
+    ReturnedValueLengthExceeded returned_value_length_exceeded = 5;
+    NumberInputDataDependenciesExceeded number_input_data_dependencies_exceeded = 6;
+    ActionsValidation actions_validation = 7;
+  }
+}

@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+message RpcResponse {
+  uint32 version = 1;
+  bytes content = 2;
+  map<string, bytes> annotations = 3;
+}

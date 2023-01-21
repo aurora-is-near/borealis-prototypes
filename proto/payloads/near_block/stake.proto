@@ -1,0 +1,13 @@
+syntax = "proto3";
+import "common.proto";
+
+message ValidatorStakeView {
+  message ValidatorStakeViewV1 {
+    string account_id = 1;
+    PublicKey public_key = 2;
+    bytes u128_stake = 3;
+  }
+  oneof variant {
+    ValidatorStakeViewV1 v1 = 1;
+  }
+}

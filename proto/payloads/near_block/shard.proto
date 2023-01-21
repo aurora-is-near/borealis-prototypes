@@ -1,0 +1,41 @@
+syntax = "proto3";
+import "common.proto";
+import "stake.proto";
+import "execution.proto";
+import "state_change.proto";
+import "transaction.proto";
+import "receipt.proto";
+
+message BlockShard {
+  uint64 shard_id = 1;
+  optional ChunkView chunk = 2;
+  repeated ExecutionOutcomeWithReceipt receipt_execution_outcomes = 3;
+  repeated StateChangeWithCauseView state_changes = 4;
+}
+
+message ChunkView {
+  string author = 1;
+  ChunkHeaderView header = 2;
+  repeated TransactionWithOutcome transactions = 3;
+  repeated ReceiptView receipts = 4;
+}
+
+message ChunkHeaderView {
+  bytes h256_chunk_hash = 1;
+  bytes h256_prev_block_hash = 2;
+  bytes h256_outcome_root = 3;
+  bytes h256_prev_state_root = 4;
+  bytes h256_encoded_merkle_root = 5;
+  uint64 encoded_length = 6;
+  uint64 height_created = 7;
+  uint64 height_included = 8;
+  uint64 shard_id = 9;
+  uint64 gas_used = 10;
+  uint64 gas_limit = 11;
+  bytes u128_validator_reward = 12;
+  bytes u128_balance_burnt = 13;
+  bytes h256_outgoing_receipts_root = 14;
+  bytes h256_tx_root = 15;
+  repeated ValidatorStakeView validator_proposals = 16;
+  Signature signature = 17;
+}
