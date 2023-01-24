@@ -32,12 +32,14 @@ impl From<Message<NEARBlock>> for proto::Messages {
             .payload
             .shards
             .into_iter()
-            .map(proto::BlockShard::from)
+            .map(|v| proto::BlockShard::from((v, &value.payload.block)))
             .map(|v| proto::Message {
                 version: value.version as u32,
                 id: format!("{}.{}", height, v.shard_id),
                 payload: Some(proto::message::Payload::NearBlockShard(v)),
             })
+            .collect::<Vec<proto::Message>>()
+            .into_iter()
             .chain(once(proto::Message {
                 version: value.version as u32,
                 id: height.to_string(),
@@ -48,6 +50,58 @@ impl From<Message<NEARBlock>> for proto::Messages {
     }
 }
 
+impl From<(Shard, &BlockView)> for proto::BlockShard {
+    fn from(value: (Shard, &BlockView)) -> Self {
+        Self {
+            header: Some(value.1.into()),
+            ..proto::BlockShard::from(value.0)
+        }
+    }
+}
+
+impl From<&BlockView> for proto::PartialBlockHeaderView {
+    fn from(value: &BlockView) -> Self {
+        Self {
+            author: value.author.clone().into(),
+            header: Some((&value.header).into()),
+        }
+    }
+}
+
+impl From<&IndexerBlockHeaderView> for proto::PartialIndexerBlockHeaderView {
+    fn from(value: &IndexerBlockHeaderView) -> Self {
+        Self {
+            height: value.height,
+            prev_height: value.prev_height,
+            h256_epoch_id: value.epoch_id.0.to_vec(),
+            h256_next_epoch_id: value.next_epoch_id.0.to_vec(),
+            h256_hash: value.hash.0.to_vec(),
+            h256_prev_hash: value.prev_hash.0.to_vec(),
+            h256_prev_state_root: value.prev_state_root.0.to_vec(),
+            h256_chunk_receipts_root: value.chunk_receipts_root.0.to_vec(),
+            h256_chunk_headers_root: value.chunk_headers_root.0.to_vec(),
+            h256_chunk_tx_root: value.chunk_tx_root.0.to_vec(),
+            h256_outcome_root: value.outcome_root.0.to_vec(),
+            chunks_included: value.chunks_included,
+            h256_challenges_root: value.challenges_root.0.to_vec(),
+            timestamp: value.timestamp,
+            timestamp_nanosec: value.timestamp_nanosec,
+            h256_random_value: value.random_value.0.to_vec(),
+            chunk_mask: value.chunk_mask.clone(),
+            u128_gas_price: value.gas_price.to_be_bytes().to_vec(),
+            block_ordinal: value.block_ordinal,
+            u128_total_supply: value.total_supply.to_be_bytes().to_vec(),
+            h256_last_final_block: value.last_final_block.0.to_vec(),
+            h256_last_ds_final_block: value.last_ds_final_block.0.to_vec(),
+            h256_next_bp_hash: value.next_bp_hash.0.to_vec(),
+            h256_block_merkle_root: value.block_merkle_root.0.to_vec(),
+            h256_epoch_sync_data_hash: value.epoch_sync_data_hash.map(|v| v.0.to_vec()),
+            signature: Some(value.signature.clone().into()),
+            latest_protocol_version: value.latest_protocol_version,
+        }
+    }
+}
+
 impl From<Shard> for proto::BlockShard {
     fn from(value: Shard) -> Self {
         Self {
@@ -55,6 +109,7 @@ impl From<Shard> for proto::BlockShard {
             chunk: value.chunk.map(Into::into),
             receipt_execution_outcomes: value.receipt_execution_outcomes.into_iter().map(Into::into).collect(),
             state_changes: value.state_changes.into_iter().map(Into::into).collect(),
+            header: None,
         }
     }
 }
@@ -908,12 +963,16 @@ impl From<CostGasUsed> for proto::CostGasUsed {
                     "BASE" => proto::cost::Variant::ExtCost(proto::cost::ExtCost {
                         value: proto::ExtCosts::Base as i32,
                     }),
-                    "CONTRACT_LOADING_BASE" | "CONTRACT_COMPILE_BASE" => proto::cost::Variant::ExtCost(proto::cost::ExtCost {
-                        value: proto::ExtCosts::ContractLoadingBase as i32,
-                    }),
-                    "CONTRACT_LOADING_BYTES" | "CONTRACT_COMPILE_BYTES" => proto::cost::Variant::ExtCost(proto::cost::ExtCost {
-                        value: proto::ExtCosts::ContractLoadingBytes as i32,
-                    }),
+                    "CONTRACT_LOADING_BASE" | "CONTRACT_COMPILE_BASE" => {
+                        proto::cost::Variant::ExtCost(proto::cost::ExtCost {
+                            value: proto::ExtCosts::ContractLoadingBase as i32,
+                        })
+                    }
+                    "CONTRACT_LOADING_BYTES" | "CONTRACT_COMPILE_BYTES" => {
+                        proto::cost::Variant::ExtCost(proto::cost::ExtCost {
+                            value: proto::ExtCosts::ContractLoadingBytes as i32,
+                        })
+                    }
                     "READ_MEMORY_BASE" => proto::cost::Variant::ExtCost(proto::cost::ExtCost {
                         value: proto::ExtCosts::ReadMemoryBase as i32,
                     }),

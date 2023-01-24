@@ -11,6 +11,7 @@ message BlockShard {
   optional ChunkView chunk = 2;
   repeated ExecutionOutcomeWithReceipt receipt_execution_outcomes = 3;
   repeated StateChangeWithCauseView state_changes = 4;
+  PartialBlockHeaderView header = 5;
 }
 
 message ChunkView {
@@ -38,4 +39,39 @@ message ChunkHeaderView {
   bytes h256_tx_root = 15;
   repeated ValidatorStakeView validator_proposals = 16;
   Signature signature = 17;
+}
+
+message PartialBlockHeaderView {
+  string author = 1;
+  PartialIndexerBlockHeaderView header = 2;
+}
+
+message PartialIndexerBlockHeaderView {
+  uint64 height = 1;
+  optional uint64 prev_height = 2;
+  bytes h256_epoch_id = 3;
+  bytes h256_next_epoch_id = 4;
+  bytes h256_hash = 5;
+  bytes h256_prev_hash = 6;
+  bytes h256_prev_state_root = 7;
+  bytes h256_chunk_receipts_root = 8;
+  bytes h256_chunk_headers_root = 9;
+  bytes h256_chunk_tx_root = 10;
+  bytes h256_outcome_root = 11;
+  uint64 chunks_included = 12;
+  bytes h256_challenges_root = 13;
+  uint64 timestamp = 14;
+  uint64 timestamp_nanosec = 15;
+  bytes h256_random_value = 16;
+  repeated bool chunk_mask = 17;
+  bytes u128_gas_price = 18;
+  optional uint64 block_ordinal = 19;
+  bytes u128_total_supply = 20;
+  bytes h256_last_final_block = 21;
+  bytes h256_last_ds_final_block = 22;
+  bytes h256_next_bp_hash = 23;
+  bytes h256_block_merkle_root = 24;
+  optional bytes h256_epoch_sync_data_hash = 25;
+  Signature signature = 26;
+  uint32 latest_protocol_version = 27;
 }

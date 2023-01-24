@@ -47,6 +47,15 @@ impl From<proto::Messages> for Message<NEARBlock> {
     }
 }
 
+impl From<proto::BlockShard> for (BlockView, Shard) {
+    fn from(value: proto::BlockShard) -> Self {
+        (
+            BlockView::from(value.header.as_ref().unwrap().clone()),
+            Shard::from(value),
+        )
+    }
+}
+
 impl From<proto::BlockShard> for Shard {
     fn from(value: proto::BlockShard) -> Self {
         Self {
@@ -724,6 +733,54 @@ impl From<proto::BlockHeaderView> for BlockView {
         Self {
             author: AccountId::try_from(value.author).unwrap(),
             header: value.header.unwrap().into(),
+        }
+    }
+}
+
+impl From<proto::PartialBlockHeaderView> for BlockView {
+    fn from(value: proto::PartialBlockHeaderView) -> Self {
+        Self {
+            author: AccountId::try_from(value.author).unwrap(),
+            header: value.header.unwrap().into(),
+        }
+    }
+}
+
+impl From<proto::PartialIndexerBlockHeaderView> for IndexerBlockHeaderView {
+    fn from(value: proto::PartialIndexerBlockHeaderView) -> Self {
+        Self {
+            height: value.height,
+            prev_height: value.prev_height,
+            epoch_id: CryptoHash(value.h256_epoch_id.try_into().unwrap()),
+            next_epoch_id: CryptoHash(value.h256_next_epoch_id.try_into().unwrap()),
+            hash: CryptoHash(value.h256_hash.try_into().unwrap()),
+            prev_hash: CryptoHash(value.h256_prev_hash.try_into().unwrap()),
+            prev_state_root: CryptoHash(value.h256_prev_state_root.try_into().unwrap()),
+            chunk_receipts_root: CryptoHash(value.h256_chunk_receipts_root.try_into().unwrap()),
+            chunk_headers_root: CryptoHash(value.h256_chunk_headers_root.try_into().unwrap()),
+            chunk_tx_root: CryptoHash(value.h256_chunk_tx_root.try_into().unwrap()),
+            outcome_root: CryptoHash(value.h256_outcome_root.try_into().unwrap()),
+            chunks_included: value.chunks_included,
+            challenges_root: CryptoHash(value.h256_challenges_root.try_into().unwrap()),
+            timestamp: value.timestamp,
+            timestamp_nanosec: value.timestamp_nanosec,
+            random_value: CryptoHash(value.h256_random_value.try_into().unwrap()),
+            validator_proposals: Vec::new(),
+            chunk_mask: value.chunk_mask,
+            gas_price: u128::from_be_bytes(value.u128_gas_price.try_into().unwrap()),
+            block_ordinal: value.block_ordinal,
+            total_supply: u128::from_be_bytes(value.u128_total_supply.try_into().unwrap()),
+            challenges_result: Vec::new(),
+            last_final_block: CryptoHash(value.h256_last_final_block.try_into().unwrap()),
+            last_ds_final_block: CryptoHash(value.h256_last_ds_final_block.try_into().unwrap()),
+            next_bp_hash: CryptoHash(value.h256_next_bp_hash.try_into().unwrap()),
+            block_merkle_root: CryptoHash(value.h256_block_merkle_root.try_into().unwrap()),
+            epoch_sync_data_hash: value
+                .h256_epoch_sync_data_hash
+                .map(|v| CryptoHash(v.try_into().unwrap())),
+            approvals: Vec::new(),
+            signature: value.signature.unwrap().into(),
+            latest_protocol_version: value.latest_protocol_version,
         }
     }
 }
