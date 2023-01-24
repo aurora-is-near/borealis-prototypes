@@ -12,7 +12,7 @@ async fn main() {
 
     match config.command {
         Command::Convert => Convertor::convert(
-            config.creds,
+            config.nats_creds,
             config.nats_server,
             config.nats_subject,
             config.sequence_start,
@@ -25,7 +25,7 @@ async fn main() {
         .await
         .unwrap(),
         Command::Print => Convertor::print(
-            config.creds,
+            config.nats_creds,
             config.nats_server,
             config.nats_subject,
             config.sequence_start,
@@ -33,7 +33,7 @@ async fn main() {
         .await
         .unwrap(),
         Command::Migrate => Convertor::migrate(
-            config.creds,
+            config.nats_creds,
             config.nats_server,
             config.nats_subject,
             config.nats_output_creds,

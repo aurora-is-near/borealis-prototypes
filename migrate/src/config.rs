@@ -13,24 +13,16 @@ pub(crate) enum Command {
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
 pub(crate) struct Config {
+    #[arg(short = 'i', long, default_value = "10")]
+    pub(crate) batch_size: usize,
+    #[arg(short = 'l', long, default_value = "9")]
+    pub(crate) compression_level: u16,
     #[arg(short, long)]
-    pub(crate) creds: String,
+    pub(crate) nats_creds: String,
     #[arg(short = 'a', long)]
     pub(crate) nats_server: String,
     #[arg(short = 's', long)]
     pub(crate) nats_subject: String,
-    #[arg(short = 'r', long)]
-    pub(crate) sequence_start: u64,
-    #[arg(short = 'o', long)]
-    pub(crate) sequence_stop: u64,
-    #[arg(short = 'e', long, default_value = "false")]
-    pub(crate) print_header: bool,
-    #[arg(short = 'i', long, default_value = "10")]
-    pub(crate) batch_size: usize,
-    #[arg(short = 't', long, default_value = "1s")]
-    pub(crate) timeout: Duration,
-    #[arg(short = 'l', long, default_value = "9")]
-    pub(crate) compression_level: u16,
     #[arg(short = 'k', long)]
     pub(crate) nats_output_creds: Option<String>,
     #[arg(short = 'u', long)]
@@ -39,6 +31,14 @@ pub(crate) struct Config {
     pub(crate) nats_output_subject_header: String,
     #[arg(short = 'd', long)]
     pub(crate) nats_output_subject_shards: String,
+    #[arg(short = 'e', long, default_value = "false")]
+    pub(crate) print_header: bool,
+    #[arg(short = 'r', long, default_value = "1")]
+    pub(crate) sequence_start: u64,
+    #[arg(short = 'o', long)]
+    pub(crate) sequence_stop: u64,
+    #[arg(short = 't', long, default_value = "10s")]
+    pub(crate) timeout: Duration,
     #[command(subcommand)]
     pub(crate) command: Command,
 }

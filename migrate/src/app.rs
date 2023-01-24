@@ -4,6 +4,7 @@ use async_nats::jetstream::{consumer, Context};
 use async_nats::ConnectOptions;
 use borealis_proto_types as proto;
 use borealis_types::payloads::NEARBlock;
+use futures::{stream, stream::FuturesUnordered, StreamExt};
 use futures_util::TryStreamExt;
 use prost::Message;
 use std::io::Write;
@@ -31,6 +32,7 @@ impl Convertor {
             log::info!("seq;height;date;cbor;proto;proto_zstd;diff;diff_zstd");
         }
 
+        let shards = 4;
         let mut seq = sequence_start;
 
         loop {
@@ -66,20 +68,31 @@ impl Convertor {
                                 let protobuf = proto::Messages::from(parsed).into_inner();
                                 let mut new_size = 0;
                                 let mut compressed_size = 0;
+                                let last_shard_id = protobuf.len() - 1;
 
-                                for msg in protobuf {
+                                let mut futures = FuturesUnordered::new();
+                                let empty_shards = (last_shard_id..shards).map(|shard_id| {
+                                    jetstream.publish(
+                                        format!("{}{}", subject_shard.as_ref(), shard_id),
+                                        Default::default()
+                                    )
+                                });
+                                protobuf.into_iter().filter_map(|msg| {
                                     let source = msg.encode_to_vec();
                                     let mut compressed: Vec<u8> = Vec::new();
-                                    zstd::stream::copy_encode(&source[..], &mut compressed, compression_level)?;
+                                    zstd::stream::copy_encode(&source[..], &mut compressed, compression_level).unwrap();
 
                                     new_size += source.len();
                                     compressed_size += compressed.len();
 
-                                    jetstream.publish(match msg.payload.expect("Payload is mandatory") {
+                                    Some(jetstream.publish(match msg.payload.expect("Payload is mandatory") {
                                         proto::message::Payload::NearBlockHeader(..) => subject_header.as_ref().to_string(),
                                         proto::message::Payload::NearBlockShard(shard) => format!("{}{}", subject_shard.as_ref(), shard.shard_id),
-                                        _ => continue,
-                                    }, compressed.into()).await.map_err(|e| anyhow!(e))?.await.map_err(|e| anyhow!(e))?;
+                                        _ => return None,
+                                    }, compressed.into()))
+                                }).chain(empty_shards).for_each(|publish_fut| futures.push(publish_fut));
+
+                                while let Some(_result) = futures.next().await {
                                 }
 
                                 log::info!("{seq};{id};\"{date}\";{old_size};{new_size};{compressed_size};{};{}",
