@@ -4,7 +4,7 @@ use async_nats::jetstream::{consumer, Context};
 use async_nats::ConnectOptions;
 use borealis_proto_types as proto;
 use borealis_types::payloads::NEARBlock;
-use futures::{stream, stream::FuturesUnordered, StreamExt};
+use futures::{stream::FuturesUnordered, StreamExt};
 use futures_util::TryStreamExt;
 use prost::Message;
 use std::io::Write;
@@ -22,7 +22,7 @@ impl Convertor {
         subject_header: impl AsRef<str>,
         subject_shard: impl AsRef<str>,
         sequence_start: u64,
-        sequence_stop: u64,
+        sequence_stop: Option<u64>,
         print_header: bool,
         batch_size: usize,
         timeout: std::time::Duration,
@@ -41,8 +41,9 @@ impl Convertor {
             let mut sequence = consumer.sequence(batch_size).map_err(|e| anyhow!(e))?;
 
             'sequence: loop {
-                if seq >= sequence_stop {
-                    return Ok(());
+                match sequence_stop {
+                    Some(sequence_stop) if seq >= sequence_stop => return Ok(()),
+                    _ => {}
                 }
 
                 match sequence.try_next().await.map_err(|e| anyhow!(e))? {
@@ -92,7 +93,15 @@ impl Convertor {
                                     }, compressed.into()))
                                 }).chain(empty_shards).for_each(|publish_fut| futures.push(publish_fut));
 
-                                while let Some(_result) = futures.next().await {
+                                let mut has_error = false;
+                                while let Some(result) = futures.next().await {
+                                    if let Err(error) = result {
+                                        log::error!("{error:?}");
+                                        has_error = true;
+                                    }
+                                }
+                                if has_error {
+                                    return Err(anyhow!("Error occurred while publishing messages."));
                                 }
 
                                 log::info!("{seq};{id};\"{date}\";{old_size};{new_size};{compressed_size};{};{}",
@@ -114,7 +123,7 @@ impl Convertor {
         urls: impl AsRef<str>,
         subject: impl AsRef<str>,
         sequence_start: u64,
-        sequence_stop: u64,
+        sequence_stop: Option<u64>,
         print_header: bool,
         batch_size: usize,
         timeout: std::time::Duration,
@@ -126,14 +135,17 @@ impl Convertor {
 
         let mut seq = sequence_start;
 
-        while seq < sequence_stop {
+        loop {
             let consumer = Self::consumer(&path, &urls, &subject, seq).await?;
             let mut sequence = consumer.sequence(batch_size).unwrap();
 
             'sequence: loop {
-                let mut batch = sequence.try_next().await.unwrap().unwrap();
+                match sequence_stop {
+                    Some(sequence_stop) if seq >= sequence_stop => return Ok(()),
+                    _ => {}
+                }
 
-                'batch: loop {
+                'batch: while let Some(mut batch) = sequence.try_next().await.unwrap() {
                     let sleep = tokio::time::sleep(timeout);
                     tokio::pin!(sleep);
                     tokio::select! {
@@ -181,8 +193,6 @@ impl Convertor {
                 }
             }
         }
-
-        Ok(())
     }
 
     pub async fn print(

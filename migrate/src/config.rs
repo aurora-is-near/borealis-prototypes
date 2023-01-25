@@ -36,7 +36,7 @@ pub(crate) struct Config {
     #[arg(short = 'r', long, default_value = "1")]
     pub(crate) sequence_start: u64,
     #[arg(short = 'o', long)]
-    pub(crate) sequence_stop: u64,
+    pub(crate) sequence_stop: Option<u64>,
     #[arg(short = 't', long, default_value = "10s")]
     pub(crate) timeout: Duration,
     #[command(subcommand)]
