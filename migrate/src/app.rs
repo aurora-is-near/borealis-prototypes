@@ -51,67 +51,81 @@ impl Convertor {
                     Some(mut batch) => 'batch: loop {
                         let sleep = tokio::time::sleep(timeout);
                         tokio::pin!(sleep);
-                        tokio::select! {
+                        let message = tokio::select! {
                             _ = &mut sleep => {
                                 log::error!("Timeout with server. Restarting connection.");
                                 break 'sequence;
                             },
                             message = batch.try_next() => if let Ok(Some(message)) = message {
-                                let old_size = message.message.payload.len();
-                                let parsed = borealis_types::message::Message::<NEARBlock>::from_cbor(&message.message.payload)?;
-
-                                message.ack().await.map_err(|e| anyhow!(e))?;
-
-                                let id = parsed.payload.block.header.height;
-                                let date = chrono::NaiveDateTime::from_timestamp_millis(
-                                    (parsed.payload.block.header.timestamp as f64 * 0.000001) as i64
-                                ).unwrap_or_default();
-                                let protobuf = proto::Messages::from(parsed).into_inner();
-                                let mut new_size = 0;
-                                let mut compressed_size = 0;
-                                let last_shard_id = protobuf.len() - 1;
-
-                                let mut futures = FuturesUnordered::new();
-                                let empty_shards = (last_shard_id..shards).map(|shard_id| {
-                                    jetstream.publish(
-                                        format!("{}{}", subject_shard.as_ref(), shard_id),
-                                        Default::default()
-                                    )
-                                });
-                                protobuf.into_iter().filter_map(|msg| {
-                                    let source = msg.encode_to_vec();
-                                    let mut compressed: Vec<u8> = Vec::new();
-                                    zstd::stream::copy_encode(&source[..], &mut compressed, compression_level).unwrap();
-
-                                    new_size += source.len();
-                                    compressed_size += compressed.len();
-
-                                    Some(jetstream.publish(match msg.payload.expect("Payload is mandatory") {
-                                        proto::message::Payload::NearBlockHeader(..) => subject_header.as_ref().to_string(),
-                                        proto::message::Payload::NearBlockShard(shard) => format!("{}{}", subject_shard.as_ref(), shard.shard_id),
-                                        _ => return None,
-                                    }, compressed.into()))
-                                }).chain(empty_shards).for_each(|publish_fut| futures.push(publish_fut));
-
-                                let mut has_error = false;
-                                while let Some(result) = futures.next().await {
-                                    if let Err(error) = result {
-                                        log::error!("{error:?}");
-                                        has_error = true;
-                                    }
-                                }
-                                if has_error {
-                                    return Err(anyhow!("Error occurred while publishing messages."));
-                                }
-
-                                log::info!("{seq};{id};\"{date}\";{old_size};{new_size};{compressed_size};{};{}",
-                                    new_size as f64 / old_size as f64, compressed_size as f64 / old_size as f64
-                                );
-                                seq += 1;
+                                message
                             } else {
                                 break 'batch;
                             }
+                        };
+
+                        let old_size = message.message.payload.len();
+                        let parsed =
+                            borealis_types::message::Message::<NEARBlock>::from_cbor(&message.message.payload)?;
+
+                        message.ack().await.map_err(|e| anyhow!(e))?;
+
+                        let id = parsed.payload.block.header.height;
+                        let date = chrono::NaiveDateTime::from_timestamp_millis(
+                            (parsed.payload.block.header.timestamp as f64 * 0.000001) as i64,
+                        )
+                        .unwrap_or_default();
+                        let protobuf = proto::Messages::from(parsed).into_inner();
+                        let mut new_size = 0;
+                        let mut compressed_size = 0;
+                        let last_shard_id = protobuf.len() - 1;
+
+                        let mut futures = FuturesUnordered::new();
+                        let empty_shards = (last_shard_id..shards).map(|shard_id| {
+                            jetstream.publish(format!("{}{}", subject_shard.as_ref(), shard_id), Default::default())
+                        });
+                        protobuf
+                            .into_iter()
+                            .filter_map(|msg| {
+                                let source = msg.encode_to_vec();
+                                let mut compressed: Vec<u8> = Vec::new();
+                                zstd::stream::copy_encode(&source[..], &mut compressed, compression_level).unwrap();
+
+                                new_size += source.len();
+                                compressed_size += compressed.len();
+
+                                Some(jetstream.publish(
+                                    match msg.payload.expect("Payload is mandatory") {
+                                        proto::message::Payload::NearBlockHeader(..) => {
+                                            subject_header.as_ref().to_string()
+                                        }
+                                        proto::message::Payload::NearBlockShard(shard) => {
+                                            format!("{}{}", subject_shard.as_ref(), shard.shard_id)
+                                        }
+                                        _ => return None,
+                                    },
+                                    compressed.into(),
+                                ))
+                            })
+                            .chain(empty_shards)
+                            .for_each(|publish_fut| futures.push(publish_fut));
+
+                        let mut has_error = false;
+                        while let Some(result) = futures.next().await {
+                            if let Err(error) = result {
+                                log::error!("{error:?}");
+                                has_error = true;
+                            }
                         }
+                        if has_error {
+                            return Err(anyhow!("Error occurred while publishing messages."));
+                        }
+
+                        log::info!(
+                            "{seq};{id};\"{date}\";{old_size};{new_size};{compressed_size};{};{}",
+                            new_size as f64 / old_size as f64,
+                            compressed_size as f64 / old_size as f64
+                        );
+                        seq += 1;
                     },
                 }
             }
