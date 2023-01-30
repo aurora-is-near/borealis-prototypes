@@ -87,8 +87,7 @@ impl Convertor {
                             .into_iter()
                             .filter_map(|msg| {
                                 let source = msg.encode_to_vec();
-                                let mut compressed: Vec<u8> = Vec::new();
-                                zstd::stream::copy_encode(&source[..], &mut compressed, compression_level).unwrap();
+                                let compressed = zstd::stream::encode_all(&source[..], compression_level).unwrap();
 
                                 new_size += source.len();
                                 compressed_size += compressed.len();
