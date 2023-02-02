@@ -1,5 +1,6 @@
 mod compression;
 mod decoding;
+mod decoding_aurora;
 mod encoding;
 mod proto;
 
