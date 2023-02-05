@@ -15,3 +15,10 @@ RUST_LOG=debug cargo run -p borealis-proto-migrate -- \
   --nats-output-subject-shards v2.mainnet.near. \
   migrate
 ```
+
+### Data availability / developer streams
+
+  - Server:  nats://developer.nats.backend.aurora.dev:4222/
+  - Stream name: v3_mainnet_near_blocks
+  - Subject header: v3.mainnet.near.blocks.header
+  - Subject shards: v3.mainnet.near.blocks.[0-4]
