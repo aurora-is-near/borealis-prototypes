@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+option go_package = "github.com/aurora-is-near/borealis-prototypes/go/payloads/get_account_status;getaccountstatus";
+
 message GetAccountStatusRequest {
   string account = 1;
 }

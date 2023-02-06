@@ -1,7 +1,10 @@
 syntax = "proto3";
-import "common.proto";
-import "execution.proto";
-import "receipt.proto";
+
+import "common/common.proto";
+import "payloads/near_block/transaction/execution.proto";
+import "payloads/near_block/transaction/receipt.proto";
+
+option go_package = "github.com/aurora-is-near/borealis-prototypes/go/payloads/near_block/transaction;transaction";
 
 message TransactionWithOutcome {
   SignedTransactionView transaction = 1;

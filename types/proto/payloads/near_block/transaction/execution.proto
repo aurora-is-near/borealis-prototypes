@@ -1,6 +1,9 @@
 syntax = "proto3";
-import "errors/execution.proto";
-import "receipt.proto";
+
+import "payloads/near_block/transaction/errors/execution.proto";
+import "payloads/near_block/transaction/receipt.proto";
+
+option go_package = "github.com/aurora-is-near/borealis-prototypes/go/payloads/near_block/transaction;transaction";
 
 message ExecutionOutcomeWithOptionalReceipt {
   ExecutionOutcomeWithIdView execution_outcome = 1;

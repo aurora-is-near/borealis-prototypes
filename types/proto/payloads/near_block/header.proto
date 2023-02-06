@@ -1,6 +1,9 @@
 syntax = "proto3";
-import "common.proto";
-import "stake.proto";
+
+import "common/common.proto";
+import "payloads/near_block/stake.proto";
+
+option go_package = "github.com/aurora-is-near/borealis-prototypes/go/payloads/near_block;nearblock";
 
 message BlockHeaderView {
   string author = 1;

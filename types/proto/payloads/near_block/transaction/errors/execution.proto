@@ -1,7 +1,10 @@
 syntax = "proto3";
-import "common.proto";
-import "errors/receipt_validation.proto";
-import "errors/function_call.proto";
+
+import "common/common.proto";
+import "payloads/near_block/transaction/errors/receipt_validation.proto";
+import "payloads/near_block/transaction/errors/function_call.proto";
+
+option go_package = "github.com/aurora-is-near/borealis-prototypes/go/payloads/near_block/transaction/errors;errors";
 
 message TxExecutionError {
   message ActionError {

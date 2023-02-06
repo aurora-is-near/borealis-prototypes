@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+option go_package = "github.com/aurora-is-near/borealis-prototypes/go/common;common";
+
 message OptionalSignature {
   optional Signature value = 1;
 }

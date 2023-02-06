@@ -1,5 +1,6 @@
 syntax = "proto3";
-import "common.proto";
+
+option go_package = "github.com/aurora-is-near/borealis-prototypes/go/payloads/near_block/transaction/errors;errors";
 
 // Error that can occur while preparing or executing Wasm smart-contract.
 enum PrepareError {

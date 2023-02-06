@@ -1,10 +1,13 @@
 syntax = "proto3";
-import "common.proto";
-import "stake.proto";
-import "execution.proto";
-import "state_change.proto";
-import "transaction.proto";
-import "receipt.proto";
+
+import "common/common.proto";
+import "payloads/near_block/stake.proto";
+import "payloads/near_block/transaction/execution.proto";
+import "payloads/near_block/transaction/state_change.proto";
+import "payloads/near_block/transaction/transaction.proto";
+import "payloads/near_block/transaction/receipt.proto";
+
+option go_package = "github.com/aurora-is-near/borealis-prototypes/go/payloads/near_block;nearblock";
 
 message BlockShard {
   uint64 shard_id = 1;
