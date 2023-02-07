@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+option go_package = "github.com/aurora-is-near/borealis-prototypes/go/payloads/rpc;rpc";
+
+message RpcMessage {
+  uint32 version = 1;
+  bytes content = 2;
+  map<string, bytes> annotations = 3;
+}

@@ -1,7 +1,9 @@
 syntax = "proto3";
-import "common.proto";
-import "errors/host.proto";
-import "errors/compilation.proto";
+
+import "payloads/near_block/transaction/errors/host.proto";
+import "payloads/near_block/transaction/errors/compilation.proto";
+
+option go_package = "github.com/aurora-is-near/borealis-prototypes/go/payloads/near_block/transaction/errors;errors";
 
 // A kind of a trap happened during execution of a binary
 enum WasmTrap {

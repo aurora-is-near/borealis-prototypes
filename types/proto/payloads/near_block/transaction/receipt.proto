@@ -1,6 +1,9 @@
 syntax = "proto3";
-import "common.proto";
-import "access_key.proto";
+
+import "common/common.proto";
+import "payloads/near_block/transaction/access_key.proto";
+
+option go_package = "github.com/aurora-is-near/borealis-prototypes/go/payloads/near_block/transaction;transaction";
 
 message ReceiptView {
   string predecessor_id = 1;
