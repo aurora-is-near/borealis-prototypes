@@ -24,6 +24,9 @@ pub(crate) struct Config {
     /// Used for compression of the v3 NEAR blocks ranging from -7 (fastest) to 22 (best compression ratio).
     #[arg(short = 'l', long, default_value = "9")]
     pub(crate) compression_level: i16,
+    /// Dumps processed blocks into files.
+    #[arg(short = 'f', long)]
+    pub(crate) dump_blocks: bool,
     /// Credentials for the `nats_server`.
     #[arg(short, long)]
     pub(crate) nats_creds: String,
@@ -63,6 +66,11 @@ pub(crate) struct Config {
     /// optional, if not provided then it will run until interrupted.
     #[arg(short = 'o', long)]
     pub(crate) sequence_stop: Option<u64>,
+    /// Suppress `Nats-Expected-Last-Msg-Id` NATS message header when publishing first message.
+    /// Only effective when `sequence_start` is higher than `1`, otherwise the `Nats-Expected-Last-Msg-Id` cannot be
+    /// included as there is no previous message.
+    #[arg(short = 'x', long)]
+    pub(crate) skip_expect: bool,
     /// Maximum `timeout` duration for the connection to the incoming stream. If a message is not received within this
     /// `timeout` duration, the connection is reestablished.
     ///

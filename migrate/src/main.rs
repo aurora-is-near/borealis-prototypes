@@ -46,6 +46,8 @@ async fn main() {
             config.batch_size,
             config.timeout.into(),
             config.compression_level as i32,
+            config.skip_expect,
+            config.dump_blocks,
         )
         .await
         .unwrap(),
