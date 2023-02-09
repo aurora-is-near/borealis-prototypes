@@ -994,7 +994,7 @@ impl From<proto::ActionView> for ActionView {
         match value.variant.unwrap() {
             proto::action_view::Variant::CreateAccount(..) => ActionView::CreateAccount,
             proto::action_view::Variant::DeployContract(v) => ActionView::DeployContract {
-                code: to_base64(&v.code),
+                code: to_base64(v.code),
             },
             proto::action_view::Variant::FunctionCall(v) => ActionView::FunctionCall {
                 method_name: v.method_name,

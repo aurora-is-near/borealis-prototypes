@@ -26,6 +26,7 @@ zstd-sys = "2"
 
 [dev-dependencies]
 sha2 = "0.10"
+test-case = "2"
 
 [build-dependencies]
 prost-build = { version = "0.11" }
