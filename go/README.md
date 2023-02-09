@@ -40,8 +40,6 @@ func decodeGeneric(data []byte) (any, error) {
 ```go
 func encodeRpcResponse(rpcResponse *rpc.RpcMessage) ([]byte, error) {
 	msg := &borealisproto.Message{
-		Version: 0,
-		Id:      "",
 		Payload: &borealisproto.Message_RpcResponse{
 			RpcResponse: rpcResponse,
 		},
