@@ -1,5 +1,6 @@
 use std::io::{self, Read};
 use thiserror::Error;
+use zstd::stream;
 
 #[derive(Debug, Error)]
 pub enum DecodeError {
@@ -27,11 +28,11 @@ impl<T: prost::Message + Default> CompressedMessage for T {
     fn encode_compressed(&self, compression_level: i32) -> Result<Vec<u8>, io::Error> {
         let source = self.encode_to_vec();
 
-        zstd::stream::encode_all(&source[..], compression_level)
+        stream::encode_all(&source[..], compression_level)
     }
 
     fn decode_compressed(source: impl Read) -> Result<Self, DecodeError> {
-        let bytes = zstd::stream::decode_all(source)?;
+        let bytes = stream::decode_all(source)?;
 
         Ok(Self::decode(&bytes[..])?)
     }

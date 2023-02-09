@@ -1,3 +1,4 @@
+//! Encoding of the [`borealis_types`] into the [`proto`] types.
 use crate::proto;
 use borealis_types::message::Message;
 use borealis_types::payloads::events::{
@@ -26,24 +27,23 @@ use std::iter::once;
 
 impl From<Message<NEARBlock>> for proto::Messages {
     fn from(value: Message<NEARBlock>) -> Self {
-        let height = value.payload.block.header.height;
+        value.payload.into()
+    }
+}
 
+impl From<NEARBlock> for proto::Messages {
+    fn from(value: NEARBlock) -> Self {
         value
-            .payload
             .shards
             .into_iter()
-            .map(|v| proto::BlockShard::from((v, &value.payload.block)))
+            .map(|v| proto::BlockShard::from((v, &value.block)))
             .map(|v| proto::Message {
-                version: value.version as u32,
-                id: format!("{}.{}", height, v.shard_id),
                 payload: Some(proto::message::Payload::NearBlockShard(v)),
             })
             .collect::<Vec<proto::Message>>()
             .into_iter()
             .chain(once(proto::Message {
-                version: value.version as u32,
-                id: height.to_string(),
-                payload: Some(proto::message::Payload::NearBlockHeader(value.payload.block.into())),
+                payload: Some(proto::message::Payload::NearBlockHeader(value.block.into())),
             }))
             .collect::<Vec<proto::Message>>()
             .into()
@@ -954,9 +954,11 @@ impl From<CostGasUsed> for proto::CostGasUsed {
                     "DELETE_KEY" => proto::cost::Variant::ActionCost(proto::cost::ActionCost {
                         value: proto::ActionCosts::DeleteKey as i32,
                     }),
-                    "VALUE_RETURN" => proto::cost::Variant::ActionCost(proto::cost::ActionCost {
-                        value: proto::ActionCosts::ValueReturn as i32,
-                    }),
+                    "NEW_DATA_RECEIPT_BYTE" | "VALUE_RETURN" => {
+                        proto::cost::Variant::ActionCost(proto::cost::ActionCost {
+                            value: proto::ActionCosts::NewDataReceiptByte as i32,
+                        })
+                    }
                     "NEW_RECEIPT" => proto::cost::Variant::ActionCost(proto::cost::ActionCost {
                         value: proto::ActionCosts::NewReceipt as i32,
                     }),
@@ -1140,6 +1142,12 @@ impl From<CostGasUsed> for proto::CostGasUsed {
                     }),
                     "ALT_BN128_G1_SUM_ELEMENT" => proto::cost::Variant::ExtCost(proto::cost::ExtCost {
                         value: proto::ExtCosts::AltBn128G1SumElement as i32,
+                    }),
+                    "ED25519_VERIFY_BASE" => proto::cost::Variant::ExtCost(proto::cost::ExtCost {
+                        value: proto::ExtCosts::Ed25519VerifyBase as i32,
+                    }),
+                    "ED25519_VERIFY_BYTE" => proto::cost::Variant::ExtCost(proto::cost::ExtCost {
+                        value: proto::ExtCosts::Ed25519VerifyByte as i32,
                     }),
                     "WASM_INSTRUCTION" => proto::cost::Variant::WasmInstruction(proto::cost::WasmInstruction {}),
                     v => panic!("Unknown variant {v}"),

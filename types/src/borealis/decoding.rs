@@ -1,28 +1,37 @@
+//! Decoding of the [`proto`] types into the [`borealis_types`].
 use crate::proto;
-use aurora_near_crypto::{ED25519PublicKey, PublicKey, Secp256K1PublicKey, Signature};
-use aurora_near_primitives::challenge::SlashedValidator;
-use aurora_near_primitives::errors::{
+use borealis_types::message::Message;
+use borealis_types::payloads::events::{
+    BlockView, ChunkHeaderView, ChunkView, ExecutionOutcomeWithOptionalReceipt, ExecutionOutcomeWithReceipt,
+    IndexerBlockHeaderView, Shard, TransactionWithOutcome,
+};
+use borealis_types::payloads::NEARBlock;
+use borealis_types::types::views::{
+    ExecutionMetadataView, ExecutionOutcomeView, ExecutionOutcomeWithIdView, ExecutionStatusView, ReceiptView,
+    StateChangeCauseView, StateChangeValueView, StateChangeWithCauseView,
+};
+use borealis_types::types::CryptoHash;
+use itertools::{Either, Itertools};
+use near_crypto::{ED25519PublicKey, PublicKey, Secp256K1PublicKey, Signature};
+use near_primitives::challenge::SlashedValidator;
+use near_primitives::errors::{
     ActionError, ActionErrorKind, ActionsValidationError, InvalidAccessKeyError, InvalidTxError,
     ReceiptValidationError, TxExecutionError,
 };
-use aurora_near_primitives::merkle::{Direction, MerklePathItem};
-use aurora_near_vm_errors::{
-    CompilationError, FunctionCallErrorSer, HostError, MethodResolveError, PrepareError, WasmTrap,
+use near_primitives::merkle::{Direction, MerklePathItem};
+use near_primitives::types::{AccountId, StoreKey, StoreValue};
+use near_primitives::views::validator_stake_view::ValidatorStakeView;
+use near_primitives::views::{
+    AccessKeyPermissionView, AccessKeyView, AccountView, ActionView, CostGasUsed, DataReceiverView, ReceiptEnumView,
+    SignedTransactionView, ValidatorStakeViewV1,
 };
-use aurora_refiner_types::near_block::{
-    BlockView, ChunkHeaderView, ChunkView, ExecutionOutcomeWithOptionalReceipt, ExecutionOutcomeWithReceipt,
-    IndexerBlockHeaderView, NEARBlock, Shard, TransactionWithOutcome,
-};
-use aurora_refiner_types::near_primitives::hash::CryptoHash;
-use aurora_refiner_types::near_primitives::types::{AccountId, StoreKey, StoreValue};
-use aurora_refiner_types::near_primitives::views::validator_stake_view::ValidatorStakeView;
-use aurora_refiner_types::near_primitives::views::{
-    AccessKeyPermissionView, AccessKeyView, AccountView, ActionView, CostGasUsed, DataReceiverView,
-    ExecutionMetadataView, ExecutionOutcomeView, ExecutionOutcomeWithIdView, ExecutionStatusView, ReceiptEnumView,
-    ReceiptView, SignedTransactionView, StateChangeCauseView, StateChangeValueView, StateChangeWithCauseView,
-    ValidatorStakeViewV1,
-};
-use itertools::{Either, Itertools};
+use near_vm_errors::{CompilationError, FunctionCallErrorSer, HostError, MethodResolveError, PrepareError, WasmTrap};
+
+impl From<proto::Messages> for Message<NEARBlock> {
+    fn from(value: proto::Messages) -> Self {
+        Self::new(0, value.into())
+    }
+}
 
 impl From<proto::Messages> for NEARBlock {
     fn from(value: proto::Messages) -> Self {
@@ -36,7 +45,7 @@ impl From<proto::Messages> for NEARBlock {
                     v => panic!("Unexpected variant {v:?}"),
                 });
 
-        NEARBlock {
+        Self {
             block: messages.1.pop().unwrap(),
             shards: messages.0,
         }
@@ -95,9 +104,7 @@ impl From<proto::ExecutionStatusView> for ExecutionStatusView {
         match value.variant.unwrap() {
             proto::execution_status_view::Variant::Unknown(..) => ExecutionStatusView::Unknown,
             proto::execution_status_view::Variant::Failure(v) => ExecutionStatusView::Failure(v.error.unwrap().into()),
-            proto::execution_status_view::Variant::SuccessValue(v) => {
-                ExecutionStatusView::SuccessValue(String::from_utf8(v.value).unwrap())
-            }
+            proto::execution_status_view::Variant::SuccessValue(v) => ExecutionStatusView::SuccessValue(v.value),
             proto::execution_status_view::Variant::SuccessReceiptId(v) => {
                 ExecutionStatusView::SuccessReceiptId(CryptoHash(v.h256_receipt_hash.try_into().unwrap()))
             }
@@ -272,7 +279,7 @@ impl From<proto::ActionsValidationError> for ActionsValidationError {
             }
             proto::actions_validation_error::Variant::IntegerOverflow(..) => ActionsValidationError::IntegerOverflow,
             proto::actions_validation_error::Variant::InvalidAccountId(v) => ActionsValidationError::InvalidAccountId {
-                account_id: AccountId::try_from(v.account_id).unwrap(),
+                account_id: v.account_id,
             },
             proto::actions_validation_error::Variant::ContractSizeExceeded(v) => {
                 ActionsValidationError::ContractSizeExceeded {
@@ -516,7 +523,7 @@ impl From<proto::tx_execution_error::invalid_tx_error::ActionsValidation> for Ac
             proto::tx_execution_error::invalid_tx_error::actions_validation::Variant::AddKeyMethodNamesNumberOfBytesExceeded(v) => ActionsValidationError::AddKeyMethodNamesNumberOfBytesExceeded { total_number_of_bytes: v.total_number_of_bytes, limit: v.limit },
             proto::tx_execution_error::invalid_tx_error::actions_validation::Variant::AddKeyMethodNameLengthExceeded(v) => ActionsValidationError::AddKeyMethodNameLengthExceeded { length: v.length, limit: v.limit },
             proto::tx_execution_error::invalid_tx_error::actions_validation::Variant::IntegerOverflow(..) => ActionsValidationError::IntegerOverflow,
-            proto::tx_execution_error::invalid_tx_error::actions_validation::Variant::InvalidAccountId(v) => ActionsValidationError::InvalidAccountId { account_id: AccountId::try_from(v.account_id).unwrap() },
+            proto::tx_execution_error::invalid_tx_error::actions_validation::Variant::InvalidAccountId(v) => ActionsValidationError::InvalidAccountId { account_id: v.account_id },
             proto::tx_execution_error::invalid_tx_error::actions_validation::Variant::ContractSizeExceeded(v) => ActionsValidationError::ContractSizeExceeded { size: v.size, limit: v.limit },
             proto::tx_execution_error::invalid_tx_error::actions_validation::Variant::FunctionCallMethodNameLengthExceeded(v) => ActionsValidationError::FunctionCallMethodNameLengthExceeded { length: v.length, limit: v.limit },
             proto::tx_execution_error::invalid_tx_error::actions_validation::Variant::FunctionCallArgumentsLengthExceeded(v) => ActionsValidationError::FunctionCallArgumentsLengthExceeded { length: v.length, limit: v.limit },
@@ -625,7 +632,7 @@ impl From<proto::CostGasUsed> for CostGasUsed {
                     proto::ActionCosts::Stake => "STAKE",
                     proto::ActionCosts::AddKey => "ADD_KEY",
                     proto::ActionCosts::DeleteKey => "DELETE_KEY",
-                    proto::ActionCosts::ValueReturn => "VALUE_RETURN",
+                    proto::ActionCosts::NewDataReceiptByte => "NEW_DATA_RECEIPT_BYTE",
                     proto::ActionCosts::NewReceipt => "NEW_RECEIPT",
                 },
                 proto::cost::Variant::ExtCost(v) => match proto::ExtCosts::from_i32(v.value).unwrap() {
@@ -688,6 +695,8 @@ impl From<proto::CostGasUsed> for CostGasUsed {
                     proto::ExtCosts::AltBn128PairingCheckElement => "ALT_BN128_PAIRING_CHECK_ELEMENT",
                     proto::ExtCosts::AltBn128G1SumBase => "ALT_BN128_G1_SUM_BASE",
                     proto::ExtCosts::AltBn128G1SumElement => "ALT_BN128_G1_SUM_ELEMENT",
+                    proto::ExtCosts::Ed25519VerifyBase => "ED25519_VERIFY_BASE",
+                    proto::ExtCosts::Ed25519VerifyByte => "ED25519_VERIFY_BYTE",
                 },
                 proto::cost::Variant::WasmInstruction(..) => "WASM_INSTRUCTION",
             }
@@ -989,12 +998,10 @@ impl From<proto::ActionView> for ActionView {
     fn from(value: proto::ActionView) -> Self {
         match value.variant.unwrap() {
             proto::action_view::Variant::CreateAccount(..) => ActionView::CreateAccount,
-            proto::action_view::Variant::DeployContract(v) => ActionView::DeployContract {
-                code: String::from_utf8(v.code).unwrap(),
-            },
+            proto::action_view::Variant::DeployContract(v) => ActionView::DeployContract { code: v.code },
             proto::action_view::Variant::FunctionCall(v) => ActionView::FunctionCall {
                 method_name: v.method_name,
-                args: String::from_utf8(v.args).unwrap(),
+                args: v.args,
                 gas: v.gas,
                 deposit: u128::from_be_bytes(v.u128_deposit.try_into().unwrap()),
             },

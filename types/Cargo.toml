@@ -9,6 +9,7 @@ aurora-near-crypto = { git = "https://github.com/near/nearcore", tag = "1.26.1",
 aurora-near-primitives = { git = "https://github.com/near/nearcore", tag = "1.26.1", package = "near-primitives" }
 aurora-near-vm-errors = { git = "https://github.com/near/nearcore", tag = "1.26.1", package = "near-vm-errors", features = ["protocol_feature_alt_bn128"] }
 borealis-types = { git = "ssh://git@github.com/aurora-is-near/borealis.rs.git", tag = "borealis-rs-v0.2.0" }
+borealis-rs = { git = "ssh://git@github.com/aurora-is-near/borealis.rs.git", tag = "borealis-rs-v0.4.0" }
 bs58 = "0.4"
 bytes = "1"
 chrono = "0.4"

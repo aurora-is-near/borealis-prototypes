@@ -9,8 +9,8 @@ import "payloads/get_account_status/response.proto";
 option go_package = "github.com/aurora-is-near/borealis-prototypes/go;borealisproto";
 
 message Message {
-  uint32 version = 1;
-  string id = 2;
+  reserved "id", "version";
+  reserved 1, 2;
   oneof payload {
     bytes generic = 3;
     RpcMessage rpc_request = 4;
