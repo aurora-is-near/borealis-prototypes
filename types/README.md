@@ -13,7 +13,7 @@ cargo add --git ssh://git@github.com/aurora-is-near/borealis-prototypes.git bore
 Or add the following line to your Cargo.toml:
 
 ```toml
-borealis-proto-types = { git = "ssh://git@github.com/aurora-is-near/borealis-prototypes.git", version = "0.2.0" }
+borealis-proto-types = { git = "ssh://git@github.com/aurora-is-near/borealis-prototypes.git", version = "0.3.0" }
 ```
 
 ## Usage

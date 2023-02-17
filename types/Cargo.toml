@@ -1,9 +1,10 @@
 [package]
 name = "borealis-proto-types"
-version = "0.2.0"
+version = "0.3.0"
 edition = "2021"
 
 [dependencies]
+async-nats = { version = "0.27", optional = true }
 aurora-refiner-types = { workspace = true }
 aurora-near-crypto = { git = "https://github.com/near/nearcore", tag = "1.26.1", package = "near-crypto" }
 aurora-near-primitives = { git = "https://github.com/near/nearcore", tag = "1.26.1", package = "near-primitives" }
