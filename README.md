@@ -17,13 +17,7 @@ Furthermore, it contains a CLI tool for migrating the version 2 Borealis message
 
 ### Types
 
-The common `.proto` definitions are contained in this directory.
-
-```
-types/proto
-```
-
-Pick a guide based on the language you are using to decode and encode the messages.
+The common `.proto` definitions are contained in [`types/proto`](types/proto). To decode and encode the messages, see a guide based on the language you are using.
 
 * [go](/go/README.md)
 * [rust](/types/README.md)
