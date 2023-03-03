@@ -31,6 +31,25 @@ impl From<Message<NEARBlock>> for proto::Messages {
     }
 }
 
+impl From<&NEARBlock> for proto::Messages {
+    fn from(value: &NEARBlock) -> Self {
+        value
+            .shards
+            .iter()
+            .map(|v| proto::BlockShard::from((v, &value.block)))
+            .map(|v| proto::Message {
+                payload: Some(proto::message::Payload::NearBlockShard(v)),
+            })
+            .collect::<Vec<proto::Message>>()
+            .into_iter()
+            .chain(once(proto::Message {
+                payload: Some(proto::message::Payload::NearBlockHeader((&value.block).into())),
+            }))
+            .collect::<Vec<proto::Message>>()
+            .into()
+    }
+}
+
 impl From<NEARBlock> for proto::Messages {
     fn from(value: NEARBlock) -> Self {
         value
@@ -54,6 +73,15 @@ impl From<(Shard, &BlockView)> for proto::BlockShard {
     fn from(value: (Shard, &BlockView)) -> Self {
         Self {
             header: Some(value.1.into()),
+            ..proto::BlockShard::from(value.0)
+        }
+    }
+}
+
+impl From<(&Shard, &BlockView)> for proto::BlockShard {
+    fn from(value: (&Shard, &BlockView)) -> Self {
+        Self {
+            header: Some(value.1.clone().into()),
             ..proto::BlockShard::from(value.0)
         }
     }
@@ -109,6 +137,110 @@ impl From<Shard> for proto::BlockShard {
             chunk: value.chunk.map(Into::into),
             receipt_execution_outcomes: value.receipt_execution_outcomes.into_iter().map(Into::into).collect(),
             state_changes: value.state_changes.into_iter().map(Into::into).collect(),
+            header: None,
+        }
+    }
+}
+
+impl From<&Shard> for proto::BlockShard {
+    fn from(value: &Shard) -> Self {
+        Self {
+            shard_id: value.shard_id,
+            chunk: value.chunk.clone().map(Into::into),
+            receipt_execution_outcomes: value
+                .receipt_execution_outcomes
+                .iter()
+                .cloned()
+                .map(Into::into)
+                .collect(),
+            state_changes: value
+                .state_changes
+                .iter()
+                .map(|v: &StateChangeWithCauseView| StateChangeWithCauseView {
+                    cause: match &v.cause {
+                        StateChangeCauseView::NotWritableToDisk => StateChangeCauseView::NotWritableToDisk,
+                        StateChangeCauseView::InitialState => StateChangeCauseView::InitialState,
+                        StateChangeCauseView::TransactionProcessing { tx_hash } => {
+                            StateChangeCauseView::TransactionProcessing {
+                                tx_hash: tx_hash.clone(),
+                            }
+                        }
+                        StateChangeCauseView::ActionReceiptProcessingStarted { receipt_hash } => {
+                            StateChangeCauseView::ActionReceiptProcessingStarted {
+                                receipt_hash: receipt_hash.clone(),
+                            }
+                        }
+                        StateChangeCauseView::ActionReceiptGasReward { receipt_hash } => {
+                            StateChangeCauseView::ActionReceiptGasReward {
+                                receipt_hash: receipt_hash.clone(),
+                            }
+                        }
+                        StateChangeCauseView::ReceiptProcessing { receipt_hash } => {
+                            StateChangeCauseView::ReceiptProcessing {
+                                receipt_hash: receipt_hash.clone(),
+                            }
+                        }
+                        StateChangeCauseView::PostponedReceipt { receipt_hash } => {
+                            StateChangeCauseView::PostponedReceipt {
+                                receipt_hash: receipt_hash.clone(),
+                            }
+                        }
+                        StateChangeCauseView::UpdatedDelayedReceipts => StateChangeCauseView::UpdatedDelayedReceipts,
+                        StateChangeCauseView::ValidatorAccountsUpdate => StateChangeCauseView::ValidatorAccountsUpdate,
+                        StateChangeCauseView::Migration => StateChangeCauseView::Migration,
+                        StateChangeCauseView::Resharding => StateChangeCauseView::Resharding,
+                    },
+                    value: match &v.value {
+                        StateChangeValueView::AccountUpdate { account_id, account } => {
+                            StateChangeValueView::AccountUpdate {
+                                account_id: account_id.clone(),
+                                account: account.clone(),
+                            }
+                        }
+                        StateChangeValueView::AccountDeletion { account_id } => StateChangeValueView::AccountDeletion {
+                            account_id: account_id.clone(),
+                        },
+                        StateChangeValueView::AccessKeyUpdate {
+                            account_id,
+                            public_key,
+                            access_key,
+                        } => StateChangeValueView::AccessKeyUpdate {
+                            account_id: account_id.clone(),
+                            public_key: public_key.clone(),
+                            access_key: access_key.clone(),
+                        },
+                        StateChangeValueView::AccessKeyDeletion { account_id, public_key } => {
+                            StateChangeValueView::AccessKeyDeletion {
+                                account_id: account_id.clone(),
+                                public_key: public_key.clone(),
+                            }
+                        }
+                        StateChangeValueView::DataUpdate { account_id, key, value } => {
+                            StateChangeValueView::DataUpdate {
+                                account_id: account_id.clone(),
+                                key: key.clone(),
+                                value: value.clone(),
+                            }
+                        }
+                        StateChangeValueView::DataDeletion { account_id, key } => StateChangeValueView::DataDeletion {
+                            account_id: account_id.clone(),
+                            key: key.clone(),
+                        },
+                        StateChangeValueView::ContractCodeUpdate { account_id, code } => {
+                            StateChangeValueView::ContractCodeUpdate {
+                                account_id: account_id.clone(),
+                                code: code.clone(),
+                            }
+                        }
+                        StateChangeValueView::ContractCodeDeletion { account_id } => {
+                            StateChangeValueView::ContractCodeDeletion {
+                                account_id: account_id.clone(),
+                            }
+                        }
+                    },
+                })
+                .map(Into::into)
+                .collect(),
             header: None,
         }
     }
@@ -1196,6 +1328,15 @@ impl From<BlockView> for proto::BlockHeaderView {
     }
 }
 
+impl From<&BlockView> for proto::BlockHeaderView {
+    fn from(value: &BlockView) -> Self {
+        Self {
+            author: value.author.clone().into(),
+            header: Some((&value.header).into()),
+        }
+    }
+}
+
 impl From<ChunkView> for proto::ChunkView {
     fn from(value: ChunkView) -> Self {
         Self {
@@ -1322,6 +1463,43 @@ impl From<IndexerBlockHeaderView> for proto::IndexerBlockHeaderView {
             h256_epoch_sync_data_hash: value.epoch_sync_data_hash.map(|v| v.0.to_vec()),
             approvals: value.approvals.into_iter().map(Into::into).collect(),
             signature: Some(value.signature.into()),
+            latest_protocol_version: value.latest_protocol_version,
+        }
+    }
+}
+
+impl From<&IndexerBlockHeaderView> for proto::IndexerBlockHeaderView {
+    fn from(value: &IndexerBlockHeaderView) -> Self {
+        Self {
+            height: value.height,
+            prev_height: value.prev_height,
+            h256_epoch_id: value.epoch_id.0.to_vec(),
+            h256_next_epoch_id: value.next_epoch_id.0.to_vec(),
+            h256_hash: value.hash.0.to_vec(),
+            h256_prev_hash: value.prev_hash.0.to_vec(),
+            h256_prev_state_root: value.prev_state_root.0.to_vec(),
+            h256_chunk_receipts_root: value.chunk_receipts_root.0.to_vec(),
+            h256_chunk_headers_root: value.chunk_headers_root.0.to_vec(),
+            h256_chunk_tx_root: value.chunk_tx_root.0.to_vec(),
+            h256_outcome_root: value.outcome_root.0.to_vec(),
+            chunks_included: value.chunks_included,
+            h256_challenges_root: value.challenges_root.0.to_vec(),
+            timestamp: value.timestamp,
+            timestamp_nanosec: value.timestamp_nanosec,
+            h256_random_value: value.random_value.0.to_vec(),
+            validator_proposals: value.validator_proposals.clone().into_iter().map(Into::into).collect(),
+            chunk_mask: value.chunk_mask.clone(),
+            u128_gas_price: value.gas_price.to_be_bytes().to_vec(),
+            block_ordinal: value.block_ordinal,
+            u128_total_supply: value.total_supply.to_be_bytes().to_vec(),
+            challenges_result: value.challenges_result.clone().into_iter().map(Into::into).collect(),
+            h256_last_final_block: value.last_final_block.0.to_vec(),
+            h256_last_ds_final_block: value.last_ds_final_block.0.to_vec(),
+            h256_next_bp_hash: value.next_bp_hash.0.to_vec(),
+            h256_block_merkle_root: value.block_merkle_root.0.to_vec(),
+            h256_epoch_sync_data_hash: value.epoch_sync_data_hash.map(|v| v.0.to_vec()),
+            approvals: value.approvals.clone().into_iter().map(Into::into).collect(),
+            signature: Some(value.signature.clone().into()),
             latest_protocol_version: value.latest_protocol_version,
         }
     }

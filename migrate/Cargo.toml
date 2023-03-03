@@ -8,12 +8,12 @@ aurora-refiner-types = { workspace = true }
 borealis-proto-types = { path = "../types" }
 borealis-rs = { workspace = true }
 anyhow = "1"
-async-nats = { version = "0.26" }
 borealis-types = { workspace = true }
+async-nats = { workspace = true }
 chrono = "0.4"
 clap = { version = "4", features = ["derive"] }
 env_logger = "0.10"
-futures-util = "0.3"
+futures-util = { workspace = true }
 futures = "0.3"
 log = "0.4"
 prost = { workspace = true }

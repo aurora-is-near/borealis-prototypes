@@ -145,40 +145,6 @@ dependencies = [
 
 [[package]]
 name = "async-nats"
-version = "0.26.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0b0e90b3cd41350d89a242b981fb888f0eb8e3cb81c0fcb4563338f7e96a1084"
-dependencies = [
- "base64 0.13.1",
- "base64-url",
- "bytes",
- "futures",
- "http",
- "itertools",
- "itoa",
- "lazy_static",
- "nkeys",
- "nuid",
- "once_cell",
- "regex",
- "ring",
- "rustls-native-certs",
- "rustls-pemfile",
- "serde",
- "serde_json",
- "serde_nanos",
- "serde_repr",
- "subslice",
- "time 0.3.17",
- "tokio",
- "tokio-retry",
- "tokio-rustls",
- "tracing",
- "url",
-]
-
-[[package]]
-name = "async-nats"
 version = "0.27.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "47a445ce9f6605511fe594b31a6ba174bc874fef6bfa628cea51e9bfe450e2f7"
@@ -469,7 +435,7 @@ name = "borealis-proto-migrate"
 version = "0.3.0"
 dependencies = [
  "anyhow",
- "async-nats 0.26.0",
+ "async-nats 0.27.1",
  "aurora-refiner-types",
  "borealis-proto-types",
  "borealis-rs",
@@ -489,9 +455,10 @@ dependencies = [
 
 [[package]]
 name = "borealis-proto-types"
-version = "0.3.0"
+version = "0.4.0"
 dependencies = [
  "async-nats 0.27.1",
+ "async-trait",
  "aurora-refiner-types",
  "borealis-rs",
  "borealis-types",
@@ -499,6 +466,7 @@ dependencies = [
  "bytes",
  "chrono",
  "ed25519-dalek",
+ "futures-util",
  "itertools",
  "log",
  "near-crypto 0.0.0 (git+https://github.com/near/nearcore?tag=1.26.1)",
@@ -512,6 +480,7 @@ dependencies = [
  "sha2 0.10.6",
  "test-case",
  "thiserror",
+ "tokio",
  "zstd",
  "zstd-sys",
 ]
