@@ -17,9 +17,9 @@ bs58 = "0.4"
 bytes = "1"
 chrono = "0.4"
 log = "0.4"
-near-crypto = { git = "https://github.com/near/nearcore", tag = "1.29.0-rc.1" }
-near-primitives = { git = "https://github.com/near/nearcore", tag = "1.29.0-rc.1" }
-near-vm-errors = { git = "https://github.com/near/nearcore", tag = "1.29.0-rc.1" }
+near-crypto = { git = "https://github.com/near/nearcore", tag = "1.31.1" }
+near-primitives = { git = "https://github.com/near/nearcore", tag = "1.31.1" }
+near-vm-errors = { git = "https://github.com/near/nearcore", tag = "1.31.1" }
 prost = { workspace = true }
 thiserror = "1"
 itertools = "0.10"

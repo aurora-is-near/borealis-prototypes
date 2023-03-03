@@ -68,6 +68,9 @@ message HostError {
   // Invalid input to alt_bn128 familiy of functions (e.g., point which isn't
   // on the curve).
   message AltBn128InvalidInput { string msg = 1; }
+  // Invalid input to ed25519 signature verification function (e.g. signature cannot be
+  // derived from bytes).
+  message Ed25519VerifyInvalidInput { string msg = 1; }
   oneof variant {
     BadUTF16 bad_utf16 = 1;
     BadUTF8 bad_utf8 = 2;
@@ -101,5 +104,6 @@ message HostError {
     Deprecated deprecated = 30;
     ECRecoverError ecrecover_error = 31;
     AltBn128InvalidInput alt_bn_128_invalid_input = 32;
+    Ed25519VerifyInvalidInput ed25519_verify_invalid_input = 33;
   }
 }

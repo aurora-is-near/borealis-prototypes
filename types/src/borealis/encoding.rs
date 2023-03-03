@@ -626,11 +626,6 @@ impl From<CompilationError> for proto::CompilationError {
                 CompilationError::WasmerCompileError { msg } => proto::compilation_error::Variant::WasmerCompileError(
                     proto::compilation_error::WasmerCompileError { msg },
                 ),
-                CompilationError::UnsupportedCompiler { msg } => {
-                    proto::compilation_error::Variant::UnsupportedCompiler(
-                        proto::compilation_error::UnsupportedCompiler { msg },
-                    )
-                }
             }),
         }
     }
@@ -776,6 +771,9 @@ impl From<HostError> for proto::HostError {
                 HostError::AltBn128InvalidInput { msg } => {
                     proto::host_error::Variant::AltBn128InvalidInput(proto::host_error::AltBn128InvalidInput { msg })
                 }
+                HostError::Ed25519VerifyInvalidInput { msg } => proto::host_error::Variant::Ed25519VerifyInvalidInput(
+                    proto::host_error::Ed25519VerifyInvalidInput { msg },
+                ),
             }),
         }
     }
