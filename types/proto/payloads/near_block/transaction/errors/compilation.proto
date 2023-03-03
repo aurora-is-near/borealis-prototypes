@@ -32,6 +32,8 @@ enum PrepareError {
 }
 
 message CompilationError {
+  reserved "unsupported_compiler";
+  reserved 4;
   message CodeDoesNotExist {
     string account_id = 1;
   }
@@ -41,13 +43,9 @@ message CompilationError {
   message WasmerCompileError {
     string msg = 1;
   }
-  message UnsupportedCompiler {
-    string msg = 1;
-  }
   oneof variant {
     CodeDoesNotExist code_does_not_exist = 1;
     PrepareError prepare_error = 2;
     WasmerCompileError wasmer_compile_error = 3;
-    UnsupportedCompiler unsupported_compiler = 4;
   }
 }

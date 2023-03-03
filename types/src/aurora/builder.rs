@@ -20,6 +20,7 @@ use crate::message::Payload::{NearBlockHeader, NearBlockShard};
 use crate::{CompressedMessage, DecodeError, Message as ProtoMsg};
 use async_nats::Message;
 use aurora_refiner_types::near_block::{BlockView, NEARBlock, Shard};
+use itertools::Itertools;
 use std::collections::HashMap;
 
 /// Collects messages, each one containing a part of a block data. There are multiple parts, one for a header and one
@@ -122,14 +123,19 @@ impl BlockBuilder {
     fn is_ready(&self) -> bool {
         self.header
             .as_ref()
-            .map(|header| self.shards.iter().count() as u64 == header.header.chunks_included)
+            .map(|header| self.shards.len() as u64 >= header.header.chunks_included)
             .unwrap_or(false)
     }
 
     fn build(&mut self) -> Option<NEARBlock> {
         self.is_ready().then(|| NEARBlock {
             block: self.header.take().unwrap(),
-            shards: self.shards.drain().map(|(_, shard)| shard).collect(),
+            shards: self
+                .shards
+                .drain()
+                .map(|(_, shard)| shard)
+                .sorted_by_key(|shard| shard.shard_id)
+                .collect(),
         })
     }
 }
@@ -138,8 +144,8 @@ impl BlockBuilder {
 mod tests {
     use super::*;
     use crate::proto;
-    use aurora_near_primitives::types::AccountId;
     use aurora_refiner_types::near_block::IndexerBlockHeaderView;
+    use near_primitives::types::AccountId;
     use std::str::FromStr;
     use test_case::test_case;
 
