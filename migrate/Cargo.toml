@@ -1,11 +1,11 @@
 [package]
 name = "borealis-proto-migrate"
-version = "0.3.0"
+version = "0.4.0"
 edition = "2021"
 
 [dependencies]
 aurora-refiner-types = { workspace = true }
-borealis-proto-types = { path = "../types" }
+borealis-proto-types = { path = "../types", features = ["async-nats-publish"] }
 borealis-rs = { workspace = true }
 anyhow = "1"
 borealis-types = { workspace = true }
