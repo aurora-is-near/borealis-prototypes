@@ -4,4 +4,4 @@ mod decoding;
 mod encoding;
 
 #[cfg(feature = "async-nats")]
-pub use builder::*;
+pub use builder::BlocksBuilder;

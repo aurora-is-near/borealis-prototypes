@@ -435,6 +435,7 @@ impl From<proto::HostError> for HostError {
             },
             proto::host_error::Variant::EcrecoverError(v) => HostError::ECRecoverError { msg: v.msg },
             proto::host_error::Variant::AltBn128InvalidInput(v) => HostError::AltBn128InvalidInput { msg: v.msg },
+            v => panic!("Unexpected variant {v:?}"),
         }
     }
 }

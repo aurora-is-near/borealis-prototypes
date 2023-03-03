@@ -41,7 +41,7 @@ The tool creates multiple output messages (2..5) per single input message. It do
 Downloads version 2 messages from `--nats-server` and uploads them re-encoded and compressed as version 3 messages to `--nats-output-server`.
 
 ```shell
-RUST_LOG=debug cargo run -p borealis-proto-migrate -- \
+RUST_LOG=debug cargo run --release -p borealis-proto-migrate -- \
   --nats-creds production_developer.creds \
   --nats-server nats://developer.nats.backend.aurora.dev:4222 \
   --nats-subject v2.mainnet.near.blocks \

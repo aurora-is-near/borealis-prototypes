@@ -1,23 +1,25 @@
 [package]
 name = "borealis-proto-types"
-version = "0.3.0"
+version = "0.4.0"
 edition = "2021"
 
 [dependencies]
-async-nats = { version = "0.27", optional = true }
+async-nats = { workspace = true, optional = true }
+async-trait = { version = "0.1", optional = true }
 aurora-refiner-types = { workspace = true }
 aurora-near-crypto = { git = "https://github.com/near/nearcore", tag = "1.26.1", package = "near-crypto" }
 aurora-near-primitives = { git = "https://github.com/near/nearcore", tag = "1.26.1", package = "near-primitives" }
 aurora-near-vm-errors = { git = "https://github.com/near/nearcore", tag = "1.26.1", package = "near-vm-errors", features = ["protocol_feature_alt_bn128"] }
 borealis-types = { workspace = true }
 borealis-rs = { workspace = true }
+futures-util = { workspace = true }
 bs58 = "0.4"
 bytes = "1"
 chrono = "0.4"
 log = "0.4"
-near-crypto = { git = "https://github.com/near/nearcore", tag = "1.29.0-rc.1" }
-near-primitives = { git = "https://github.com/near/nearcore", tag = "1.29.0-rc.1" }
-near-vm-errors = { git = "https://github.com/near/nearcore", tag = "1.29.0-rc.1" }
+near-crypto = { git = "https://github.com/near/nearcore", tag = "1.31.1" }
+near-primitives = { git = "https://github.com/near/nearcore", tag = "1.31.1" }
+near-vm-errors = { git = "https://github.com/near/nearcore", tag = "1.31.1" }
 prost = { workspace = true }
 thiserror = "1"
 itertools = "0.10"
@@ -25,9 +27,14 @@ ed25519-dalek = "1"
 zstd = { workspace = true }
 zstd-sys = { workspace = true }
 
+[features]
+default = []
+async-nats-publish = ["async-nats", "async-trait"]
+
 [dev-dependencies]
 sha2 = "0.10"
 test-case = "3"
+tokio = { version = "1", features = ["macros", "test-util"] }
 
 [build-dependencies]
 prost-build = { version = "0.11" }
