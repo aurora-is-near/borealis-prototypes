@@ -1,9 +1,11 @@
+use crate::common::borealis::{dump_block, upgrade_old_block};
 use borealis_proto_types::{CompressedMessage, Message, Messages};
 use borealis_types::message;
 use borealis_types::payloads::{NEARBlock, SendablePayload};
 use std::iter::once;
-use std::{fs, io};
 use test_case::test_case;
+
+pub mod common;
 
 #[test_case(
     include_bytes!("data/34834053.v3"),
@@ -83,40 +85,4 @@ fn test_decoding_proto_and_converting_to_borealis_equals_borealis(
     let expected_payload = expected_payload.to_cbor().expect("Unable to encode NEAR block to CBOR");
 
     assert_eq!(expected_payload, actual_payload);
-}
-
-/// Writes the contents of the `block` in a pretty-printed debug format into the test output tmp directory.
-///
-/// The directory is the one given from the env variable `CARGO_TARGET_TMPDIR`. The `block` height is used as a prefix
-/// of the filename.
-fn dump_block(block: &NEARBlock, suffix: &str) -> io::Result<()> {
-    let contents = format!("{:#?}", block);
-    let path = format!(
-        "{}/{}.{}.txt",
-        env!("CARGO_TARGET_TMPDIR"),
-        block.block.header.height,
-        suffix
-    );
-    fs::write(path, &contents.as_bytes())
-}
-
-/// Performs backwards compatible changes on the `block`.
-///
-/// The purpose of this change is to be able to compare the `block` historically encoded exactly with a newly encoded
-/// one.
-fn upgrade_old_block(block: &mut NEARBlock) {
-    for shard in &mut block.shards {
-        for receipt in &mut shard.receipt_execution_outcomes {
-            if let Some(gas_profile) = &mut receipt.execution_outcome.outcome.metadata.gas_profile {
-                for cost in gas_profile {
-                    cost.cost = match cost.cost.as_str() {
-                        "CONTRACT_COMPILE_BASE" => "CONTRACT_LOADING_BASE".to_owned(),
-                        "CONTRACT_COMPILE_BYTES" => "CONTRACT_LOADING_BYTES".to_owned(),
-                        "VALUE_RETURN" => "NEW_DATA_RECEIPT_BYTE".to_owned(),
-                        _ => continue,
-                    }
-                }
-            }
-        }
-    }
 }

@@ -348,7 +348,7 @@ impl From<proto::CompilationError> for CompilationError {
                 CompilationError::WasmerCompileError { msg: v.msg }
             }
             proto::compilation_error::Variant::UnsupportedCompiler(v) => {
-                CompilationError::UnsupportedCompiler { msg: v.msg }
+                CompilationError::WasmerCompileError { msg: v.msg }
             }
         }
     }
@@ -440,6 +440,9 @@ impl From<proto::HostError> for HostError {
             },
             proto::host_error::Variant::EcrecoverError(v) => HostError::ECRecoverError { msg: v.msg },
             proto::host_error::Variant::AltBn128InvalidInput(v) => HostError::AltBn128InvalidInput { msg: v.msg },
+            proto::host_error::Variant::Ed25519VerifyInvalidInput(v) => {
+                HostError::Ed25519VerifyInvalidInput { msg: v.msg }
+            }
         }
     }
 }
