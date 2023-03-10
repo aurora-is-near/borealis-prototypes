@@ -72,9 +72,9 @@ fn test_decoding_proto_and_converting_to_aurora_equals_aurora(
 
     let messages: Messages = shards_v3
         .into_iter()
-        .map(|shard_v3| Message::decode_compressed(&shard_v3[..]).expect("Cannot decode compressed shard"))
+        .map(|shard_v3| Message::decode_compressed(shard_v3).expect("Cannot decode compressed shard"))
         .chain(once(
-            Message::decode_compressed(&header_v3[..]).expect("Cannot decode compressed header"),
+            Message::decode_compressed(header_v3).expect("Cannot decode compressed header"),
         ))
         .collect();
 

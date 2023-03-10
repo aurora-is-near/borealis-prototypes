@@ -57,9 +57,9 @@ use test_case::test_case;
 fn test_decoding_aurora_and_converting_to_proto_equals_proto(header_v3: &[u8], shards_v3: Vec<&[u8]>, block_v2: &[u8]) {
     let expected_messages: Messages = shards_v3
         .into_iter()
-        .map(|shard_v3| Message::decode_compressed(&shard_v3[..]).expect("Cannot decode compressed shard"))
+        .map(|shard_v3| Message::decode_compressed(shard_v3).expect("Cannot decode compressed shard"))
         .chain(once(
-            Message::decode_compressed(&header_v3[..]).expect("Cannot decode compressed header"),
+            Message::decode_compressed(header_v3).expect("Cannot decode compressed header"),
         ))
         .collect();
 

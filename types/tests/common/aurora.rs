@@ -13,7 +13,7 @@ pub fn dump_block(block: &NEARBlock, suffix: &str) -> io::Result<()> {
         env!("CARGO_TARGET_TMPDIR"),
         block.block.header.height,
     );
-    fs::write(path, &contents.as_bytes())
+    fs::write(path, contents.as_bytes())
 }
 
 /// Performs backwards compatible changes on the `block`.

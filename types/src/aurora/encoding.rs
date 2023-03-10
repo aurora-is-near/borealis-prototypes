@@ -1,11 +1,5 @@
 //! Encoding of the [`borealis_types`] into the [`proto`] types.
 use crate::proto;
-use aurora_near_crypto::{PublicKey, Signature};
-use aurora_near_primitives::challenge::SlashedValidator;
-use aurora_near_primitives::merkle::{Direction, MerklePathItem};
-use aurora_near_vm_errors::{
-    CompilationError, FunctionCallErrorSer, HostError, MethodResolveError, PrepareError, WasmTrap,
-};
 use aurora_refiner_types::near_block::{
     BlockView, ChunkHeaderView, ChunkView, ExecutionOutcomeWithOptionalReceipt, ExecutionOutcomeWithReceipt,
     IndexerBlockHeaderView, NEARBlock, Shard, TransactionWithOutcome,
@@ -24,7 +18,10 @@ use aurora_refiner_types::near_primitives::views::{
     StateChangeCauseView, StateChangeValueView, StateChangeWithCauseView,
 };
 use borealis_rs::bus_message::BusMessage;
-use near_primitives::serialize::from_base64;
+use near_crypto::{PublicKey, Signature};
+use near_primitives::challenge::SlashedValidator;
+use near_primitives::merkle::{Direction, MerklePathItem};
+use near_vm_errors::{CompilationError, FunctionCallErrorSer, HostError, MethodResolveError, PrepareError, WasmTrap};
 use std::iter::once;
 
 impl From<BusMessage<NEARBlock>> for proto::Messages {
@@ -153,7 +150,7 @@ impl From<ExecutionStatusView> for proto::ExecutionStatusView {
                 }
                 ExecutionStatusView::SuccessValue(value) => {
                     proto::execution_status_view::Variant::SuccessValue(proto::execution_status_view::SuccessValue {
-                        value: from_base64(&value).expect("Invalid base64 string"),
+                        value,
                     })
                 }
                 ExecutionStatusView::SuccessReceiptId(receipt_hash) => {
@@ -397,9 +394,7 @@ impl From<ActionsValidationError> for proto::ActionsValidationError {
                 ),
                 ActionsValidationError::InvalidAccountId { account_id } => {
                     proto::actions_validation_error::Variant::InvalidAccountId(
-                        proto::actions_validation_error::InvalidAccountId {
-                            account_id: account_id.to_string(),
-                        },
+                        proto::actions_validation_error::InvalidAccountId { account_id },
                     )
                 }
                 ActionsValidationError::ContractSizeExceeded { size, limit } => {
@@ -498,11 +493,6 @@ impl From<CompilationError> for proto::CompilationError {
                 CompilationError::WasmerCompileError { msg } => proto::compilation_error::Variant::WasmerCompileError(
                     proto::compilation_error::WasmerCompileError { msg },
                 ),
-                CompilationError::UnsupportedCompiler { msg } => {
-                    proto::compilation_error::Variant::UnsupportedCompiler(
-                        proto::compilation_error::UnsupportedCompiler { msg },
-                    )
-                }
             }),
         }
     }
@@ -648,6 +638,9 @@ impl From<HostError> for proto::HostError {
                 HostError::AltBn128InvalidInput { msg } => {
                     proto::host_error::Variant::AltBn128InvalidInput(proto::host_error::AltBn128InvalidInput { msg })
                 }
+                HostError::Ed25519VerifyInvalidInput { msg } => proto::host_error::Variant::Ed25519VerifyInvalidInput(
+                    proto::host_error::Ed25519VerifyInvalidInput { msg },
+                ),
             }),
         }
     }
@@ -773,7 +766,7 @@ impl From<ActionsValidationError> for proto::tx_execution_error::invalid_tx_erro
                 }
                 ActionsValidationError::InvalidAccountId { account_id } => {
                     proto::tx_execution_error::invalid_tx_error::actions_validation::Variant::InvalidAccountId(
-                        proto::tx_execution_error::invalid_tx_error::actions_validation::InvalidAccountId { account_id: account_id.to_string() }
+                        proto::tx_execution_error::invalid_tx_error::actions_validation::InvalidAccountId { account_id }
                     )
                 }
                 ActionsValidationError::ContractSizeExceeded { size, limit } => {
@@ -1422,9 +1415,7 @@ impl From<ActionView> for proto::ActionView {
                     proto::action_view::Variant::CreateAccount(proto::action_view::CreateAccount {})
                 }
                 ActionView::DeployContract { code } => {
-                    proto::action_view::Variant::DeployContract(proto::action_view::DeployContract {
-                        code: from_base64(&code).expect("Invalid base64 string"),
-                    })
+                    proto::action_view::Variant::DeployContract(proto::action_view::DeployContract { code })
                 }
                 ActionView::FunctionCall {
                     args,
@@ -1433,7 +1424,7 @@ impl From<ActionView> for proto::ActionView {
                     method_name,
                 } => proto::action_view::Variant::FunctionCall(proto::action_view::FunctionCall {
                     method_name,
-                    args: from_base64(&args).expect("Invalid base64 string"),
+                    args,
                     gas,
                     u128_deposit: deposit.to_be_bytes().to_vec(),
                 }),
@@ -1680,7 +1671,7 @@ impl From<AccountView> for proto::AccountView {
 mod tests {
     use super::*;
     use crate::proto::signature::Variant;
-    use aurora_near_crypto::{KeyType, Secp256K1Signature, SecretKey};
+    use near_crypto::{KeyType, Secp256K1Signature, SecretKey};
     use sha2::Digest;
 
     #[test]

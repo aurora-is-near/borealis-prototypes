@@ -1,5 +1,6 @@
+#![allow(clippy::large_enum_variant)]
+
 mod aurora;
-mod borealis;
 mod proto;
 
 #[cfg(feature = "async-nats")]

@@ -125,10 +125,7 @@ pub async fn publish(
             headers.insert(NATS_EXPECTED_LAST_MESSAGE_ID, last_message_id.as_str());
         }
 
-        publisher
-            .publish_with_headers(subject, headers, payload)
-            .await
-            .map_err(PublishError::from)?;
+        publisher.publish_with_headers(subject, headers, payload).await?;
     }
 
     Ok(EncodingStats::new(encoded_size, compressed_size))
@@ -146,8 +143,8 @@ fn subject_for_shard(subject_shard_prefix: &str, shard_id: ShardId) -> String {
 mod tests {
     use super::*;
     use async_trait::async_trait;
-    use aurora_near_primitives::types::AccountId;
     use aurora_refiner_types::near_block::{BlockView, IndexerBlockHeaderView, NEARBlock, Shard};
+    use near_primitives::types::AccountId;
     use std::ops::Deref;
     use std::str::FromStr;
     use std::sync::RwLock;

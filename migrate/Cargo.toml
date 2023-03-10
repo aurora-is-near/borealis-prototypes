@@ -4,17 +4,16 @@ version = "0.4.0"
 edition = "2021"
 
 [dependencies]
+anyhow = "1"
+async-nats = { workspace = true }
 aurora-refiner-types = { workspace = true }
 borealis-proto-types = { path = "../types", features = ["async-nats-publish"] }
 borealis-rs = { workspace = true }
-anyhow = "1"
-borealis-types = { workspace = true }
-async-nats = { workspace = true }
 chrono = "0.4"
 clap = { version = "4", features = ["derive"] }
 env_logger = "0.10"
-futures-util = { workspace = true }
 futures = "0.3"
+futures-util = { workspace = true }
 log = "0.4"
 prost = { workspace = true }
 thiserror = "1"

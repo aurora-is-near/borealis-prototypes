@@ -123,7 +123,7 @@ impl BlockBuilder {
     fn is_ready(&self) -> bool {
         self.header
             .as_ref()
-            .map(|header| self.shards.iter().count() as u64 >= header.header.chunks_included)
+            .map(|header| self.shards.len() as u64 >= header.header.chunks_included)
             .unwrap_or(false)
     }
 
@@ -144,8 +144,8 @@ impl BlockBuilder {
 mod tests {
     use super::*;
     use crate::proto;
-    use aurora_near_primitives::types::AccountId;
     use aurora_refiner_types::near_block::IndexerBlockHeaderView;
+    use near_primitives::types::AccountId;
     use std::str::FromStr;
     use test_case::test_case;
 

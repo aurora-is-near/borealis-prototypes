@@ -2,8 +2,9 @@ use anyhow::anyhow;
 use async_nats::jetstream::consumer::{Consumer, DeliverPolicy};
 use async_nats::jetstream::{consumer, Context};
 use async_nats::ConnectOptions;
+use aurora_refiner_types::near_block::NEARBlock;
 use borealis_proto_types as proto;
-use borealis_types::payloads::NEARBlock;
+use borealis_rs::bus_message::BusMessage;
 use futures_util::TryStreamExt;
 use prost::Message;
 use std::fs;
@@ -73,8 +74,7 @@ impl Convertor {
                             };
 
                             let old_size = message.message.payload.len();
-                            let parsed =
-                                borealis_types::message::Message::<NEARBlock>::from_cbor(&message.message.payload)?;
+                            let parsed = BusMessage::<NEARBlock>::deserialize(&message.message.payload)?;
 
                             message.ack().await.map_err(|e| anyhow!(e))?;
 
@@ -156,7 +156,7 @@ impl Convertor {
                                 log::info!("Message {seq} received.");
 
                                 let old_size = message.message.payload.len();
-                                let parsed = borealis_types::message::Message::<borealis_types::payloads::NEARBlock>::from_cbor(&message.message.payload).unwrap();
+                                let parsed = BusMessage::<NEARBlock>::deserialize(&message.message.payload).unwrap();
                                 let date = chrono::NaiveDateTime::from_timestamp_millis(
                                     (parsed.payload.block.header.timestamp as f64 * 0.000001) as i64
                                 ).unwrap();
@@ -212,7 +212,7 @@ impl Convertor {
                 },
                 message = batch.try_next() => {
                     if let Ok(Some(message)) = message {
-                        let parsed = borealis_types::message::Message::<borealis_types::payloads::NEARBlock>::from_cbor(&message.message.payload).unwrap();
+                        let parsed = BusMessage::<NEARBlock>::deserialize(&message.message.payload).unwrap();
                         println!("{parsed:#?}");
 
                         let protobuf = proto::Messages::from(parsed).into_inner();
