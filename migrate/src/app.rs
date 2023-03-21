@@ -36,7 +36,6 @@ impl Convertor {
             log::info!("seq;height;date;cbor;proto;proto_zstd;diff;diff_zstd");
         }
 
-        let shards = 4;
         let mut seq = sequence_start
             - (sequence_start <= 1 || skip_expect)
                 .not()
@@ -94,7 +93,6 @@ impl Convertor {
                                 subject_header.as_ref().to_string(),
                                 subject_shard.as_ref().to_string(),
                                 compression_level,
-                                shards as u64,
                                 &mut last_msg_id,
                             )
                             .await?;

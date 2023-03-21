@@ -33,7 +33,6 @@ pub mod common;
 #[tokio::test]
 async fn test_published_messages_are_decoded_by_builder(block_v2: &[u8]) {
     let height = 0;
-    let shards = 4;
     let mut expected_payload = BusMessage::<NEARBlock>::deserialize(block_v2)
         .expect("Cannot decode expected data from CBOR")
         .payload;
@@ -52,7 +51,6 @@ async fn test_published_messages_are_decoded_by_builder(block_v2: &[u8]) {
         "header",
         "shard.",
         0,
-        shards,
         &mut last_msg_id,
     )
     .await

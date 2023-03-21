@@ -21,6 +21,7 @@ use crate::{CompressedMessage, DecodeError, Message as ProtoMsg};
 use async_nats::Message;
 use aurora_refiner_types::near_block::{BlockView, NEARBlock, Shard};
 use itertools::Itertools;
+use near_primitives::types::ShardId;
 use std::collections::HashMap;
 
 /// Collects messages, each one containing a part of a block data. There are multiple parts, one for a header and one
@@ -128,14 +129,37 @@ impl BlockBuilder {
     }
 
     fn build(&mut self) -> Option<NEARBlock> {
-        self.is_ready().then(|| NEARBlock {
-            block: self.header.take().unwrap(),
-            shards: self
+        self.is_ready().then(|| {
+            let block = self.header.take().unwrap();
+            let mut included_shards = self
                 .shards
                 .drain()
                 .map(|(_, shard)| shard)
                 .sorted_by_key(|shard| shard.shard_id)
-                .collect(),
+                .rev()
+                .collect::<Vec<_>>();
+            let chunk_mask = block.header.chunk_mask.clone();
+            let shards_max = chunk_mask.len();
+
+            NEARBlock {
+                block,
+                shards: (0..shards_max)
+                    .map(|shard_id| {
+                        let is_included = chunk_mask.get(shard_id).copied().unwrap_or_default();
+
+                        if is_included {
+                            included_shards.pop().expect("chunk_mask invalid included shard")
+                        } else {
+                            Shard {
+                                shard_id: shard_id as ShardId,
+                                chunk: None,
+                                receipt_execution_outcomes: vec![],
+                                state_changes: vec![],
+                            }
+                        }
+                    })
+                    .collect(),
+            }
         })
     }
 }

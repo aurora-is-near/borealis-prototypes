@@ -3,6 +3,7 @@ use async_nats::header::{NATS_EXPECTED_LAST_MESSAGE_ID, NATS_MESSAGE_ID};
 use async_nats::HeaderMap;
 use async_trait::async_trait;
 use bytes::Bytes;
+use itertools::Itertools;
 use near_primitives::types::ShardId;
 use prost::Message;
 use std::error::Error;
@@ -72,7 +73,6 @@ pub async fn publish(
     subject_header: impl Into<String>,
     subject_shard_prefix: impl Into<String>,
     compression_level: i32,
-    shards: u64,
     last_msg_id: &mut Option<String>,
 ) -> Result<EncodingStats, PublishError> {
     let protobuf = block.into().into_inner();
@@ -83,16 +83,19 @@ pub async fn publish(
             _ => None,
         })
         .unwrap();
-    let last_shard_id = protobuf.len() - 1;
     let subject_header = subject_header.into();
     let subject_shard_prefix = subject_shard_prefix.into();
-    let shards = shards as usize;
 
     let mut encoded_size = 0;
     let mut compressed_size = 0;
 
     let messages = protobuf
         .into_iter()
+        .sorted_by_key(|v| match v.payload.as_ref().expect("Payload is mandatory") {
+            proto::message::Payload::NearBlockHeader(..) => 1,
+            proto::message::Payload::NearBlockShard(shard) => shard.shard_id + 2,
+            _ => 0,
+        })
         .filter_map(|msg| {
             let (msg_id, subject) = match msg.payload.as_ref().expect("Payload is mandatory") {
                 proto::message::Payload::NearBlockHeader(..) => (height.to_string(), subject_header.clone()),
@@ -110,13 +113,7 @@ pub async fn publish(
             compressed_size += compressed.len();
 
             Some((subject, msg_id, compressed.into()))
-        })
-        .chain((last_shard_id..shards).map(|shard_id| {
-            let msg_id = msg_id_for_shard(height, shard_id as u64);
-            let subject = subject_for_shard(&subject_shard_prefix, shard_id as u64);
-
-            (subject, msg_id, Default::default())
-        }));
+        });
 
     for (subject, msg_id, payload) in messages {
         let mut headers = HeaderMap::new();
@@ -145,6 +142,7 @@ mod tests {
     use async_trait::async_trait;
     use aurora_refiner_types::near_block::{BlockView, IndexerBlockHeaderView, NEARBlock, Shard};
     use near_primitives::types::AccountId;
+    use std::iter::once;
     use std::ops::Deref;
     use std::str::FromStr;
     use std::sync::RwLock;
@@ -154,7 +152,6 @@ mod tests {
     struct Publish {
         subject: String,
         headers: HeaderMap,
-        is_empty: bool,
     }
 
     impl Publish {
@@ -162,15 +159,6 @@ mod tests {
             Self {
                 subject: subject.into(),
                 headers: headers.into(),
-                is_empty: false,
-            }
-        }
-
-        pub fn without_payload(subject: impl Into<String>, headers: impl Into<HeaderMap>) -> Self {
-            Self {
-                subject: subject.into(),
-                headers: headers.into(),
-                is_empty: true,
             }
         }
     }
@@ -186,13 +174,9 @@ mod tests {
             &self,
             subject: String,
             headers: HeaderMap,
-            payload: Bytes,
+            _payload: Bytes,
         ) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
-            self.messages.write().unwrap().push(Publish {
-                subject,
-                headers,
-                is_empty: payload.is_empty(),
-            });
+            self.messages.write().unwrap().push(Publish { subject, headers });
             Ok(())
         }
     }
@@ -212,10 +196,10 @@ mod tests {
         }
     }
 
-    #[test_case(4, 4; "Publishing a block on all shards")]
-    #[test_case(4, 1; "Publishing a block with some shards missing")]
+    #[test_case(4; "Publishing a block on four shards")]
+    #[test_case(1; "Publishing a block on one shard")]
     #[tokio::test]
-    async fn test_publishing_block_succeeds(shards_count: u64, shards_filled: u64) {
+    async fn test_publishing_block_succeeds(shards_filled: u64) {
         let block = create_dummy_block(shards_filled);
         let publisher = DummyPublisher {
             messages: RwLock::new(Vec::new()),
@@ -230,7 +214,6 @@ mod tests {
             subject_header,
             subject_shard_prefix,
             0,
-            shards_count,
             &mut last_msg_id,
         )
         .await
@@ -239,46 +222,28 @@ mod tests {
         let messages = publisher.messages.read().unwrap();
 
         let actual_messages = messages.deref();
-        let expected_messages = (0..shards_filled)
-            .map(|shard_id| {
-                Publish::with_payload(subject_for_shard("shard.", shard_id), {
-                    let mut headers = HeaderMap::new();
-                    headers.insert(NATS_MESSAGE_ID, msg_id_for_shard(0, shard_id).as_str());
-                    if shard_id > 0 {
-                        headers.insert(
-                            NATS_EXPECTED_LAST_MESSAGE_ID,
-                            msg_id_for_shard(0, shard_id - 1).as_str(),
-                        );
-                    }
-                    headers
-                })
-            })
-            .chain(std::iter::once(Publish::with_payload("header", {
+        let expected_messages = once(Publish::with_payload("header", {
+            let mut headers = HeaderMap::new();
+            headers.insert(NATS_MESSAGE_ID, "0");
+            headers
+        }))
+        .chain((0..shards_filled).map(|shard_id| {
+            Publish::with_payload(subject_for_shard("shard.", shard_id), {
                 let mut headers = HeaderMap::new();
-                headers.insert(NATS_MESSAGE_ID, "0");
+                headers.insert(NATS_MESSAGE_ID, msg_id_for_shard(0, shard_id).as_str());
                 headers.insert(
                     NATS_EXPECTED_LAST_MESSAGE_ID,
-                    msg_id_for_shard(0, shards_filled - 1).as_str(),
+                    if shard_id == 0 {
+                        "0".to_owned()
+                    } else {
+                        msg_id_for_shard(0, shard_id - 1)
+                    }
+                    .as_str(),
                 );
                 headers
-            })))
-            .chain((shards_filled..shards_count).map(|shard_id| {
-                Publish::without_payload(subject_for_shard("shard.", shard_id), {
-                    let mut headers = HeaderMap::new();
-                    headers.insert(NATS_MESSAGE_ID, msg_id_for_shard(0, shard_id).as_str());
-                    headers.insert(
-                        NATS_EXPECTED_LAST_MESSAGE_ID,
-                        if shard_id == shards_filled {
-                            "0".to_owned()
-                        } else {
-                            msg_id_for_shard(0, shard_id - 1)
-                        }
-                        .as_str(),
-                    );
-                    headers
-                })
-            }))
-            .collect::<Vec<_>>();
+            })
+        }))
+        .collect::<Vec<_>>();
 
         assert_eq!(&expected_messages, actual_messages);
     }
@@ -299,7 +264,6 @@ mod tests {
             subject_header,
             subject_shard_prefix,
             0,
-            shards,
             &mut last_msg_id,
         )
         .await
