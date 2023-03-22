@@ -6,6 +6,36 @@ import "payloads/near_block/transaction/errors/function_call.proto";
 
 option go_package = "github.com/aurora-is-near/borealis-prototypes/go/payloads/near_block/transaction/errors;errors";
 
+message InvalidAccessKeyError {
+  message AccessKeyNotFound {
+    string account_id = 1;
+    PublicKey public_key = 2;
+  }
+  message ReceiverMismatch {
+    string tx_receiver = 1;
+    string ak_receiver = 2;
+  }
+  message MethodNameMismatch {
+    string method_name = 1;
+  }
+  message RequiresFullAccess {}
+  message NotEnoughAllowance {
+    string account_id = 1;
+    PublicKey public_key = 2;
+    bytes u128_allowance = 3;
+    bytes u128_cost = 4;
+  }
+  message DepositWithFunctionCall {}
+  oneof variant {
+    AccessKeyNotFound access_key_not_found = 1;
+    ReceiverMismatch receiver_mismatch = 2;
+    MethodNameMismatch method_name_mismatch = 3;
+    RequiresFullAccess requires_full_access = 4;
+    NotEnoughAllowance not_enough_allowance = 5;
+    DepositWithFunctionCall deposit_with_function_call = 6;
+  }
+}
+
 message TxExecutionError {
   message ActionError {
     message ActionErrorKind {
@@ -90,6 +120,29 @@ message TxExecutionError {
       message DeleteAccountWithLargeState {
         string account_id = 1;
       }
+      // Signature does not match the provided actions and given signer public key.
+      message DelegateActionInvalidSignature {}
+      // Receiver of the transaction doesn't match Sender of the delegate action
+      message DelegateActionSenderDoesNotMatchTxReceiver {
+        string sender_id = 1;
+        string receiver_id = 2;
+      }
+      // Delegate action has expired. `max_block_height` is less than actual block height.
+      message DelegateActionExpired {}
+      // The given public key doesn't exist for Sender account
+      message DelegateActionAccessKeyError {
+        InvalidAccessKeyError error = 1;
+      }
+      // DelegateAction nonce must be greater sender[public_key].nonce
+      message DelegateActionInvalidNonce {
+        uint64 delegate_nonce = 1;
+        uint64 ak_nonce = 2;
+      }
+      // DelegateAction nonce is larger than the upper bound given by the block height
+      message DelegateActionNonceTooLarge {
+        uint64 delegate_nonce = 1;
+        uint64 upper_bound = 2;
+      }
       oneof variant {
         AccountAlreadyExists account_already_exists = 1;
         AccountDoesNotExist account_does_not_exist = 2;
@@ -107,41 +160,18 @@ message TxExecutionError {
         NewReceiptValidationError new_receipt_validation_error = 14;
         OnlyImplicitAccountCreationAllowed only_implicit_account_creation_allowed = 15;
         DeleteAccountWithLargeState delete_account_with_large_state = 16;
+        DelegateActionInvalidSignature delegate_action_invalid_signature = 17;
+        DelegateActionSenderDoesNotMatchTxReceiver delegate_action_sender_does_not_match_tx_receiver = 18;
+        DelegateActionExpired delegate_action_expired = 19;
+        DelegateActionAccessKeyError delegate_action_access_key_error = 20;
+        DelegateActionInvalidNonce delegate_action_invalid_nonce = 21;
+        DelegateActionNonceTooLarge delegate_action_nonce_too_large = 22;
       }
     }
     optional uint64 index = 1;
     ActionErrorKind kind = 2;
   }
   message InvalidTxError {
-    message InvalidAccessKeyError {
-      message AccessKeyNotFound {
-        string account_id = 1;
-        PublicKey public_key = 2;
-      }
-      message ReceiverMismatch {
-        string tx_receiver = 1;
-        string ak_receiver = 2;
-      }
-      message MethodNameMismatch {
-        string method_name = 1;
-      }
-      message RequiresFullAccess {}
-      message NotEnoughAllowance {
-        string account_id = 1;
-        PublicKey public_key = 2;
-        bytes u128_allowance = 3;
-        bytes u128_cost = 4;
-      }
-      message DepositWithFunctionCall {}
-      oneof variant {
-        AccessKeyNotFound access_key_not_found = 1;
-        ReceiverMismatch receiver_mismatch = 2;
-        MethodNameMismatch method_name_mismatch = 3;
-        RequiresFullAccess requires_full_access = 4;
-        NotEnoughAllowance not_enough_allowance = 5;
-        DepositWithFunctionCall deposit_with_function_call = 6;
-      }
-    }
     message InvalidSignerId {
       string signer_id = 1;
     }
@@ -210,6 +240,11 @@ message TxExecutionError {
         PublicKey public_key = 1;
       }
       message FunctionCallZeroAttachedGas {}
+      message DelegateActionMustBeOnlyOne {}
+      message UnsupportedProtocolFeature {
+        string protocol_feature = 1;
+        uint32 version = 2;
+      }
       oneof variant {
         DeleteActionMustBeFinal delete_action_must_be_final = 1;
         TotalPrepaidGasExceeded total_prepaid_gas_exceeded = 2;
@@ -223,6 +258,8 @@ message TxExecutionError {
         FunctionCallArgumentsLengthExceeded function_call_arguments_length_exceeded = 10;
         UnsuitableStakingKey unsuitable_staking_key = 11;
         FunctionCallZeroAttachedGas function_call_zero_attached_gas = 12;
+        DelegateActionMustBeOnlyOne delegate_action_must_be_only_one = 13;
+        UnsupportedProtocolFeature unsupported_protocol_feature = 14;
       }
     }
     message TransactionSizeExceeded {

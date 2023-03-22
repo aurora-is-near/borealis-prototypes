@@ -55,6 +55,18 @@ message ActionsValidationError {
   }
   // The attached amount of gas in a FunctionCall action has to be a positive number.
   message FunctionCallZeroAttachedGas {}
+  // There should be the only one DelegateAction
+  message DelegateActionMustBeOnlyOne {}
+  // The transaction includes a feature that the current protocol version
+  // does not support.
+  //
+  // Note: we stringify the protocol feature name instead of using
+  // `ProtocolFeature` here because we don't want to leak the internals of
+  // that type into observable borsh serialization.
+  message UnsupportedProtocolFeature {
+    string protocol_feature = 1;
+    uint32 version = 2;
+  }
   oneof variant {
     DeleteActionMustBeFinal delete_action_must_be_final = 1;
     TotalPrepaidGasExceeded total_prepaid_gas_exceeded = 2;
@@ -68,5 +80,7 @@ message ActionsValidationError {
     FunctionCallArgumentsLengthExceeded function_call_arguments_length_exceeded = 10;
     UnsuitableStakingKey unsuitable_staking_key = 11;
     FunctionCallZeroAttachedGas function_call_zero_attached_gas = 12;
+    DelegateActionMustBeOnlyOne delegate_action_must_be_only_one = 13;
+    UnsupportedProtocolFeature unsupported_protocol_feature = 14;
   }
 }

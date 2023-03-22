@@ -20,6 +20,7 @@ use aurora_refiner_types::near_primitives::views::{
 use borealis_rs::bus_message::BusMessage;
 use near_crypto::{PublicKey, Signature};
 use near_primitives::challenge::SlashedValidator;
+use near_primitives::delegate_action::{DelegateAction, NonDelegateAction};
 use near_primitives::merkle::{Direction, MerklePathItem};
 use near_vm_errors::{CompilationError, FunctionCallErrorSer, HostError, MethodResolveError, PrepareError, WasmTrap};
 use std::iter::once;
@@ -293,6 +294,45 @@ impl From<ActionErrorKind> for proto::tx_execution_error::action_error::ActionEr
                         }
                     )
                 }
+                ActionErrorKind::DelegateActionInvalidSignature => {
+                    proto::tx_execution_error::action_error::action_error_kind::Variant::DelegateActionInvalidSignature(
+                        proto::tx_execution_error::action_error::action_error_kind::DelegateActionInvalidSignature {}
+                    )
+                }
+                ActionErrorKind::DelegateActionSenderDoesNotMatchTxReceiver { receiver_id, sender_id } => {
+                    proto::tx_execution_error::action_error::action_error_kind::Variant::DelegateActionSenderDoesNotMatchTxReceiver(proto::tx_execution_error::action_error::action_error_kind::DelegateActionSenderDoesNotMatchTxReceiver {
+                        receiver_id: receiver_id.to_string(),
+                        sender_id: sender_id.to_string(),
+                    })
+                }
+                ActionErrorKind::DelegateActionExpired => {
+                    proto::tx_execution_error::action_error::action_error_kind::Variant::DelegateActionExpired(
+                        proto::tx_execution_error::action_error::action_error_kind::DelegateActionExpired {}
+                    )
+                }
+                ActionErrorKind::DelegateActionAccessKeyError(error) => {
+                    proto::tx_execution_error::action_error::action_error_kind::Variant::DelegateActionAccessKeyError(
+                        proto::tx_execution_error::action_error::action_error_kind::DelegateActionAccessKeyError {
+                            error: Some(error.into()),
+                        }
+                    )
+                }
+                ActionErrorKind::DelegateActionInvalidNonce { ak_nonce, delegate_nonce } => {
+                    proto::tx_execution_error::action_error::action_error_kind::Variant::DelegateActionInvalidNonce(
+                        proto::tx_execution_error::action_error::action_error_kind::DelegateActionInvalidNonce {
+                            ak_nonce,
+                            delegate_nonce,
+                        }
+                    )
+                }
+                ActionErrorKind::DelegateActionNonceTooLarge { upper_bound, delegate_nonce } => {
+                    proto::tx_execution_error::action_error::action_error_kind::Variant::DelegateActionNonceTooLarge(
+                        proto::tx_execution_error::action_error::action_error_kind::DelegateActionNonceTooLarge {
+                            upper_bound,
+                            delegate_nonce,
+                        }
+                    )
+                }
             }),
         }
     }
@@ -424,6 +464,20 @@ impl From<ActionsValidationError> for proto::ActionsValidationError {
                         proto::actions_validation_error::FunctionCallZeroAttachedGas {},
                     )
                 }
+                ActionsValidationError::DelegateActionMustBeOnlyOne => {
+                    proto::actions_validation_error::Variant::DelegateActionMustBeOnlyOne(
+                        proto::actions_validation_error::DelegateActionMustBeOnlyOne {},
+                    )
+                }
+                ActionsValidationError::UnsupportedProtocolFeature {
+                    protocol_feature,
+                    version,
+                } => proto::actions_validation_error::Variant::UnsupportedProtocolFeature(
+                    proto::actions_validation_error::UnsupportedProtocolFeature {
+                        protocol_feature,
+                        version,
+                    },
+                ),
             }),
         }
     }
@@ -678,51 +732,53 @@ impl From<WasmTrap> for proto::WasmTrap {
     }
 }
 
-impl From<InvalidAccessKeyError> for proto::tx_execution_error::invalid_tx_error::InvalidAccessKeyError {
+impl From<InvalidAccessKeyError> for proto::InvalidAccessKeyError {
     fn from(value: InvalidAccessKeyError) -> Self {
         Self {
             variant: Some(match value {
                 InvalidAccessKeyError::AccessKeyNotFound { public_key, account_id } => {
-                    proto::tx_execution_error::invalid_tx_error::invalid_access_key_error::Variant::AccessKeyNotFound(
-                        proto::tx_execution_error::invalid_tx_error::invalid_access_key_error::AccessKeyNotFound {
+                    proto::invalid_access_key_error::Variant::AccessKeyNotFound(
+                        proto::invalid_access_key_error::AccessKeyNotFound {
                             account_id: account_id.to_string(),
                             public_key: Some(public_key.into()),
-                        }
+                        },
                     )
                 }
-                InvalidAccessKeyError::ReceiverMismatch { tx_receiver, ak_receiver } => {
-                    proto::tx_execution_error::invalid_tx_error::invalid_access_key_error::Variant::ReceiverMismatch(
-                        proto::tx_execution_error::invalid_tx_error::invalid_access_key_error::ReceiverMismatch {
-                            tx_receiver: tx_receiver.to_string(),
-                            ak_receiver,
-                        }
-                    )
-                }
+                InvalidAccessKeyError::ReceiverMismatch {
+                    tx_receiver,
+                    ak_receiver,
+                } => proto::invalid_access_key_error::Variant::ReceiverMismatch(
+                    proto::invalid_access_key_error::ReceiverMismatch {
+                        tx_receiver: tx_receiver.to_string(),
+                        ak_receiver,
+                    },
+                ),
                 InvalidAccessKeyError::MethodNameMismatch { method_name } => {
-                    proto::tx_execution_error::invalid_tx_error::invalid_access_key_error::Variant::MethodNameMismatch(
-                        proto::tx_execution_error::invalid_tx_error::invalid_access_key_error::MethodNameMismatch {
-                            method_name,
-                        }
+                    proto::invalid_access_key_error::Variant::MethodNameMismatch(
+                        proto::invalid_access_key_error::MethodNameMismatch { method_name },
                     )
                 }
                 InvalidAccessKeyError::RequiresFullAccess => {
-                    proto::tx_execution_error::invalid_tx_error::invalid_access_key_error::Variant::RequiresFullAccess(
-                        proto::tx_execution_error::invalid_tx_error::invalid_access_key_error::RequiresFullAccess {}
+                    proto::invalid_access_key_error::Variant::RequiresFullAccess(
+                        proto::invalid_access_key_error::RequiresFullAccess {},
                     )
                 }
-                InvalidAccessKeyError::NotEnoughAllowance { account_id, public_key, allowance, cost } => {
-                    proto::tx_execution_error::invalid_tx_error::invalid_access_key_error::Variant::NotEnoughAllowance(
-                        proto::tx_execution_error::invalid_tx_error::invalid_access_key_error::NotEnoughAllowance {
-                            account_id: account_id.to_string(),
-                            public_key: Some(public_key.into()),
-                            u128_allowance: allowance.to_be_bytes().to_vec(),
-                            u128_cost: cost.to_be_bytes().to_vec(),
-                        }
-                    )
-                }
+                InvalidAccessKeyError::NotEnoughAllowance {
+                    account_id,
+                    public_key,
+                    allowance,
+                    cost,
+                } => proto::invalid_access_key_error::Variant::NotEnoughAllowance(
+                    proto::invalid_access_key_error::NotEnoughAllowance {
+                        account_id: account_id.to_string(),
+                        public_key: Some(public_key.into()),
+                        u128_allowance: allowance.to_be_bytes().to_vec(),
+                        u128_cost: cost.to_be_bytes().to_vec(),
+                    },
+                ),
                 InvalidAccessKeyError::DepositWithFunctionCall => {
-                    proto::tx_execution_error::invalid_tx_error::invalid_access_key_error::Variant::DepositWithFunctionCall(
-                        proto::tx_execution_error::invalid_tx_error::invalid_access_key_error::DepositWithFunctionCall {}
+                    proto::invalid_access_key_error::Variant::DepositWithFunctionCall(
+                        proto::invalid_access_key_error::DepositWithFunctionCall {},
                     )
                 }
             }),
@@ -793,6 +849,17 @@ impl From<ActionsValidationError> for proto::tx_execution_error::invalid_tx_erro
                     proto::tx_execution_error::invalid_tx_error::actions_validation::Variant::FunctionCallZeroAttachedGas(
                         proto::tx_execution_error::invalid_tx_error::actions_validation::FunctionCallZeroAttachedGas {}
                     )
+                }
+                ActionsValidationError::DelegateActionMustBeOnlyOne => {
+                    proto::tx_execution_error::invalid_tx_error::actions_validation::Variant::DelegateActionMustBeOnlyOne(
+                        proto::tx_execution_error::invalid_tx_error::actions_validation::DelegateActionMustBeOnlyOne {}
+                    )
+                }
+                ActionsValidationError::UnsupportedProtocolFeature { protocol_feature, version } => {
+                    proto::tx_execution_error::invalid_tx_error::actions_validation::Variant::UnsupportedProtocolFeature(proto::tx_execution_error::invalid_tx_error::actions_validation::UnsupportedProtocolFeature {
+                        protocol_feature,
+                        version,
+                    })
                 }
             }),
         }
@@ -1455,7 +1522,35 @@ impl From<ActionView> for proto::ActionView {
                         beneficiary_id: beneficiary_id.to_string(),
                     })
                 }
+                ActionView::Delegate {
+                    signature,
+                    delegate_action,
+                } => proto::action_view::Variant::Delegate(proto::action_view::Delegate {
+                    delegate_action: Some(delegate_action.into()),
+                    signature: Some(signature.into()),
+                }),
             }),
+        }
+    }
+}
+
+impl From<DelegateAction> for proto::action_view::delegate::DelegateAction {
+    fn from(value: DelegateAction) -> Self {
+        Self {
+            sender_id: value.sender_id.to_string(),
+            receiver_id: value.receiver_id.to_string(),
+            actions: value.actions.into_iter().map(Into::into).collect(),
+            nonce: value.nonce,
+            max_block_height: value.max_block_height,
+            public_key: Some(value.public_key.into()),
+        }
+    }
+}
+
+impl From<NonDelegateAction> for proto::action_view::delegate::delegate_action::NonDelegateAction {
+    fn from(value: NonDelegateAction) -> Self {
+        Self {
+            action: Some(ActionView::from(near_primitives::transaction::Action::from(value)).into()),
         }
     }
 }

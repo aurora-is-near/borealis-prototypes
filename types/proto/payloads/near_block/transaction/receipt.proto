@@ -64,6 +64,33 @@ message ActionView {
   message DeleteAccount {
     string beneficiary_id = 1;
   }
+  message Delegate {
+    // This action allows to execute the inner actions behalf of the defined sender.
+    message DelegateAction {
+      message NonDelegateAction {
+        ActionView action = 1;
+      }
+      // Signer of the delegated actions
+      string sender_id = 1;
+      // Receiver of the delegated actions.
+      string receiver_id = 2;
+      // List of actions to be executed.
+      //
+      // With the meta transactions MVP defined in NEP-366, nested
+      // DelegateActions are not allowed. A separate type is used to enforce it.
+      repeated NonDelegateAction actions = 3;
+      /// Nonce to ensure that the same delegate action is not sent twice by a
+      /// relayer and should match for given account's `public_key`.
+      /// After this action is processed it will increment.
+      uint64 nonce = 4;
+      /// The maximal height of the block in the blockchain below which the given DelegateAction is valid.
+      uint64 max_block_height = 5;
+      /// Public key used to sign this delegated action.
+      PublicKey public_key = 6;
+    }
+    DelegateAction delegate_action = 1;
+    Signature signature = 2;
+  }
   oneof variant {
     CreateAccount create_account = 1;
     DeployContract deploy_contract = 2;
@@ -73,5 +100,6 @@ message ActionView {
     AddKey add_key = 6;
     DeleteKey delete_key = 7;
     DeleteAccount delete_account = 8;
+    Delegate delegate = 9;
   }
 }

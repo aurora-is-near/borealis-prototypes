@@ -20,7 +20,6 @@ use crate::message::Payload::{NearBlockHeader, NearBlockShard};
 use crate::{CompressedMessage, DecodeError, Message as ProtoMsg};
 use async_nats::Message;
 use aurora_refiner_types::near_block::{BlockView, NEARBlock, Shard};
-use itertools::Itertools;
 use near_primitives::types::ShardId;
 use std::collections::HashMap;
 
@@ -134,27 +133,34 @@ impl BlockBuilder {
             let mut included_shards = self
                 .shards
                 .drain()
-                .map(|(_, shard)| shard)
-                .sorted_by_key(|shard| shard.shard_id)
-                .rev()
-                .collect::<Vec<_>>();
+                .map(|(_, shard)| (shard.shard_id, shard))
+                .collect::<HashMap<_, _>>();
             let chunk_mask = block.header.chunk_mask.clone();
-            let shards_max = chunk_mask.len();
+            let shards_max = chunk_mask.len() as u64;
 
             NEARBlock {
                 block,
                 shards: (0..shards_max)
                     .map(|shard_id| {
-                        let is_included = chunk_mask.get(shard_id).copied().unwrap_or_default();
+                        let is_included = chunk_mask.get(shard_id as usize).copied().unwrap_or_default();
 
-                        if is_included {
-                            included_shards.pop().expect("chunk_mask invalid included shard")
-                        } else {
-                            Shard {
-                                shard_id: shard_id as ShardId,
-                                chunk: None,
-                                receipt_execution_outcomes: vec![],
-                                state_changes: vec![],
+                        match included_shards.remove(&shard_id) {
+                            None => {
+                                assert!(
+                                    !is_included,
+                                    "shard_id {} not present but included in chunk mask",
+                                    shard_id
+                                );
+                                Shard {
+                                    shard_id: shard_id as ShardId,
+                                    chunk: None,
+                                    receipt_execution_outcomes: vec![],
+                                    state_changes: vec![],
+                                }
+                            }
+                            Some(shard) => {
+                                assert!(is_included, "shard_id {} present but not in chunk mask", shard_id);
+                                shard
                             }
                         }
                     })

@@ -1,5 +1,5 @@
 //! Decoding of the [`proto`] types into the [`aurora_refiner_types`].
-use crate::proto;
+use crate::{access_key_permission_view, proto};
 use aurora_refiner_types::near_block::{
     BlockView, ChunkHeaderView, ChunkView, ExecutionOutcomeWithOptionalReceipt, ExecutionOutcomeWithReceipt,
     IndexerBlockHeaderView, NEARBlock, Shard, TransactionWithOutcome,
@@ -15,12 +15,17 @@ use aurora_refiner_types::near_primitives::views::{
 };
 use itertools::{Either, Itertools};
 use near_crypto::{ED25519PublicKey, PublicKey, Secp256K1PublicKey, Signature};
+use near_primitives::account::{AccessKeyPermission, FunctionCallPermission};
 use near_primitives::challenge::SlashedValidator;
 use near_primitives::errors::{
     ActionError, ActionErrorKind, ActionsValidationError, InvalidAccessKeyError, InvalidTxError,
     ReceiptValidationError, TxExecutionError,
 };
 use near_primitives::merkle::{Direction, MerklePathItem};
+use near_primitives::transaction::{
+    Action, AddKeyAction, CreateAccountAction, DeleteAccountAction, DeleteKeyAction, DeployContractAction,
+    FunctionCallAction, StakeAction, TransferAction,
+};
 use near_vm_errors::{CompilationError, FunctionCallErrorSer, HostError, MethodResolveError, PrepareError, WasmTrap};
 
 impl From<proto::Messages> for NEARBlock {
@@ -193,6 +198,35 @@ impl From<proto::tx_execution_error::action_error::ActionErrorKind> for ActionEr
                     account_id: AccountId::try_from(v.account_id).unwrap(),
                 }
             }
+            proto::tx_execution_error::action_error::action_error_kind::Variant::DelegateActionInvalidSignature(..) => {
+                Self::DelegateActionInvalidSignature
+            }
+            proto::tx_execution_error::action_error::action_error_kind::Variant::DelegateActionSenderDoesNotMatchTxReceiver(error) => {
+                Self::DelegateActionSenderDoesNotMatchTxReceiver {
+                    sender_id: AccountId::try_from(error.sender_id).unwrap(),
+                    receiver_id: AccountId::try_from(error.receiver_id).unwrap(),
+                }
+            }
+            proto::tx_execution_error::action_error::action_error_kind::Variant::DelegateActionExpired(..) => {
+                Self::DelegateActionExpired
+            }
+            proto::tx_execution_error::action_error::action_error_kind::Variant::DelegateActionAccessKeyError(error) => {
+                Self::DelegateActionAccessKeyError(
+                    InvalidAccessKeyError::from(error.error.unwrap())
+                )
+            }
+            proto::tx_execution_error::action_error::action_error_kind::Variant::DelegateActionInvalidNonce(error) => {
+                Self::DelegateActionInvalidNonce {
+                    delegate_nonce: error.delegate_nonce,
+                    ak_nonce: error.ak_nonce,
+                }
+            }
+            proto::tx_execution_error::action_error::action_error_kind::Variant::DelegateActionNonceTooLarge(error) => {
+                Self::DelegateActionNonceTooLarge {
+                    delegate_nonce: error.delegate_nonce,
+                    upper_bound: error.upper_bound,
+                }
+            }
         }
     }
 }
@@ -296,6 +330,15 @@ impl From<proto::ActionsValidationError> for ActionsValidationError {
             }
             proto::actions_validation_error::Variant::FunctionCallZeroAttachedGas(..) => {
                 ActionsValidationError::FunctionCallZeroAttachedGas
+            }
+            proto::actions_validation_error::Variant::DelegateActionMustBeOnlyOne(..) => {
+                ActionsValidationError::DelegateActionMustBeOnlyOne
+            }
+            proto::actions_validation_error::Variant::UnsupportedProtocolFeature(v) => {
+                ActionsValidationError::UnsupportedProtocolFeature {
+                    protocol_feature: v.protocol_feature,
+                    version: v.version,
+                }
             }
         }
     }
@@ -466,30 +509,28 @@ impl From<proto::WasmTrap> for WasmTrap {
     }
 }
 
-impl From<proto::tx_execution_error::invalid_tx_error::InvalidAccessKeyError> for InvalidAccessKeyError {
-    fn from(value: proto::tx_execution_error::invalid_tx_error::InvalidAccessKeyError) -> Self {
+impl From<proto::InvalidAccessKeyError> for InvalidAccessKeyError {
+    fn from(value: proto::InvalidAccessKeyError) -> Self {
         match value.variant.unwrap() {
-            proto::tx_execution_error::invalid_tx_error::invalid_access_key_error::Variant::AccessKeyNotFound(v) => {
+            proto::invalid_access_key_error::Variant::AccessKeyNotFound(v) => {
                 InvalidAccessKeyError::AccessKeyNotFound {
                     public_key: v.public_key.unwrap().into(),
                     account_id: AccountId::try_from(v.account_id).unwrap(),
                 }
             }
-            proto::tx_execution_error::invalid_tx_error::invalid_access_key_error::Variant::ReceiverMismatch(v) => {
-                InvalidAccessKeyError::ReceiverMismatch {
-                    tx_receiver: AccountId::try_from(v.tx_receiver).unwrap(),
-                    ak_receiver: v.ak_receiver,
-                }
-            }
-            proto::tx_execution_error::invalid_tx_error::invalid_access_key_error::Variant::MethodNameMismatch(v) => {
+            proto::invalid_access_key_error::Variant::ReceiverMismatch(v) => InvalidAccessKeyError::ReceiverMismatch {
+                tx_receiver: AccountId::try_from(v.tx_receiver).unwrap(),
+                ak_receiver: v.ak_receiver,
+            },
+            proto::invalid_access_key_error::Variant::MethodNameMismatch(v) => {
                 InvalidAccessKeyError::MethodNameMismatch {
                     method_name: v.method_name,
                 }
             }
-            proto::tx_execution_error::invalid_tx_error::invalid_access_key_error::Variant::RequiresFullAccess(..) => {
+            proto::invalid_access_key_error::Variant::RequiresFullAccess(..) => {
                 InvalidAccessKeyError::RequiresFullAccess
             }
-            proto::tx_execution_error::invalid_tx_error::invalid_access_key_error::Variant::NotEnoughAllowance(v) => {
+            proto::invalid_access_key_error::Variant::NotEnoughAllowance(v) => {
                 InvalidAccessKeyError::NotEnoughAllowance {
                     public_key: v.public_key.unwrap().into(),
                     account_id: AccountId::try_from(v.account_id).unwrap(),
@@ -497,9 +538,9 @@ impl From<proto::tx_execution_error::invalid_tx_error::InvalidAccessKeyError> fo
                     cost: u128::from_be_bytes(v.u128_cost.try_into().unwrap()),
                 }
             }
-            proto::tx_execution_error::invalid_tx_error::invalid_access_key_error::Variant::DepositWithFunctionCall(
-                ..,
-            ) => InvalidAccessKeyError::DepositWithFunctionCall,
+            proto::invalid_access_key_error::Variant::DepositWithFunctionCall(..) => {
+                InvalidAccessKeyError::DepositWithFunctionCall
+            }
         }
     }
 }
@@ -518,7 +559,12 @@ impl From<proto::tx_execution_error::invalid_tx_error::ActionsValidation> for Ac
             proto::tx_execution_error::invalid_tx_error::actions_validation::Variant::FunctionCallMethodNameLengthExceeded(v) => ActionsValidationError::FunctionCallMethodNameLengthExceeded { length: v.length, limit: v.limit },
             proto::tx_execution_error::invalid_tx_error::actions_validation::Variant::FunctionCallArgumentsLengthExceeded(v) => ActionsValidationError::FunctionCallArgumentsLengthExceeded { length: v.length, limit: v.limit },
             proto::tx_execution_error::invalid_tx_error::actions_validation::Variant::UnsuitableStakingKey(v) => ActionsValidationError::UnsuitableStakingKey { public_key: v.public_key.unwrap().into() },
-            proto::tx_execution_error::invalid_tx_error::actions_validation::Variant::FunctionCallZeroAttachedGas(..) => ActionsValidationError::FunctionCallZeroAttachedGas
+            proto::tx_execution_error::invalid_tx_error::actions_validation::Variant::FunctionCallZeroAttachedGas(..) => ActionsValidationError::FunctionCallZeroAttachedGas,
+            proto::tx_execution_error::invalid_tx_error::actions_validation::Variant::DelegateActionMustBeOnlyOne(..) => ActionsValidationError::DelegateActionMustBeOnlyOne,
+            proto::tx_execution_error::invalid_tx_error::actions_validation::Variant::UnsupportedProtocolFeature(v) => ActionsValidationError::UnsupportedProtocolFeature {
+                protocol_feature: v.protocol_feature,
+                version: v.version,
+            },
         }
     }
 }
@@ -984,6 +1030,85 @@ impl From<proto::DataReceiverView> for DataReceiverView {
     }
 }
 
+impl From<proto::action_view::delegate::delegate_action::NonDelegateAction>
+    for near_primitives::delegate_action::NonDelegateAction
+{
+    fn from(value: proto::action_view::delegate::delegate_action::NonDelegateAction) -> Self {
+        Self::try_from(match value.action.unwrap().variant.unwrap() {
+            proto::action_view::Variant::CreateAccount(..) => Action::CreateAccount(CreateAccountAction {}),
+            proto::action_view::Variant::DeployContract(v) => {
+                Action::DeployContract(DeployContractAction { code: v.code })
+            }
+            proto::action_view::Variant::FunctionCall(v) => Action::FunctionCall(FunctionCallAction {
+                method_name: v.method_name,
+                args: v.args,
+                gas: v.gas,
+                deposit: u128::from_be_bytes(v.u128_deposit.try_into().unwrap()),
+            }),
+            proto::action_view::Variant::Transfer(v) => Action::Transfer(TransferAction {
+                deposit: u128::from_be_bytes(v.u128_deposit.try_into().unwrap()),
+            }),
+            proto::action_view::Variant::Stake(v) => Action::Stake(StakeAction {
+                stake: u128::from_be_bytes(v.u128_stake.try_into().unwrap()),
+                public_key: v.public_key.unwrap().into(),
+            }),
+            proto::action_view::Variant::AddKey(v) => Action::AddKey(AddKeyAction {
+                public_key: v.public_key.unwrap().into(),
+                access_key: v.access_key.unwrap().into(),
+            }),
+            proto::action_view::Variant::DeleteKey(v) => Action::DeleteKey(DeleteKeyAction {
+                public_key: v.public_key.unwrap().into(),
+            }),
+            proto::action_view::Variant::DeleteAccount(v) => Action::DeleteAccount(DeleteAccountAction {
+                beneficiary_id: AccountId::try_from(v.beneficiary_id).unwrap(),
+            }),
+            proto::action_view::Variant::Delegate(..) => panic!("Non-delegate action cannot contain delegate action"),
+        })
+        .unwrap()
+    }
+}
+
+impl From<proto::AccessKeyView> for near_primitives::account::AccessKey {
+    fn from(value: proto::AccessKeyView) -> Self {
+        Self {
+            nonce: value.nonce,
+            permission: value.permission.unwrap().into(),
+        }
+    }
+}
+
+impl From<proto::AccessKeyPermissionView> for AccessKeyPermission {
+    fn from(value: proto::AccessKeyPermissionView) -> Self {
+        match value.variant.unwrap() {
+            access_key_permission_view::Variant::FunctionCall(v) => Self::FunctionCall(v.into()),
+            access_key_permission_view::Variant::FullAccess(..) => Self::FullAccess,
+        }
+    }
+}
+
+impl From<proto::access_key_permission_view::FunctionCall> for FunctionCallPermission {
+    fn from(value: proto::access_key_permission_view::FunctionCall) -> Self {
+        Self {
+            allowance: value.u128_allowance.map(|v| u128::from_be_bytes(v.try_into().unwrap())),
+            receiver_id: value.receiver_id,
+            method_names: value.method_names,
+        }
+    }
+}
+
+impl From<proto::action_view::delegate::DelegateAction> for near_primitives::delegate_action::DelegateAction {
+    fn from(value: proto::action_view::delegate::DelegateAction) -> Self {
+        Self {
+            sender_id: AccountId::try_from(value.sender_id).unwrap(),
+            receiver_id: AccountId::try_from(value.receiver_id).unwrap(),
+            actions: value.actions.into_iter().map(Into::into).collect(),
+            nonce: value.nonce,
+            max_block_height: value.max_block_height,
+            public_key: value.public_key.unwrap().into(),
+        }
+    }
+}
+
 impl From<proto::ActionView> for ActionView {
     fn from(value: proto::ActionView) -> Self {
         match value.variant.unwrap() {
@@ -1011,6 +1136,10 @@ impl From<proto::ActionView> for ActionView {
             },
             proto::action_view::Variant::DeleteAccount(v) => ActionView::DeleteAccount {
                 beneficiary_id: AccountId::try_from(v.beneficiary_id).unwrap(),
+            },
+            proto::action_view::Variant::Delegate(v) => ActionView::Delegate {
+                delegate_action: v.delegate_action.unwrap().into(),
+                signature: v.signature.unwrap().into(),
             },
         }
     }
