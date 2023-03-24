@@ -1,6 +1,6 @@
 [package]
 name = "borealis-proto-types"
-version = "0.5.1"
+version = "0.5.2"
 edition = "2021"
 
 [dependencies]
@@ -15,9 +15,9 @@ ed25519-dalek = "1"
 futures-util = { workspace = true }
 itertools = "0.10"
 log = "0.4"
-near-crypto = { git = "https://github.com/near/nearcore", tag = "1.32.0" }
-near-primitives = { git = "https://github.com/near/nearcore", tag = "1.32.0" }
-near-vm-errors = { git = "https://github.com/near/nearcore", tag = "1.32.0" }
+near-crypto = { git = "https://github.com/near/nearcore", tag = "1.32.1" }
+near-primitives = { git = "https://github.com/near/nearcore", tag = "1.32.1" }
+near-vm-errors = { git = "https://github.com/near/nearcore", tag = "1.32.1" }
 prost = { workspace = true }
 thiserror = "1"
 zstd = { workspace = true }
