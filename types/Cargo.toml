@@ -15,9 +15,9 @@ ed25519-dalek = "1"
 futures-util = { workspace = true }
 itertools = "0.10"
 log = "0.4"
-near-crypto = { git = "https://github.com/near/nearcore", tag = "1.32.1" }
-near-primitives = { git = "https://github.com/near/nearcore", tag = "1.32.1" }
-near-vm-errors = { git = "https://github.com/near/nearcore", tag = "1.32.1" }
+near-crypto = { workspace = true }
+near-primitives = { workspace = true }
+near-vm-errors = { workspace = true }
 prost = { workspace = true }
 thiserror = "1"
 zstd = { workspace = true }
