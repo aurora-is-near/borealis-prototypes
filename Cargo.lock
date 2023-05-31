@@ -298,7 +298,7 @@ dependencies = [
 [[package]]
 name = "aurora-refiner-types"
 version = "0.20.0"
-source = "git+https://github.com/aurora-is-near/borealis-engine-lib.git?tag=v0.20.1#2559c13364324c0d67068f56518404fbd6eba046"
+source = "git+https://github.com/aurora-is-near/borealis-engine-lib.git?tag=v0.20.2#ebee86708cbed0af2f9e92fd8743a7e3298cf278"
 dependencies = [
  "aurora-engine",
  "aurora-engine-sdk",
@@ -413,7 +413,7 @@ dependencies = [
 
 [[package]]
 name = "borealis-proto-migrate"
-version = "0.5.5"
+version = "0.5.6"
 dependencies = [
  "anyhow",
  "async-nats 0.27.1",
@@ -435,7 +435,7 @@ dependencies = [
 
 [[package]]
 name = "borealis-proto-types"
-version = "0.5.5"
+version = "0.5.6"
 dependencies = [
  "async-nats 0.27.1",
  "async-trait",
@@ -463,8 +463,8 @@ dependencies = [
 
 [[package]]
 name = "borealis-rs"
-version = "0.13.1"
-source = "git+ssh://git@github.com/aurora-is-near/borealis.rs.git?tag=v0.13.1#f90e3abaef9f693705e3fcef4fe5ce6d20fd1c9c"
+version = "0.13.2"
+source = "git+ssh://git@github.com/aurora-is-near/borealis.rs.git?tag=v0.13.2#fd40cd60c974265f8db42a42eb4b437a66f833bd"
 dependencies = [
  "anyhow",
  "async-nats 0.24.0",
@@ -1787,7 +1787,7 @@ checksum = "e5ce46fe64a9d73be07dcbe690a38ce1b293be448fd8ce1e6c1b8062c9f72c6a"
 [[package]]
 name = "near-account-id"
 version = "0.0.0"
-source = "git+https://github.com/near/nearcore?tag=1.34.0-rc.1#073460def5d2beffa7df7d487432b9670d35f490"
+source = "git+https://github.com/near/nearcore?tag=1.34.0#78b86501fff5c68b684d200536b6055a85389963"
 dependencies = [
  "borsh 0.10.3",
  "serde",
@@ -1796,7 +1796,7 @@ dependencies = [
 [[package]]
 name = "near-config-utils"
 version = "0.0.0"
-source = "git+https://github.com/near/nearcore?tag=1.34.0-rc.1#073460def5d2beffa7df7d487432b9670d35f490"
+source = "git+https://github.com/near/nearcore?tag=1.34.0#78b86501fff5c68b684d200536b6055a85389963"
 dependencies = [
  "anyhow",
  "json_comments",
@@ -1807,7 +1807,7 @@ dependencies = [
 [[package]]
 name = "near-crypto"
 version = "0.0.0"
-source = "git+https://github.com/near/nearcore?tag=1.34.0-rc.1#073460def5d2beffa7df7d487432b9670d35f490"
+source = "git+https://github.com/near/nearcore?tag=1.34.0#78b86501fff5c68b684d200536b6055a85389963"
 dependencies = [
  "blake2",
  "borsh 0.10.3",
@@ -1833,7 +1833,7 @@ dependencies = [
 [[package]]
 name = "near-fmt"
 version = "0.0.0"
-source = "git+https://github.com/near/nearcore?tag=1.34.0-rc.1#073460def5d2beffa7df7d487432b9670d35f490"
+source = "git+https://github.com/near/nearcore?tag=1.34.0#78b86501fff5c68b684d200536b6055a85389963"
 dependencies = [
  "near-primitives-core",
 ]
@@ -1841,7 +1841,7 @@ dependencies = [
 [[package]]
 name = "near-primitives"
 version = "0.0.0"
-source = "git+https://github.com/near/nearcore?tag=1.34.0-rc.1#073460def5d2beffa7df7d487432b9670d35f490"
+source = "git+https://github.com/near/nearcore?tag=1.34.0#78b86501fff5c68b684d200536b6055a85389963"
 dependencies = [
  "arbitrary",
  "borsh 0.10.3",
@@ -1876,7 +1876,7 @@ dependencies = [
 [[package]]
 name = "near-primitives-core"
 version = "0.0.0"
-source = "git+https://github.com/near/nearcore?tag=1.34.0-rc.1#073460def5d2beffa7df7d487432b9670d35f490"
+source = "git+https://github.com/near/nearcore?tag=1.34.0#78b86501fff5c68b684d200536b6055a85389963"
 dependencies = [
  "arbitrary",
  "base64 0.13.1",
@@ -1896,7 +1896,7 @@ dependencies = [
 [[package]]
 name = "near-rpc-error-core"
 version = "0.0.0"
-source = "git+https://github.com/near/nearcore?tag=1.34.0-rc.1#073460def5d2beffa7df7d487432b9670d35f490"
+source = "git+https://github.com/near/nearcore?tag=1.34.0#78b86501fff5c68b684d200536b6055a85389963"
 dependencies = [
  "quote",
  "serde",
@@ -1906,7 +1906,7 @@ dependencies = [
 [[package]]
 name = "near-rpc-error-macro"
 version = "0.0.0"
-source = "git+https://github.com/near/nearcore?tag=1.34.0-rc.1#073460def5d2beffa7df7d487432b9670d35f490"
+source = "git+https://github.com/near/nearcore?tag=1.34.0#78b86501fff5c68b684d200536b6055a85389963"
 dependencies = [
  "fs2",
  "near-rpc-error-core",
@@ -1923,7 +1923,7 @@ checksum = "bc1279be274b9a49c2cb4b62541241a1ff6745cb77ca81ece7f949cfbc229bff"
 [[package]]
 name = "near-vm-errors"
 version = "0.0.0"
-source = "git+https://github.com/near/nearcore?tag=1.34.0-rc.1#073460def5d2beffa7df7d487432b9670d35f490"
+source = "git+https://github.com/near/nearcore?tag=1.34.0#78b86501fff5c68b684d200536b6055a85389963"
 dependencies = [
  "borsh 0.10.3",
  "near-account-id",
