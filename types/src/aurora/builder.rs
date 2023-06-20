@@ -18,8 +18,8 @@
 //! ```
 use crate::message::Payload::{NearBlockHeader, NearBlockShard};
 use crate::{CompressedMessage, DecodeError, Message as ProtoMsg};
-use async_nats::Message;
 use aurora_refiner_types::near_block::{BlockView, NEARBlock, Shard};
+use bytes::Bytes;
 use near_primitives::types::ShardId;
 use std::collections::HashMap;
 
@@ -56,7 +56,7 @@ use std::collections::HashMap;
 ///         .parse::<u64>()?;
 ///
 ///     // Add msg and get block if it is completed
-///     match blocks.add_message(height, msg)? {
+///     match blocks.add_message(height, msg.payload)? {
 ///         Some(near_block) => { /* Do something with completed near_block */ }
 ///         None => continue,
 ///     }
@@ -77,11 +77,11 @@ impl BlocksBuilder {
     ///
     /// Returns [`Some`] with the constructed block if all the messages (one for header and one for each shard) are
     /// collected. Returns [`None`] if the block is still incomplete.
-    pub fn add_message(&mut self, height: u64, msg: Message) -> Result<Option<NEARBlock>, DecodeError> {
-        Ok(if msg.payload.is_empty() {
+    pub fn add_message(&mut self, height: u64, payload: Bytes) -> Result<Option<NEARBlock>, DecodeError> {
+        Ok(if payload.is_empty() {
             None
         } else {
-            let decoded_message = ProtoMsg::decode_compressed(&msg.payload[..])?;
+            let decoded_message = ProtoMsg::decode_compressed(&payload[..])?;
 
             self.add_proto_message(height, decoded_message)
         })
@@ -174,6 +174,7 @@ impl BlockBuilder {
 mod tests {
     use super::*;
     use crate::proto;
+    use async_nats::Message;
     use aurora_refiner_types::near_block::IndexerBlockHeaderView;
     use near_primitives::types::AccountId;
     use std::str::FromStr;
@@ -188,14 +189,14 @@ mod tests {
 
         let header = create_dummy_block_header_message(shards_count);
 
-        let mut block = builder.add_message(height, header).unwrap();
+        let mut block = builder.add_message(height, header.payload).unwrap();
 
         for i in 0..shards_count {
             assert!(block.is_none());
 
             let shard = create_dummy_shard_message(i);
 
-            block = builder.add_message(height, shard).unwrap();
+            block = builder.add_message(height, shard.payload).unwrap();
         }
 
         assert!(block.is_some());
@@ -235,7 +236,7 @@ mod tests {
 
         for height in 0..2 {
             let header = create_dummy_block_header_message(shards_count);
-            let block = builder.add_message(height, header).unwrap();
+            let block = builder.add_message(height, header.payload).unwrap();
 
             assert!(block.is_some());
         }
@@ -248,25 +249,25 @@ mod tests {
 
         let height = 0;
         let header = create_dummy_block_header_message(shards_count);
-        let block = builder.add_message(height, header).unwrap();
+        let block = builder.add_message(height, header.payload).unwrap();
 
         assert!(block.is_none());
 
         let height = 1;
         let header = create_dummy_block_header_message(shards_count);
-        let block = builder.add_message(height, header).unwrap();
+        let block = builder.add_message(height, header.payload).unwrap();
 
         assert!(block.is_none());
 
         let height = 0;
         let header = create_dummy_shard_message(0);
-        let block = builder.add_message(height, header).unwrap();
+        let block = builder.add_message(height, header.payload).unwrap();
 
         assert!(block.is_some());
 
         let height = 1;
         let header = create_dummy_shard_message(0);
-        let block = builder.add_message(height, header).unwrap();
+        let block = builder.add_message(height, header.payload).unwrap();
 
         assert!(block.is_some());
     }
@@ -280,21 +281,21 @@ mod tests {
 
         let header = create_dummy_block_header_message(shards_count);
 
-        let mut block = builder.add_message(height, header).unwrap();
+        let mut block = builder.add_message(height, header.payload).unwrap();
 
         assert!(block.is_none());
 
         for _ in 0..empty_count {
             let empty = create_empty_message();
 
-            block = builder.add_message(height, empty).unwrap();
+            block = builder.add_message(height, empty.payload).unwrap();
 
             assert!(block.is_none());
         }
 
         let shard = create_dummy_shard_message(0);
 
-        block = builder.add_message(height, shard).unwrap();
+        block = builder.add_message(height, shard.payload).unwrap();
 
         assert!(block.is_some());
     }

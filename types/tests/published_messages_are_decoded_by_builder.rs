@@ -73,7 +73,10 @@ async fn test_published_messages_are_decoded_by_builder(block_v2: &[u8]) {
     let mut actual_payload: Option<NEARBlock> = None;
 
     for message in messages {
-        if let Some(payload) = builder.add_message(height, message).expect("Unable to add message") {
+        if let Some(payload) = builder
+            .add_message(height, message.payload)
+            .expect("Unable to add message")
+        {
             actual_payload.replace(payload);
         }
     }
