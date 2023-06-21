@@ -32,7 +32,6 @@ pub mod common;
 )]
 #[tokio::test]
 async fn test_published_messages_are_decoded_by_builder(block_v2: &[u8]) {
-    let height = 0;
     let mut expected_payload = BusMessage::<NEARBlock>::deserialize(block_v2)
         .expect("Cannot decode expected data from CBOR")
         .payload;
@@ -73,10 +72,7 @@ async fn test_published_messages_are_decoded_by_builder(block_v2: &[u8]) {
     let mut actual_payload: Option<NEARBlock> = None;
 
     for message in messages {
-        if let Some(payload) = builder
-            .add_message(height, message.payload)
-            .expect("Unable to add message")
-        {
+        if let Some(payload) = builder.add_message(message.payload).expect("Unable to add message") {
             actual_payload.replace(payload);
         }
     }

@@ -56,7 +56,7 @@ use std::collections::HashMap;
 ///         .parse::<u64>()?;
 ///
 ///     // Add msg and get block if it is completed
-///     match blocks.add_message(height, msg.payload)? {
+///     match blocks.add_message(msg.payload)? {
 ///         Some(near_block) => { /* Do something with completed near_block */ }
 ///         None => continue,
 ///     }
@@ -77,23 +77,37 @@ impl BlocksBuilder {
     ///
     /// Returns [`Some`] with the constructed block if all the messages (one for header and one for each shard) are
     /// collected. Returns [`None`] if the block is still incomplete.
-    pub fn add_message(&mut self, height: u64, payload: Bytes) -> Result<Option<NEARBlock>, DecodeError> {
+    pub fn add_message(&mut self, payload: Bytes) -> Result<Option<NEARBlock>, DecodeError> {
         Ok(if payload.is_empty() {
             None
         } else {
             let decoded_message = ProtoMsg::decode_compressed(&payload[..])?;
 
-            self.add_proto_message(height, decoded_message)
+            self.add_proto_message(decoded_message)
         })
     }
 
-    fn add_proto_message(&mut self, height: u64, msg: ProtoMsg) -> Option<NEARBlock> {
-        let maybe_block = match msg.payload {
+    fn add_proto_message(&mut self, msg: ProtoMsg) -> Option<NEARBlock> {
+        let height = match &msg.payload {
+            Some(NearBlockHeader(header)) => header.header.as_ref().expect("Header must be present in header").height,
+            Some(NearBlockShard(shard)) => {
+                shard
+                    .header
+                    .as_ref()
+                    .expect("Header must be present in shard")
+                    .header
+                    .as_ref()
+                    .expect("Header must be present")
+                    .height
+            }
+            _ => return None,
+        };
+        let builder = match msg.payload {
             Some(NearBlockHeader(header)) => self.blocks.entry(height).or_default().add_header(header.into()),
             Some(NearBlockShard(shard)) => self.blocks.entry(height).or_default().add_shard(shard.into()),
             _ => return None,
-        }
-        .build();
+        };
+        let maybe_block = builder.build();
 
         if maybe_block.is_some() {
             self.blocks.remove(&height);
@@ -173,7 +187,7 @@ impl BlockBuilder {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::proto;
+    use crate::{proto, BlockShard, PartialBlockHeaderView, PartialIndexerBlockHeaderView};
     use async_nats::Message;
     use aurora_refiner_types::near_block::IndexerBlockHeaderView;
     use near_primitives::types::AccountId;
@@ -187,16 +201,16 @@ mod tests {
         let height = 0;
         let mut builder = BlocksBuilder::default();
 
-        let header = create_dummy_block_header_message(shards_count);
+        let header = create_dummy_block_header_message(height, shards_count);
 
-        let mut block = builder.add_message(height, header.payload).unwrap();
+        let mut block = builder.add_message(header.payload).unwrap();
 
         for i in 0..shards_count {
             assert!(block.is_none());
 
-            let shard = create_dummy_shard_message(i);
+            let shard = create_dummy_shard_message(height, i);
 
-            block = builder.add_message(height, shard.payload).unwrap();
+            block = builder.add_message(shard.payload).unwrap();
         }
 
         assert!(block.is_some());
@@ -206,9 +220,10 @@ mod tests {
     #[test_case(1; "One shard")]
     #[test_case(4; "Four shards")]
     fn test_block_builder_builds_only_after_adding_header_and_expected_number_of_shards(shards_count: u64) {
+        let height = 0;
         let mut builder = BlockBuilder::default();
 
-        let header = create_dummy_block_header(shards_count);
+        let header = create_dummy_block_header(height, shards_count);
 
         builder.add_header(header);
 
@@ -235,8 +250,8 @@ mod tests {
         let mut builder = BlocksBuilder::default();
 
         for height in 0..2 {
-            let header = create_dummy_block_header_message(shards_count);
-            let block = builder.add_message(height, header.payload).unwrap();
+            let header = create_dummy_block_header_message(height, shards_count);
+            let block = builder.add_message(header.payload).unwrap();
 
             assert!(block.is_some());
         }
@@ -248,26 +263,26 @@ mod tests {
         let mut builder = BlocksBuilder::default();
 
         let height = 0;
-        let header = create_dummy_block_header_message(shards_count);
-        let block = builder.add_message(height, header.payload).unwrap();
+        let header = create_dummy_block_header_message(height, shards_count);
+        let block = builder.add_message(header.payload).unwrap();
 
         assert!(block.is_none());
 
         let height = 1;
-        let header = create_dummy_block_header_message(shards_count);
-        let block = builder.add_message(height, header.payload).unwrap();
+        let header = create_dummy_block_header_message(height, shards_count);
+        let block = builder.add_message(header.payload).unwrap();
 
         assert!(block.is_none());
 
         let height = 0;
-        let header = create_dummy_shard_message(0);
-        let block = builder.add_message(height, header.payload).unwrap();
+        let header = create_dummy_shard_message(height, 0);
+        let block = builder.add_message(header.payload).unwrap();
 
         assert!(block.is_some());
 
         let height = 1;
-        let header = create_dummy_shard_message(0);
-        let block = builder.add_message(height, header.payload).unwrap();
+        let header = create_dummy_shard_message(height, 0);
+        let block = builder.add_message(header.payload).unwrap();
 
         assert!(block.is_some());
     }
@@ -279,23 +294,23 @@ mod tests {
         let height = 0;
         let mut builder = BlocksBuilder::default();
 
-        let header = create_dummy_block_header_message(shards_count);
+        let header = create_dummy_block_header_message(height, shards_count);
 
-        let mut block = builder.add_message(height, header.payload).unwrap();
+        let mut block = builder.add_message(header.payload).unwrap();
 
         assert!(block.is_none());
 
         for _ in 0..empty_count {
             let empty = create_empty_message();
 
-            block = builder.add_message(height, empty.payload).unwrap();
+            block = builder.add_message(empty.payload).unwrap();
 
             assert!(block.is_none());
         }
 
-        let shard = create_dummy_shard_message(0);
+        let shard = create_dummy_shard_message(height, 0);
 
-        block = builder.add_message(height, shard.payload).unwrap();
+        block = builder.add_message(shard.payload).unwrap();
 
         assert!(block.is_some());
     }
@@ -324,25 +339,59 @@ mod tests {
         }
     }
 
-    fn create_dummy_block_header_message(shards_count: u64) -> Message {
+    fn create_dummy_block_header_message(height: u64, shards_count: u64) -> Message {
         proto::Message {
-            payload: Some(NearBlockHeader(create_dummy_block_header(shards_count).into())),
+            payload: Some(NearBlockHeader(create_dummy_block_header(height, shards_count).into())),
         }
         .into()
     }
 
-    fn create_dummy_shard_message(shard_id: u64) -> Message {
+    fn create_dummy_shard_message(height: u64, shard_id: u64) -> Message {
+        let mut shard = BlockShard::from(create_dummy_shard(shard_id));
+        shard.header = Some(PartialBlockHeaderView {
+            author: "".to_string(),
+            header: Some(PartialIndexerBlockHeaderView {
+                height,
+                prev_height: None,
+                h256_epoch_id: vec![],
+                h256_next_epoch_id: vec![],
+                h256_hash: vec![],
+                h256_prev_hash: vec![],
+                h256_prev_state_root: vec![],
+                h256_chunk_receipts_root: vec![],
+                h256_chunk_headers_root: vec![],
+                h256_chunk_tx_root: vec![],
+                h256_outcome_root: vec![],
+                chunks_included: 0,
+                h256_challenges_root: vec![],
+                timestamp: 0,
+                timestamp_nanosec: 0,
+                h256_random_value: vec![],
+                chunk_mask: vec![],
+                u128_gas_price: vec![],
+                block_ordinal: None,
+                u128_total_supply: vec![],
+                h256_last_final_block: vec![],
+                h256_last_ds_final_block: vec![],
+                h256_next_bp_hash: vec![],
+                h256_block_merkle_root: vec![],
+                h256_epoch_sync_data_hash: None,
+                signature: None,
+                latest_protocol_version: 0,
+            }),
+        });
+
         proto::Message {
-            payload: Some(NearBlockShard(create_dummy_shard(shard_id).into())),
+            payload: Some(NearBlockShard(shard)),
         }
         .into()
     }
 
-    fn create_dummy_block_header(shards_count: u64) -> BlockView {
+    fn create_dummy_block_header(height: u64, shards_count: u64) -> BlockView {
         BlockView {
             author: AccountId::from_str("dummy").unwrap(),
             header: IndexerBlockHeaderView {
-                height: 0,
+                height,
                 prev_height: None,
                 epoch_id: Default::default(),
                 next_epoch_id: Default::default(),
