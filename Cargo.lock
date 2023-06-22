@@ -417,7 +417,7 @@ dependencies = [
 
 [[package]]
 name = "borealis-proto-migrate"
-version = "0.8.0"
+version = "0.8.1"
 dependencies = [
  "anyhow",
  "async-nats 0.27.1",
@@ -439,7 +439,7 @@ dependencies = [
 
 [[package]]
 name = "borealis-proto-types"
-version = "0.8.0"
+version = "0.8.1"
 dependencies = [
  "async-nats 0.27.1",
  "async-trait",
