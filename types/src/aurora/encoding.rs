@@ -1491,7 +1491,7 @@ impl From<ActionView> for proto::ActionView {
                     method_name,
                 } => proto::action_view::Variant::FunctionCall(proto::action_view::FunctionCall {
                     method_name,
-                    args,
+                    args: args.to_vec(),
                     gas,
                     u128_deposit: deposit.to_be_bytes().to_vec(),
                 }),
@@ -1671,15 +1671,15 @@ impl From<StateChangeValueView> for proto::StateChangeValueView {
                 StateChangeValueView::DataUpdate { account_id, value, key } => {
                     proto::state_change_value_view::Variant::DataUpdate(proto::state_change_value_view::DataUpdate {
                         account_id: account_id.into(),
-                        value: AsRef::<Vec<u8>>::as_ref(&value).to_vec(),
-                        key: AsRef::<Vec<u8>>::as_ref(&key).to_vec(),
+                        value: value.to_vec(),
+                        key: key.to_vec(),
                     })
                 }
                 StateChangeValueView::DataDeletion { account_id, key } => {
                     proto::state_change_value_view::Variant::DataDeletion(
                         proto::state_change_value_view::DataDeletion {
                             account_id: account_id.into(),
-                            key: AsRef::<Vec<u8>>::as_ref(&key).to_vec(),
+                            key: key.to_vec(),
                         },
                     )
                 }

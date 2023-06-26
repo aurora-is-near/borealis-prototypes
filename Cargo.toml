@@ -1,4 +1,5 @@
 [workspace]
+resolver = "2"
 members = [
     "migrate",
     "types",
@@ -6,13 +7,13 @@ members = [
 
 [workspace.dependencies]
 async-nats = "0.27"
-aurora-refiner-types = { git = "https://github.com/aurora-is-near/borealis-engine-lib.git", tag = "v0.21.0" }
-borealis-rs = { git = "ssh://git@github.com/aurora-is-near/borealis.rs.git", tag = "v0.14.1" }
+aurora-refiner-types = { git = "https://github.com/aurora-is-near/borealis-engine-lib.git", tag = "v0.22.0" }
+borealis-rs = { git = "ssh://git@github.com/aurora-is-near/borealis.rs.git", tag = "v0.15.0" }
 bytes = "2"
 futures-util = "0.3"
-near-crypto = { git = "https://github.com/near/nearcore", tag = "1.34.0" }
-near-primitives = { git = "https://github.com/near/nearcore", tag = "1.34.0" }
-near-vm-errors = { git = "https://github.com/near/nearcore", tag = "1.34.0" }
+near-crypto = { git = "https://github.com/near/nearcore", tag = "1.35.0-rc.1" }
+near-primitives = { git = "https://github.com/near/nearcore", tag = "1.35.0-rc.1" }
+near-vm-errors = { git = "https://github.com/near/nearcore", tag = "1.35.0-rc.1" }
 prost = "0.11"
 zstd = "0.12"
 zstd-sys = "2"

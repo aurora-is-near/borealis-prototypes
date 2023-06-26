@@ -1116,7 +1116,7 @@ impl From<proto::ActionView> for ActionView {
             proto::action_view::Variant::DeployContract(v) => ActionView::DeployContract { code: v.code },
             proto::action_view::Variant::FunctionCall(v) => ActionView::FunctionCall {
                 method_name: v.method_name,
-                args: v.args,
+                args: v.args.into(),
                 gas: v.gas,
                 deposit: u128::from_be_bytes(v.u128_deposit.try_into().unwrap()),
             },
