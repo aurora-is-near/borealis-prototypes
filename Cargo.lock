@@ -216,8 +216,8 @@ dependencies = [
 
 [[package]]
 name = "aurora-engine"
-version = "2.9.0"
-source = "git+https://github.com/aurora-is-near/aurora-engine.git?rev=ddbde784cece70de7919ef0addba3f9e59af2f23#ddbde784cece70de7919ef0addba3f9e59af2f23"
+version = "2.9.2"
+source = "git+https://github.com/aurora-is-near/aurora-engine.git?rev=8202d6e55b2e863b2b23f0cefd653e76607695e1#8202d6e55b2e863b2b23f0cefd653e76607695e1"
 dependencies = [
  "aurora-engine-modexp",
  "aurora-engine-precompiles",
@@ -225,7 +225,6 @@ dependencies = [
  "aurora-engine-transactions",
  "aurora-engine-types",
  "bitflags",
- "byte-slice-cast",
  "ethabi",
  "evm",
  "hex",
@@ -238,16 +237,17 @@ dependencies = [
 [[package]]
 name = "aurora-engine-modexp"
 version = "1.0.0"
-source = "git+https://github.com/aurora-is-near/aurora-engine.git?rev=ddbde784cece70de7919ef0addba3f9e59af2f23#ddbde784cece70de7919ef0addba3f9e59af2f23"
+source = "git+https://github.com/aurora-is-near/aurora-engine.git?rev=8202d6e55b2e863b2b23f0cefd653e76607695e1#8202d6e55b2e863b2b23f0cefd653e76607695e1"
 dependencies = [
  "hex",
+ "ibig",
  "num",
 ]
 
 [[package]]
 name = "aurora-engine-precompiles"
 version = "1.0.0"
-source = "git+https://github.com/aurora-is-near/aurora-engine.git?rev=ddbde784cece70de7919ef0addba3f9e59af2f23#ddbde784cece70de7919ef0addba3f9e59af2f23"
+source = "git+https://github.com/aurora-is-near/aurora-engine.git?rev=8202d6e55b2e863b2b23f0cefd653e76607695e1#8202d6e55b2e863b2b23f0cefd653e76607695e1"
 dependencies = [
  "aurora-engine-modexp",
  "aurora-engine-sdk",
@@ -266,7 +266,7 @@ dependencies = [
 [[package]]
 name = "aurora-engine-sdk"
 version = "1.0.0"
-source = "git+https://github.com/aurora-is-near/aurora-engine.git?rev=ddbde784cece70de7919ef0addba3f9e59af2f23#ddbde784cece70de7919ef0addba3f9e59af2f23"
+source = "git+https://github.com/aurora-is-near/aurora-engine.git?rev=8202d6e55b2e863b2b23f0cefd653e76607695e1#8202d6e55b2e863b2b23f0cefd653e76607695e1"
 dependencies = [
  "aurora-engine-types",
  "base64 0.21.2",
@@ -277,7 +277,7 @@ dependencies = [
 [[package]]
 name = "aurora-engine-transactions"
 version = "1.0.0"
-source = "git+https://github.com/aurora-is-near/aurora-engine.git?rev=ddbde784cece70de7919ef0addba3f9e59af2f23#ddbde784cece70de7919ef0addba3f9e59af2f23"
+source = "git+https://github.com/aurora-is-near/aurora-engine.git?rev=8202d6e55b2e863b2b23f0cefd653e76607695e1#8202d6e55b2e863b2b23f0cefd653e76607695e1"
 dependencies = [
  "aurora-engine-precompiles",
  "aurora-engine-sdk",
@@ -290,11 +290,14 @@ dependencies = [
 [[package]]
 name = "aurora-engine-types"
 version = "1.0.0"
-source = "git+https://github.com/aurora-is-near/aurora-engine.git?rev=ddbde784cece70de7919ef0addba3f9e59af2f23#ddbde784cece70de7919ef0addba3f9e59af2f23"
+source = "git+https://github.com/aurora-is-near/aurora-engine.git?rev=8202d6e55b2e863b2b23f0cefd653e76607695e1#8202d6e55b2e863b2b23f0cefd653e76607695e1"
 dependencies = [
+ "base64 0.21.2",
  "borsh 0.10.3",
+ "bs58 0.5.0",
  "hex",
  "primitive-types 0.12.1",
+ "rlp",
  "serde",
  "serde_json",
 ]
@@ -302,7 +305,7 @@ dependencies = [
 [[package]]
 name = "aurora-refiner-types"
 version = "0.22.0"
-source = "git+https://github.com/aurora-is-near/borealis-engine-lib.git?tag=v0.22.0#f0dcbfb56fe6e9e5f6feb202027684f294b16063"
+source = "git+https://github.com/aurora-is-near/borealis-engine-lib.git?tag=v0.23.0#08bad20de4aa3344937cc974c6c02bc3b15f18ec"
 dependencies = [
  "aurora-engine",
  "aurora-engine-sdk",
@@ -445,7 +448,7 @@ dependencies = [
  "async-trait",
  "aurora-refiner-types",
  "borealis-rs",
- "bs58",
+ "bs58 0.4.0",
  "bytes",
  "chrono",
  "ed25519-dalek",
@@ -467,8 +470,8 @@ dependencies = [
 
 [[package]]
 name = "borealis-rs"
-version = "0.15.0"
-source = "git+ssh://git@github.com/aurora-is-near/borealis.rs.git?tag=v0.15.0#cdd87e6499548cdd78a53141cd66a7f410723cf0"
+version = "0.15.1"
+source = "git+ssh://git@github.com/aurora-is-near/borealis.rs.git?tag=v0.16.0#dd1be9d84f5a872f442e5a43822163d1c9b38d1f"
 dependencies = [
  "anyhow",
  "async-nats 0.24.0",
@@ -584,6 +587,16 @@ name = "bs58"
 version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "771fe0050b883fcc3ea2359b1a96bcfbc090b7116eae7c3c512c7a083fdf23d3"
+
+[[package]]
+name = "bs58"
+version = "0.5.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f5353f36341f7451062466f0b755b96ac3a9547e4d7f6b70d603fc721a7d7896"
+dependencies = [
+ "sha2 0.10.7",
+ "tinyvec",
+]
 
 [[package]]
 name = "bumpalo"
@@ -1554,6 +1567,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "ibig"
+version = "0.3.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d1fcc7f316b2c079dde77564a1360639c1a956a23fa96122732e416cb10717bb"
+dependencies = [
+ "cfg-if 1.0.0",
+ "num-traits",
+ "static_assertions",
+]
+
+[[package]]
 name = "ident_case"
 version = "1.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1869,7 +1893,7 @@ source = "git+https://github.com/near/nearcore?tag=1.35.0-rc.1#703702c756390078e
 dependencies = [
  "blake2",
  "borsh 0.10.3",
- "bs58",
+ "bs58 0.4.0",
  "c2-chacha",
  "curve25519-dalek",
  "derive_more",
@@ -1940,7 +1964,7 @@ dependencies = [
  "arbitrary",
  "base64 0.21.2",
  "borsh 0.10.3",
- "bs58",
+ "bs58 0.4.0",
  "derive_more",
  "enum-map",
  "near-account-id",
