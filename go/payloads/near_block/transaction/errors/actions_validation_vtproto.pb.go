@@ -237,6 +237,41 @@ func (m *ActionsValidationError_FunctionCallZeroAttachedGas) CloneMessageVT() pr
 	return m.CloneVT()
 }
 
+func (m *ActionsValidationError_DelegateActionMustBeOnlyOne) CloneVT() *ActionsValidationError_DelegateActionMustBeOnlyOne {
+	if m == nil {
+		return (*ActionsValidationError_DelegateActionMustBeOnlyOne)(nil)
+	}
+	r := &ActionsValidationError_DelegateActionMustBeOnlyOne{}
+	if len(m.unknownFields) > 0 {
+		r.unknownFields = make([]byte, len(m.unknownFields))
+		copy(r.unknownFields, m.unknownFields)
+	}
+	return r
+}
+
+func (m *ActionsValidationError_DelegateActionMustBeOnlyOne) CloneMessageVT() proto.Message {
+	return m.CloneVT()
+}
+
+func (m *ActionsValidationError_UnsupportedProtocolFeature) CloneVT() *ActionsValidationError_UnsupportedProtocolFeature {
+	if m == nil {
+		return (*ActionsValidationError_UnsupportedProtocolFeature)(nil)
+	}
+	r := &ActionsValidationError_UnsupportedProtocolFeature{
+		ProtocolFeature: m.ProtocolFeature,
+		Version:         m.Version,
+	}
+	if len(m.unknownFields) > 0 {
+		r.unknownFields = make([]byte, len(m.unknownFields))
+		copy(r.unknownFields, m.unknownFields)
+	}
+	return r
+}
+
+func (m *ActionsValidationError_UnsupportedProtocolFeature) CloneMessageVT() proto.Message {
+	return m.CloneVT()
+}
+
 func (m *ActionsValidationError) CloneVT() *ActionsValidationError {
 	if m == nil {
 		return (*ActionsValidationError)(nil)
@@ -374,6 +409,26 @@ func (m *ActionsValidationError_FunctionCallZeroAttachedGas_) CloneVT() isAction
 	}
 	r := &ActionsValidationError_FunctionCallZeroAttachedGas_{
 		FunctionCallZeroAttachedGas: m.FunctionCallZeroAttachedGas.CloneVT(),
+	}
+	return r
+}
+
+func (m *ActionsValidationError_DelegateActionMustBeOnlyOne_) CloneVT() isActionsValidationError_Variant {
+	if m == nil {
+		return (*ActionsValidationError_DelegateActionMustBeOnlyOne_)(nil)
+	}
+	r := &ActionsValidationError_DelegateActionMustBeOnlyOne_{
+		DelegateActionMustBeOnlyOne: m.DelegateActionMustBeOnlyOne.CloneVT(),
+	}
+	return r
+}
+
+func (m *ActionsValidationError_UnsupportedProtocolFeature_) CloneVT() isActionsValidationError_Variant {
+	if m == nil {
+		return (*ActionsValidationError_UnsupportedProtocolFeature_)(nil)
+	}
+	r := &ActionsValidationError_UnsupportedProtocolFeature_{
+		UnsupportedProtocolFeature: m.UnsupportedProtocolFeature.CloneVT(),
 	}
 	return r
 }
@@ -613,6 +668,44 @@ func (this *ActionsValidationError_FunctionCallZeroAttachedGas) EqualVT(that *Ac
 
 func (this *ActionsValidationError_FunctionCallZeroAttachedGas) EqualMessageVT(thatMsg proto.Message) bool {
 	that, ok := thatMsg.(*ActionsValidationError_FunctionCallZeroAttachedGas)
+	if !ok {
+		return false
+	}
+	return this.EqualVT(that)
+}
+func (this *ActionsValidationError_DelegateActionMustBeOnlyOne) EqualVT(that *ActionsValidationError_DelegateActionMustBeOnlyOne) bool {
+	if this == that {
+		return true
+	} else if this == nil || that == nil {
+		return false
+	}
+	return string(this.unknownFields) == string(that.unknownFields)
+}
+
+func (this *ActionsValidationError_DelegateActionMustBeOnlyOne) EqualMessageVT(thatMsg proto.Message) bool {
+	that, ok := thatMsg.(*ActionsValidationError_DelegateActionMustBeOnlyOne)
+	if !ok {
+		return false
+	}
+	return this.EqualVT(that)
+}
+func (this *ActionsValidationError_UnsupportedProtocolFeature) EqualVT(that *ActionsValidationError_UnsupportedProtocolFeature) bool {
+	if this == that {
+		return true
+	} else if this == nil || that == nil {
+		return false
+	}
+	if this.ProtocolFeature != that.ProtocolFeature {
+		return false
+	}
+	if this.Version != that.Version {
+		return false
+	}
+	return string(this.unknownFields) == string(that.unknownFields)
+}
+
+func (this *ActionsValidationError_UnsupportedProtocolFeature) EqualMessageVT(thatMsg proto.Message) bool {
+	that, ok := thatMsg.(*ActionsValidationError_UnsupportedProtocolFeature)
 	if !ok {
 		return false
 	}
@@ -938,6 +1031,56 @@ func (this *ActionsValidationError_FunctionCallZeroAttachedGas_) EqualVT(thatIfa
 		}
 		if q == nil {
 			q = &ActionsValidationError_FunctionCallZeroAttachedGas{}
+		}
+		if !p.EqualVT(q) {
+			return false
+		}
+	}
+	return true
+}
+
+func (this *ActionsValidationError_DelegateActionMustBeOnlyOne_) EqualVT(thatIface isActionsValidationError_Variant) bool {
+	that, ok := thatIface.(*ActionsValidationError_DelegateActionMustBeOnlyOne_)
+	if !ok {
+		return false
+	}
+	if this == that {
+		return true
+	}
+	if this == nil && that != nil || this != nil && that == nil {
+		return false
+	}
+	if p, q := this.DelegateActionMustBeOnlyOne, that.DelegateActionMustBeOnlyOne; p != q {
+		if p == nil {
+			p = &ActionsValidationError_DelegateActionMustBeOnlyOne{}
+		}
+		if q == nil {
+			q = &ActionsValidationError_DelegateActionMustBeOnlyOne{}
+		}
+		if !p.EqualVT(q) {
+			return false
+		}
+	}
+	return true
+}
+
+func (this *ActionsValidationError_UnsupportedProtocolFeature_) EqualVT(thatIface isActionsValidationError_Variant) bool {
+	that, ok := thatIface.(*ActionsValidationError_UnsupportedProtocolFeature_)
+	if !ok {
+		return false
+	}
+	if this == that {
+		return true
+	}
+	if this == nil && that != nil || this != nil && that == nil {
+		return false
+	}
+	if p, q := this.UnsupportedProtocolFeature, that.UnsupportedProtocolFeature; p != q {
+		if p == nil {
+			p = &ActionsValidationError_UnsupportedProtocolFeature{}
+		}
+		if q == nil {
+			q = &ActionsValidationError_UnsupportedProtocolFeature{}
 		}
 		if !p.EqualVT(q) {
 			return false
@@ -1429,6 +1572,84 @@ func (m *ActionsValidationError_FunctionCallZeroAttachedGas) MarshalToSizedBuffe
 	return len(dAtA) - i, nil
 }
 
+func (m *ActionsValidationError_DelegateActionMustBeOnlyOne) MarshalVT() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ActionsValidationError_DelegateActionMustBeOnlyOne) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *ActionsValidationError_DelegateActionMustBeOnlyOne) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *ActionsValidationError_UnsupportedProtocolFeature) MarshalVT() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ActionsValidationError_UnsupportedProtocolFeature) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *ActionsValidationError_UnsupportedProtocolFeature) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	if m.Version != 0 {
+		i = encodeVarint(dAtA, i, uint64(m.Version))
+		i--
+		dAtA[i] = 0x10
+	}
+	if len(m.ProtocolFeature) > 0 {
+		i -= len(m.ProtocolFeature)
+		copy(dAtA[i:], m.ProtocolFeature)
+		i = encodeVarint(dAtA, i, uint64(len(m.ProtocolFeature)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
 func (m *ActionsValidationError) MarshalVT() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
@@ -1696,6 +1917,44 @@ func (m *ActionsValidationError_FunctionCallZeroAttachedGas_) MarshalToSizedBuff
 		i = encodeVarint(dAtA, i, uint64(size))
 		i--
 		dAtA[i] = 0x62
+	}
+	return len(dAtA) - i, nil
+}
+func (m *ActionsValidationError_DelegateActionMustBeOnlyOne_) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *ActionsValidationError_DelegateActionMustBeOnlyOne_) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.DelegateActionMustBeOnlyOne != nil {
+		size, err := m.DelegateActionMustBeOnlyOne.MarshalToSizedBufferVT(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x6a
+	}
+	return len(dAtA) - i, nil
+}
+func (m *ActionsValidationError_UnsupportedProtocolFeature_) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *ActionsValidationError_UnsupportedProtocolFeature_) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.UnsupportedProtocolFeature != nil {
+		size, err := m.UnsupportedProtocolFeature.MarshalToSizedBufferVT(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x72
 	}
 	return len(dAtA) - i, nil
 }
@@ -2193,6 +2452,84 @@ func (m *ActionsValidationError_FunctionCallZeroAttachedGas) MarshalToSizedBuffe
 	return len(dAtA) - i, nil
 }
 
+func (m *ActionsValidationError_DelegateActionMustBeOnlyOne) MarshalVTStrict() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVTStrict(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ActionsValidationError_DelegateActionMustBeOnlyOne) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *ActionsValidationError_DelegateActionMustBeOnlyOne) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *ActionsValidationError_UnsupportedProtocolFeature) MarshalVTStrict() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVTStrict(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ActionsValidationError_UnsupportedProtocolFeature) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *ActionsValidationError_UnsupportedProtocolFeature) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	if m.Version != 0 {
+		i = encodeVarint(dAtA, i, uint64(m.Version))
+		i--
+		dAtA[i] = 0x10
+	}
+	if len(m.ProtocolFeature) > 0 {
+		i -= len(m.ProtocolFeature)
+		copy(dAtA[i:], m.ProtocolFeature)
+		i = encodeVarint(dAtA, i, uint64(len(m.ProtocolFeature)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
 func (m *ActionsValidationError) MarshalVTStrict() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
@@ -2222,6 +2559,20 @@ func (m *ActionsValidationError) MarshalToSizedBufferVTStrict(dAtA []byte) (int,
 	if m.unknownFields != nil {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
+	}
+	if msg, ok := m.Variant.(*ActionsValidationError_UnsupportedProtocolFeature_); ok {
+		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+	}
+	if msg, ok := m.Variant.(*ActionsValidationError_DelegateActionMustBeOnlyOne_); ok {
+		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
 	}
 	if msg, ok := m.Variant.(*ActionsValidationError_FunctionCallZeroAttachedGas_); ok {
 		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
@@ -2538,6 +2889,44 @@ func (m *ActionsValidationError_FunctionCallZeroAttachedGas_) MarshalToSizedBuff
 	}
 	return len(dAtA) - i, nil
 }
+func (m *ActionsValidationError_DelegateActionMustBeOnlyOne_) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *ActionsValidationError_DelegateActionMustBeOnlyOne_) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.DelegateActionMustBeOnlyOne != nil {
+		size, err := m.DelegateActionMustBeOnlyOne.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x6a
+	}
+	return len(dAtA) - i, nil
+}
+func (m *ActionsValidationError_UnsupportedProtocolFeature_) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *ActionsValidationError_UnsupportedProtocolFeature_) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.UnsupportedProtocolFeature != nil {
+		size, err := m.UnsupportedProtocolFeature.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x72
+	}
+	return len(dAtA) - i, nil
+}
 func (m *ActionsValidationError_DeleteActionMustBeFinal) SizeVT() (n int) {
 	if m == nil {
 		return 0
@@ -2708,6 +3097,33 @@ func (m *ActionsValidationError_FunctionCallZeroAttachedGas) SizeVT() (n int) {
 	return n
 }
 
+func (m *ActionsValidationError_DelegateActionMustBeOnlyOne) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	n += len(m.unknownFields)
+	return n
+}
+
+func (m *ActionsValidationError_UnsupportedProtocolFeature) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.ProtocolFeature)
+	if l > 0 {
+		n += 1 + l + sov(uint64(l))
+	}
+	if m.Version != 0 {
+		n += 1 + sov(uint64(m.Version))
+	}
+	n += len(m.unknownFields)
+	return n
+}
+
 func (m *ActionsValidationError) SizeVT() (n int) {
 	if m == nil {
 		return 0
@@ -2861,6 +3277,30 @@ func (m *ActionsValidationError_FunctionCallZeroAttachedGas_) SizeVT() (n int) {
 	_ = l
 	if m.FunctionCallZeroAttachedGas != nil {
 		l = m.FunctionCallZeroAttachedGas.SizeVT()
+		n += 1 + l + sov(uint64(l))
+	}
+	return n
+}
+func (m *ActionsValidationError_DelegateActionMustBeOnlyOne_) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.DelegateActionMustBeOnlyOne != nil {
+		l = m.DelegateActionMustBeOnlyOne.SizeVT()
+		n += 1 + l + sov(uint64(l))
+	}
+	return n
+}
+func (m *ActionsValidationError_UnsupportedProtocolFeature_) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.UnsupportedProtocolFeature != nil {
+		l = m.UnsupportedProtocolFeature.SizeVT()
 		n += 1 + l + sov(uint64(l))
 	}
 	return n
@@ -3818,6 +4258,159 @@ func (m *ActionsValidationError_FunctionCallZeroAttachedGas) UnmarshalVT(dAtA []
 	}
 	return nil
 }
+func (m *ActionsValidationError_DelegateActionMustBeOnlyOne) UnmarshalVT(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflow
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: ActionsValidationError_DelegateActionMustBeOnlyOne: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: ActionsValidationError_DelegateActionMustBeOnlyOne: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skip(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLength
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *ActionsValidationError_UnsupportedProtocolFeature) UnmarshalVT(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflow
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: ActionsValidationError_UnsupportedProtocolFeature: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: ActionsValidationError_UnsupportedProtocolFeature: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ProtocolFeature", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ProtocolFeature = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Version", wireType)
+			}
+			m.Version = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Version |= uint32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skip(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLength
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
 func (m *ActionsValidationError) UnmarshalVT(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -4337,6 +4930,88 @@ func (m *ActionsValidationError) UnmarshalVT(dAtA []byte) error {
 					return err
 				}
 				m.Variant = &ActionsValidationError_FunctionCallZeroAttachedGas_{FunctionCallZeroAttachedGas: v}
+			}
+			iNdEx = postIndex
+		case 13:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DelegateActionMustBeOnlyOne", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if oneof, ok := m.Variant.(*ActionsValidationError_DelegateActionMustBeOnlyOne_); ok {
+				if err := oneof.DelegateActionMustBeOnlyOne.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+			} else {
+				v := &ActionsValidationError_DelegateActionMustBeOnlyOne{}
+				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+				m.Variant = &ActionsValidationError_DelegateActionMustBeOnlyOne_{DelegateActionMustBeOnlyOne: v}
+			}
+			iNdEx = postIndex
+		case 14:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field UnsupportedProtocolFeature", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if oneof, ok := m.Variant.(*ActionsValidationError_UnsupportedProtocolFeature_); ok {
+				if err := oneof.UnsupportedProtocolFeature.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+			} else {
+				v := &ActionsValidationError_UnsupportedProtocolFeature{}
+				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+				m.Variant = &ActionsValidationError_UnsupportedProtocolFeature_{UnsupportedProtocolFeature: v}
 			}
 			iNdEx = postIndex
 		default:

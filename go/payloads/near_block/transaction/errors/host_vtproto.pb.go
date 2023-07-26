@@ -575,6 +575,24 @@ func (m *HostError_AltBn128InvalidInput) CloneMessageVT() proto.Message {
 	return m.CloneVT()
 }
 
+func (m *HostError_Ed25519VerifyInvalidInput) CloneVT() *HostError_Ed25519VerifyInvalidInput {
+	if m == nil {
+		return (*HostError_Ed25519VerifyInvalidInput)(nil)
+	}
+	r := &HostError_Ed25519VerifyInvalidInput{
+		Msg: m.Msg,
+	}
+	if len(m.unknownFields) > 0 {
+		r.unknownFields = make([]byte, len(m.unknownFields))
+		copy(r.unknownFields, m.unknownFields)
+	}
+	return r
+}
+
+func (m *HostError_Ed25519VerifyInvalidInput) CloneMessageVT() proto.Message {
+	return m.CloneVT()
+}
+
 func (m *HostError) CloneVT() *HostError {
 	if m == nil {
 		return (*HostError)(nil)
@@ -910,6 +928,16 @@ func (m *HostError_AltBn_128InvalidInput) CloneVT() isHostError_Variant {
 	}
 	r := &HostError_AltBn_128InvalidInput{
 		AltBn_128InvalidInput: m.AltBn_128InvalidInput.CloneVT(),
+	}
+	return r
+}
+
+func (m *HostError_Ed25519VerifyInvalidInput_) CloneVT() isHostError_Variant {
+	if m == nil {
+		return (*HostError_Ed25519VerifyInvalidInput_)(nil)
+	}
+	r := &HostError_Ed25519VerifyInvalidInput_{
+		Ed25519VerifyInvalidInput: m.Ed25519VerifyInvalidInput.CloneVT(),
 	}
 	return r
 }
@@ -1499,6 +1527,25 @@ func (this *HostError_AltBn128InvalidInput) EqualVT(that *HostError_AltBn128Inva
 
 func (this *HostError_AltBn128InvalidInput) EqualMessageVT(thatMsg proto.Message) bool {
 	that, ok := thatMsg.(*HostError_AltBn128InvalidInput)
+	if !ok {
+		return false
+	}
+	return this.EqualVT(that)
+}
+func (this *HostError_Ed25519VerifyInvalidInput) EqualVT(that *HostError_Ed25519VerifyInvalidInput) bool {
+	if this == that {
+		return true
+	} else if this == nil || that == nil {
+		return false
+	}
+	if this.Msg != that.Msg {
+		return false
+	}
+	return string(this.unknownFields) == string(that.unknownFields)
+}
+
+func (this *HostError_Ed25519VerifyInvalidInput) EqualMessageVT(thatMsg proto.Message) bool {
+	that, ok := thatMsg.(*HostError_Ed25519VerifyInvalidInput)
 	if !ok {
 		return false
 	}
@@ -2324,6 +2371,31 @@ func (this *HostError_AltBn_128InvalidInput) EqualVT(thatIface isHostError_Varia
 		}
 		if q == nil {
 			q = &HostError_AltBn128InvalidInput{}
+		}
+		if !p.EqualVT(q) {
+			return false
+		}
+	}
+	return true
+}
+
+func (this *HostError_Ed25519VerifyInvalidInput_) EqualVT(thatIface isHostError_Variant) bool {
+	that, ok := thatIface.(*HostError_Ed25519VerifyInvalidInput_)
+	if !ok {
+		return false
+	}
+	if this == that {
+		return true
+	}
+	if this == nil && that != nil || this != nil && that == nil {
+		return false
+	}
+	if p, q := this.Ed25519VerifyInvalidInput, that.Ed25519VerifyInvalidInput; p != q {
+		if p == nil {
+			p = &HostError_Ed25519VerifyInvalidInput{}
+		}
+		if q == nil {
+			q = &HostError_Ed25519VerifyInvalidInput{}
 		}
 		if !p.EqualVT(q) {
 			return false
@@ -3528,6 +3600,46 @@ func (m *HostError_AltBn128InvalidInput) MarshalToSizedBufferVT(dAtA []byte) (in
 	return len(dAtA) - i, nil
 }
 
+func (m *HostError_Ed25519VerifyInvalidInput) MarshalVT() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *HostError_Ed25519VerifyInvalidInput) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *HostError_Ed25519VerifyInvalidInput) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	if len(m.Msg) > 0 {
+		i -= len(m.Msg)
+		copy(dAtA[i:], m.Msg)
+		i = encodeVarint(dAtA, i, uint64(len(m.Msg)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
 func (m *HostError) MarshalVT() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
@@ -4209,6 +4321,27 @@ func (m *HostError_AltBn_128InvalidInput) MarshalToSizedBufferVT(dAtA []byte) (i
 		dAtA[i] = 0x2
 		i--
 		dAtA[i] = 0x82
+	}
+	return len(dAtA) - i, nil
+}
+func (m *HostError_Ed25519VerifyInvalidInput_) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *HostError_Ed25519VerifyInvalidInput_) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.Ed25519VerifyInvalidInput != nil {
+		size, err := m.Ed25519VerifyInvalidInput.MarshalToSizedBufferVT(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x2
+		i--
+		dAtA[i] = 0x8a
 	}
 	return len(dAtA) - i, nil
 }
@@ -5408,6 +5541,46 @@ func (m *HostError_AltBn128InvalidInput) MarshalToSizedBufferVTStrict(dAtA []byt
 	return len(dAtA) - i, nil
 }
 
+func (m *HostError_Ed25519VerifyInvalidInput) MarshalVTStrict() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVTStrict(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *HostError_Ed25519VerifyInvalidInput) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *HostError_Ed25519VerifyInvalidInput) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	if len(m.Msg) > 0 {
+		i -= len(m.Msg)
+		copy(dAtA[i:], m.Msg)
+		i = encodeVarint(dAtA, i, uint64(len(m.Msg)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
 func (m *HostError) MarshalVTStrict() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
@@ -5437,6 +5610,13 @@ func (m *HostError) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 	if m.unknownFields != nil {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
+	}
+	if msg, ok := m.Variant.(*HostError_Ed25519VerifyInvalidInput_); ok {
+		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
 	}
 	if msg, ok := m.Variant.(*HostError_AltBn_128InvalidInput); ok {
 		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
@@ -6307,6 +6487,27 @@ func (m *HostError_AltBn_128InvalidInput) MarshalToSizedBufferVTStrict(dAtA []by
 	}
 	return len(dAtA) - i, nil
 }
+func (m *HostError_Ed25519VerifyInvalidInput_) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *HostError_Ed25519VerifyInvalidInput_) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.Ed25519VerifyInvalidInput != nil {
+		size, err := m.Ed25519VerifyInvalidInput.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x2
+		i--
+		dAtA[i] = 0x8a
+	}
+	return len(dAtA) - i, nil
+}
 func (m *HostError_BadUTF16) SizeVT() (n int) {
 	if m == nil {
 		return 0
@@ -6697,6 +6898,20 @@ func (m *HostError_ECRecoverError) SizeVT() (n int) {
 }
 
 func (m *HostError_AltBn128InvalidInput) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Msg)
+	if l > 0 {
+		n += 1 + l + sov(uint64(l))
+	}
+	n += len(m.unknownFields)
+	return n
+}
+
+func (m *HostError_Ed25519VerifyInvalidInput) SizeVT() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -7103,6 +7318,18 @@ func (m *HostError_AltBn_128InvalidInput) SizeVT() (n int) {
 	_ = l
 	if m.AltBn_128InvalidInput != nil {
 		l = m.AltBn_128InvalidInput.SizeVT()
+		n += 2 + l + sov(uint64(l))
+	}
+	return n
+}
+func (m *HostError_Ed25519VerifyInvalidInput_) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Ed25519VerifyInvalidInput != nil {
+		l = m.Ed25519VerifyInvalidInput.SizeVT()
 		n += 2 + l + sov(uint64(l))
 	}
 	return n
@@ -9298,6 +9525,89 @@ func (m *HostError_AltBn128InvalidInput) UnmarshalVT(dAtA []byte) error {
 	}
 	return nil
 }
+func (m *HostError_Ed25519VerifyInvalidInput) UnmarshalVT(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflow
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: HostError_Ed25519VerifyInvalidInput: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: HostError_Ed25519VerifyInvalidInput: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Msg", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Msg = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skip(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLength
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
 func (m *HostError) UnmarshalVT(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -10637,6 +10947,47 @@ func (m *HostError) UnmarshalVT(dAtA []byte) error {
 					return err
 				}
 				m.Variant = &HostError_AltBn_128InvalidInput{AltBn_128InvalidInput: v}
+			}
+			iNdEx = postIndex
+		case 33:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Ed25519VerifyInvalidInput", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if oneof, ok := m.Variant.(*HostError_Ed25519VerifyInvalidInput_); ok {
+				if err := oneof.Ed25519VerifyInvalidInput.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+			} else {
+				v := &HostError_Ed25519VerifyInvalidInput{}
+				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+				m.Variant = &HostError_Ed25519VerifyInvalidInput_{Ed25519VerifyInvalidInput: v}
 			}
 			iNdEx = postIndex
 		default:

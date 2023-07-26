@@ -19,6 +19,204 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+func (m *InvalidAccessKeyError_AccessKeyNotFound) CloneVT() *InvalidAccessKeyError_AccessKeyNotFound {
+	if m == nil {
+		return (*InvalidAccessKeyError_AccessKeyNotFound)(nil)
+	}
+	r := &InvalidAccessKeyError_AccessKeyNotFound{
+		AccountId: m.AccountId,
+		PublicKey: m.PublicKey.CloneVT(),
+	}
+	if len(m.unknownFields) > 0 {
+		r.unknownFields = make([]byte, len(m.unknownFields))
+		copy(r.unknownFields, m.unknownFields)
+	}
+	return r
+}
+
+func (m *InvalidAccessKeyError_AccessKeyNotFound) CloneMessageVT() proto.Message {
+	return m.CloneVT()
+}
+
+func (m *InvalidAccessKeyError_ReceiverMismatch) CloneVT() *InvalidAccessKeyError_ReceiverMismatch {
+	if m == nil {
+		return (*InvalidAccessKeyError_ReceiverMismatch)(nil)
+	}
+	r := &InvalidAccessKeyError_ReceiverMismatch{
+		TxReceiver: m.TxReceiver,
+		AkReceiver: m.AkReceiver,
+	}
+	if len(m.unknownFields) > 0 {
+		r.unknownFields = make([]byte, len(m.unknownFields))
+		copy(r.unknownFields, m.unknownFields)
+	}
+	return r
+}
+
+func (m *InvalidAccessKeyError_ReceiverMismatch) CloneMessageVT() proto.Message {
+	return m.CloneVT()
+}
+
+func (m *InvalidAccessKeyError_MethodNameMismatch) CloneVT() *InvalidAccessKeyError_MethodNameMismatch {
+	if m == nil {
+		return (*InvalidAccessKeyError_MethodNameMismatch)(nil)
+	}
+	r := &InvalidAccessKeyError_MethodNameMismatch{
+		MethodName: m.MethodName,
+	}
+	if len(m.unknownFields) > 0 {
+		r.unknownFields = make([]byte, len(m.unknownFields))
+		copy(r.unknownFields, m.unknownFields)
+	}
+	return r
+}
+
+func (m *InvalidAccessKeyError_MethodNameMismatch) CloneMessageVT() proto.Message {
+	return m.CloneVT()
+}
+
+func (m *InvalidAccessKeyError_RequiresFullAccess) CloneVT() *InvalidAccessKeyError_RequiresFullAccess {
+	if m == nil {
+		return (*InvalidAccessKeyError_RequiresFullAccess)(nil)
+	}
+	r := &InvalidAccessKeyError_RequiresFullAccess{}
+	if len(m.unknownFields) > 0 {
+		r.unknownFields = make([]byte, len(m.unknownFields))
+		copy(r.unknownFields, m.unknownFields)
+	}
+	return r
+}
+
+func (m *InvalidAccessKeyError_RequiresFullAccess) CloneMessageVT() proto.Message {
+	return m.CloneVT()
+}
+
+func (m *InvalidAccessKeyError_NotEnoughAllowance) CloneVT() *InvalidAccessKeyError_NotEnoughAllowance {
+	if m == nil {
+		return (*InvalidAccessKeyError_NotEnoughAllowance)(nil)
+	}
+	r := &InvalidAccessKeyError_NotEnoughAllowance{
+		AccountId: m.AccountId,
+		PublicKey: m.PublicKey.CloneVT(),
+	}
+	if rhs := m.U128Allowance; rhs != nil {
+		tmpBytes := make([]byte, len(rhs))
+		copy(tmpBytes, rhs)
+		r.U128Allowance = tmpBytes
+	}
+	if rhs := m.U128Cost; rhs != nil {
+		tmpBytes := make([]byte, len(rhs))
+		copy(tmpBytes, rhs)
+		r.U128Cost = tmpBytes
+	}
+	if len(m.unknownFields) > 0 {
+		r.unknownFields = make([]byte, len(m.unknownFields))
+		copy(r.unknownFields, m.unknownFields)
+	}
+	return r
+}
+
+func (m *InvalidAccessKeyError_NotEnoughAllowance) CloneMessageVT() proto.Message {
+	return m.CloneVT()
+}
+
+func (m *InvalidAccessKeyError_DepositWithFunctionCall) CloneVT() *InvalidAccessKeyError_DepositWithFunctionCall {
+	if m == nil {
+		return (*InvalidAccessKeyError_DepositWithFunctionCall)(nil)
+	}
+	r := &InvalidAccessKeyError_DepositWithFunctionCall{}
+	if len(m.unknownFields) > 0 {
+		r.unknownFields = make([]byte, len(m.unknownFields))
+		copy(r.unknownFields, m.unknownFields)
+	}
+	return r
+}
+
+func (m *InvalidAccessKeyError_DepositWithFunctionCall) CloneMessageVT() proto.Message {
+	return m.CloneVT()
+}
+
+func (m *InvalidAccessKeyError) CloneVT() *InvalidAccessKeyError {
+	if m == nil {
+		return (*InvalidAccessKeyError)(nil)
+	}
+	r := &InvalidAccessKeyError{}
+	if m.Variant != nil {
+		r.Variant = m.Variant.(interface {
+			CloneVT() isInvalidAccessKeyError_Variant
+		}).CloneVT()
+	}
+	if len(m.unknownFields) > 0 {
+		r.unknownFields = make([]byte, len(m.unknownFields))
+		copy(r.unknownFields, m.unknownFields)
+	}
+	return r
+}
+
+func (m *InvalidAccessKeyError) CloneMessageVT() proto.Message {
+	return m.CloneVT()
+}
+
+func (m *InvalidAccessKeyError_AccessKeyNotFound_) CloneVT() isInvalidAccessKeyError_Variant {
+	if m == nil {
+		return (*InvalidAccessKeyError_AccessKeyNotFound_)(nil)
+	}
+	r := &InvalidAccessKeyError_AccessKeyNotFound_{
+		AccessKeyNotFound: m.AccessKeyNotFound.CloneVT(),
+	}
+	return r
+}
+
+func (m *InvalidAccessKeyError_ReceiverMismatch_) CloneVT() isInvalidAccessKeyError_Variant {
+	if m == nil {
+		return (*InvalidAccessKeyError_ReceiverMismatch_)(nil)
+	}
+	r := &InvalidAccessKeyError_ReceiverMismatch_{
+		ReceiverMismatch: m.ReceiverMismatch.CloneVT(),
+	}
+	return r
+}
+
+func (m *InvalidAccessKeyError_MethodNameMismatch_) CloneVT() isInvalidAccessKeyError_Variant {
+	if m == nil {
+		return (*InvalidAccessKeyError_MethodNameMismatch_)(nil)
+	}
+	r := &InvalidAccessKeyError_MethodNameMismatch_{
+		MethodNameMismatch: m.MethodNameMismatch.CloneVT(),
+	}
+	return r
+}
+
+func (m *InvalidAccessKeyError_RequiresFullAccess_) CloneVT() isInvalidAccessKeyError_Variant {
+	if m == nil {
+		return (*InvalidAccessKeyError_RequiresFullAccess_)(nil)
+	}
+	r := &InvalidAccessKeyError_RequiresFullAccess_{
+		RequiresFullAccess: m.RequiresFullAccess.CloneVT(),
+	}
+	return r
+}
+
+func (m *InvalidAccessKeyError_NotEnoughAllowance_) CloneVT() isInvalidAccessKeyError_Variant {
+	if m == nil {
+		return (*InvalidAccessKeyError_NotEnoughAllowance_)(nil)
+	}
+	r := &InvalidAccessKeyError_NotEnoughAllowance_{
+		NotEnoughAllowance: m.NotEnoughAllowance.CloneVT(),
+	}
+	return r
+}
+
+func (m *InvalidAccessKeyError_DepositWithFunctionCall_) CloneVT() isInvalidAccessKeyError_Variant {
+	if m == nil {
+		return (*InvalidAccessKeyError_DepositWithFunctionCall_)(nil)
+	}
+	r := &InvalidAccessKeyError_DepositWithFunctionCall_{
+		DepositWithFunctionCall: m.DepositWithFunctionCall.CloneVT(),
+	}
+	return r
+}
+
 func (m *TxExecutionError_ActionError_ActionErrorKind_AccountAlreadyExists) CloneVT() *TxExecutionError_ActionError_ActionErrorKind_AccountAlreadyExists {
 	if m == nil {
 		return (*TxExecutionError_ActionError_ActionErrorKind_AccountAlreadyExists)(nil)
@@ -343,6 +541,113 @@ func (m *TxExecutionError_ActionError_ActionErrorKind_DeleteAccountWithLargeStat
 	return m.CloneVT()
 }
 
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidSignature) CloneVT() *TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidSignature {
+	if m == nil {
+		return (*TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidSignature)(nil)
+	}
+	r := &TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidSignature{}
+	if len(m.unknownFields) > 0 {
+		r.unknownFields = make([]byte, len(m.unknownFields))
+		copy(r.unknownFields, m.unknownFields)
+	}
+	return r
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidSignature) CloneMessageVT() proto.Message {
+	return m.CloneVT()
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionSenderDoesNotMatchTxReceiver) CloneVT() *TxExecutionError_ActionError_ActionErrorKind_DelegateActionSenderDoesNotMatchTxReceiver {
+	if m == nil {
+		return (*TxExecutionError_ActionError_ActionErrorKind_DelegateActionSenderDoesNotMatchTxReceiver)(nil)
+	}
+	r := &TxExecutionError_ActionError_ActionErrorKind_DelegateActionSenderDoesNotMatchTxReceiver{
+		SenderId:   m.SenderId,
+		ReceiverId: m.ReceiverId,
+	}
+	if len(m.unknownFields) > 0 {
+		r.unknownFields = make([]byte, len(m.unknownFields))
+		copy(r.unknownFields, m.unknownFields)
+	}
+	return r
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionSenderDoesNotMatchTxReceiver) CloneMessageVT() proto.Message {
+	return m.CloneVT()
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionExpired) CloneVT() *TxExecutionError_ActionError_ActionErrorKind_DelegateActionExpired {
+	if m == nil {
+		return (*TxExecutionError_ActionError_ActionErrorKind_DelegateActionExpired)(nil)
+	}
+	r := &TxExecutionError_ActionError_ActionErrorKind_DelegateActionExpired{}
+	if len(m.unknownFields) > 0 {
+		r.unknownFields = make([]byte, len(m.unknownFields))
+		copy(r.unknownFields, m.unknownFields)
+	}
+	return r
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionExpired) CloneMessageVT() proto.Message {
+	return m.CloneVT()
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionAccessKeyError) CloneVT() *TxExecutionError_ActionError_ActionErrorKind_DelegateActionAccessKeyError {
+	if m == nil {
+		return (*TxExecutionError_ActionError_ActionErrorKind_DelegateActionAccessKeyError)(nil)
+	}
+	r := &TxExecutionError_ActionError_ActionErrorKind_DelegateActionAccessKeyError{
+		Error: m.Error.CloneVT(),
+	}
+	if len(m.unknownFields) > 0 {
+		r.unknownFields = make([]byte, len(m.unknownFields))
+		copy(r.unknownFields, m.unknownFields)
+	}
+	return r
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionAccessKeyError) CloneMessageVT() proto.Message {
+	return m.CloneVT()
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidNonce) CloneVT() *TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidNonce {
+	if m == nil {
+		return (*TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidNonce)(nil)
+	}
+	r := &TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidNonce{
+		DelegateNonce: m.DelegateNonce,
+		AkNonce:       m.AkNonce,
+	}
+	if len(m.unknownFields) > 0 {
+		r.unknownFields = make([]byte, len(m.unknownFields))
+		copy(r.unknownFields, m.unknownFields)
+	}
+	return r
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidNonce) CloneMessageVT() proto.Message {
+	return m.CloneVT()
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionNonceTooLarge) CloneVT() *TxExecutionError_ActionError_ActionErrorKind_DelegateActionNonceTooLarge {
+	if m == nil {
+		return (*TxExecutionError_ActionError_ActionErrorKind_DelegateActionNonceTooLarge)(nil)
+	}
+	r := &TxExecutionError_ActionError_ActionErrorKind_DelegateActionNonceTooLarge{
+		DelegateNonce: m.DelegateNonce,
+		UpperBound:    m.UpperBound,
+	}
+	if len(m.unknownFields) > 0 {
+		r.unknownFields = make([]byte, len(m.unknownFields))
+		copy(r.unknownFields, m.unknownFields)
+	}
+	return r
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionNonceTooLarge) CloneMessageVT() proto.Message {
+	return m.CloneVT()
+}
+
 func (m *TxExecutionError_ActionError_ActionErrorKind) CloneVT() *TxExecutionError_ActionError_ActionErrorKind {
 	if m == nil {
 		return (*TxExecutionError_ActionError_ActionErrorKind)(nil)
@@ -524,6 +829,66 @@ func (m *TxExecutionError_ActionError_ActionErrorKind_DeleteAccountWithLargeStat
 	return r
 }
 
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidSignature_) CloneVT() isTxExecutionError_ActionError_ActionErrorKind_Variant {
+	if m == nil {
+		return (*TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidSignature_)(nil)
+	}
+	r := &TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidSignature_{
+		DelegateActionInvalidSignature: m.DelegateActionInvalidSignature.CloneVT(),
+	}
+	return r
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionSenderDoesNotMatchTxReceiver_) CloneVT() isTxExecutionError_ActionError_ActionErrorKind_Variant {
+	if m == nil {
+		return (*TxExecutionError_ActionError_ActionErrorKind_DelegateActionSenderDoesNotMatchTxReceiver_)(nil)
+	}
+	r := &TxExecutionError_ActionError_ActionErrorKind_DelegateActionSenderDoesNotMatchTxReceiver_{
+		DelegateActionSenderDoesNotMatchTxReceiver: m.DelegateActionSenderDoesNotMatchTxReceiver.CloneVT(),
+	}
+	return r
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionExpired_) CloneVT() isTxExecutionError_ActionError_ActionErrorKind_Variant {
+	if m == nil {
+		return (*TxExecutionError_ActionError_ActionErrorKind_DelegateActionExpired_)(nil)
+	}
+	r := &TxExecutionError_ActionError_ActionErrorKind_DelegateActionExpired_{
+		DelegateActionExpired: m.DelegateActionExpired.CloneVT(),
+	}
+	return r
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionAccessKeyError_) CloneVT() isTxExecutionError_ActionError_ActionErrorKind_Variant {
+	if m == nil {
+		return (*TxExecutionError_ActionError_ActionErrorKind_DelegateActionAccessKeyError_)(nil)
+	}
+	r := &TxExecutionError_ActionError_ActionErrorKind_DelegateActionAccessKeyError_{
+		DelegateActionAccessKeyError: m.DelegateActionAccessKeyError.CloneVT(),
+	}
+	return r
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidNonce_) CloneVT() isTxExecutionError_ActionError_ActionErrorKind_Variant {
+	if m == nil {
+		return (*TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidNonce_)(nil)
+	}
+	r := &TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidNonce_{
+		DelegateActionInvalidNonce: m.DelegateActionInvalidNonce.CloneVT(),
+	}
+	return r
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionNonceTooLarge_) CloneVT() isTxExecutionError_ActionError_ActionErrorKind_Variant {
+	if m == nil {
+		return (*TxExecutionError_ActionError_ActionErrorKind_DelegateActionNonceTooLarge_)(nil)
+	}
+	r := &TxExecutionError_ActionError_ActionErrorKind_DelegateActionNonceTooLarge_{
+		DelegateActionNonceTooLarge: m.DelegateActionNonceTooLarge.CloneVT(),
+	}
+	return r
+}
+
 func (m *TxExecutionError_ActionError) CloneVT() *TxExecutionError_ActionError {
 	if m == nil {
 		return (*TxExecutionError_ActionError)(nil)
@@ -544,204 +909,6 @@ func (m *TxExecutionError_ActionError) CloneVT() *TxExecutionError_ActionError {
 
 func (m *TxExecutionError_ActionError) CloneMessageVT() proto.Message {
 	return m.CloneVT()
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_AccessKeyNotFound) CloneVT() *TxExecutionError_InvalidTxError_InvalidAccessKeyError_AccessKeyNotFound {
-	if m == nil {
-		return (*TxExecutionError_InvalidTxError_InvalidAccessKeyError_AccessKeyNotFound)(nil)
-	}
-	r := &TxExecutionError_InvalidTxError_InvalidAccessKeyError_AccessKeyNotFound{
-		AccountId: m.AccountId,
-		PublicKey: m.PublicKey.CloneVT(),
-	}
-	if len(m.unknownFields) > 0 {
-		r.unknownFields = make([]byte, len(m.unknownFields))
-		copy(r.unknownFields, m.unknownFields)
-	}
-	return r
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_AccessKeyNotFound) CloneMessageVT() proto.Message {
-	return m.CloneVT()
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_ReceiverMismatch) CloneVT() *TxExecutionError_InvalidTxError_InvalidAccessKeyError_ReceiverMismatch {
-	if m == nil {
-		return (*TxExecutionError_InvalidTxError_InvalidAccessKeyError_ReceiverMismatch)(nil)
-	}
-	r := &TxExecutionError_InvalidTxError_InvalidAccessKeyError_ReceiverMismatch{
-		TxReceiver: m.TxReceiver,
-		AkReceiver: m.AkReceiver,
-	}
-	if len(m.unknownFields) > 0 {
-		r.unknownFields = make([]byte, len(m.unknownFields))
-		copy(r.unknownFields, m.unknownFields)
-	}
-	return r
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_ReceiverMismatch) CloneMessageVT() proto.Message {
-	return m.CloneVT()
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_MethodNameMismatch) CloneVT() *TxExecutionError_InvalidTxError_InvalidAccessKeyError_MethodNameMismatch {
-	if m == nil {
-		return (*TxExecutionError_InvalidTxError_InvalidAccessKeyError_MethodNameMismatch)(nil)
-	}
-	r := &TxExecutionError_InvalidTxError_InvalidAccessKeyError_MethodNameMismatch{
-		MethodName: m.MethodName,
-	}
-	if len(m.unknownFields) > 0 {
-		r.unknownFields = make([]byte, len(m.unknownFields))
-		copy(r.unknownFields, m.unknownFields)
-	}
-	return r
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_MethodNameMismatch) CloneMessageVT() proto.Message {
-	return m.CloneVT()
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_RequiresFullAccess) CloneVT() *TxExecutionError_InvalidTxError_InvalidAccessKeyError_RequiresFullAccess {
-	if m == nil {
-		return (*TxExecutionError_InvalidTxError_InvalidAccessKeyError_RequiresFullAccess)(nil)
-	}
-	r := &TxExecutionError_InvalidTxError_InvalidAccessKeyError_RequiresFullAccess{}
-	if len(m.unknownFields) > 0 {
-		r.unknownFields = make([]byte, len(m.unknownFields))
-		copy(r.unknownFields, m.unknownFields)
-	}
-	return r
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_RequiresFullAccess) CloneMessageVT() proto.Message {
-	return m.CloneVT()
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_NotEnoughAllowance) CloneVT() *TxExecutionError_InvalidTxError_InvalidAccessKeyError_NotEnoughAllowance {
-	if m == nil {
-		return (*TxExecutionError_InvalidTxError_InvalidAccessKeyError_NotEnoughAllowance)(nil)
-	}
-	r := &TxExecutionError_InvalidTxError_InvalidAccessKeyError_NotEnoughAllowance{
-		AccountId: m.AccountId,
-		PublicKey: m.PublicKey.CloneVT(),
-	}
-	if rhs := m.U128Allowance; rhs != nil {
-		tmpBytes := make([]byte, len(rhs))
-		copy(tmpBytes, rhs)
-		r.U128Allowance = tmpBytes
-	}
-	if rhs := m.U128Cost; rhs != nil {
-		tmpBytes := make([]byte, len(rhs))
-		copy(tmpBytes, rhs)
-		r.U128Cost = tmpBytes
-	}
-	if len(m.unknownFields) > 0 {
-		r.unknownFields = make([]byte, len(m.unknownFields))
-		copy(r.unknownFields, m.unknownFields)
-	}
-	return r
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_NotEnoughAllowance) CloneMessageVT() proto.Message {
-	return m.CloneVT()
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_DepositWithFunctionCall) CloneVT() *TxExecutionError_InvalidTxError_InvalidAccessKeyError_DepositWithFunctionCall {
-	if m == nil {
-		return (*TxExecutionError_InvalidTxError_InvalidAccessKeyError_DepositWithFunctionCall)(nil)
-	}
-	r := &TxExecutionError_InvalidTxError_InvalidAccessKeyError_DepositWithFunctionCall{}
-	if len(m.unknownFields) > 0 {
-		r.unknownFields = make([]byte, len(m.unknownFields))
-		copy(r.unknownFields, m.unknownFields)
-	}
-	return r
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_DepositWithFunctionCall) CloneMessageVT() proto.Message {
-	return m.CloneVT()
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError) CloneVT() *TxExecutionError_InvalidTxError_InvalidAccessKeyError {
-	if m == nil {
-		return (*TxExecutionError_InvalidTxError_InvalidAccessKeyError)(nil)
-	}
-	r := &TxExecutionError_InvalidTxError_InvalidAccessKeyError{}
-	if m.Variant != nil {
-		r.Variant = m.Variant.(interface {
-			CloneVT() isTxExecutionError_InvalidTxError_InvalidAccessKeyError_Variant
-		}).CloneVT()
-	}
-	if len(m.unknownFields) > 0 {
-		r.unknownFields = make([]byte, len(m.unknownFields))
-		copy(r.unknownFields, m.unknownFields)
-	}
-	return r
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError) CloneMessageVT() proto.Message {
-	return m.CloneVT()
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_AccessKeyNotFound_) CloneVT() isTxExecutionError_InvalidTxError_InvalidAccessKeyError_Variant {
-	if m == nil {
-		return (*TxExecutionError_InvalidTxError_InvalidAccessKeyError_AccessKeyNotFound_)(nil)
-	}
-	r := &TxExecutionError_InvalidTxError_InvalidAccessKeyError_AccessKeyNotFound_{
-		AccessKeyNotFound: m.AccessKeyNotFound.CloneVT(),
-	}
-	return r
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_ReceiverMismatch_) CloneVT() isTxExecutionError_InvalidTxError_InvalidAccessKeyError_Variant {
-	if m == nil {
-		return (*TxExecutionError_InvalidTxError_InvalidAccessKeyError_ReceiverMismatch_)(nil)
-	}
-	r := &TxExecutionError_InvalidTxError_InvalidAccessKeyError_ReceiverMismatch_{
-		ReceiverMismatch: m.ReceiverMismatch.CloneVT(),
-	}
-	return r
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_MethodNameMismatch_) CloneVT() isTxExecutionError_InvalidTxError_InvalidAccessKeyError_Variant {
-	if m == nil {
-		return (*TxExecutionError_InvalidTxError_InvalidAccessKeyError_MethodNameMismatch_)(nil)
-	}
-	r := &TxExecutionError_InvalidTxError_InvalidAccessKeyError_MethodNameMismatch_{
-		MethodNameMismatch: m.MethodNameMismatch.CloneVT(),
-	}
-	return r
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_RequiresFullAccess_) CloneVT() isTxExecutionError_InvalidTxError_InvalidAccessKeyError_Variant {
-	if m == nil {
-		return (*TxExecutionError_InvalidTxError_InvalidAccessKeyError_RequiresFullAccess_)(nil)
-	}
-	r := &TxExecutionError_InvalidTxError_InvalidAccessKeyError_RequiresFullAccess_{
-		RequiresFullAccess: m.RequiresFullAccess.CloneVT(),
-	}
-	return r
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_NotEnoughAllowance_) CloneVT() isTxExecutionError_InvalidTxError_InvalidAccessKeyError_Variant {
-	if m == nil {
-		return (*TxExecutionError_InvalidTxError_InvalidAccessKeyError_NotEnoughAllowance_)(nil)
-	}
-	r := &TxExecutionError_InvalidTxError_InvalidAccessKeyError_NotEnoughAllowance_{
-		NotEnoughAllowance: m.NotEnoughAllowance.CloneVT(),
-	}
-	return r
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_DepositWithFunctionCall_) CloneVT() isTxExecutionError_InvalidTxError_InvalidAccessKeyError_Variant {
-	if m == nil {
-		return (*TxExecutionError_InvalidTxError_InvalidAccessKeyError_DepositWithFunctionCall_)(nil)
-	}
-	r := &TxExecutionError_InvalidTxError_InvalidAccessKeyError_DepositWithFunctionCall_{
-		DepositWithFunctionCall: m.DepositWithFunctionCall.CloneVT(),
-	}
-	return r
 }
 
 func (m *TxExecutionError_InvalidTxError_InvalidSignerId) CloneVT() *TxExecutionError_InvalidTxError_InvalidSignerId {
@@ -1168,6 +1335,41 @@ func (m *TxExecutionError_InvalidTxError_ActionsValidation_FunctionCallZeroAttac
 	return m.CloneVT()
 }
 
+func (m *TxExecutionError_InvalidTxError_ActionsValidation_DelegateActionMustBeOnlyOne) CloneVT() *TxExecutionError_InvalidTxError_ActionsValidation_DelegateActionMustBeOnlyOne {
+	if m == nil {
+		return (*TxExecutionError_InvalidTxError_ActionsValidation_DelegateActionMustBeOnlyOne)(nil)
+	}
+	r := &TxExecutionError_InvalidTxError_ActionsValidation_DelegateActionMustBeOnlyOne{}
+	if len(m.unknownFields) > 0 {
+		r.unknownFields = make([]byte, len(m.unknownFields))
+		copy(r.unknownFields, m.unknownFields)
+	}
+	return r
+}
+
+func (m *TxExecutionError_InvalidTxError_ActionsValidation_DelegateActionMustBeOnlyOne) CloneMessageVT() proto.Message {
+	return m.CloneVT()
+}
+
+func (m *TxExecutionError_InvalidTxError_ActionsValidation_UnsupportedProtocolFeature) CloneVT() *TxExecutionError_InvalidTxError_ActionsValidation_UnsupportedProtocolFeature {
+	if m == nil {
+		return (*TxExecutionError_InvalidTxError_ActionsValidation_UnsupportedProtocolFeature)(nil)
+	}
+	r := &TxExecutionError_InvalidTxError_ActionsValidation_UnsupportedProtocolFeature{
+		ProtocolFeature: m.ProtocolFeature,
+		Version:         m.Version,
+	}
+	if len(m.unknownFields) > 0 {
+		r.unknownFields = make([]byte, len(m.unknownFields))
+		copy(r.unknownFields, m.unknownFields)
+	}
+	return r
+}
+
+func (m *TxExecutionError_InvalidTxError_ActionsValidation_UnsupportedProtocolFeature) CloneMessageVT() proto.Message {
+	return m.CloneVT()
+}
+
 func (m *TxExecutionError_InvalidTxError_ActionsValidation) CloneVT() *TxExecutionError_InvalidTxError_ActionsValidation {
 	if m == nil {
 		return (*TxExecutionError_InvalidTxError_ActionsValidation)(nil)
@@ -1309,6 +1511,26 @@ func (m *TxExecutionError_InvalidTxError_ActionsValidation_FunctionCallZeroAttac
 	return r
 }
 
+func (m *TxExecutionError_InvalidTxError_ActionsValidation_DelegateActionMustBeOnlyOne_) CloneVT() isTxExecutionError_InvalidTxError_ActionsValidation_Variant {
+	if m == nil {
+		return (*TxExecutionError_InvalidTxError_ActionsValidation_DelegateActionMustBeOnlyOne_)(nil)
+	}
+	r := &TxExecutionError_InvalidTxError_ActionsValidation_DelegateActionMustBeOnlyOne_{
+		DelegateActionMustBeOnlyOne: m.DelegateActionMustBeOnlyOne.CloneVT(),
+	}
+	return r
+}
+
+func (m *TxExecutionError_InvalidTxError_ActionsValidation_UnsupportedProtocolFeature_) CloneVT() isTxExecutionError_InvalidTxError_ActionsValidation_Variant {
+	if m == nil {
+		return (*TxExecutionError_InvalidTxError_ActionsValidation_UnsupportedProtocolFeature_)(nil)
+	}
+	r := &TxExecutionError_InvalidTxError_ActionsValidation_UnsupportedProtocolFeature_{
+		UnsupportedProtocolFeature: m.UnsupportedProtocolFeature.CloneVT(),
+	}
+	return r
+}
+
 func (m *TxExecutionError_InvalidTxError_TransactionSizeExceeded) CloneVT() *TxExecutionError_InvalidTxError_TransactionSizeExceeded {
 	if m == nil {
 		return (*TxExecutionError_InvalidTxError_TransactionSizeExceeded)(nil)
@@ -1349,11 +1571,11 @@ func (m *TxExecutionError_InvalidTxError) CloneMessageVT() proto.Message {
 	return m.CloneVT()
 }
 
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_) CloneVT() isTxExecutionError_InvalidTxError_Variant {
+func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError) CloneVT() isTxExecutionError_InvalidTxError_Variant {
 	if m == nil {
-		return (*TxExecutionError_InvalidTxError_InvalidAccessKeyError_)(nil)
+		return (*TxExecutionError_InvalidTxError_InvalidAccessKeyError)(nil)
 	}
-	r := &TxExecutionError_InvalidTxError_InvalidAccessKeyError_{
+	r := &TxExecutionError_InvalidTxError_InvalidAccessKeyError{
 		InvalidAccessKeyError: m.InvalidAccessKeyError.CloneVT(),
 	}
 	return r
@@ -1528,6 +1750,307 @@ func (m *TxExecutionError_InvalidTxError_) CloneVT() isTxExecutionError_Variant 
 		InvalidTxError: m.InvalidTxError.CloneVT(),
 	}
 	return r
+}
+
+func (this *InvalidAccessKeyError_AccessKeyNotFound) EqualVT(that *InvalidAccessKeyError_AccessKeyNotFound) bool {
+	if this == that {
+		return true
+	} else if this == nil || that == nil {
+		return false
+	}
+	if this.AccountId != that.AccountId {
+		return false
+	}
+	if !this.PublicKey.EqualVT(that.PublicKey) {
+		return false
+	}
+	return string(this.unknownFields) == string(that.unknownFields)
+}
+
+func (this *InvalidAccessKeyError_AccessKeyNotFound) EqualMessageVT(thatMsg proto.Message) bool {
+	that, ok := thatMsg.(*InvalidAccessKeyError_AccessKeyNotFound)
+	if !ok {
+		return false
+	}
+	return this.EqualVT(that)
+}
+func (this *InvalidAccessKeyError_ReceiverMismatch) EqualVT(that *InvalidAccessKeyError_ReceiverMismatch) bool {
+	if this == that {
+		return true
+	} else if this == nil || that == nil {
+		return false
+	}
+	if this.TxReceiver != that.TxReceiver {
+		return false
+	}
+	if this.AkReceiver != that.AkReceiver {
+		return false
+	}
+	return string(this.unknownFields) == string(that.unknownFields)
+}
+
+func (this *InvalidAccessKeyError_ReceiverMismatch) EqualMessageVT(thatMsg proto.Message) bool {
+	that, ok := thatMsg.(*InvalidAccessKeyError_ReceiverMismatch)
+	if !ok {
+		return false
+	}
+	return this.EqualVT(that)
+}
+func (this *InvalidAccessKeyError_MethodNameMismatch) EqualVT(that *InvalidAccessKeyError_MethodNameMismatch) bool {
+	if this == that {
+		return true
+	} else if this == nil || that == nil {
+		return false
+	}
+	if this.MethodName != that.MethodName {
+		return false
+	}
+	return string(this.unknownFields) == string(that.unknownFields)
+}
+
+func (this *InvalidAccessKeyError_MethodNameMismatch) EqualMessageVT(thatMsg proto.Message) bool {
+	that, ok := thatMsg.(*InvalidAccessKeyError_MethodNameMismatch)
+	if !ok {
+		return false
+	}
+	return this.EqualVT(that)
+}
+func (this *InvalidAccessKeyError_RequiresFullAccess) EqualVT(that *InvalidAccessKeyError_RequiresFullAccess) bool {
+	if this == that {
+		return true
+	} else if this == nil || that == nil {
+		return false
+	}
+	return string(this.unknownFields) == string(that.unknownFields)
+}
+
+func (this *InvalidAccessKeyError_RequiresFullAccess) EqualMessageVT(thatMsg proto.Message) bool {
+	that, ok := thatMsg.(*InvalidAccessKeyError_RequiresFullAccess)
+	if !ok {
+		return false
+	}
+	return this.EqualVT(that)
+}
+func (this *InvalidAccessKeyError_NotEnoughAllowance) EqualVT(that *InvalidAccessKeyError_NotEnoughAllowance) bool {
+	if this == that {
+		return true
+	} else if this == nil || that == nil {
+		return false
+	}
+	if this.AccountId != that.AccountId {
+		return false
+	}
+	if !this.PublicKey.EqualVT(that.PublicKey) {
+		return false
+	}
+	if string(this.U128Allowance) != string(that.U128Allowance) {
+		return false
+	}
+	if string(this.U128Cost) != string(that.U128Cost) {
+		return false
+	}
+	return string(this.unknownFields) == string(that.unknownFields)
+}
+
+func (this *InvalidAccessKeyError_NotEnoughAllowance) EqualMessageVT(thatMsg proto.Message) bool {
+	that, ok := thatMsg.(*InvalidAccessKeyError_NotEnoughAllowance)
+	if !ok {
+		return false
+	}
+	return this.EqualVT(that)
+}
+func (this *InvalidAccessKeyError_DepositWithFunctionCall) EqualVT(that *InvalidAccessKeyError_DepositWithFunctionCall) bool {
+	if this == that {
+		return true
+	} else if this == nil || that == nil {
+		return false
+	}
+	return string(this.unknownFields) == string(that.unknownFields)
+}
+
+func (this *InvalidAccessKeyError_DepositWithFunctionCall) EqualMessageVT(thatMsg proto.Message) bool {
+	that, ok := thatMsg.(*InvalidAccessKeyError_DepositWithFunctionCall)
+	if !ok {
+		return false
+	}
+	return this.EqualVT(that)
+}
+func (this *InvalidAccessKeyError) EqualVT(that *InvalidAccessKeyError) bool {
+	if this == that {
+		return true
+	} else if this == nil || that == nil {
+		return false
+	}
+	if this.Variant == nil && that.Variant != nil {
+		return false
+	} else if this.Variant != nil {
+		if that.Variant == nil {
+			return false
+		}
+		if !this.Variant.(interface {
+			EqualVT(isInvalidAccessKeyError_Variant) bool
+		}).EqualVT(that.Variant) {
+			return false
+		}
+	}
+	return string(this.unknownFields) == string(that.unknownFields)
+}
+
+func (this *InvalidAccessKeyError) EqualMessageVT(thatMsg proto.Message) bool {
+	that, ok := thatMsg.(*InvalidAccessKeyError)
+	if !ok {
+		return false
+	}
+	return this.EqualVT(that)
+}
+func (this *InvalidAccessKeyError_AccessKeyNotFound_) EqualVT(thatIface isInvalidAccessKeyError_Variant) bool {
+	that, ok := thatIface.(*InvalidAccessKeyError_AccessKeyNotFound_)
+	if !ok {
+		return false
+	}
+	if this == that {
+		return true
+	}
+	if this == nil && that != nil || this != nil && that == nil {
+		return false
+	}
+	if p, q := this.AccessKeyNotFound, that.AccessKeyNotFound; p != q {
+		if p == nil {
+			p = &InvalidAccessKeyError_AccessKeyNotFound{}
+		}
+		if q == nil {
+			q = &InvalidAccessKeyError_AccessKeyNotFound{}
+		}
+		if !p.EqualVT(q) {
+			return false
+		}
+	}
+	return true
+}
+
+func (this *InvalidAccessKeyError_ReceiverMismatch_) EqualVT(thatIface isInvalidAccessKeyError_Variant) bool {
+	that, ok := thatIface.(*InvalidAccessKeyError_ReceiverMismatch_)
+	if !ok {
+		return false
+	}
+	if this == that {
+		return true
+	}
+	if this == nil && that != nil || this != nil && that == nil {
+		return false
+	}
+	if p, q := this.ReceiverMismatch, that.ReceiverMismatch; p != q {
+		if p == nil {
+			p = &InvalidAccessKeyError_ReceiverMismatch{}
+		}
+		if q == nil {
+			q = &InvalidAccessKeyError_ReceiverMismatch{}
+		}
+		if !p.EqualVT(q) {
+			return false
+		}
+	}
+	return true
+}
+
+func (this *InvalidAccessKeyError_MethodNameMismatch_) EqualVT(thatIface isInvalidAccessKeyError_Variant) bool {
+	that, ok := thatIface.(*InvalidAccessKeyError_MethodNameMismatch_)
+	if !ok {
+		return false
+	}
+	if this == that {
+		return true
+	}
+	if this == nil && that != nil || this != nil && that == nil {
+		return false
+	}
+	if p, q := this.MethodNameMismatch, that.MethodNameMismatch; p != q {
+		if p == nil {
+			p = &InvalidAccessKeyError_MethodNameMismatch{}
+		}
+		if q == nil {
+			q = &InvalidAccessKeyError_MethodNameMismatch{}
+		}
+		if !p.EqualVT(q) {
+			return false
+		}
+	}
+	return true
+}
+
+func (this *InvalidAccessKeyError_RequiresFullAccess_) EqualVT(thatIface isInvalidAccessKeyError_Variant) bool {
+	that, ok := thatIface.(*InvalidAccessKeyError_RequiresFullAccess_)
+	if !ok {
+		return false
+	}
+	if this == that {
+		return true
+	}
+	if this == nil && that != nil || this != nil && that == nil {
+		return false
+	}
+	if p, q := this.RequiresFullAccess, that.RequiresFullAccess; p != q {
+		if p == nil {
+			p = &InvalidAccessKeyError_RequiresFullAccess{}
+		}
+		if q == nil {
+			q = &InvalidAccessKeyError_RequiresFullAccess{}
+		}
+		if !p.EqualVT(q) {
+			return false
+		}
+	}
+	return true
+}
+
+func (this *InvalidAccessKeyError_NotEnoughAllowance_) EqualVT(thatIface isInvalidAccessKeyError_Variant) bool {
+	that, ok := thatIface.(*InvalidAccessKeyError_NotEnoughAllowance_)
+	if !ok {
+		return false
+	}
+	if this == that {
+		return true
+	}
+	if this == nil && that != nil || this != nil && that == nil {
+		return false
+	}
+	if p, q := this.NotEnoughAllowance, that.NotEnoughAllowance; p != q {
+		if p == nil {
+			p = &InvalidAccessKeyError_NotEnoughAllowance{}
+		}
+		if q == nil {
+			q = &InvalidAccessKeyError_NotEnoughAllowance{}
+		}
+		if !p.EqualVT(q) {
+			return false
+		}
+	}
+	return true
+}
+
+func (this *InvalidAccessKeyError_DepositWithFunctionCall_) EqualVT(thatIface isInvalidAccessKeyError_Variant) bool {
+	that, ok := thatIface.(*InvalidAccessKeyError_DepositWithFunctionCall_)
+	if !ok {
+		return false
+	}
+	if this == that {
+		return true
+	}
+	if this == nil && that != nil || this != nil && that == nil {
+		return false
+	}
+	if p, q := this.DepositWithFunctionCall, that.DepositWithFunctionCall; p != q {
+		if p == nil {
+			p = &InvalidAccessKeyError_DepositWithFunctionCall{}
+		}
+		if q == nil {
+			q = &InvalidAccessKeyError_DepositWithFunctionCall{}
+		}
+		if !p.EqualVT(q) {
+			return false
+		}
+	}
+	return true
 }
 
 func (this *TxExecutionError_ActionError_ActionErrorKind_AccountAlreadyExists) EqualVT(that *TxExecutionError_ActionError_ActionErrorKind_AccountAlreadyExists) bool {
@@ -1865,6 +2388,123 @@ func (this *TxExecutionError_ActionError_ActionErrorKind_DeleteAccountWithLargeS
 
 func (this *TxExecutionError_ActionError_ActionErrorKind_DeleteAccountWithLargeState) EqualMessageVT(thatMsg proto.Message) bool {
 	that, ok := thatMsg.(*TxExecutionError_ActionError_ActionErrorKind_DeleteAccountWithLargeState)
+	if !ok {
+		return false
+	}
+	return this.EqualVT(that)
+}
+func (this *TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidSignature) EqualVT(that *TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidSignature) bool {
+	if this == that {
+		return true
+	} else if this == nil || that == nil {
+		return false
+	}
+	return string(this.unknownFields) == string(that.unknownFields)
+}
+
+func (this *TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidSignature) EqualMessageVT(thatMsg proto.Message) bool {
+	that, ok := thatMsg.(*TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidSignature)
+	if !ok {
+		return false
+	}
+	return this.EqualVT(that)
+}
+func (this *TxExecutionError_ActionError_ActionErrorKind_DelegateActionSenderDoesNotMatchTxReceiver) EqualVT(that *TxExecutionError_ActionError_ActionErrorKind_DelegateActionSenderDoesNotMatchTxReceiver) bool {
+	if this == that {
+		return true
+	} else if this == nil || that == nil {
+		return false
+	}
+	if this.SenderId != that.SenderId {
+		return false
+	}
+	if this.ReceiverId != that.ReceiverId {
+		return false
+	}
+	return string(this.unknownFields) == string(that.unknownFields)
+}
+
+func (this *TxExecutionError_ActionError_ActionErrorKind_DelegateActionSenderDoesNotMatchTxReceiver) EqualMessageVT(thatMsg proto.Message) bool {
+	that, ok := thatMsg.(*TxExecutionError_ActionError_ActionErrorKind_DelegateActionSenderDoesNotMatchTxReceiver)
+	if !ok {
+		return false
+	}
+	return this.EqualVT(that)
+}
+func (this *TxExecutionError_ActionError_ActionErrorKind_DelegateActionExpired) EqualVT(that *TxExecutionError_ActionError_ActionErrorKind_DelegateActionExpired) bool {
+	if this == that {
+		return true
+	} else if this == nil || that == nil {
+		return false
+	}
+	return string(this.unknownFields) == string(that.unknownFields)
+}
+
+func (this *TxExecutionError_ActionError_ActionErrorKind_DelegateActionExpired) EqualMessageVT(thatMsg proto.Message) bool {
+	that, ok := thatMsg.(*TxExecutionError_ActionError_ActionErrorKind_DelegateActionExpired)
+	if !ok {
+		return false
+	}
+	return this.EqualVT(that)
+}
+func (this *TxExecutionError_ActionError_ActionErrorKind_DelegateActionAccessKeyError) EqualVT(that *TxExecutionError_ActionError_ActionErrorKind_DelegateActionAccessKeyError) bool {
+	if this == that {
+		return true
+	} else if this == nil || that == nil {
+		return false
+	}
+	if !this.Error.EqualVT(that.Error) {
+		return false
+	}
+	return string(this.unknownFields) == string(that.unknownFields)
+}
+
+func (this *TxExecutionError_ActionError_ActionErrorKind_DelegateActionAccessKeyError) EqualMessageVT(thatMsg proto.Message) bool {
+	that, ok := thatMsg.(*TxExecutionError_ActionError_ActionErrorKind_DelegateActionAccessKeyError)
+	if !ok {
+		return false
+	}
+	return this.EqualVT(that)
+}
+func (this *TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidNonce) EqualVT(that *TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidNonce) bool {
+	if this == that {
+		return true
+	} else if this == nil || that == nil {
+		return false
+	}
+	if this.DelegateNonce != that.DelegateNonce {
+		return false
+	}
+	if this.AkNonce != that.AkNonce {
+		return false
+	}
+	return string(this.unknownFields) == string(that.unknownFields)
+}
+
+func (this *TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidNonce) EqualMessageVT(thatMsg proto.Message) bool {
+	that, ok := thatMsg.(*TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidNonce)
+	if !ok {
+		return false
+	}
+	return this.EqualVT(that)
+}
+func (this *TxExecutionError_ActionError_ActionErrorKind_DelegateActionNonceTooLarge) EqualVT(that *TxExecutionError_ActionError_ActionErrorKind_DelegateActionNonceTooLarge) bool {
+	if this == that {
+		return true
+	} else if this == nil || that == nil {
+		return false
+	}
+	if this.DelegateNonce != that.DelegateNonce {
+		return false
+	}
+	if this.UpperBound != that.UpperBound {
+		return false
+	}
+	return string(this.unknownFields) == string(that.unknownFields)
+}
+
+func (this *TxExecutionError_ActionError_ActionErrorKind_DelegateActionNonceTooLarge) EqualMessageVT(thatMsg proto.Message) bool {
+	that, ok := thatMsg.(*TxExecutionError_ActionError_ActionErrorKind_DelegateActionNonceTooLarge)
 	if !ok {
 		return false
 	}
@@ -2298,6 +2938,156 @@ func (this *TxExecutionError_ActionError_ActionErrorKind_DeleteAccountWithLargeS
 	return true
 }
 
+func (this *TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidSignature_) EqualVT(thatIface isTxExecutionError_ActionError_ActionErrorKind_Variant) bool {
+	that, ok := thatIface.(*TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidSignature_)
+	if !ok {
+		return false
+	}
+	if this == that {
+		return true
+	}
+	if this == nil && that != nil || this != nil && that == nil {
+		return false
+	}
+	if p, q := this.DelegateActionInvalidSignature, that.DelegateActionInvalidSignature; p != q {
+		if p == nil {
+			p = &TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidSignature{}
+		}
+		if q == nil {
+			q = &TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidSignature{}
+		}
+		if !p.EqualVT(q) {
+			return false
+		}
+	}
+	return true
+}
+
+func (this *TxExecutionError_ActionError_ActionErrorKind_DelegateActionSenderDoesNotMatchTxReceiver_) EqualVT(thatIface isTxExecutionError_ActionError_ActionErrorKind_Variant) bool {
+	that, ok := thatIface.(*TxExecutionError_ActionError_ActionErrorKind_DelegateActionSenderDoesNotMatchTxReceiver_)
+	if !ok {
+		return false
+	}
+	if this == that {
+		return true
+	}
+	if this == nil && that != nil || this != nil && that == nil {
+		return false
+	}
+	if p, q := this.DelegateActionSenderDoesNotMatchTxReceiver, that.DelegateActionSenderDoesNotMatchTxReceiver; p != q {
+		if p == nil {
+			p = &TxExecutionError_ActionError_ActionErrorKind_DelegateActionSenderDoesNotMatchTxReceiver{}
+		}
+		if q == nil {
+			q = &TxExecutionError_ActionError_ActionErrorKind_DelegateActionSenderDoesNotMatchTxReceiver{}
+		}
+		if !p.EqualVT(q) {
+			return false
+		}
+	}
+	return true
+}
+
+func (this *TxExecutionError_ActionError_ActionErrorKind_DelegateActionExpired_) EqualVT(thatIface isTxExecutionError_ActionError_ActionErrorKind_Variant) bool {
+	that, ok := thatIface.(*TxExecutionError_ActionError_ActionErrorKind_DelegateActionExpired_)
+	if !ok {
+		return false
+	}
+	if this == that {
+		return true
+	}
+	if this == nil && that != nil || this != nil && that == nil {
+		return false
+	}
+	if p, q := this.DelegateActionExpired, that.DelegateActionExpired; p != q {
+		if p == nil {
+			p = &TxExecutionError_ActionError_ActionErrorKind_DelegateActionExpired{}
+		}
+		if q == nil {
+			q = &TxExecutionError_ActionError_ActionErrorKind_DelegateActionExpired{}
+		}
+		if !p.EqualVT(q) {
+			return false
+		}
+	}
+	return true
+}
+
+func (this *TxExecutionError_ActionError_ActionErrorKind_DelegateActionAccessKeyError_) EqualVT(thatIface isTxExecutionError_ActionError_ActionErrorKind_Variant) bool {
+	that, ok := thatIface.(*TxExecutionError_ActionError_ActionErrorKind_DelegateActionAccessKeyError_)
+	if !ok {
+		return false
+	}
+	if this == that {
+		return true
+	}
+	if this == nil && that != nil || this != nil && that == nil {
+		return false
+	}
+	if p, q := this.DelegateActionAccessKeyError, that.DelegateActionAccessKeyError; p != q {
+		if p == nil {
+			p = &TxExecutionError_ActionError_ActionErrorKind_DelegateActionAccessKeyError{}
+		}
+		if q == nil {
+			q = &TxExecutionError_ActionError_ActionErrorKind_DelegateActionAccessKeyError{}
+		}
+		if !p.EqualVT(q) {
+			return false
+		}
+	}
+	return true
+}
+
+func (this *TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidNonce_) EqualVT(thatIface isTxExecutionError_ActionError_ActionErrorKind_Variant) bool {
+	that, ok := thatIface.(*TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidNonce_)
+	if !ok {
+		return false
+	}
+	if this == that {
+		return true
+	}
+	if this == nil && that != nil || this != nil && that == nil {
+		return false
+	}
+	if p, q := this.DelegateActionInvalidNonce, that.DelegateActionInvalidNonce; p != q {
+		if p == nil {
+			p = &TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidNonce{}
+		}
+		if q == nil {
+			q = &TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidNonce{}
+		}
+		if !p.EqualVT(q) {
+			return false
+		}
+	}
+	return true
+}
+
+func (this *TxExecutionError_ActionError_ActionErrorKind_DelegateActionNonceTooLarge_) EqualVT(thatIface isTxExecutionError_ActionError_ActionErrorKind_Variant) bool {
+	that, ok := thatIface.(*TxExecutionError_ActionError_ActionErrorKind_DelegateActionNonceTooLarge_)
+	if !ok {
+		return false
+	}
+	if this == that {
+		return true
+	}
+	if this == nil && that != nil || this != nil && that == nil {
+		return false
+	}
+	if p, q := this.DelegateActionNonceTooLarge, that.DelegateActionNonceTooLarge; p != q {
+		if p == nil {
+			p = &TxExecutionError_ActionError_ActionErrorKind_DelegateActionNonceTooLarge{}
+		}
+		if q == nil {
+			q = &TxExecutionError_ActionError_ActionErrorKind_DelegateActionNonceTooLarge{}
+		}
+		if !p.EqualVT(q) {
+			return false
+		}
+	}
+	return true
+}
+
 func (this *TxExecutionError_ActionError) EqualVT(that *TxExecutionError_ActionError) bool {
 	if this == that {
 		return true
@@ -2320,307 +3110,6 @@ func (this *TxExecutionError_ActionError) EqualMessageVT(thatMsg proto.Message) 
 	}
 	return this.EqualVT(that)
 }
-func (this *TxExecutionError_InvalidTxError_InvalidAccessKeyError_AccessKeyNotFound) EqualVT(that *TxExecutionError_InvalidTxError_InvalidAccessKeyError_AccessKeyNotFound) bool {
-	if this == that {
-		return true
-	} else if this == nil || that == nil {
-		return false
-	}
-	if this.AccountId != that.AccountId {
-		return false
-	}
-	if !this.PublicKey.EqualVT(that.PublicKey) {
-		return false
-	}
-	return string(this.unknownFields) == string(that.unknownFields)
-}
-
-func (this *TxExecutionError_InvalidTxError_InvalidAccessKeyError_AccessKeyNotFound) EqualMessageVT(thatMsg proto.Message) bool {
-	that, ok := thatMsg.(*TxExecutionError_InvalidTxError_InvalidAccessKeyError_AccessKeyNotFound)
-	if !ok {
-		return false
-	}
-	return this.EqualVT(that)
-}
-func (this *TxExecutionError_InvalidTxError_InvalidAccessKeyError_ReceiverMismatch) EqualVT(that *TxExecutionError_InvalidTxError_InvalidAccessKeyError_ReceiverMismatch) bool {
-	if this == that {
-		return true
-	} else if this == nil || that == nil {
-		return false
-	}
-	if this.TxReceiver != that.TxReceiver {
-		return false
-	}
-	if this.AkReceiver != that.AkReceiver {
-		return false
-	}
-	return string(this.unknownFields) == string(that.unknownFields)
-}
-
-func (this *TxExecutionError_InvalidTxError_InvalidAccessKeyError_ReceiverMismatch) EqualMessageVT(thatMsg proto.Message) bool {
-	that, ok := thatMsg.(*TxExecutionError_InvalidTxError_InvalidAccessKeyError_ReceiverMismatch)
-	if !ok {
-		return false
-	}
-	return this.EqualVT(that)
-}
-func (this *TxExecutionError_InvalidTxError_InvalidAccessKeyError_MethodNameMismatch) EqualVT(that *TxExecutionError_InvalidTxError_InvalidAccessKeyError_MethodNameMismatch) bool {
-	if this == that {
-		return true
-	} else if this == nil || that == nil {
-		return false
-	}
-	if this.MethodName != that.MethodName {
-		return false
-	}
-	return string(this.unknownFields) == string(that.unknownFields)
-}
-
-func (this *TxExecutionError_InvalidTxError_InvalidAccessKeyError_MethodNameMismatch) EqualMessageVT(thatMsg proto.Message) bool {
-	that, ok := thatMsg.(*TxExecutionError_InvalidTxError_InvalidAccessKeyError_MethodNameMismatch)
-	if !ok {
-		return false
-	}
-	return this.EqualVT(that)
-}
-func (this *TxExecutionError_InvalidTxError_InvalidAccessKeyError_RequiresFullAccess) EqualVT(that *TxExecutionError_InvalidTxError_InvalidAccessKeyError_RequiresFullAccess) bool {
-	if this == that {
-		return true
-	} else if this == nil || that == nil {
-		return false
-	}
-	return string(this.unknownFields) == string(that.unknownFields)
-}
-
-func (this *TxExecutionError_InvalidTxError_InvalidAccessKeyError_RequiresFullAccess) EqualMessageVT(thatMsg proto.Message) bool {
-	that, ok := thatMsg.(*TxExecutionError_InvalidTxError_InvalidAccessKeyError_RequiresFullAccess)
-	if !ok {
-		return false
-	}
-	return this.EqualVT(that)
-}
-func (this *TxExecutionError_InvalidTxError_InvalidAccessKeyError_NotEnoughAllowance) EqualVT(that *TxExecutionError_InvalidTxError_InvalidAccessKeyError_NotEnoughAllowance) bool {
-	if this == that {
-		return true
-	} else if this == nil || that == nil {
-		return false
-	}
-	if this.AccountId != that.AccountId {
-		return false
-	}
-	if !this.PublicKey.EqualVT(that.PublicKey) {
-		return false
-	}
-	if string(this.U128Allowance) != string(that.U128Allowance) {
-		return false
-	}
-	if string(this.U128Cost) != string(that.U128Cost) {
-		return false
-	}
-	return string(this.unknownFields) == string(that.unknownFields)
-}
-
-func (this *TxExecutionError_InvalidTxError_InvalidAccessKeyError_NotEnoughAllowance) EqualMessageVT(thatMsg proto.Message) bool {
-	that, ok := thatMsg.(*TxExecutionError_InvalidTxError_InvalidAccessKeyError_NotEnoughAllowance)
-	if !ok {
-		return false
-	}
-	return this.EqualVT(that)
-}
-func (this *TxExecutionError_InvalidTxError_InvalidAccessKeyError_DepositWithFunctionCall) EqualVT(that *TxExecutionError_InvalidTxError_InvalidAccessKeyError_DepositWithFunctionCall) bool {
-	if this == that {
-		return true
-	} else if this == nil || that == nil {
-		return false
-	}
-	return string(this.unknownFields) == string(that.unknownFields)
-}
-
-func (this *TxExecutionError_InvalidTxError_InvalidAccessKeyError_DepositWithFunctionCall) EqualMessageVT(thatMsg proto.Message) bool {
-	that, ok := thatMsg.(*TxExecutionError_InvalidTxError_InvalidAccessKeyError_DepositWithFunctionCall)
-	if !ok {
-		return false
-	}
-	return this.EqualVT(that)
-}
-func (this *TxExecutionError_InvalidTxError_InvalidAccessKeyError) EqualVT(that *TxExecutionError_InvalidTxError_InvalidAccessKeyError) bool {
-	if this == that {
-		return true
-	} else if this == nil || that == nil {
-		return false
-	}
-	if this.Variant == nil && that.Variant != nil {
-		return false
-	} else if this.Variant != nil {
-		if that.Variant == nil {
-			return false
-		}
-		if !this.Variant.(interface {
-			EqualVT(isTxExecutionError_InvalidTxError_InvalidAccessKeyError_Variant) bool
-		}).EqualVT(that.Variant) {
-			return false
-		}
-	}
-	return string(this.unknownFields) == string(that.unknownFields)
-}
-
-func (this *TxExecutionError_InvalidTxError_InvalidAccessKeyError) EqualMessageVT(thatMsg proto.Message) bool {
-	that, ok := thatMsg.(*TxExecutionError_InvalidTxError_InvalidAccessKeyError)
-	if !ok {
-		return false
-	}
-	return this.EqualVT(that)
-}
-func (this *TxExecutionError_InvalidTxError_InvalidAccessKeyError_AccessKeyNotFound_) EqualVT(thatIface isTxExecutionError_InvalidTxError_InvalidAccessKeyError_Variant) bool {
-	that, ok := thatIface.(*TxExecutionError_InvalidTxError_InvalidAccessKeyError_AccessKeyNotFound_)
-	if !ok {
-		return false
-	}
-	if this == that {
-		return true
-	}
-	if this == nil && that != nil || this != nil && that == nil {
-		return false
-	}
-	if p, q := this.AccessKeyNotFound, that.AccessKeyNotFound; p != q {
-		if p == nil {
-			p = &TxExecutionError_InvalidTxError_InvalidAccessKeyError_AccessKeyNotFound{}
-		}
-		if q == nil {
-			q = &TxExecutionError_InvalidTxError_InvalidAccessKeyError_AccessKeyNotFound{}
-		}
-		if !p.EqualVT(q) {
-			return false
-		}
-	}
-	return true
-}
-
-func (this *TxExecutionError_InvalidTxError_InvalidAccessKeyError_ReceiverMismatch_) EqualVT(thatIface isTxExecutionError_InvalidTxError_InvalidAccessKeyError_Variant) bool {
-	that, ok := thatIface.(*TxExecutionError_InvalidTxError_InvalidAccessKeyError_ReceiverMismatch_)
-	if !ok {
-		return false
-	}
-	if this == that {
-		return true
-	}
-	if this == nil && that != nil || this != nil && that == nil {
-		return false
-	}
-	if p, q := this.ReceiverMismatch, that.ReceiverMismatch; p != q {
-		if p == nil {
-			p = &TxExecutionError_InvalidTxError_InvalidAccessKeyError_ReceiverMismatch{}
-		}
-		if q == nil {
-			q = &TxExecutionError_InvalidTxError_InvalidAccessKeyError_ReceiverMismatch{}
-		}
-		if !p.EqualVT(q) {
-			return false
-		}
-	}
-	return true
-}
-
-func (this *TxExecutionError_InvalidTxError_InvalidAccessKeyError_MethodNameMismatch_) EqualVT(thatIface isTxExecutionError_InvalidTxError_InvalidAccessKeyError_Variant) bool {
-	that, ok := thatIface.(*TxExecutionError_InvalidTxError_InvalidAccessKeyError_MethodNameMismatch_)
-	if !ok {
-		return false
-	}
-	if this == that {
-		return true
-	}
-	if this == nil && that != nil || this != nil && that == nil {
-		return false
-	}
-	if p, q := this.MethodNameMismatch, that.MethodNameMismatch; p != q {
-		if p == nil {
-			p = &TxExecutionError_InvalidTxError_InvalidAccessKeyError_MethodNameMismatch{}
-		}
-		if q == nil {
-			q = &TxExecutionError_InvalidTxError_InvalidAccessKeyError_MethodNameMismatch{}
-		}
-		if !p.EqualVT(q) {
-			return false
-		}
-	}
-	return true
-}
-
-func (this *TxExecutionError_InvalidTxError_InvalidAccessKeyError_RequiresFullAccess_) EqualVT(thatIface isTxExecutionError_InvalidTxError_InvalidAccessKeyError_Variant) bool {
-	that, ok := thatIface.(*TxExecutionError_InvalidTxError_InvalidAccessKeyError_RequiresFullAccess_)
-	if !ok {
-		return false
-	}
-	if this == that {
-		return true
-	}
-	if this == nil && that != nil || this != nil && that == nil {
-		return false
-	}
-	if p, q := this.RequiresFullAccess, that.RequiresFullAccess; p != q {
-		if p == nil {
-			p = &TxExecutionError_InvalidTxError_InvalidAccessKeyError_RequiresFullAccess{}
-		}
-		if q == nil {
-			q = &TxExecutionError_InvalidTxError_InvalidAccessKeyError_RequiresFullAccess{}
-		}
-		if !p.EqualVT(q) {
-			return false
-		}
-	}
-	return true
-}
-
-func (this *TxExecutionError_InvalidTxError_InvalidAccessKeyError_NotEnoughAllowance_) EqualVT(thatIface isTxExecutionError_InvalidTxError_InvalidAccessKeyError_Variant) bool {
-	that, ok := thatIface.(*TxExecutionError_InvalidTxError_InvalidAccessKeyError_NotEnoughAllowance_)
-	if !ok {
-		return false
-	}
-	if this == that {
-		return true
-	}
-	if this == nil && that != nil || this != nil && that == nil {
-		return false
-	}
-	if p, q := this.NotEnoughAllowance, that.NotEnoughAllowance; p != q {
-		if p == nil {
-			p = &TxExecutionError_InvalidTxError_InvalidAccessKeyError_NotEnoughAllowance{}
-		}
-		if q == nil {
-			q = &TxExecutionError_InvalidTxError_InvalidAccessKeyError_NotEnoughAllowance{}
-		}
-		if !p.EqualVT(q) {
-			return false
-		}
-	}
-	return true
-}
-
-func (this *TxExecutionError_InvalidTxError_InvalidAccessKeyError_DepositWithFunctionCall_) EqualVT(thatIface isTxExecutionError_InvalidTxError_InvalidAccessKeyError_Variant) bool {
-	that, ok := thatIface.(*TxExecutionError_InvalidTxError_InvalidAccessKeyError_DepositWithFunctionCall_)
-	if !ok {
-		return false
-	}
-	if this == that {
-		return true
-	}
-	if this == nil && that != nil || this != nil && that == nil {
-		return false
-	}
-	if p, q := this.DepositWithFunctionCall, that.DepositWithFunctionCall; p != q {
-		if p == nil {
-			p = &TxExecutionError_InvalidTxError_InvalidAccessKeyError_DepositWithFunctionCall{}
-		}
-		if q == nil {
-			q = &TxExecutionError_InvalidTxError_InvalidAccessKeyError_DepositWithFunctionCall{}
-		}
-		if !p.EqualVT(q) {
-			return false
-		}
-	}
-	return true
-}
-
 func (this *TxExecutionError_InvalidTxError_InvalidSignerId) EqualVT(that *TxExecutionError_InvalidTxError_InvalidSignerId) bool {
 	if this == that {
 		return true
@@ -3073,6 +3562,44 @@ func (this *TxExecutionError_InvalidTxError_ActionsValidation_FunctionCallZeroAt
 	}
 	return this.EqualVT(that)
 }
+func (this *TxExecutionError_InvalidTxError_ActionsValidation_DelegateActionMustBeOnlyOne) EqualVT(that *TxExecutionError_InvalidTxError_ActionsValidation_DelegateActionMustBeOnlyOne) bool {
+	if this == that {
+		return true
+	} else if this == nil || that == nil {
+		return false
+	}
+	return string(this.unknownFields) == string(that.unknownFields)
+}
+
+func (this *TxExecutionError_InvalidTxError_ActionsValidation_DelegateActionMustBeOnlyOne) EqualMessageVT(thatMsg proto.Message) bool {
+	that, ok := thatMsg.(*TxExecutionError_InvalidTxError_ActionsValidation_DelegateActionMustBeOnlyOne)
+	if !ok {
+		return false
+	}
+	return this.EqualVT(that)
+}
+func (this *TxExecutionError_InvalidTxError_ActionsValidation_UnsupportedProtocolFeature) EqualVT(that *TxExecutionError_InvalidTxError_ActionsValidation_UnsupportedProtocolFeature) bool {
+	if this == that {
+		return true
+	} else if this == nil || that == nil {
+		return false
+	}
+	if this.ProtocolFeature != that.ProtocolFeature {
+		return false
+	}
+	if this.Version != that.Version {
+		return false
+	}
+	return string(this.unknownFields) == string(that.unknownFields)
+}
+
+func (this *TxExecutionError_InvalidTxError_ActionsValidation_UnsupportedProtocolFeature) EqualMessageVT(thatMsg proto.Message) bool {
+	that, ok := thatMsg.(*TxExecutionError_InvalidTxError_ActionsValidation_UnsupportedProtocolFeature)
+	if !ok {
+		return false
+	}
+	return this.EqualVT(that)
+}
 func (this *TxExecutionError_InvalidTxError_ActionsValidation) EqualVT(that *TxExecutionError_InvalidTxError_ActionsValidation) bool {
 	if this == that {
 		return true
@@ -3401,6 +3928,56 @@ func (this *TxExecutionError_InvalidTxError_ActionsValidation_FunctionCallZeroAt
 	return true
 }
 
+func (this *TxExecutionError_InvalidTxError_ActionsValidation_DelegateActionMustBeOnlyOne_) EqualVT(thatIface isTxExecutionError_InvalidTxError_ActionsValidation_Variant) bool {
+	that, ok := thatIface.(*TxExecutionError_InvalidTxError_ActionsValidation_DelegateActionMustBeOnlyOne_)
+	if !ok {
+		return false
+	}
+	if this == that {
+		return true
+	}
+	if this == nil && that != nil || this != nil && that == nil {
+		return false
+	}
+	if p, q := this.DelegateActionMustBeOnlyOne, that.DelegateActionMustBeOnlyOne; p != q {
+		if p == nil {
+			p = &TxExecutionError_InvalidTxError_ActionsValidation_DelegateActionMustBeOnlyOne{}
+		}
+		if q == nil {
+			q = &TxExecutionError_InvalidTxError_ActionsValidation_DelegateActionMustBeOnlyOne{}
+		}
+		if !p.EqualVT(q) {
+			return false
+		}
+	}
+	return true
+}
+
+func (this *TxExecutionError_InvalidTxError_ActionsValidation_UnsupportedProtocolFeature_) EqualVT(thatIface isTxExecutionError_InvalidTxError_ActionsValidation_Variant) bool {
+	that, ok := thatIface.(*TxExecutionError_InvalidTxError_ActionsValidation_UnsupportedProtocolFeature_)
+	if !ok {
+		return false
+	}
+	if this == that {
+		return true
+	}
+	if this == nil && that != nil || this != nil && that == nil {
+		return false
+	}
+	if p, q := this.UnsupportedProtocolFeature, that.UnsupportedProtocolFeature; p != q {
+		if p == nil {
+			p = &TxExecutionError_InvalidTxError_ActionsValidation_UnsupportedProtocolFeature{}
+		}
+		if q == nil {
+			q = &TxExecutionError_InvalidTxError_ActionsValidation_UnsupportedProtocolFeature{}
+		}
+		if !p.EqualVT(q) {
+			return false
+		}
+	}
+	return true
+}
+
 func (this *TxExecutionError_InvalidTxError_TransactionSizeExceeded) EqualVT(that *TxExecutionError_InvalidTxError_TransactionSizeExceeded) bool {
 	if this == that {
 		return true
@@ -3451,8 +4028,8 @@ func (this *TxExecutionError_InvalidTxError) EqualMessageVT(thatMsg proto.Messag
 	}
 	return this.EqualVT(that)
 }
-func (this *TxExecutionError_InvalidTxError_InvalidAccessKeyError_) EqualVT(thatIface isTxExecutionError_InvalidTxError_Variant) bool {
-	that, ok := thatIface.(*TxExecutionError_InvalidTxError_InvalidAccessKeyError_)
+func (this *TxExecutionError_InvalidTxError_InvalidAccessKeyError) EqualVT(thatIface isTxExecutionError_InvalidTxError_Variant) bool {
+	that, ok := thatIface.(*TxExecutionError_InvalidTxError_InvalidAccessKeyError)
 	if !ok {
 		return false
 	}
@@ -3464,10 +4041,10 @@ func (this *TxExecutionError_InvalidTxError_InvalidAccessKeyError_) EqualVT(that
 	}
 	if p, q := this.InvalidAccessKeyError, that.InvalidAccessKeyError; p != q {
 		if p == nil {
-			p = &TxExecutionError_InvalidTxError_InvalidAccessKeyError{}
+			p = &InvalidAccessKeyError{}
 		}
 		if q == nil {
-			q = &TxExecutionError_InvalidTxError_InvalidAccessKeyError{}
+			q = &InvalidAccessKeyError{}
 		}
 		if !p.EqualVT(q) {
 			return false
@@ -3879,6 +4456,429 @@ func (this *TxExecutionError_InvalidTxError_) EqualVT(thatIface isTxExecutionErr
 	return true
 }
 
+func (m *InvalidAccessKeyError_AccessKeyNotFound) MarshalVT() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *InvalidAccessKeyError_AccessKeyNotFound) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *InvalidAccessKeyError_AccessKeyNotFound) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	if m.PublicKey != nil {
+		size, err := m.PublicKey.MarshalToSizedBufferVT(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.AccountId) > 0 {
+		i -= len(m.AccountId)
+		copy(dAtA[i:], m.AccountId)
+		i = encodeVarint(dAtA, i, uint64(len(m.AccountId)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *InvalidAccessKeyError_ReceiverMismatch) MarshalVT() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *InvalidAccessKeyError_ReceiverMismatch) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *InvalidAccessKeyError_ReceiverMismatch) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	if len(m.AkReceiver) > 0 {
+		i -= len(m.AkReceiver)
+		copy(dAtA[i:], m.AkReceiver)
+		i = encodeVarint(dAtA, i, uint64(len(m.AkReceiver)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.TxReceiver) > 0 {
+		i -= len(m.TxReceiver)
+		copy(dAtA[i:], m.TxReceiver)
+		i = encodeVarint(dAtA, i, uint64(len(m.TxReceiver)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *InvalidAccessKeyError_MethodNameMismatch) MarshalVT() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *InvalidAccessKeyError_MethodNameMismatch) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *InvalidAccessKeyError_MethodNameMismatch) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	if len(m.MethodName) > 0 {
+		i -= len(m.MethodName)
+		copy(dAtA[i:], m.MethodName)
+		i = encodeVarint(dAtA, i, uint64(len(m.MethodName)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *InvalidAccessKeyError_RequiresFullAccess) MarshalVT() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *InvalidAccessKeyError_RequiresFullAccess) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *InvalidAccessKeyError_RequiresFullAccess) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *InvalidAccessKeyError_NotEnoughAllowance) MarshalVT() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *InvalidAccessKeyError_NotEnoughAllowance) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *InvalidAccessKeyError_NotEnoughAllowance) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	if len(m.U128Cost) > 0 {
+		i -= len(m.U128Cost)
+		copy(dAtA[i:], m.U128Cost)
+		i = encodeVarint(dAtA, i, uint64(len(m.U128Cost)))
+		i--
+		dAtA[i] = 0x22
+	}
+	if len(m.U128Allowance) > 0 {
+		i -= len(m.U128Allowance)
+		copy(dAtA[i:], m.U128Allowance)
+		i = encodeVarint(dAtA, i, uint64(len(m.U128Allowance)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if m.PublicKey != nil {
+		size, err := m.PublicKey.MarshalToSizedBufferVT(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.AccountId) > 0 {
+		i -= len(m.AccountId)
+		copy(dAtA[i:], m.AccountId)
+		i = encodeVarint(dAtA, i, uint64(len(m.AccountId)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *InvalidAccessKeyError_DepositWithFunctionCall) MarshalVT() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *InvalidAccessKeyError_DepositWithFunctionCall) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *InvalidAccessKeyError_DepositWithFunctionCall) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *InvalidAccessKeyError) MarshalVT() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *InvalidAccessKeyError) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *InvalidAccessKeyError) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	if vtmsg, ok := m.Variant.(interface {
+		MarshalToSizedBufferVT([]byte) (int, error)
+	}); ok {
+		size, err := vtmsg.MarshalToSizedBufferVT(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *InvalidAccessKeyError_AccessKeyNotFound_) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *InvalidAccessKeyError_AccessKeyNotFound_) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.AccessKeyNotFound != nil {
+		size, err := m.AccessKeyNotFound.MarshalToSizedBufferVT(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+func (m *InvalidAccessKeyError_ReceiverMismatch_) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *InvalidAccessKeyError_ReceiverMismatch_) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.ReceiverMismatch != nil {
+		size, err := m.ReceiverMismatch.MarshalToSizedBufferVT(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x12
+	}
+	return len(dAtA) - i, nil
+}
+func (m *InvalidAccessKeyError_MethodNameMismatch_) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *InvalidAccessKeyError_MethodNameMismatch_) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.MethodNameMismatch != nil {
+		size, err := m.MethodNameMismatch.MarshalToSizedBufferVT(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x1a
+	}
+	return len(dAtA) - i, nil
+}
+func (m *InvalidAccessKeyError_RequiresFullAccess_) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *InvalidAccessKeyError_RequiresFullAccess_) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.RequiresFullAccess != nil {
+		size, err := m.RequiresFullAccess.MarshalToSizedBufferVT(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x22
+	}
+	return len(dAtA) - i, nil
+}
+func (m *InvalidAccessKeyError_NotEnoughAllowance_) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *InvalidAccessKeyError_NotEnoughAllowance_) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.NotEnoughAllowance != nil {
+		size, err := m.NotEnoughAllowance.MarshalToSizedBufferVT(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x2a
+	}
+	return len(dAtA) - i, nil
+}
+func (m *InvalidAccessKeyError_DepositWithFunctionCall_) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *InvalidAccessKeyError_DepositWithFunctionCall_) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.DepositWithFunctionCall != nil {
+		size, err := m.DepositWithFunctionCall.MarshalToSizedBufferVT(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x32
+	}
+	return len(dAtA) - i, nil
+}
 func (m *TxExecutionError_ActionError_ActionErrorKind_AccountAlreadyExists) MarshalVT() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
@@ -4615,6 +5615,248 @@ func (m *TxExecutionError_ActionError_ActionErrorKind_DeleteAccountWithLargeStat
 	return len(dAtA) - i, nil
 }
 
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidSignature) MarshalVT() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidSignature) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidSignature) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionSenderDoesNotMatchTxReceiver) MarshalVT() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionSenderDoesNotMatchTxReceiver) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionSenderDoesNotMatchTxReceiver) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	if len(m.ReceiverId) > 0 {
+		i -= len(m.ReceiverId)
+		copy(dAtA[i:], m.ReceiverId)
+		i = encodeVarint(dAtA, i, uint64(len(m.ReceiverId)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.SenderId) > 0 {
+		i -= len(m.SenderId)
+		copy(dAtA[i:], m.SenderId)
+		i = encodeVarint(dAtA, i, uint64(len(m.SenderId)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionExpired) MarshalVT() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionExpired) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionExpired) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionAccessKeyError) MarshalVT() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionAccessKeyError) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionAccessKeyError) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	if m.Error != nil {
+		size, err := m.Error.MarshalToSizedBufferVT(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidNonce) MarshalVT() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidNonce) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidNonce) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	if m.AkNonce != 0 {
+		i = encodeVarint(dAtA, i, uint64(m.AkNonce))
+		i--
+		dAtA[i] = 0x10
+	}
+	if m.DelegateNonce != 0 {
+		i = encodeVarint(dAtA, i, uint64(m.DelegateNonce))
+		i--
+		dAtA[i] = 0x8
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionNonceTooLarge) MarshalVT() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionNonceTooLarge) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionNonceTooLarge) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	if m.UpperBound != 0 {
+		i = encodeVarint(dAtA, i, uint64(m.UpperBound))
+		i--
+		dAtA[i] = 0x10
+	}
+	if m.DelegateNonce != 0 {
+		i = encodeVarint(dAtA, i, uint64(m.DelegateNonce))
+		i--
+		dAtA[i] = 0x8
+	}
+	return len(dAtA) - i, nil
+}
+
 func (m *TxExecutionError_ActionError_ActionErrorKind) MarshalVT() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
@@ -4963,6 +6205,132 @@ func (m *TxExecutionError_ActionError_ActionErrorKind_DeleteAccountWithLargeStat
 	}
 	return len(dAtA) - i, nil
 }
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidSignature_) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidSignature_) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.DelegateActionInvalidSignature != nil {
+		size, err := m.DelegateActionInvalidSignature.MarshalToSizedBufferVT(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x1
+		i--
+		dAtA[i] = 0x8a
+	}
+	return len(dAtA) - i, nil
+}
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionSenderDoesNotMatchTxReceiver_) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionSenderDoesNotMatchTxReceiver_) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.DelegateActionSenderDoesNotMatchTxReceiver != nil {
+		size, err := m.DelegateActionSenderDoesNotMatchTxReceiver.MarshalToSizedBufferVT(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x1
+		i--
+		dAtA[i] = 0x92
+	}
+	return len(dAtA) - i, nil
+}
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionExpired_) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionExpired_) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.DelegateActionExpired != nil {
+		size, err := m.DelegateActionExpired.MarshalToSizedBufferVT(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x1
+		i--
+		dAtA[i] = 0x9a
+	}
+	return len(dAtA) - i, nil
+}
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionAccessKeyError_) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionAccessKeyError_) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.DelegateActionAccessKeyError != nil {
+		size, err := m.DelegateActionAccessKeyError.MarshalToSizedBufferVT(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x1
+		i--
+		dAtA[i] = 0xa2
+	}
+	return len(dAtA) - i, nil
+}
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidNonce_) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidNonce_) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.DelegateActionInvalidNonce != nil {
+		size, err := m.DelegateActionInvalidNonce.MarshalToSizedBufferVT(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x1
+		i--
+		dAtA[i] = 0xaa
+	}
+	return len(dAtA) - i, nil
+}
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionNonceTooLarge_) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionNonceTooLarge_) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.DelegateActionNonceTooLarge != nil {
+		size, err := m.DelegateActionNonceTooLarge.MarshalToSizedBufferVT(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x1
+		i--
+		dAtA[i] = 0xb2
+	}
+	return len(dAtA) - i, nil
+}
 func (m *TxExecutionError_ActionError) MarshalVT() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
@@ -5011,429 +6379,6 @@ func (m *TxExecutionError_ActionError) MarshalToSizedBufferVT(dAtA []byte) (int,
 	return len(dAtA) - i, nil
 }
 
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_AccessKeyNotFound) MarshalVT() (dAtA []byte, err error) {
-	if m == nil {
-		return nil, nil
-	}
-	size := m.SizeVT()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_AccessKeyNotFound) MarshalToVT(dAtA []byte) (int, error) {
-	size := m.SizeVT()
-	return m.MarshalToSizedBufferVT(dAtA[:size])
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_AccessKeyNotFound) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
-	if m == nil {
-		return 0, nil
-	}
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.unknownFields != nil {
-		i -= len(m.unknownFields)
-		copy(dAtA[i:], m.unknownFields)
-	}
-	if m.PublicKey != nil {
-		size, err := m.PublicKey.MarshalToSizedBufferVT(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-		i = encodeVarint(dAtA, i, uint64(size))
-		i--
-		dAtA[i] = 0x12
-	}
-	if len(m.AccountId) > 0 {
-		i -= len(m.AccountId)
-		copy(dAtA[i:], m.AccountId)
-		i = encodeVarint(dAtA, i, uint64(len(m.AccountId)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_ReceiverMismatch) MarshalVT() (dAtA []byte, err error) {
-	if m == nil {
-		return nil, nil
-	}
-	size := m.SizeVT()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_ReceiverMismatch) MarshalToVT(dAtA []byte) (int, error) {
-	size := m.SizeVT()
-	return m.MarshalToSizedBufferVT(dAtA[:size])
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_ReceiverMismatch) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
-	if m == nil {
-		return 0, nil
-	}
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.unknownFields != nil {
-		i -= len(m.unknownFields)
-		copy(dAtA[i:], m.unknownFields)
-	}
-	if len(m.AkReceiver) > 0 {
-		i -= len(m.AkReceiver)
-		copy(dAtA[i:], m.AkReceiver)
-		i = encodeVarint(dAtA, i, uint64(len(m.AkReceiver)))
-		i--
-		dAtA[i] = 0x12
-	}
-	if len(m.TxReceiver) > 0 {
-		i -= len(m.TxReceiver)
-		copy(dAtA[i:], m.TxReceiver)
-		i = encodeVarint(dAtA, i, uint64(len(m.TxReceiver)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_MethodNameMismatch) MarshalVT() (dAtA []byte, err error) {
-	if m == nil {
-		return nil, nil
-	}
-	size := m.SizeVT()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_MethodNameMismatch) MarshalToVT(dAtA []byte) (int, error) {
-	size := m.SizeVT()
-	return m.MarshalToSizedBufferVT(dAtA[:size])
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_MethodNameMismatch) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
-	if m == nil {
-		return 0, nil
-	}
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.unknownFields != nil {
-		i -= len(m.unknownFields)
-		copy(dAtA[i:], m.unknownFields)
-	}
-	if len(m.MethodName) > 0 {
-		i -= len(m.MethodName)
-		copy(dAtA[i:], m.MethodName)
-		i = encodeVarint(dAtA, i, uint64(len(m.MethodName)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_RequiresFullAccess) MarshalVT() (dAtA []byte, err error) {
-	if m == nil {
-		return nil, nil
-	}
-	size := m.SizeVT()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_RequiresFullAccess) MarshalToVT(dAtA []byte) (int, error) {
-	size := m.SizeVT()
-	return m.MarshalToSizedBufferVT(dAtA[:size])
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_RequiresFullAccess) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
-	if m == nil {
-		return 0, nil
-	}
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.unknownFields != nil {
-		i -= len(m.unknownFields)
-		copy(dAtA[i:], m.unknownFields)
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_NotEnoughAllowance) MarshalVT() (dAtA []byte, err error) {
-	if m == nil {
-		return nil, nil
-	}
-	size := m.SizeVT()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_NotEnoughAllowance) MarshalToVT(dAtA []byte) (int, error) {
-	size := m.SizeVT()
-	return m.MarshalToSizedBufferVT(dAtA[:size])
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_NotEnoughAllowance) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
-	if m == nil {
-		return 0, nil
-	}
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.unknownFields != nil {
-		i -= len(m.unknownFields)
-		copy(dAtA[i:], m.unknownFields)
-	}
-	if len(m.U128Cost) > 0 {
-		i -= len(m.U128Cost)
-		copy(dAtA[i:], m.U128Cost)
-		i = encodeVarint(dAtA, i, uint64(len(m.U128Cost)))
-		i--
-		dAtA[i] = 0x22
-	}
-	if len(m.U128Allowance) > 0 {
-		i -= len(m.U128Allowance)
-		copy(dAtA[i:], m.U128Allowance)
-		i = encodeVarint(dAtA, i, uint64(len(m.U128Allowance)))
-		i--
-		dAtA[i] = 0x1a
-	}
-	if m.PublicKey != nil {
-		size, err := m.PublicKey.MarshalToSizedBufferVT(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-		i = encodeVarint(dAtA, i, uint64(size))
-		i--
-		dAtA[i] = 0x12
-	}
-	if len(m.AccountId) > 0 {
-		i -= len(m.AccountId)
-		copy(dAtA[i:], m.AccountId)
-		i = encodeVarint(dAtA, i, uint64(len(m.AccountId)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_DepositWithFunctionCall) MarshalVT() (dAtA []byte, err error) {
-	if m == nil {
-		return nil, nil
-	}
-	size := m.SizeVT()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_DepositWithFunctionCall) MarshalToVT(dAtA []byte) (int, error) {
-	size := m.SizeVT()
-	return m.MarshalToSizedBufferVT(dAtA[:size])
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_DepositWithFunctionCall) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
-	if m == nil {
-		return 0, nil
-	}
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.unknownFields != nil {
-		i -= len(m.unknownFields)
-		copy(dAtA[i:], m.unknownFields)
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError) MarshalVT() (dAtA []byte, err error) {
-	if m == nil {
-		return nil, nil
-	}
-	size := m.SizeVT()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError) MarshalToVT(dAtA []byte) (int, error) {
-	size := m.SizeVT()
-	return m.MarshalToSizedBufferVT(dAtA[:size])
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
-	if m == nil {
-		return 0, nil
-	}
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.unknownFields != nil {
-		i -= len(m.unknownFields)
-		copy(dAtA[i:], m.unknownFields)
-	}
-	if vtmsg, ok := m.Variant.(interface {
-		MarshalToSizedBufferVT([]byte) (int, error)
-	}); ok {
-		size, err := vtmsg.MarshalToSizedBufferVT(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_AccessKeyNotFound_) MarshalToVT(dAtA []byte) (int, error) {
-	size := m.SizeVT()
-	return m.MarshalToSizedBufferVT(dAtA[:size])
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_AccessKeyNotFound_) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	if m.AccessKeyNotFound != nil {
-		size, err := m.AccessKeyNotFound.MarshalToSizedBufferVT(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-		i = encodeVarint(dAtA, i, uint64(size))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_ReceiverMismatch_) MarshalToVT(dAtA []byte) (int, error) {
-	size := m.SizeVT()
-	return m.MarshalToSizedBufferVT(dAtA[:size])
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_ReceiverMismatch_) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	if m.ReceiverMismatch != nil {
-		size, err := m.ReceiverMismatch.MarshalToSizedBufferVT(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-		i = encodeVarint(dAtA, i, uint64(size))
-		i--
-		dAtA[i] = 0x12
-	}
-	return len(dAtA) - i, nil
-}
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_MethodNameMismatch_) MarshalToVT(dAtA []byte) (int, error) {
-	size := m.SizeVT()
-	return m.MarshalToSizedBufferVT(dAtA[:size])
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_MethodNameMismatch_) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	if m.MethodNameMismatch != nil {
-		size, err := m.MethodNameMismatch.MarshalToSizedBufferVT(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-		i = encodeVarint(dAtA, i, uint64(size))
-		i--
-		dAtA[i] = 0x1a
-	}
-	return len(dAtA) - i, nil
-}
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_RequiresFullAccess_) MarshalToVT(dAtA []byte) (int, error) {
-	size := m.SizeVT()
-	return m.MarshalToSizedBufferVT(dAtA[:size])
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_RequiresFullAccess_) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	if m.RequiresFullAccess != nil {
-		size, err := m.RequiresFullAccess.MarshalToSizedBufferVT(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-		i = encodeVarint(dAtA, i, uint64(size))
-		i--
-		dAtA[i] = 0x22
-	}
-	return len(dAtA) - i, nil
-}
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_NotEnoughAllowance_) MarshalToVT(dAtA []byte) (int, error) {
-	size := m.SizeVT()
-	return m.MarshalToSizedBufferVT(dAtA[:size])
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_NotEnoughAllowance_) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	if m.NotEnoughAllowance != nil {
-		size, err := m.NotEnoughAllowance.MarshalToSizedBufferVT(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-		i = encodeVarint(dAtA, i, uint64(size))
-		i--
-		dAtA[i] = 0x2a
-	}
-	return len(dAtA) - i, nil
-}
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_DepositWithFunctionCall_) MarshalToVT(dAtA []byte) (int, error) {
-	size := m.SizeVT()
-	return m.MarshalToSizedBufferVT(dAtA[:size])
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_DepositWithFunctionCall_) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	if m.DepositWithFunctionCall != nil {
-		size, err := m.DepositWithFunctionCall.MarshalToSizedBufferVT(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-		i = encodeVarint(dAtA, i, uint64(size))
-		i--
-		dAtA[i] = 0x32
-	}
-	return len(dAtA) - i, nil
-}
 func (m *TxExecutionError_InvalidTxError_InvalidSignerId) MarshalVT() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
@@ -6356,6 +7301,84 @@ func (m *TxExecutionError_InvalidTxError_ActionsValidation_FunctionCallZeroAttac
 	return len(dAtA) - i, nil
 }
 
+func (m *TxExecutionError_InvalidTxError_ActionsValidation_DelegateActionMustBeOnlyOne) MarshalVT() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *TxExecutionError_InvalidTxError_ActionsValidation_DelegateActionMustBeOnlyOne) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *TxExecutionError_InvalidTxError_ActionsValidation_DelegateActionMustBeOnlyOne) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *TxExecutionError_InvalidTxError_ActionsValidation_UnsupportedProtocolFeature) MarshalVT() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *TxExecutionError_InvalidTxError_ActionsValidation_UnsupportedProtocolFeature) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *TxExecutionError_InvalidTxError_ActionsValidation_UnsupportedProtocolFeature) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	if m.Version != 0 {
+		i = encodeVarint(dAtA, i, uint64(m.Version))
+		i--
+		dAtA[i] = 0x10
+	}
+	if len(m.ProtocolFeature) > 0 {
+		i -= len(m.ProtocolFeature)
+		copy(dAtA[i:], m.ProtocolFeature)
+		i = encodeVarint(dAtA, i, uint64(len(m.ProtocolFeature)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
 func (m *TxExecutionError_InvalidTxError_ActionsValidation) MarshalVT() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
@@ -6626,6 +7649,44 @@ func (m *TxExecutionError_InvalidTxError_ActionsValidation_FunctionCallZeroAttac
 	}
 	return len(dAtA) - i, nil
 }
+func (m *TxExecutionError_InvalidTxError_ActionsValidation_DelegateActionMustBeOnlyOne_) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *TxExecutionError_InvalidTxError_ActionsValidation_DelegateActionMustBeOnlyOne_) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.DelegateActionMustBeOnlyOne != nil {
+		size, err := m.DelegateActionMustBeOnlyOne.MarshalToSizedBufferVT(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x6a
+	}
+	return len(dAtA) - i, nil
+}
+func (m *TxExecutionError_InvalidTxError_ActionsValidation_UnsupportedProtocolFeature_) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *TxExecutionError_InvalidTxError_ActionsValidation_UnsupportedProtocolFeature_) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.UnsupportedProtocolFeature != nil {
+		size, err := m.UnsupportedProtocolFeature.MarshalToSizedBufferVT(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x72
+	}
+	return len(dAtA) - i, nil
+}
 func (m *TxExecutionError_InvalidTxError_TransactionSizeExceeded) MarshalVT() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
@@ -6711,12 +7772,12 @@ func (m *TxExecutionError_InvalidTxError) MarshalToSizedBufferVT(dAtA []byte) (i
 	return len(dAtA) - i, nil
 }
 
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_) MarshalToVT(dAtA []byte) (int, error) {
+func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError) MarshalToVT(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVT(dAtA[:size])
 }
 
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	if m.InvalidAccessKeyError != nil {
 		size, err := m.InvalidAccessKeyError.MarshalToSizedBufferVT(dAtA[:i])
@@ -7054,6 +8115,462 @@ func (m *TxExecutionError_InvalidTxError_) MarshalToSizedBufferVT(dAtA []byte) (
 		i = encodeVarint(dAtA, i, uint64(size))
 		i--
 		dAtA[i] = 0x12
+	}
+	return len(dAtA) - i, nil
+}
+func (m *InvalidAccessKeyError_AccessKeyNotFound) MarshalVTStrict() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVTStrict(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *InvalidAccessKeyError_AccessKeyNotFound) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *InvalidAccessKeyError_AccessKeyNotFound) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	if m.PublicKey != nil {
+		size, err := m.PublicKey.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.AccountId) > 0 {
+		i -= len(m.AccountId)
+		copy(dAtA[i:], m.AccountId)
+		i = encodeVarint(dAtA, i, uint64(len(m.AccountId)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *InvalidAccessKeyError_ReceiverMismatch) MarshalVTStrict() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVTStrict(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *InvalidAccessKeyError_ReceiverMismatch) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *InvalidAccessKeyError_ReceiverMismatch) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	if len(m.AkReceiver) > 0 {
+		i -= len(m.AkReceiver)
+		copy(dAtA[i:], m.AkReceiver)
+		i = encodeVarint(dAtA, i, uint64(len(m.AkReceiver)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.TxReceiver) > 0 {
+		i -= len(m.TxReceiver)
+		copy(dAtA[i:], m.TxReceiver)
+		i = encodeVarint(dAtA, i, uint64(len(m.TxReceiver)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *InvalidAccessKeyError_MethodNameMismatch) MarshalVTStrict() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVTStrict(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *InvalidAccessKeyError_MethodNameMismatch) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *InvalidAccessKeyError_MethodNameMismatch) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	if len(m.MethodName) > 0 {
+		i -= len(m.MethodName)
+		copy(dAtA[i:], m.MethodName)
+		i = encodeVarint(dAtA, i, uint64(len(m.MethodName)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *InvalidAccessKeyError_RequiresFullAccess) MarshalVTStrict() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVTStrict(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *InvalidAccessKeyError_RequiresFullAccess) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *InvalidAccessKeyError_RequiresFullAccess) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *InvalidAccessKeyError_NotEnoughAllowance) MarshalVTStrict() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVTStrict(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *InvalidAccessKeyError_NotEnoughAllowance) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *InvalidAccessKeyError_NotEnoughAllowance) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	if len(m.U128Cost) > 0 {
+		i -= len(m.U128Cost)
+		copy(dAtA[i:], m.U128Cost)
+		i = encodeVarint(dAtA, i, uint64(len(m.U128Cost)))
+		i--
+		dAtA[i] = 0x22
+	}
+	if len(m.U128Allowance) > 0 {
+		i -= len(m.U128Allowance)
+		copy(dAtA[i:], m.U128Allowance)
+		i = encodeVarint(dAtA, i, uint64(len(m.U128Allowance)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if m.PublicKey != nil {
+		size, err := m.PublicKey.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.AccountId) > 0 {
+		i -= len(m.AccountId)
+		copy(dAtA[i:], m.AccountId)
+		i = encodeVarint(dAtA, i, uint64(len(m.AccountId)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *InvalidAccessKeyError_DepositWithFunctionCall) MarshalVTStrict() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVTStrict(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *InvalidAccessKeyError_DepositWithFunctionCall) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *InvalidAccessKeyError_DepositWithFunctionCall) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *InvalidAccessKeyError) MarshalVTStrict() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVTStrict(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *InvalidAccessKeyError) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *InvalidAccessKeyError) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	if msg, ok := m.Variant.(*InvalidAccessKeyError_DepositWithFunctionCall_); ok {
+		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+	}
+	if msg, ok := m.Variant.(*InvalidAccessKeyError_NotEnoughAllowance_); ok {
+		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+	}
+	if msg, ok := m.Variant.(*InvalidAccessKeyError_RequiresFullAccess_); ok {
+		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+	}
+	if msg, ok := m.Variant.(*InvalidAccessKeyError_MethodNameMismatch_); ok {
+		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+	}
+	if msg, ok := m.Variant.(*InvalidAccessKeyError_ReceiverMismatch_); ok {
+		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+	}
+	if msg, ok := m.Variant.(*InvalidAccessKeyError_AccessKeyNotFound_); ok {
+		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *InvalidAccessKeyError_AccessKeyNotFound_) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *InvalidAccessKeyError_AccessKeyNotFound_) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.AccessKeyNotFound != nil {
+		size, err := m.AccessKeyNotFound.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+func (m *InvalidAccessKeyError_ReceiverMismatch_) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *InvalidAccessKeyError_ReceiverMismatch_) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.ReceiverMismatch != nil {
+		size, err := m.ReceiverMismatch.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x12
+	}
+	return len(dAtA) - i, nil
+}
+func (m *InvalidAccessKeyError_MethodNameMismatch_) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *InvalidAccessKeyError_MethodNameMismatch_) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.MethodNameMismatch != nil {
+		size, err := m.MethodNameMismatch.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x1a
+	}
+	return len(dAtA) - i, nil
+}
+func (m *InvalidAccessKeyError_RequiresFullAccess_) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *InvalidAccessKeyError_RequiresFullAccess_) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.RequiresFullAccess != nil {
+		size, err := m.RequiresFullAccess.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x22
+	}
+	return len(dAtA) - i, nil
+}
+func (m *InvalidAccessKeyError_NotEnoughAllowance_) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *InvalidAccessKeyError_NotEnoughAllowance_) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.NotEnoughAllowance != nil {
+		size, err := m.NotEnoughAllowance.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x2a
+	}
+	return len(dAtA) - i, nil
+}
+func (m *InvalidAccessKeyError_DepositWithFunctionCall_) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *InvalidAccessKeyError_DepositWithFunctionCall_) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.DepositWithFunctionCall != nil {
+		size, err := m.DepositWithFunctionCall.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x32
 	}
 	return len(dAtA) - i, nil
 }
@@ -7793,6 +9310,248 @@ func (m *TxExecutionError_ActionError_ActionErrorKind_DeleteAccountWithLargeStat
 	return len(dAtA) - i, nil
 }
 
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidSignature) MarshalVTStrict() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVTStrict(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidSignature) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidSignature) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionSenderDoesNotMatchTxReceiver) MarshalVTStrict() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVTStrict(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionSenderDoesNotMatchTxReceiver) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionSenderDoesNotMatchTxReceiver) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	if len(m.ReceiverId) > 0 {
+		i -= len(m.ReceiverId)
+		copy(dAtA[i:], m.ReceiverId)
+		i = encodeVarint(dAtA, i, uint64(len(m.ReceiverId)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.SenderId) > 0 {
+		i -= len(m.SenderId)
+		copy(dAtA[i:], m.SenderId)
+		i = encodeVarint(dAtA, i, uint64(len(m.SenderId)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionExpired) MarshalVTStrict() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVTStrict(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionExpired) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionExpired) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionAccessKeyError) MarshalVTStrict() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVTStrict(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionAccessKeyError) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionAccessKeyError) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	if m.Error != nil {
+		size, err := m.Error.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidNonce) MarshalVTStrict() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVTStrict(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidNonce) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidNonce) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	if m.AkNonce != 0 {
+		i = encodeVarint(dAtA, i, uint64(m.AkNonce))
+		i--
+		dAtA[i] = 0x10
+	}
+	if m.DelegateNonce != 0 {
+		i = encodeVarint(dAtA, i, uint64(m.DelegateNonce))
+		i--
+		dAtA[i] = 0x8
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionNonceTooLarge) MarshalVTStrict() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVTStrict(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionNonceTooLarge) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionNonceTooLarge) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	if m.UpperBound != 0 {
+		i = encodeVarint(dAtA, i, uint64(m.UpperBound))
+		i--
+		dAtA[i] = 0x10
+	}
+	if m.DelegateNonce != 0 {
+		i = encodeVarint(dAtA, i, uint64(m.DelegateNonce))
+		i--
+		dAtA[i] = 0x8
+	}
+	return len(dAtA) - i, nil
+}
+
 func (m *TxExecutionError_ActionError_ActionErrorKind) MarshalVTStrict() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
@@ -7822,6 +9581,48 @@ func (m *TxExecutionError_ActionError_ActionErrorKind) MarshalToSizedBufferVTStr
 	if m.unknownFields != nil {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
+	}
+	if msg, ok := m.Variant.(*TxExecutionError_ActionError_ActionErrorKind_DelegateActionNonceTooLarge_); ok {
+		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+	}
+	if msg, ok := m.Variant.(*TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidNonce_); ok {
+		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+	}
+	if msg, ok := m.Variant.(*TxExecutionError_ActionError_ActionErrorKind_DelegateActionAccessKeyError_); ok {
+		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+	}
+	if msg, ok := m.Variant.(*TxExecutionError_ActionError_ActionErrorKind_DelegateActionExpired_); ok {
+		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+	}
+	if msg, ok := m.Variant.(*TxExecutionError_ActionError_ActionErrorKind_DelegateActionSenderDoesNotMatchTxReceiver_); ok {
+		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+	}
+	if msg, ok := m.Variant.(*TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidSignature_); ok {
+		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
 	}
 	if msg, ok := m.Variant.(*TxExecutionError_ActionError_ActionErrorKind_DeleteAccountWithLargeState_); ok {
 		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
@@ -8244,6 +10045,132 @@ func (m *TxExecutionError_ActionError_ActionErrorKind_DeleteAccountWithLargeStat
 	}
 	return len(dAtA) - i, nil
 }
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidSignature_) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidSignature_) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.DelegateActionInvalidSignature != nil {
+		size, err := m.DelegateActionInvalidSignature.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x1
+		i--
+		dAtA[i] = 0x8a
+	}
+	return len(dAtA) - i, nil
+}
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionSenderDoesNotMatchTxReceiver_) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionSenderDoesNotMatchTxReceiver_) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.DelegateActionSenderDoesNotMatchTxReceiver != nil {
+		size, err := m.DelegateActionSenderDoesNotMatchTxReceiver.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x1
+		i--
+		dAtA[i] = 0x92
+	}
+	return len(dAtA) - i, nil
+}
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionExpired_) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionExpired_) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.DelegateActionExpired != nil {
+		size, err := m.DelegateActionExpired.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x1
+		i--
+		dAtA[i] = 0x9a
+	}
+	return len(dAtA) - i, nil
+}
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionAccessKeyError_) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionAccessKeyError_) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.DelegateActionAccessKeyError != nil {
+		size, err := m.DelegateActionAccessKeyError.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x1
+		i--
+		dAtA[i] = 0xa2
+	}
+	return len(dAtA) - i, nil
+}
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidNonce_) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidNonce_) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.DelegateActionInvalidNonce != nil {
+		size, err := m.DelegateActionInvalidNonce.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x1
+		i--
+		dAtA[i] = 0xaa
+	}
+	return len(dAtA) - i, nil
+}
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionNonceTooLarge_) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionNonceTooLarge_) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.DelegateActionNonceTooLarge != nil {
+		size, err := m.DelegateActionNonceTooLarge.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x1
+		i--
+		dAtA[i] = 0xb2
+	}
+	return len(dAtA) - i, nil
+}
 func (m *TxExecutionError_ActionError) MarshalVTStrict() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
@@ -8292,462 +10219,6 @@ func (m *TxExecutionError_ActionError) MarshalToSizedBufferVTStrict(dAtA []byte)
 	return len(dAtA) - i, nil
 }
 
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_AccessKeyNotFound) MarshalVTStrict() (dAtA []byte, err error) {
-	if m == nil {
-		return nil, nil
-	}
-	size := m.SizeVT()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBufferVTStrict(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_AccessKeyNotFound) MarshalToVTStrict(dAtA []byte) (int, error) {
-	size := m.SizeVT()
-	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_AccessKeyNotFound) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
-	if m == nil {
-		return 0, nil
-	}
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.unknownFields != nil {
-		i -= len(m.unknownFields)
-		copy(dAtA[i:], m.unknownFields)
-	}
-	if m.PublicKey != nil {
-		size, err := m.PublicKey.MarshalToSizedBufferVTStrict(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-		i = encodeVarint(dAtA, i, uint64(size))
-		i--
-		dAtA[i] = 0x12
-	}
-	if len(m.AccountId) > 0 {
-		i -= len(m.AccountId)
-		copy(dAtA[i:], m.AccountId)
-		i = encodeVarint(dAtA, i, uint64(len(m.AccountId)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_ReceiverMismatch) MarshalVTStrict() (dAtA []byte, err error) {
-	if m == nil {
-		return nil, nil
-	}
-	size := m.SizeVT()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBufferVTStrict(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_ReceiverMismatch) MarshalToVTStrict(dAtA []byte) (int, error) {
-	size := m.SizeVT()
-	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_ReceiverMismatch) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
-	if m == nil {
-		return 0, nil
-	}
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.unknownFields != nil {
-		i -= len(m.unknownFields)
-		copy(dAtA[i:], m.unknownFields)
-	}
-	if len(m.AkReceiver) > 0 {
-		i -= len(m.AkReceiver)
-		copy(dAtA[i:], m.AkReceiver)
-		i = encodeVarint(dAtA, i, uint64(len(m.AkReceiver)))
-		i--
-		dAtA[i] = 0x12
-	}
-	if len(m.TxReceiver) > 0 {
-		i -= len(m.TxReceiver)
-		copy(dAtA[i:], m.TxReceiver)
-		i = encodeVarint(dAtA, i, uint64(len(m.TxReceiver)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_MethodNameMismatch) MarshalVTStrict() (dAtA []byte, err error) {
-	if m == nil {
-		return nil, nil
-	}
-	size := m.SizeVT()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBufferVTStrict(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_MethodNameMismatch) MarshalToVTStrict(dAtA []byte) (int, error) {
-	size := m.SizeVT()
-	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_MethodNameMismatch) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
-	if m == nil {
-		return 0, nil
-	}
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.unknownFields != nil {
-		i -= len(m.unknownFields)
-		copy(dAtA[i:], m.unknownFields)
-	}
-	if len(m.MethodName) > 0 {
-		i -= len(m.MethodName)
-		copy(dAtA[i:], m.MethodName)
-		i = encodeVarint(dAtA, i, uint64(len(m.MethodName)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_RequiresFullAccess) MarshalVTStrict() (dAtA []byte, err error) {
-	if m == nil {
-		return nil, nil
-	}
-	size := m.SizeVT()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBufferVTStrict(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_RequiresFullAccess) MarshalToVTStrict(dAtA []byte) (int, error) {
-	size := m.SizeVT()
-	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_RequiresFullAccess) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
-	if m == nil {
-		return 0, nil
-	}
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.unknownFields != nil {
-		i -= len(m.unknownFields)
-		copy(dAtA[i:], m.unknownFields)
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_NotEnoughAllowance) MarshalVTStrict() (dAtA []byte, err error) {
-	if m == nil {
-		return nil, nil
-	}
-	size := m.SizeVT()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBufferVTStrict(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_NotEnoughAllowance) MarshalToVTStrict(dAtA []byte) (int, error) {
-	size := m.SizeVT()
-	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_NotEnoughAllowance) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
-	if m == nil {
-		return 0, nil
-	}
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.unknownFields != nil {
-		i -= len(m.unknownFields)
-		copy(dAtA[i:], m.unknownFields)
-	}
-	if len(m.U128Cost) > 0 {
-		i -= len(m.U128Cost)
-		copy(dAtA[i:], m.U128Cost)
-		i = encodeVarint(dAtA, i, uint64(len(m.U128Cost)))
-		i--
-		dAtA[i] = 0x22
-	}
-	if len(m.U128Allowance) > 0 {
-		i -= len(m.U128Allowance)
-		copy(dAtA[i:], m.U128Allowance)
-		i = encodeVarint(dAtA, i, uint64(len(m.U128Allowance)))
-		i--
-		dAtA[i] = 0x1a
-	}
-	if m.PublicKey != nil {
-		size, err := m.PublicKey.MarshalToSizedBufferVTStrict(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-		i = encodeVarint(dAtA, i, uint64(size))
-		i--
-		dAtA[i] = 0x12
-	}
-	if len(m.AccountId) > 0 {
-		i -= len(m.AccountId)
-		copy(dAtA[i:], m.AccountId)
-		i = encodeVarint(dAtA, i, uint64(len(m.AccountId)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_DepositWithFunctionCall) MarshalVTStrict() (dAtA []byte, err error) {
-	if m == nil {
-		return nil, nil
-	}
-	size := m.SizeVT()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBufferVTStrict(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_DepositWithFunctionCall) MarshalToVTStrict(dAtA []byte) (int, error) {
-	size := m.SizeVT()
-	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_DepositWithFunctionCall) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
-	if m == nil {
-		return 0, nil
-	}
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.unknownFields != nil {
-		i -= len(m.unknownFields)
-		copy(dAtA[i:], m.unknownFields)
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError) MarshalVTStrict() (dAtA []byte, err error) {
-	if m == nil {
-		return nil, nil
-	}
-	size := m.SizeVT()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBufferVTStrict(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError) MarshalToVTStrict(dAtA []byte) (int, error) {
-	size := m.SizeVT()
-	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
-	if m == nil {
-		return 0, nil
-	}
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.unknownFields != nil {
-		i -= len(m.unknownFields)
-		copy(dAtA[i:], m.unknownFields)
-	}
-	if msg, ok := m.Variant.(*TxExecutionError_InvalidTxError_InvalidAccessKeyError_DepositWithFunctionCall_); ok {
-		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-	}
-	if msg, ok := m.Variant.(*TxExecutionError_InvalidTxError_InvalidAccessKeyError_NotEnoughAllowance_); ok {
-		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-	}
-	if msg, ok := m.Variant.(*TxExecutionError_InvalidTxError_InvalidAccessKeyError_RequiresFullAccess_); ok {
-		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-	}
-	if msg, ok := m.Variant.(*TxExecutionError_InvalidTxError_InvalidAccessKeyError_MethodNameMismatch_); ok {
-		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-	}
-	if msg, ok := m.Variant.(*TxExecutionError_InvalidTxError_InvalidAccessKeyError_ReceiverMismatch_); ok {
-		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-	}
-	if msg, ok := m.Variant.(*TxExecutionError_InvalidTxError_InvalidAccessKeyError_AccessKeyNotFound_); ok {
-		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_AccessKeyNotFound_) MarshalToVTStrict(dAtA []byte) (int, error) {
-	size := m.SizeVT()
-	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_AccessKeyNotFound_) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	if m.AccessKeyNotFound != nil {
-		size, err := m.AccessKeyNotFound.MarshalToSizedBufferVTStrict(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-		i = encodeVarint(dAtA, i, uint64(size))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_ReceiverMismatch_) MarshalToVTStrict(dAtA []byte) (int, error) {
-	size := m.SizeVT()
-	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_ReceiverMismatch_) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	if m.ReceiverMismatch != nil {
-		size, err := m.ReceiverMismatch.MarshalToSizedBufferVTStrict(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-		i = encodeVarint(dAtA, i, uint64(size))
-		i--
-		dAtA[i] = 0x12
-	}
-	return len(dAtA) - i, nil
-}
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_MethodNameMismatch_) MarshalToVTStrict(dAtA []byte) (int, error) {
-	size := m.SizeVT()
-	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_MethodNameMismatch_) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	if m.MethodNameMismatch != nil {
-		size, err := m.MethodNameMismatch.MarshalToSizedBufferVTStrict(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-		i = encodeVarint(dAtA, i, uint64(size))
-		i--
-		dAtA[i] = 0x1a
-	}
-	return len(dAtA) - i, nil
-}
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_RequiresFullAccess_) MarshalToVTStrict(dAtA []byte) (int, error) {
-	size := m.SizeVT()
-	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_RequiresFullAccess_) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	if m.RequiresFullAccess != nil {
-		size, err := m.RequiresFullAccess.MarshalToSizedBufferVTStrict(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-		i = encodeVarint(dAtA, i, uint64(size))
-		i--
-		dAtA[i] = 0x22
-	}
-	return len(dAtA) - i, nil
-}
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_NotEnoughAllowance_) MarshalToVTStrict(dAtA []byte) (int, error) {
-	size := m.SizeVT()
-	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_NotEnoughAllowance_) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	if m.NotEnoughAllowance != nil {
-		size, err := m.NotEnoughAllowance.MarshalToSizedBufferVTStrict(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-		i = encodeVarint(dAtA, i, uint64(size))
-		i--
-		dAtA[i] = 0x2a
-	}
-	return len(dAtA) - i, nil
-}
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_DepositWithFunctionCall_) MarshalToVTStrict(dAtA []byte) (int, error) {
-	size := m.SizeVT()
-	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_DepositWithFunctionCall_) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	if m.DepositWithFunctionCall != nil {
-		size, err := m.DepositWithFunctionCall.MarshalToSizedBufferVTStrict(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-		i = encodeVarint(dAtA, i, uint64(size))
-		i--
-		dAtA[i] = 0x32
-	}
-	return len(dAtA) - i, nil
-}
 func (m *TxExecutionError_InvalidTxError_InvalidSignerId) MarshalVTStrict() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
@@ -9670,6 +11141,84 @@ func (m *TxExecutionError_InvalidTxError_ActionsValidation_FunctionCallZeroAttac
 	return len(dAtA) - i, nil
 }
 
+func (m *TxExecutionError_InvalidTxError_ActionsValidation_DelegateActionMustBeOnlyOne) MarshalVTStrict() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVTStrict(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *TxExecutionError_InvalidTxError_ActionsValidation_DelegateActionMustBeOnlyOne) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *TxExecutionError_InvalidTxError_ActionsValidation_DelegateActionMustBeOnlyOne) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *TxExecutionError_InvalidTxError_ActionsValidation_UnsupportedProtocolFeature) MarshalVTStrict() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVTStrict(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *TxExecutionError_InvalidTxError_ActionsValidation_UnsupportedProtocolFeature) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *TxExecutionError_InvalidTxError_ActionsValidation_UnsupportedProtocolFeature) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	if m.Version != 0 {
+		i = encodeVarint(dAtA, i, uint64(m.Version))
+		i--
+		dAtA[i] = 0x10
+	}
+	if len(m.ProtocolFeature) > 0 {
+		i -= len(m.ProtocolFeature)
+		copy(dAtA[i:], m.ProtocolFeature)
+		i = encodeVarint(dAtA, i, uint64(len(m.ProtocolFeature)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
 func (m *TxExecutionError_InvalidTxError_ActionsValidation) MarshalVTStrict() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
@@ -9699,6 +11248,20 @@ func (m *TxExecutionError_InvalidTxError_ActionsValidation) MarshalToSizedBuffer
 	if m.unknownFields != nil {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
+	}
+	if msg, ok := m.Variant.(*TxExecutionError_InvalidTxError_ActionsValidation_UnsupportedProtocolFeature_); ok {
+		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+	}
+	if msg, ok := m.Variant.(*TxExecutionError_InvalidTxError_ActionsValidation_DelegateActionMustBeOnlyOne_); ok {
+		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
 	}
 	if msg, ok := m.Variant.(*TxExecutionError_InvalidTxError_ActionsValidation_FunctionCallZeroAttachedGas_); ok {
 		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
@@ -10015,6 +11578,44 @@ func (m *TxExecutionError_InvalidTxError_ActionsValidation_FunctionCallZeroAttac
 	}
 	return len(dAtA) - i, nil
 }
+func (m *TxExecutionError_InvalidTxError_ActionsValidation_DelegateActionMustBeOnlyOne_) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *TxExecutionError_InvalidTxError_ActionsValidation_DelegateActionMustBeOnlyOne_) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.DelegateActionMustBeOnlyOne != nil {
+		size, err := m.DelegateActionMustBeOnlyOne.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x6a
+	}
+	return len(dAtA) - i, nil
+}
+func (m *TxExecutionError_InvalidTxError_ActionsValidation_UnsupportedProtocolFeature_) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *TxExecutionError_InvalidTxError_ActionsValidation_UnsupportedProtocolFeature_) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.UnsupportedProtocolFeature != nil {
+		size, err := m.UnsupportedProtocolFeature.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x72
+	}
+	return len(dAtA) - i, nil
+}
 func (m *TxExecutionError_InvalidTxError_TransactionSizeExceeded) MarshalVTStrict() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
@@ -10179,7 +11780,7 @@ func (m *TxExecutionError_InvalidTxError) MarshalToSizedBufferVTStrict(dAtA []by
 		}
 		i -= size
 	}
-	if msg, ok := m.Variant.(*TxExecutionError_InvalidTxError_InvalidAccessKeyError_); ok {
+	if msg, ok := m.Variant.(*TxExecutionError_InvalidTxError_InvalidAccessKeyError); ok {
 		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
 		if err != nil {
 			return 0, err
@@ -10189,12 +11790,12 @@ func (m *TxExecutionError_InvalidTxError) MarshalToSizedBufferVTStrict(dAtA []by
 	return len(dAtA) - i, nil
 }
 
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_) MarshalToVTStrict(dAtA []byte) (int, error) {
+func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError) MarshalToVTStrict(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
 }
 
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	if m.InvalidAccessKeyError != nil {
 		size, err := m.InvalidAccessKeyError.MarshalToSizedBufferVTStrict(dAtA[:i])
@@ -10540,6 +12141,187 @@ func (m *TxExecutionError_InvalidTxError_) MarshalToSizedBufferVTStrict(dAtA []b
 	}
 	return len(dAtA) - i, nil
 }
+func (m *InvalidAccessKeyError_AccessKeyNotFound) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.AccountId)
+	if l > 0 {
+		n += 1 + l + sov(uint64(l))
+	}
+	if m.PublicKey != nil {
+		l = m.PublicKey.SizeVT()
+		n += 1 + l + sov(uint64(l))
+	}
+	n += len(m.unknownFields)
+	return n
+}
+
+func (m *InvalidAccessKeyError_ReceiverMismatch) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.TxReceiver)
+	if l > 0 {
+		n += 1 + l + sov(uint64(l))
+	}
+	l = len(m.AkReceiver)
+	if l > 0 {
+		n += 1 + l + sov(uint64(l))
+	}
+	n += len(m.unknownFields)
+	return n
+}
+
+func (m *InvalidAccessKeyError_MethodNameMismatch) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.MethodName)
+	if l > 0 {
+		n += 1 + l + sov(uint64(l))
+	}
+	n += len(m.unknownFields)
+	return n
+}
+
+func (m *InvalidAccessKeyError_RequiresFullAccess) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	n += len(m.unknownFields)
+	return n
+}
+
+func (m *InvalidAccessKeyError_NotEnoughAllowance) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.AccountId)
+	if l > 0 {
+		n += 1 + l + sov(uint64(l))
+	}
+	if m.PublicKey != nil {
+		l = m.PublicKey.SizeVT()
+		n += 1 + l + sov(uint64(l))
+	}
+	l = len(m.U128Allowance)
+	if l > 0 {
+		n += 1 + l + sov(uint64(l))
+	}
+	l = len(m.U128Cost)
+	if l > 0 {
+		n += 1 + l + sov(uint64(l))
+	}
+	n += len(m.unknownFields)
+	return n
+}
+
+func (m *InvalidAccessKeyError_DepositWithFunctionCall) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	n += len(m.unknownFields)
+	return n
+}
+
+func (m *InvalidAccessKeyError) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if vtmsg, ok := m.Variant.(interface{ SizeVT() int }); ok {
+		n += vtmsg.SizeVT()
+	}
+	n += len(m.unknownFields)
+	return n
+}
+
+func (m *InvalidAccessKeyError_AccessKeyNotFound_) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.AccessKeyNotFound != nil {
+		l = m.AccessKeyNotFound.SizeVT()
+		n += 1 + l + sov(uint64(l))
+	}
+	return n
+}
+func (m *InvalidAccessKeyError_ReceiverMismatch_) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.ReceiverMismatch != nil {
+		l = m.ReceiverMismatch.SizeVT()
+		n += 1 + l + sov(uint64(l))
+	}
+	return n
+}
+func (m *InvalidAccessKeyError_MethodNameMismatch_) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.MethodNameMismatch != nil {
+		l = m.MethodNameMismatch.SizeVT()
+		n += 1 + l + sov(uint64(l))
+	}
+	return n
+}
+func (m *InvalidAccessKeyError_RequiresFullAccess_) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.RequiresFullAccess != nil {
+		l = m.RequiresFullAccess.SizeVT()
+		n += 1 + l + sov(uint64(l))
+	}
+	return n
+}
+func (m *InvalidAccessKeyError_NotEnoughAllowance_) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.NotEnoughAllowance != nil {
+		l = m.NotEnoughAllowance.SizeVT()
+		n += 1 + l + sov(uint64(l))
+	}
+	return n
+}
+func (m *InvalidAccessKeyError_DepositWithFunctionCall_) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.DepositWithFunctionCall != nil {
+		l = m.DepositWithFunctionCall.SizeVT()
+		n += 1 + l + sov(uint64(l))
+	}
+	return n
+}
 func (m *TxExecutionError_ActionError_ActionErrorKind_AccountAlreadyExists) SizeVT() (n int) {
 	if m == nil {
 		return 0
@@ -10812,6 +12594,90 @@ func (m *TxExecutionError_ActionError_ActionErrorKind_DeleteAccountWithLargeStat
 	return n
 }
 
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidSignature) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	n += len(m.unknownFields)
+	return n
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionSenderDoesNotMatchTxReceiver) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.SenderId)
+	if l > 0 {
+		n += 1 + l + sov(uint64(l))
+	}
+	l = len(m.ReceiverId)
+	if l > 0 {
+		n += 1 + l + sov(uint64(l))
+	}
+	n += len(m.unknownFields)
+	return n
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionExpired) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	n += len(m.unknownFields)
+	return n
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionAccessKeyError) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Error != nil {
+		l = m.Error.SizeVT()
+		n += 1 + l + sov(uint64(l))
+	}
+	n += len(m.unknownFields)
+	return n
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidNonce) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.DelegateNonce != 0 {
+		n += 1 + sov(uint64(m.DelegateNonce))
+	}
+	if m.AkNonce != 0 {
+		n += 1 + sov(uint64(m.AkNonce))
+	}
+	n += len(m.unknownFields)
+	return n
+}
+
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionNonceTooLarge) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.DelegateNonce != 0 {
+		n += 1 + sov(uint64(m.DelegateNonce))
+	}
+	if m.UpperBound != 0 {
+		n += 1 + sov(uint64(m.UpperBound))
+	}
+	n += len(m.unknownFields)
+	return n
+}
+
 func (m *TxExecutionError_ActionError_ActionErrorKind) SizeVT() (n int) {
 	if m == nil {
 		return 0
@@ -11017,6 +12883,78 @@ func (m *TxExecutionError_ActionError_ActionErrorKind_DeleteAccountWithLargeStat
 	}
 	return n
 }
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidSignature_) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.DelegateActionInvalidSignature != nil {
+		l = m.DelegateActionInvalidSignature.SizeVT()
+		n += 2 + l + sov(uint64(l))
+	}
+	return n
+}
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionSenderDoesNotMatchTxReceiver_) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.DelegateActionSenderDoesNotMatchTxReceiver != nil {
+		l = m.DelegateActionSenderDoesNotMatchTxReceiver.SizeVT()
+		n += 2 + l + sov(uint64(l))
+	}
+	return n
+}
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionExpired_) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.DelegateActionExpired != nil {
+		l = m.DelegateActionExpired.SizeVT()
+		n += 2 + l + sov(uint64(l))
+	}
+	return n
+}
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionAccessKeyError_) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.DelegateActionAccessKeyError != nil {
+		l = m.DelegateActionAccessKeyError.SizeVT()
+		n += 2 + l + sov(uint64(l))
+	}
+	return n
+}
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidNonce_) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.DelegateActionInvalidNonce != nil {
+		l = m.DelegateActionInvalidNonce.SizeVT()
+		n += 2 + l + sov(uint64(l))
+	}
+	return n
+}
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionNonceTooLarge_) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.DelegateActionNonceTooLarge != nil {
+		l = m.DelegateActionNonceTooLarge.SizeVT()
+		n += 2 + l + sov(uint64(l))
+	}
+	return n
+}
 func (m *TxExecutionError_ActionError) SizeVT() (n int) {
 	if m == nil {
 		return 0
@@ -11034,187 +12972,6 @@ func (m *TxExecutionError_ActionError) SizeVT() (n int) {
 	return n
 }
 
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_AccessKeyNotFound) SizeVT() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.AccountId)
-	if l > 0 {
-		n += 1 + l + sov(uint64(l))
-	}
-	if m.PublicKey != nil {
-		l = m.PublicKey.SizeVT()
-		n += 1 + l + sov(uint64(l))
-	}
-	n += len(m.unknownFields)
-	return n
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_ReceiverMismatch) SizeVT() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.TxReceiver)
-	if l > 0 {
-		n += 1 + l + sov(uint64(l))
-	}
-	l = len(m.AkReceiver)
-	if l > 0 {
-		n += 1 + l + sov(uint64(l))
-	}
-	n += len(m.unknownFields)
-	return n
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_MethodNameMismatch) SizeVT() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.MethodName)
-	if l > 0 {
-		n += 1 + l + sov(uint64(l))
-	}
-	n += len(m.unknownFields)
-	return n
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_RequiresFullAccess) SizeVT() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	n += len(m.unknownFields)
-	return n
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_NotEnoughAllowance) SizeVT() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.AccountId)
-	if l > 0 {
-		n += 1 + l + sov(uint64(l))
-	}
-	if m.PublicKey != nil {
-		l = m.PublicKey.SizeVT()
-		n += 1 + l + sov(uint64(l))
-	}
-	l = len(m.U128Allowance)
-	if l > 0 {
-		n += 1 + l + sov(uint64(l))
-	}
-	l = len(m.U128Cost)
-	if l > 0 {
-		n += 1 + l + sov(uint64(l))
-	}
-	n += len(m.unknownFields)
-	return n
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_DepositWithFunctionCall) SizeVT() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	n += len(m.unknownFields)
-	return n
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError) SizeVT() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if vtmsg, ok := m.Variant.(interface{ SizeVT() int }); ok {
-		n += vtmsg.SizeVT()
-	}
-	n += len(m.unknownFields)
-	return n
-}
-
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_AccessKeyNotFound_) SizeVT() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.AccessKeyNotFound != nil {
-		l = m.AccessKeyNotFound.SizeVT()
-		n += 1 + l + sov(uint64(l))
-	}
-	return n
-}
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_ReceiverMismatch_) SizeVT() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.ReceiverMismatch != nil {
-		l = m.ReceiverMismatch.SizeVT()
-		n += 1 + l + sov(uint64(l))
-	}
-	return n
-}
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_MethodNameMismatch_) SizeVT() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.MethodNameMismatch != nil {
-		l = m.MethodNameMismatch.SizeVT()
-		n += 1 + l + sov(uint64(l))
-	}
-	return n
-}
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_RequiresFullAccess_) SizeVT() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.RequiresFullAccess != nil {
-		l = m.RequiresFullAccess.SizeVT()
-		n += 1 + l + sov(uint64(l))
-	}
-	return n
-}
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_NotEnoughAllowance_) SizeVT() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.NotEnoughAllowance != nil {
-		l = m.NotEnoughAllowance.SizeVT()
-		n += 1 + l + sov(uint64(l))
-	}
-	return n
-}
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_DepositWithFunctionCall_) SizeVT() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.DepositWithFunctionCall != nil {
-		l = m.DepositWithFunctionCall.SizeVT()
-		n += 1 + l + sov(uint64(l))
-	}
-	return n
-}
 func (m *TxExecutionError_InvalidTxError_InvalidSignerId) SizeVT() (n int) {
 	if m == nil {
 		return 0
@@ -11539,6 +13296,33 @@ func (m *TxExecutionError_InvalidTxError_ActionsValidation_FunctionCallZeroAttac
 	return n
 }
 
+func (m *TxExecutionError_InvalidTxError_ActionsValidation_DelegateActionMustBeOnlyOne) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	n += len(m.unknownFields)
+	return n
+}
+
+func (m *TxExecutionError_InvalidTxError_ActionsValidation_UnsupportedProtocolFeature) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.ProtocolFeature)
+	if l > 0 {
+		n += 1 + l + sov(uint64(l))
+	}
+	if m.Version != 0 {
+		n += 1 + sov(uint64(m.Version))
+	}
+	n += len(m.unknownFields)
+	return n
+}
+
 func (m *TxExecutionError_InvalidTxError_ActionsValidation) SizeVT() (n int) {
 	if m == nil {
 		return 0
@@ -11696,6 +13480,30 @@ func (m *TxExecutionError_InvalidTxError_ActionsValidation_FunctionCallZeroAttac
 	}
 	return n
 }
+func (m *TxExecutionError_InvalidTxError_ActionsValidation_DelegateActionMustBeOnlyOne_) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.DelegateActionMustBeOnlyOne != nil {
+		l = m.DelegateActionMustBeOnlyOne.SizeVT()
+		n += 1 + l + sov(uint64(l))
+	}
+	return n
+}
+func (m *TxExecutionError_InvalidTxError_ActionsValidation_UnsupportedProtocolFeature_) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.UnsupportedProtocolFeature != nil {
+		l = m.UnsupportedProtocolFeature.SizeVT()
+		n += 1 + l + sov(uint64(l))
+	}
+	return n
+}
 func (m *TxExecutionError_InvalidTxError_TransactionSizeExceeded) SizeVT() (n int) {
 	if m == nil {
 		return 0
@@ -11725,7 +13533,7 @@ func (m *TxExecutionError_InvalidTxError) SizeVT() (n int) {
 	return n
 }
 
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_) SizeVT() (n int) {
+func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError) SizeVT() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -11929,6 +13737,909 @@ func (m *TxExecutionError_InvalidTxError_) SizeVT() (n int) {
 		n += 1 + l + sov(uint64(l))
 	}
 	return n
+}
+func (m *InvalidAccessKeyError_AccessKeyNotFound) UnmarshalVT(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflow
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: InvalidAccessKeyError_AccessKeyNotFound: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: InvalidAccessKeyError_AccessKeyNotFound: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field AccountId", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.AccountId = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field PublicKey", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.PublicKey == nil {
+				m.PublicKey = &common.PublicKey{}
+			}
+			if err := m.PublicKey.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skip(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLength
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *InvalidAccessKeyError_ReceiverMismatch) UnmarshalVT(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflow
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: InvalidAccessKeyError_ReceiverMismatch: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: InvalidAccessKeyError_ReceiverMismatch: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field TxReceiver", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.TxReceiver = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field AkReceiver", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.AkReceiver = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skip(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLength
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *InvalidAccessKeyError_MethodNameMismatch) UnmarshalVT(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflow
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: InvalidAccessKeyError_MethodNameMismatch: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: InvalidAccessKeyError_MethodNameMismatch: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field MethodName", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.MethodName = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skip(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLength
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *InvalidAccessKeyError_RequiresFullAccess) UnmarshalVT(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflow
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: InvalidAccessKeyError_RequiresFullAccess: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: InvalidAccessKeyError_RequiresFullAccess: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skip(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLength
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *InvalidAccessKeyError_NotEnoughAllowance) UnmarshalVT(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflow
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: InvalidAccessKeyError_NotEnoughAllowance: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: InvalidAccessKeyError_NotEnoughAllowance: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field AccountId", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.AccountId = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field PublicKey", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.PublicKey == nil {
+				m.PublicKey = &common.PublicKey{}
+			}
+			if err := m.PublicKey.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field U128Allowance", wireType)
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				byteLen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if byteLen < 0 {
+				return ErrInvalidLength
+			}
+			postIndex := iNdEx + byteLen
+			if postIndex < 0 {
+				return ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.U128Allowance = append(m.U128Allowance[:0], dAtA[iNdEx:postIndex]...)
+			if m.U128Allowance == nil {
+				m.U128Allowance = []byte{}
+			}
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field U128Cost", wireType)
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				byteLen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if byteLen < 0 {
+				return ErrInvalidLength
+			}
+			postIndex := iNdEx + byteLen
+			if postIndex < 0 {
+				return ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.U128Cost = append(m.U128Cost[:0], dAtA[iNdEx:postIndex]...)
+			if m.U128Cost == nil {
+				m.U128Cost = []byte{}
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skip(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLength
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *InvalidAccessKeyError_DepositWithFunctionCall) UnmarshalVT(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflow
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: InvalidAccessKeyError_DepositWithFunctionCall: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: InvalidAccessKeyError_DepositWithFunctionCall: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skip(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLength
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *InvalidAccessKeyError) UnmarshalVT(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflow
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: InvalidAccessKeyError: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: InvalidAccessKeyError: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field AccessKeyNotFound", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if oneof, ok := m.Variant.(*InvalidAccessKeyError_AccessKeyNotFound_); ok {
+				if err := oneof.AccessKeyNotFound.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+			} else {
+				v := &InvalidAccessKeyError_AccessKeyNotFound{}
+				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+				m.Variant = &InvalidAccessKeyError_AccessKeyNotFound_{AccessKeyNotFound: v}
+			}
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ReceiverMismatch", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if oneof, ok := m.Variant.(*InvalidAccessKeyError_ReceiverMismatch_); ok {
+				if err := oneof.ReceiverMismatch.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+			} else {
+				v := &InvalidAccessKeyError_ReceiverMismatch{}
+				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+				m.Variant = &InvalidAccessKeyError_ReceiverMismatch_{ReceiverMismatch: v}
+			}
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field MethodNameMismatch", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if oneof, ok := m.Variant.(*InvalidAccessKeyError_MethodNameMismatch_); ok {
+				if err := oneof.MethodNameMismatch.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+			} else {
+				v := &InvalidAccessKeyError_MethodNameMismatch{}
+				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+				m.Variant = &InvalidAccessKeyError_MethodNameMismatch_{MethodNameMismatch: v}
+			}
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field RequiresFullAccess", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if oneof, ok := m.Variant.(*InvalidAccessKeyError_RequiresFullAccess_); ok {
+				if err := oneof.RequiresFullAccess.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+			} else {
+				v := &InvalidAccessKeyError_RequiresFullAccess{}
+				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+				m.Variant = &InvalidAccessKeyError_RequiresFullAccess_{RequiresFullAccess: v}
+			}
+			iNdEx = postIndex
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field NotEnoughAllowance", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if oneof, ok := m.Variant.(*InvalidAccessKeyError_NotEnoughAllowance_); ok {
+				if err := oneof.NotEnoughAllowance.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+			} else {
+				v := &InvalidAccessKeyError_NotEnoughAllowance{}
+				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+				m.Variant = &InvalidAccessKeyError_NotEnoughAllowance_{NotEnoughAllowance: v}
+			}
+			iNdEx = postIndex
+		case 6:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DepositWithFunctionCall", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if oneof, ok := m.Variant.(*InvalidAccessKeyError_DepositWithFunctionCall_); ok {
+				if err := oneof.DepositWithFunctionCall.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+			} else {
+				v := &InvalidAccessKeyError_DepositWithFunctionCall{}
+				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+				m.Variant = &InvalidAccessKeyError_DepositWithFunctionCall_{DepositWithFunctionCall: v}
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skip(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLength
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
 }
 func (m *TxExecutionError_ActionError_ActionErrorKind_AccountAlreadyExists) UnmarshalVT(dAtA []byte) error {
 	l := len(dAtA)
@@ -13670,6 +16381,488 @@ func (m *TxExecutionError_ActionError_ActionErrorKind_DeleteAccountWithLargeStat
 	}
 	return nil
 }
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidSignature) UnmarshalVT(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflow
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidSignature: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidSignature: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skip(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLength
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionSenderDoesNotMatchTxReceiver) UnmarshalVT(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflow
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: TxExecutionError_ActionError_ActionErrorKind_DelegateActionSenderDoesNotMatchTxReceiver: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: TxExecutionError_ActionError_ActionErrorKind_DelegateActionSenderDoesNotMatchTxReceiver: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field SenderId", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.SenderId = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ReceiverId", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ReceiverId = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skip(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLength
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionExpired) UnmarshalVT(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflow
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: TxExecutionError_ActionError_ActionErrorKind_DelegateActionExpired: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: TxExecutionError_ActionError_ActionErrorKind_DelegateActionExpired: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skip(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLength
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionAccessKeyError) UnmarshalVT(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflow
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: TxExecutionError_ActionError_ActionErrorKind_DelegateActionAccessKeyError: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: TxExecutionError_ActionError_ActionErrorKind_DelegateActionAccessKeyError: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Error", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Error == nil {
+				m.Error = &InvalidAccessKeyError{}
+			}
+			if err := m.Error.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skip(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLength
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidNonce) UnmarshalVT(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflow
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidNonce: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidNonce: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DelegateNonce", wireType)
+			}
+			m.DelegateNonce = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.DelegateNonce |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field AkNonce", wireType)
+			}
+			m.AkNonce = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.AkNonce |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skip(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLength
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *TxExecutionError_ActionError_ActionErrorKind_DelegateActionNonceTooLarge) UnmarshalVT(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflow
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: TxExecutionError_ActionError_ActionErrorKind_DelegateActionNonceTooLarge: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: TxExecutionError_ActionError_ActionErrorKind_DelegateActionNonceTooLarge: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DelegateNonce", wireType)
+			}
+			m.DelegateNonce = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.DelegateNonce |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field UpperBound", wireType)
+			}
+			m.UpperBound = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.UpperBound |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skip(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLength
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
 func (m *TxExecutionError_ActionError_ActionErrorKind) UnmarshalVT(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -14355,6 +17548,252 @@ func (m *TxExecutionError_ActionError_ActionErrorKind) UnmarshalVT(dAtA []byte) 
 				m.Variant = &TxExecutionError_ActionError_ActionErrorKind_DeleteAccountWithLargeState_{DeleteAccountWithLargeState: v}
 			}
 			iNdEx = postIndex
+		case 17:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DelegateActionInvalidSignature", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if oneof, ok := m.Variant.(*TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidSignature_); ok {
+				if err := oneof.DelegateActionInvalidSignature.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+			} else {
+				v := &TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidSignature{}
+				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+				m.Variant = &TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidSignature_{DelegateActionInvalidSignature: v}
+			}
+			iNdEx = postIndex
+		case 18:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DelegateActionSenderDoesNotMatchTxReceiver", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if oneof, ok := m.Variant.(*TxExecutionError_ActionError_ActionErrorKind_DelegateActionSenderDoesNotMatchTxReceiver_); ok {
+				if err := oneof.DelegateActionSenderDoesNotMatchTxReceiver.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+			} else {
+				v := &TxExecutionError_ActionError_ActionErrorKind_DelegateActionSenderDoesNotMatchTxReceiver{}
+				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+				m.Variant = &TxExecutionError_ActionError_ActionErrorKind_DelegateActionSenderDoesNotMatchTxReceiver_{DelegateActionSenderDoesNotMatchTxReceiver: v}
+			}
+			iNdEx = postIndex
+		case 19:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DelegateActionExpired", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if oneof, ok := m.Variant.(*TxExecutionError_ActionError_ActionErrorKind_DelegateActionExpired_); ok {
+				if err := oneof.DelegateActionExpired.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+			} else {
+				v := &TxExecutionError_ActionError_ActionErrorKind_DelegateActionExpired{}
+				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+				m.Variant = &TxExecutionError_ActionError_ActionErrorKind_DelegateActionExpired_{DelegateActionExpired: v}
+			}
+			iNdEx = postIndex
+		case 20:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DelegateActionAccessKeyError", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if oneof, ok := m.Variant.(*TxExecutionError_ActionError_ActionErrorKind_DelegateActionAccessKeyError_); ok {
+				if err := oneof.DelegateActionAccessKeyError.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+			} else {
+				v := &TxExecutionError_ActionError_ActionErrorKind_DelegateActionAccessKeyError{}
+				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+				m.Variant = &TxExecutionError_ActionError_ActionErrorKind_DelegateActionAccessKeyError_{DelegateActionAccessKeyError: v}
+			}
+			iNdEx = postIndex
+		case 21:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DelegateActionInvalidNonce", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if oneof, ok := m.Variant.(*TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidNonce_); ok {
+				if err := oneof.DelegateActionInvalidNonce.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+			} else {
+				v := &TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidNonce{}
+				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+				m.Variant = &TxExecutionError_ActionError_ActionErrorKind_DelegateActionInvalidNonce_{DelegateActionInvalidNonce: v}
+			}
+			iNdEx = postIndex
+		case 22:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DelegateActionNonceTooLarge", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if oneof, ok := m.Variant.(*TxExecutionError_ActionError_ActionErrorKind_DelegateActionNonceTooLarge_); ok {
+				if err := oneof.DelegateActionNonceTooLarge.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+			} else {
+				v := &TxExecutionError_ActionError_ActionErrorKind_DelegateActionNonceTooLarge{}
+				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+				m.Variant = &TxExecutionError_ActionError_ActionErrorKind_DelegateActionNonceTooLarge_{DelegateActionNonceTooLarge: v}
+			}
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skip(dAtA[iNdEx:])
@@ -14460,909 +17899,6 @@ func (m *TxExecutionError_ActionError) UnmarshalVT(dAtA []byte) error {
 			}
 			if err := m.Kind.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skip(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLength
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_AccessKeyNotFound) UnmarshalVT(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflow
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: TxExecutionError_InvalidTxError_InvalidAccessKeyError_AccessKeyNotFound: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: TxExecutionError_InvalidTxError_InvalidAccessKeyError_AccessKeyNotFound: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field AccountId", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLength
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLength
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.AccountId = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field PublicKey", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLength
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLength
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.PublicKey == nil {
-				m.PublicKey = &common.PublicKey{}
-			}
-			if err := m.PublicKey.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skip(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLength
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_ReceiverMismatch) UnmarshalVT(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflow
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: TxExecutionError_InvalidTxError_InvalidAccessKeyError_ReceiverMismatch: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: TxExecutionError_InvalidTxError_InvalidAccessKeyError_ReceiverMismatch: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field TxReceiver", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLength
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLength
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.TxReceiver = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field AkReceiver", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLength
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLength
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.AkReceiver = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skip(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLength
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_MethodNameMismatch) UnmarshalVT(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflow
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: TxExecutionError_InvalidTxError_InvalidAccessKeyError_MethodNameMismatch: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: TxExecutionError_InvalidTxError_InvalidAccessKeyError_MethodNameMismatch: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field MethodName", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLength
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLength
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.MethodName = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skip(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLength
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_RequiresFullAccess) UnmarshalVT(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflow
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: TxExecutionError_InvalidTxError_InvalidAccessKeyError_RequiresFullAccess: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: TxExecutionError_InvalidTxError_InvalidAccessKeyError_RequiresFullAccess: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		default:
-			iNdEx = preIndex
-			skippy, err := skip(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLength
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_NotEnoughAllowance) UnmarshalVT(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflow
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: TxExecutionError_InvalidTxError_InvalidAccessKeyError_NotEnoughAllowance: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: TxExecutionError_InvalidTxError_InvalidAccessKeyError_NotEnoughAllowance: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field AccountId", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLength
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLength
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.AccountId = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field PublicKey", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLength
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLength
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.PublicKey == nil {
-				m.PublicKey = &common.PublicKey{}
-			}
-			if err := m.PublicKey.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 3:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field U128Allowance", wireType)
-			}
-			var byteLen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				byteLen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if byteLen < 0 {
-				return ErrInvalidLength
-			}
-			postIndex := iNdEx + byteLen
-			if postIndex < 0 {
-				return ErrInvalidLength
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.U128Allowance = append(m.U128Allowance[:0], dAtA[iNdEx:postIndex]...)
-			if m.U128Allowance == nil {
-				m.U128Allowance = []byte{}
-			}
-			iNdEx = postIndex
-		case 4:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field U128Cost", wireType)
-			}
-			var byteLen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				byteLen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if byteLen < 0 {
-				return ErrInvalidLength
-			}
-			postIndex := iNdEx + byteLen
-			if postIndex < 0 {
-				return ErrInvalidLength
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.U128Cost = append(m.U128Cost[:0], dAtA[iNdEx:postIndex]...)
-			if m.U128Cost == nil {
-				m.U128Cost = []byte{}
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skip(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLength
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError_DepositWithFunctionCall) UnmarshalVT(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflow
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: TxExecutionError_InvalidTxError_InvalidAccessKeyError_DepositWithFunctionCall: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: TxExecutionError_InvalidTxError_InvalidAccessKeyError_DepositWithFunctionCall: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		default:
-			iNdEx = preIndex
-			skippy, err := skip(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLength
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *TxExecutionError_InvalidTxError_InvalidAccessKeyError) UnmarshalVT(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflow
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: TxExecutionError_InvalidTxError_InvalidAccessKeyError: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: TxExecutionError_InvalidTxError_InvalidAccessKeyError: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field AccessKeyNotFound", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLength
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLength
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if oneof, ok := m.Variant.(*TxExecutionError_InvalidTxError_InvalidAccessKeyError_AccessKeyNotFound_); ok {
-				if err := oneof.AccessKeyNotFound.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
-					return err
-				}
-			} else {
-				v := &TxExecutionError_InvalidTxError_InvalidAccessKeyError_AccessKeyNotFound{}
-				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
-					return err
-				}
-				m.Variant = &TxExecutionError_InvalidTxError_InvalidAccessKeyError_AccessKeyNotFound_{AccessKeyNotFound: v}
-			}
-			iNdEx = postIndex
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ReceiverMismatch", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLength
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLength
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if oneof, ok := m.Variant.(*TxExecutionError_InvalidTxError_InvalidAccessKeyError_ReceiverMismatch_); ok {
-				if err := oneof.ReceiverMismatch.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
-					return err
-				}
-			} else {
-				v := &TxExecutionError_InvalidTxError_InvalidAccessKeyError_ReceiverMismatch{}
-				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
-					return err
-				}
-				m.Variant = &TxExecutionError_InvalidTxError_InvalidAccessKeyError_ReceiverMismatch_{ReceiverMismatch: v}
-			}
-			iNdEx = postIndex
-		case 3:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field MethodNameMismatch", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLength
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLength
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if oneof, ok := m.Variant.(*TxExecutionError_InvalidTxError_InvalidAccessKeyError_MethodNameMismatch_); ok {
-				if err := oneof.MethodNameMismatch.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
-					return err
-				}
-			} else {
-				v := &TxExecutionError_InvalidTxError_InvalidAccessKeyError_MethodNameMismatch{}
-				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
-					return err
-				}
-				m.Variant = &TxExecutionError_InvalidTxError_InvalidAccessKeyError_MethodNameMismatch_{MethodNameMismatch: v}
-			}
-			iNdEx = postIndex
-		case 4:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field RequiresFullAccess", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLength
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLength
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if oneof, ok := m.Variant.(*TxExecutionError_InvalidTxError_InvalidAccessKeyError_RequiresFullAccess_); ok {
-				if err := oneof.RequiresFullAccess.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
-					return err
-				}
-			} else {
-				v := &TxExecutionError_InvalidTxError_InvalidAccessKeyError_RequiresFullAccess{}
-				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
-					return err
-				}
-				m.Variant = &TxExecutionError_InvalidTxError_InvalidAccessKeyError_RequiresFullAccess_{RequiresFullAccess: v}
-			}
-			iNdEx = postIndex
-		case 5:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field NotEnoughAllowance", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLength
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLength
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if oneof, ok := m.Variant.(*TxExecutionError_InvalidTxError_InvalidAccessKeyError_NotEnoughAllowance_); ok {
-				if err := oneof.NotEnoughAllowance.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
-					return err
-				}
-			} else {
-				v := &TxExecutionError_InvalidTxError_InvalidAccessKeyError_NotEnoughAllowance{}
-				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
-					return err
-				}
-				m.Variant = &TxExecutionError_InvalidTxError_InvalidAccessKeyError_NotEnoughAllowance_{NotEnoughAllowance: v}
-			}
-			iNdEx = postIndex
-		case 6:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field DepositWithFunctionCall", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLength
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLength
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if oneof, ok := m.Variant.(*TxExecutionError_InvalidTxError_InvalidAccessKeyError_DepositWithFunctionCall_); ok {
-				if err := oneof.DepositWithFunctionCall.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
-					return err
-				}
-			} else {
-				v := &TxExecutionError_InvalidTxError_InvalidAccessKeyError_DepositWithFunctionCall{}
-				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
-					return err
-				}
-				m.Variant = &TxExecutionError_InvalidTxError_InvalidAccessKeyError_DepositWithFunctionCall_{DepositWithFunctionCall: v}
 			}
 			iNdEx = postIndex
 		default:
@@ -17232,6 +19768,159 @@ func (m *TxExecutionError_InvalidTxError_ActionsValidation_FunctionCallZeroAttac
 	}
 	return nil
 }
+func (m *TxExecutionError_InvalidTxError_ActionsValidation_DelegateActionMustBeOnlyOne) UnmarshalVT(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflow
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: TxExecutionError_InvalidTxError_ActionsValidation_DelegateActionMustBeOnlyOne: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: TxExecutionError_InvalidTxError_ActionsValidation_DelegateActionMustBeOnlyOne: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skip(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLength
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *TxExecutionError_InvalidTxError_ActionsValidation_UnsupportedProtocolFeature) UnmarshalVT(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflow
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: TxExecutionError_InvalidTxError_ActionsValidation_UnsupportedProtocolFeature: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: TxExecutionError_InvalidTxError_ActionsValidation_UnsupportedProtocolFeature: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ProtocolFeature", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ProtocolFeature = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Version", wireType)
+			}
+			m.Version = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Version |= uint32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skip(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLength
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
 func (m *TxExecutionError_InvalidTxError_ActionsValidation) UnmarshalVT(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -17753,6 +20442,88 @@ func (m *TxExecutionError_InvalidTxError_ActionsValidation) UnmarshalVT(dAtA []b
 				m.Variant = &TxExecutionError_InvalidTxError_ActionsValidation_FunctionCallZeroAttachedGas_{FunctionCallZeroAttachedGas: v}
 			}
 			iNdEx = postIndex
+		case 13:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DelegateActionMustBeOnlyOne", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if oneof, ok := m.Variant.(*TxExecutionError_InvalidTxError_ActionsValidation_DelegateActionMustBeOnlyOne_); ok {
+				if err := oneof.DelegateActionMustBeOnlyOne.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+			} else {
+				v := &TxExecutionError_InvalidTxError_ActionsValidation_DelegateActionMustBeOnlyOne{}
+				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+				m.Variant = &TxExecutionError_InvalidTxError_ActionsValidation_DelegateActionMustBeOnlyOne_{DelegateActionMustBeOnlyOne: v}
+			}
+			iNdEx = postIndex
+		case 14:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field UnsupportedProtocolFeature", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if oneof, ok := m.Variant.(*TxExecutionError_InvalidTxError_ActionsValidation_UnsupportedProtocolFeature_); ok {
+				if err := oneof.UnsupportedProtocolFeature.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+			} else {
+				v := &TxExecutionError_InvalidTxError_ActionsValidation_UnsupportedProtocolFeature{}
+				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+				m.Variant = &TxExecutionError_InvalidTxError_ActionsValidation_UnsupportedProtocolFeature_{UnsupportedProtocolFeature: v}
+			}
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skip(dAtA[iNdEx:])
@@ -17922,16 +20693,16 @@ func (m *TxExecutionError_InvalidTxError) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if oneof, ok := m.Variant.(*TxExecutionError_InvalidTxError_InvalidAccessKeyError_); ok {
+			if oneof, ok := m.Variant.(*TxExecutionError_InvalidTxError_InvalidAccessKeyError); ok {
 				if err := oneof.InvalidAccessKeyError.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
 			} else {
-				v := &TxExecutionError_InvalidTxError_InvalidAccessKeyError{}
+				v := &InvalidAccessKeyError{}
 				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
-				m.Variant = &TxExecutionError_InvalidTxError_InvalidAccessKeyError_{InvalidAccessKeyError: v}
+				m.Variant = &TxExecutionError_InvalidTxError_InvalidAccessKeyError{InvalidAccessKeyError: v}
 			}
 			iNdEx = postIndex
 		case 2:

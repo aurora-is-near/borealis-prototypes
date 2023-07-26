@@ -72,24 +72,6 @@ func (m *CompilationError_WasmerCompileError) CloneMessageVT() proto.Message {
 	return m.CloneVT()
 }
 
-func (m *CompilationError_UnsupportedCompiler) CloneVT() *CompilationError_UnsupportedCompiler {
-	if m == nil {
-		return (*CompilationError_UnsupportedCompiler)(nil)
-	}
-	r := &CompilationError_UnsupportedCompiler{
-		Msg: m.Msg,
-	}
-	if len(m.unknownFields) > 0 {
-		r.unknownFields = make([]byte, len(m.unknownFields))
-		copy(r.unknownFields, m.unknownFields)
-	}
-	return r
-}
-
-func (m *CompilationError_UnsupportedCompiler) CloneMessageVT() proto.Message {
-	return m.CloneVT()
-}
-
 func (m *CompilationError) CloneVT() *CompilationError {
 	if m == nil {
 		return (*CompilationError)(nil)
@@ -137,16 +119,6 @@ func (m *CompilationError_WasmerCompileError_) CloneVT() isCompilationError_Vari
 	}
 	r := &CompilationError_WasmerCompileError_{
 		WasmerCompileError: m.WasmerCompileError.CloneVT(),
-	}
-	return r
-}
-
-func (m *CompilationError_UnsupportedCompiler_) CloneVT() isCompilationError_Variant {
-	if m == nil {
-		return (*CompilationError_UnsupportedCompiler_)(nil)
-	}
-	r := &CompilationError_UnsupportedCompiler_{
-		UnsupportedCompiler: m.UnsupportedCompiler.CloneVT(),
 	}
 	return r
 }
@@ -203,25 +175,6 @@ func (this *CompilationError_WasmerCompileError) EqualVT(that *CompilationError_
 
 func (this *CompilationError_WasmerCompileError) EqualMessageVT(thatMsg proto.Message) bool {
 	that, ok := thatMsg.(*CompilationError_WasmerCompileError)
-	if !ok {
-		return false
-	}
-	return this.EqualVT(that)
-}
-func (this *CompilationError_UnsupportedCompiler) EqualVT(that *CompilationError_UnsupportedCompiler) bool {
-	if this == that {
-		return true
-	} else if this == nil || that == nil {
-		return false
-	}
-	if this.Msg != that.Msg {
-		return false
-	}
-	return string(this.unknownFields) == string(that.unknownFields)
-}
-
-func (this *CompilationError_UnsupportedCompiler) EqualMessageVT(thatMsg proto.Message) bool {
-	that, ok := thatMsg.(*CompilationError_UnsupportedCompiler)
 	if !ok {
 		return false
 	}
@@ -322,31 +275,6 @@ func (this *CompilationError_WasmerCompileError_) EqualVT(thatIface isCompilatio
 		}
 		if q == nil {
 			q = &CompilationError_WasmerCompileError{}
-		}
-		if !p.EqualVT(q) {
-			return false
-		}
-	}
-	return true
-}
-
-func (this *CompilationError_UnsupportedCompiler_) EqualVT(thatIface isCompilationError_Variant) bool {
-	that, ok := thatIface.(*CompilationError_UnsupportedCompiler_)
-	if !ok {
-		return false
-	}
-	if this == that {
-		return true
-	}
-	if this == nil && that != nil || this != nil && that == nil {
-		return false
-	}
-	if p, q := this.UnsupportedCompiler, that.UnsupportedCompiler; p != q {
-		if p == nil {
-			p = &CompilationError_UnsupportedCompiler{}
-		}
-		if q == nil {
-			q = &CompilationError_UnsupportedCompiler{}
 		}
 		if !p.EqualVT(q) {
 			return false
@@ -473,46 +401,6 @@ func (m *CompilationError_WasmerCompileError) MarshalToSizedBufferVT(dAtA []byte
 	return len(dAtA) - i, nil
 }
 
-func (m *CompilationError_UnsupportedCompiler) MarshalVT() (dAtA []byte, err error) {
-	if m == nil {
-		return nil, nil
-	}
-	size := m.SizeVT()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *CompilationError_UnsupportedCompiler) MarshalToVT(dAtA []byte) (int, error) {
-	size := m.SizeVT()
-	return m.MarshalToSizedBufferVT(dAtA[:size])
-}
-
-func (m *CompilationError_UnsupportedCompiler) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
-	if m == nil {
-		return 0, nil
-	}
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.unknownFields != nil {
-		i -= len(m.unknownFields)
-		copy(dAtA[i:], m.unknownFields)
-	}
-	if len(m.Msg) > 0 {
-		i -= len(m.Msg)
-		copy(dAtA[i:], m.Msg)
-		i = encodeVarint(dAtA, i, uint64(len(m.Msg)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
 func (m *CompilationError) MarshalVT() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
@@ -609,25 +497,6 @@ func (m *CompilationError_WasmerCompileError_) MarshalToSizedBufferVT(dAtA []byt
 		i = encodeVarint(dAtA, i, uint64(size))
 		i--
 		dAtA[i] = 0x1a
-	}
-	return len(dAtA) - i, nil
-}
-func (m *CompilationError_UnsupportedCompiler_) MarshalToVT(dAtA []byte) (int, error) {
-	size := m.SizeVT()
-	return m.MarshalToSizedBufferVT(dAtA[:size])
-}
-
-func (m *CompilationError_UnsupportedCompiler_) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	if m.UnsupportedCompiler != nil {
-		size, err := m.UnsupportedCompiler.MarshalToSizedBufferVT(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-		i = encodeVarint(dAtA, i, uint64(size))
-		i--
-		dAtA[i] = 0x22
 	}
 	return len(dAtA) - i, nil
 }
@@ -749,46 +618,6 @@ func (m *CompilationError_WasmerCompileError) MarshalToSizedBufferVTStrict(dAtA 
 	return len(dAtA) - i, nil
 }
 
-func (m *CompilationError_UnsupportedCompiler) MarshalVTStrict() (dAtA []byte, err error) {
-	if m == nil {
-		return nil, nil
-	}
-	size := m.SizeVT()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBufferVTStrict(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *CompilationError_UnsupportedCompiler) MarshalToVTStrict(dAtA []byte) (int, error) {
-	size := m.SizeVT()
-	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
-}
-
-func (m *CompilationError_UnsupportedCompiler) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
-	if m == nil {
-		return 0, nil
-	}
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.unknownFields != nil {
-		i -= len(m.unknownFields)
-		copy(dAtA[i:], m.unknownFields)
-	}
-	if len(m.Msg) > 0 {
-		i -= len(m.Msg)
-		copy(dAtA[i:], m.Msg)
-		i = encodeVarint(dAtA, i, uint64(len(m.Msg)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
 func (m *CompilationError) MarshalVTStrict() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
@@ -818,13 +647,6 @@ func (m *CompilationError) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error
 	if m.unknownFields != nil {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
-	}
-	if msg, ok := m.Variant.(*CompilationError_UnsupportedCompiler_); ok {
-		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
 	}
 	if msg, ok := m.Variant.(*CompilationError_WasmerCompileError_); ok {
 		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
@@ -907,25 +729,6 @@ func (m *CompilationError_WasmerCompileError_) MarshalToSizedBufferVTStrict(dAtA
 	}
 	return len(dAtA) - i, nil
 }
-func (m *CompilationError_UnsupportedCompiler_) MarshalToVTStrict(dAtA []byte) (int, error) {
-	size := m.SizeVT()
-	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
-}
-
-func (m *CompilationError_UnsupportedCompiler_) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	if m.UnsupportedCompiler != nil {
-		size, err := m.UnsupportedCompiler.MarshalToSizedBufferVTStrict(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-		i = encodeVarint(dAtA, i, uint64(size))
-		i--
-		dAtA[i] = 0x22
-	}
-	return len(dAtA) - i, nil
-}
 func (m *CompilationError_CodeDoesNotExist) SizeVT() (n int) {
 	if m == nil {
 		return 0
@@ -954,20 +757,6 @@ func (m *CompilationError_PrepareError) SizeVT() (n int) {
 }
 
 func (m *CompilationError_WasmerCompileError) SizeVT() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.Msg)
-	if l > 0 {
-		n += 1 + l + sov(uint64(l))
-	}
-	n += len(m.unknownFields)
-	return n
-}
-
-func (m *CompilationError_UnsupportedCompiler) SizeVT() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1026,18 +815,6 @@ func (m *CompilationError_WasmerCompileError_) SizeVT() (n int) {
 	_ = l
 	if m.WasmerCompileError != nil {
 		l = m.WasmerCompileError.SizeVT()
-		n += 1 + l + sov(uint64(l))
-	}
-	return n
-}
-func (m *CompilationError_UnsupportedCompiler_) SizeVT() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.UnsupportedCompiler != nil {
-		l = m.UnsupportedCompiler.SizeVT()
 		n += 1 + l + sov(uint64(l))
 	}
 	return n
@@ -1278,89 +1055,6 @@ func (m *CompilationError_WasmerCompileError) UnmarshalVT(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *CompilationError_UnsupportedCompiler) UnmarshalVT(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflow
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: CompilationError_UnsupportedCompiler: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: CompilationError_UnsupportedCompiler: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Msg", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLength
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLength
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Msg = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skip(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLength
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
 func (m *CompilationError) UnmarshalVT(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -1511,47 +1205,6 @@ func (m *CompilationError) UnmarshalVT(dAtA []byte) error {
 					return err
 				}
 				m.Variant = &CompilationError_WasmerCompileError_{WasmerCompileError: v}
-			}
-			iNdEx = postIndex
-		case 4:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field UnsupportedCompiler", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLength
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLength
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if oneof, ok := m.Variant.(*CompilationError_UnsupportedCompiler_); ok {
-				if err := oneof.UnsupportedCompiler.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
-					return err
-				}
-			} else {
-				v := &CompilationError_UnsupportedCompiler{}
-				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
-					return err
-				}
-				m.Variant = &CompilationError_UnsupportedCompiler_{UnsupportedCompiler: v}
 			}
 			iNdEx = postIndex
 		default:
