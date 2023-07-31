@@ -54,6 +54,17 @@ use test_case::test_case;
     include_bytes!("data/84800642.v2")
     ; "Block containing NEW_DATA_RECEIPT_BYTE cost"
 )]
+#[test_case(
+    include_bytes!("data/88200321.v3"),
+    vec![
+        include_bytes!("data/88200321.0.v3"),
+        include_bytes!("data/88200321.1.v3"),
+        include_bytes!("data/88200321.2.v3"),
+        include_bytes!("data/88200321.3.v3"),
+    ],
+    include_bytes!("data/88200321.v2")
+    ; "Block containing NEW_ACTION_RECEIPT cost"
+)]
 fn test_decoding_aurora_and_converting_to_proto_equals_proto(header_v3: &[u8], shards_v3: Vec<&[u8]>, block_v2: &[u8]) {
     let expected_messages: Messages = shards_v3
         .into_iter()

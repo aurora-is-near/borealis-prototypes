@@ -1026,6 +1026,36 @@ impl From<CostGasUsed> for proto::CostGasUsed {
                     "NEW_RECEIPT" => proto::cost::Variant::ActionCost(proto::cost::ActionCost {
                         value: proto::ActionCosts::NewReceipt as i32,
                     }),
+                    "NEW_ACTION_RECEIPT" => proto::cost::Variant::ActionCost(proto::cost::ActionCost {
+                        value: proto::ActionCosts::NewActionReceipt as i32,
+                    }),
+                    "NEW_DATA_RECEIPT_BASE" => proto::cost::Variant::ActionCost(proto::cost::ActionCost {
+                        value: proto::ActionCosts::NewDataReceiptBase as i32,
+                    }),
+                    "ADD_FULL_ACCESS_KEY" => proto::cost::Variant::ActionCost(proto::cost::ActionCost {
+                        value: proto::ActionCosts::AddFullAccessKey as i32,
+                    }),
+                    "ADD_FUNCTION_CALL_KEY_BASE" => proto::cost::Variant::ActionCost(proto::cost::ActionCost {
+                        value: proto::ActionCosts::AddFunctionCallKeyBase as i32,
+                    }),
+                    "ADD_FUNCTION_CALL_KEY_BYTE" => proto::cost::Variant::ActionCost(proto::cost::ActionCost {
+                        value: proto::ActionCosts::AddFunctionCallKeyByte as i32,
+                    }),
+                    "DEPLOY_CONTRACT_BASE" => proto::cost::Variant::ActionCost(proto::cost::ActionCost {
+                        value: proto::ActionCosts::DeployContractBase as i32,
+                    }),
+                    "DEPLOY_CONTRACT_BYTE" => proto::cost::Variant::ActionCost(proto::cost::ActionCost {
+                        value: proto::ActionCosts::DeployContractByte as i32,
+                    }),
+                    "FUNCTION_CALL_BASE" => proto::cost::Variant::ActionCost(proto::cost::ActionCost {
+                        value: proto::ActionCosts::FunctionCallBase as i32,
+                    }),
+                    "FUNCTION_CALL_BYTE" => proto::cost::Variant::ActionCost(proto::cost::ActionCost {
+                        value: proto::ActionCosts::FunctionCallByte as i32,
+                    }),
+                    "DELEGATE" => proto::cost::Variant::ActionCost(proto::cost::ActionCost {
+                        value: proto::ActionCosts::Delegate as i32,
+                    }),
                     "BASE" => proto::cost::Variant::ExtCost(proto::cost::ExtCost {
                         value: proto::ExtCosts::Base as i32,
                     }),

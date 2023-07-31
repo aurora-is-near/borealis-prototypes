@@ -30,6 +30,10 @@ pub mod common;
     include_bytes!("data/84800642.v2")
     ; "Block containing NEW_DATA_RECEIPT_BYTE cost"
 )]
+#[test_case(
+    include_bytes!("data/88200321.v2")
+    ; "Block containing NEW_ACTION_RECEIPT cost"
+)]
 #[tokio::test]
 async fn test_published_messages_are_decoded_by_builder(block_v2: &[u8]) {
     let mut expected_payload = BusMessage::<NEARBlock>::deserialize(block_v2)
