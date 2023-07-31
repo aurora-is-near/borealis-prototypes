@@ -1,4 +1,4 @@
-use crate::common::aurora::{dump_block, upgrade_old_block};
+use crate::common::aurora::dump_block;
 use aurora_refiner_types::near_block;
 use borealis_proto_types::{CompressedMessage, Message, Messages};
 use borealis_rs::bus_message::BusMessage;
@@ -74,11 +74,10 @@ fn test_decoding_proto_and_converting_to_aurora_equals_aurora(
     shards_v3: Vec<&[u8]>,
     block_v2: &[u8],
 ) {
-    let mut expected_payload = BusMessage::<near_block::NEARBlock>::deserialize(block_v2)
+    let expected_payload = BusMessage::<near_block::NEARBlock>::deserialize(block_v2)
         .expect("Cannot decode expected data from CBOR")
         .payload;
 
-    upgrade_old_block(&mut expected_payload);
     dump_block(&expected_payload, "expected").unwrap();
 
     let messages: Messages = shards_v3

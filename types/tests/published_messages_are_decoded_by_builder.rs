@@ -1,4 +1,4 @@
-use crate::common::aurora::{dump_block, upgrade_old_block};
+use crate::common::aurora::dump_block;
 use crate::common::proto::DummyPublisher;
 use aurora_refiner_types::near_block::NEARBlock;
 use borealis_proto_types::{publish, BlocksBuilder};
@@ -36,11 +36,10 @@ pub mod common;
 )]
 #[tokio::test]
 async fn test_published_messages_are_decoded_by_builder(block_v2: &[u8]) {
-    let mut expected_payload = BusMessage::<NEARBlock>::deserialize(block_v2)
+    let expected_payload = BusMessage::<NEARBlock>::deserialize(block_v2)
         .expect("Cannot decode expected data from CBOR")
         .payload;
 
-    upgrade_old_block(&mut expected_payload);
     dump_block(&expected_payload, "published.expected").unwrap();
 
     let mut last_msg_id: Option<String> = None;

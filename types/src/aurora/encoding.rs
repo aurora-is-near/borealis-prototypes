@@ -1018,11 +1018,9 @@ impl From<CostGasUsed> for proto::CostGasUsed {
                     "DELETE_KEY" => proto::cost::Variant::ActionCost(proto::cost::ActionCost {
                         value: proto::ActionCosts::DeleteKey as i32,
                     }),
-                    "NEW_DATA_RECEIPT_BYTE" | "VALUE_RETURN" => {
-                        proto::cost::Variant::ActionCost(proto::cost::ActionCost {
-                            value: proto::ActionCosts::NewDataReceiptByte as i32,
-                        })
-                    }
+                    "VALUE_RETURN" => proto::cost::Variant::ActionCost(proto::cost::ActionCost {
+                        value: proto::ActionCosts::ValueReturn as i32,
+                    }),
                     "NEW_RECEIPT" => proto::cost::Variant::ActionCost(proto::cost::ActionCost {
                         value: proto::ActionCosts::NewReceipt as i32,
                     }),
@@ -1031,6 +1029,9 @@ impl From<CostGasUsed> for proto::CostGasUsed {
                     }),
                     "NEW_DATA_RECEIPT_BASE" => proto::cost::Variant::ActionCost(proto::cost::ActionCost {
                         value: proto::ActionCosts::NewDataReceiptBase as i32,
+                    }),
+                    "NEW_DATA_RECEIPT_BYTE" => proto::cost::Variant::ActionCost(proto::cost::ActionCost {
+                        value: proto::ActionCosts::NewDataReceiptByte as i32,
                     }),
                     "ADD_FULL_ACCESS_KEY" => proto::cost::Variant::ActionCost(proto::cost::ActionCost {
                         value: proto::ActionCosts::AddFullAccessKey as i32,
@@ -1059,16 +1060,12 @@ impl From<CostGasUsed> for proto::CostGasUsed {
                     "BASE" => proto::cost::Variant::ExtCost(proto::cost::ExtCost {
                         value: proto::ExtCosts::Base as i32,
                     }),
-                    "CONTRACT_LOADING_BASE" | "CONTRACT_COMPILE_BASE" => {
-                        proto::cost::Variant::ExtCost(proto::cost::ExtCost {
-                            value: proto::ExtCosts::ContractLoadingBase as i32,
-                        })
-                    }
-                    "CONTRACT_LOADING_BYTES" | "CONTRACT_COMPILE_BYTES" => {
-                        proto::cost::Variant::ExtCost(proto::cost::ExtCost {
-                            value: proto::ExtCosts::ContractLoadingBytes as i32,
-                        })
-                    }
+                    "CONTRACT_COMPILE_BASE" => proto::cost::Variant::ExtCost(proto::cost::ExtCost {
+                        value: proto::ExtCosts::ContractCompileBase as i32,
+                    }),
+                    "CONTRACT_COMPILE_BYTES" => proto::cost::Variant::ExtCost(proto::cost::ExtCost {
+                        value: proto::ExtCosts::ContractCompileBytes as i32,
+                    }),
                     "READ_MEMORY_BASE" => proto::cost::Variant::ExtCost(proto::cost::ExtCost {
                         value: proto::ExtCosts::ReadMemoryBase as i32,
                     }),
@@ -1242,6 +1239,12 @@ impl From<CostGasUsed> for proto::CostGasUsed {
                     }),
                     "ED25519_VERIFY_BYTE" => proto::cost::Variant::ExtCost(proto::cost::ExtCost {
                         value: proto::ExtCosts::Ed25519VerifyByte as i32,
+                    }),
+                    "CONTRACT_LOADING_BASE" => proto::cost::Variant::ExtCost(proto::cost::ExtCost {
+                        value: proto::ExtCosts::ContractLoadingBase as i32,
+                    }),
+                    "CONTRACT_LOADING_BYTES" => proto::cost::Variant::ExtCost(proto::cost::ExtCost {
+                        value: proto::ExtCosts::ContractLoadingBytes as i32,
                     }),
                     "WASM_INSTRUCTION" => proto::cost::Variant::WasmInstruction(proto::cost::WasmInstruction {}),
                     v => panic!("Unknown variant {v}"),
