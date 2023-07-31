@@ -29,6 +29,7 @@ async-nats-publish = ["async-nats", "async-trait"]
 
 [dev-dependencies]
 sha2 = "0.10"
+strum = "0.24"
 test-case = "3"
 tokio = { version = "1", features = ["macros", "test-util"] }
 

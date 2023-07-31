@@ -1800,7 +1800,9 @@ mod tests {
     use super::*;
     use crate::proto::signature::Variant;
     use near_crypto::{KeyType, Secp256K1Signature, SecretKey};
+    use near_primitives::config::{ActionCosts, ExtCosts};
     use sha2::Digest;
+    use strum::IntoEnumIterator;
 
     #[test]
     fn test_secp256k1_signature_is_raw() {
@@ -1839,6 +1841,22 @@ mod tests {
             Variant::Secp256k1(..) => {
                 panic!("Wrong variant Secp256k1, expected Ed25519");
             }
+        }
+    }
+
+    #[test]
+    fn test_every_gas_cost_variant_can_be_converted_to_proto_gas_cost() {
+        for cost in ActionCosts::iter() {
+            let gas_cost = CostGasUsed::action(format!("{:?}", cost).to_ascii_uppercase(), 0);
+            let _ = proto::CostGasUsed::from(gas_cost);
+        }
+
+        let gas_cost = CostGasUsed::wasm_host("WASM_INSTRUCTION".to_string(), 0);
+        let _ = proto::CostGasUsed::from(gas_cost);
+
+        for cost in ExtCosts::iter() {
+            let gas_cost = CostGasUsed::wasm_host(format!("{:?}", cost).to_ascii_uppercase(), 0);
+            let _ = proto::CostGasUsed::from(gas_cost);
         }
     }
 }

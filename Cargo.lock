@@ -497,6 +497,7 @@ dependencies = [
  "prost",
  "prost-build",
  "sha2 0.10.7",
+ "strum",
  "test-case",
  "thiserror",
  "tokio",
