@@ -8,12 +8,12 @@ async-nats = { workspace = true, optional = true }
 async-trait = { version = "0.1", optional = true }
 aurora-refiner-types = { workspace = true }
 borealis-rs = { workspace = true }
-bs58 = "0.4"
+bs58 = "0.5"
 bytes = "1"
 chrono = "0.4"
 ed25519-dalek = "1"
 futures-util = { workspace = true }
-itertools = "0.10"
+itertools = "0.11"
 log = "0.4"
 near-crypto = { workspace = true }
 near-primitives = { workspace = true }
