@@ -285,7 +285,7 @@ dependencies = [
 [[package]]
 name = "aurora-refiner-types"
 version = "0.23.4"
-source = "git+https://github.com/aurora-is-near/borealis-engine-lib.git?tag=v0.23.4#5016581e0f975f762f202921bab803f07f520c32"
+source = "git+https://github.com/aurora-is-near/borealis-engine-lib.git?rev=bdd62f0b8dab9eeef23fee827c9d1ab14be8d2a9#bdd62f0b8dab9eeef23fee827c9d1ab14be8d2a9"
 dependencies = [
  "aurora-engine",
  "aurora-engine-sdk",
@@ -464,7 +464,7 @@ dependencies = [
 [[package]]
 name = "borealis-rs"
 version = "0.16.1"
-source = "git+ssh://git@github.com/aurora-is-near/borealis.rs.git?tag=v0.16.6#de3cb01f1f41f0c0798c63ee14c5febe98a760a9"
+source = "git+ssh://git@github.com/aurora-is-near/borealis.rs.git?rev=8a8b9bcf6f020a5940b1566e17b7130e30e2c669#8a8b9bcf6f020a5940b1566e17b7130e30e2c669"
 dependencies = [
  "anyhow",
  "async-nats",
