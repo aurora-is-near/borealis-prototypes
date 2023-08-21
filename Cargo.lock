@@ -464,7 +464,7 @@ dependencies = [
 [[package]]
 name = "borealis-rs"
 version = "0.16.1"
-source = "git+ssh://git@github.com/aurora-is-near/borealis.rs.git?tag=v0.16.6#de3cb01f1f41f0c0798c63ee14c5febe98a760a9"
+source = "git+ssh://git@github.com/aurora-is-near/borealis.rs.git?branch=logging#de12ffbf1b38f74af4865bc47060d65806471bf9"
 dependencies = [
  "anyhow",
  "async-nats",
