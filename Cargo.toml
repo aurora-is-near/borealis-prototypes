@@ -5,10 +5,13 @@ members = [
     "types",
 ]
 
+[workspace.package]
+version = "0.10.7"
+
 [workspace.dependencies]
 async-nats = "0.31"
-aurora-refiner-types = { git = "https://github.com/aurora-is-near/borealis-engine-lib.git", tag = "v0.23.5" }
-borealis-rs = { git = "ssh://git@github.com/aurora-is-near/borealis.rs.git", tag = "v0.16.7" }
+aurora-refiner-types = { git = "https://github.com/aurora-is-near/borealis-engine-lib.git", tag = "v0.23.6" }
+borealis-rs = { git = "ssh://git@github.com/aurora-is-near/borealis.rs.git", tag = "v0.16.8" }
 bytes = "1"
 futures-util = "0.3"
 near-crypto = { git = "https://github.com/near/nearcore", tag = "1.35.0" }
