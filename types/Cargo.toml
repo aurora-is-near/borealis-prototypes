@@ -1,23 +1,22 @@
 [package]
 name = "borealis-proto-types"
 version.workspace = true
-edition = "2021"
+edition.workspace = true
 
 [dependencies]
 async-nats = { workspace = true, optional = true }
 async-trait = { version = "0.1", optional = true }
 aurora-refiner-types = { workspace = true }
 borealis-rs = { workspace = true }
-bs58 = "0.4"
+bs58 = "0.5"
 bytes = "1"
 chrono = "0.4"
 ed25519-dalek = "1"
 futures-util = { workspace = true }
-itertools = "0.10"
+itertools = "0.11"
 log = "0.4"
 near-crypto = { workspace = true }
 near-primitives = { workspace = true }
-near-vm-errors = { workspace = true }
 prost = { workspace = true }
 thiserror = "1"
 zstd = { workspace = true }
@@ -34,4 +33,4 @@ test-case = "3"
 tokio = { version = "1", features = ["macros", "test-util"] }
 
 [build-dependencies]
-prost-build = { version = "0.11" }
+prost-build = { version = "0.12" }

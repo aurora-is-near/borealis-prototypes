@@ -18,15 +18,15 @@ use near_crypto::{ED25519PublicKey, PublicKey, Secp256K1PublicKey, Signature};
 use near_primitives::account::{AccessKeyPermission, FunctionCallPermission};
 use near_primitives::challenge::SlashedValidator;
 use near_primitives::errors::{
-    ActionError, ActionErrorKind, ActionsValidationError, InvalidAccessKeyError, InvalidTxError,
-    ReceiptValidationError, TxExecutionError,
+    ActionError, ActionErrorKind, ActionsValidationError, CompilationError, FunctionCallError, HostError,
+    InvalidAccessKeyError, InvalidTxError, MethodResolveError, PrepareError, ReceiptValidationError, TxExecutionError,
+    WasmTrap,
 };
 use near_primitives::merkle::{Direction, MerklePathItem};
 use near_primitives::transaction::{
     Action, AddKeyAction, CreateAccountAction, DeleteAccountAction, DeleteKeyAction, DeployContractAction,
     FunctionCallAction, StakeAction, TransferAction,
 };
-use near_vm_errors::{CompilationError, FunctionCallErrorSer, HostError, MethodResolveError, PrepareError, WasmTrap};
 
 impl From<proto::Messages> for NEARBlock {
     fn from(value: proto::Messages) -> Self {
@@ -344,26 +344,22 @@ impl From<proto::ActionsValidationError> for ActionsValidationError {
     }
 }
 
-impl From<proto::FunctionCallErrorSer> for FunctionCallErrorSer {
+impl From<proto::FunctionCallErrorSer> for FunctionCallError {
     fn from(value: proto::FunctionCallErrorSer) -> Self {
         match value.variant.unwrap() {
             proto::function_call_error_ser::Variant::CompilationError(v) => {
-                FunctionCallErrorSer::CompilationError(v.error.unwrap().into())
+                Self::CompilationError(v.error.unwrap().into())
             }
-            proto::function_call_error_ser::Variant::LinkError(v) => FunctionCallErrorSer::LinkError { msg: v.msg },
+            proto::function_call_error_ser::Variant::LinkError(v) => Self::LinkError { msg: v.msg },
             proto::function_call_error_ser::Variant::MethodResolveError(v) => {
-                FunctionCallErrorSer::MethodResolveError(proto::MethodResolveError::from_i32(v.error).unwrap().into())
+                Self::MethodResolveError(proto::MethodResolveError::try_from(v.error).unwrap().into())
             }
             proto::function_call_error_ser::Variant::WasmTrap(v) => {
-                FunctionCallErrorSer::WasmTrap(proto::WasmTrap::from_i32(v.error).unwrap().into())
+                Self::WasmTrap(proto::WasmTrap::try_from(v.error).unwrap().into())
             }
-            proto::function_call_error_ser::Variant::WasmUnknownError(..) => FunctionCallErrorSer::WasmUnknownError,
-            proto::function_call_error_ser::Variant::HostError(v) => {
-                FunctionCallErrorSer::HostError(v.error.unwrap().into())
-            }
-            proto::function_call_error_ser::Variant::ExecutionError(v) => {
-                FunctionCallErrorSer::ExecutionError(v.message)
-            }
+            proto::function_call_error_ser::Variant::WasmUnknownError(..) => Self::WasmUnknownError,
+            proto::function_call_error_ser::Variant::HostError(v) => Self::HostError(v.error.unwrap().into()),
+            proto::function_call_error_ser::Variant::ExecutionError(v) => Self::ExecutionError(v.message),
         }
     }
 }
@@ -375,7 +371,7 @@ impl From<proto::CompilationError> for CompilationError {
                 account_id: AccountId::try_from(v.account_id).unwrap(),
             },
             proto::compilation_error::Variant::PrepareError(error) => {
-                CompilationError::PrepareError(proto::PrepareError::from_i32(error.error).unwrap().into())
+                CompilationError::PrepareError(proto::PrepareError::try_from(error.error).unwrap().into())
             }
             proto::compilation_error::Variant::WasmerCompileError(v) => {
                 CompilationError::WasmerCompileError { msg: v.msg }
@@ -653,13 +649,13 @@ impl From<proto::ExecutionMetadataView> for ExecutionMetadataView {
 impl From<proto::CostGasUsed> for CostGasUsed {
     fn from(value: proto::CostGasUsed) -> Self {
         CostGasUsed {
-            cost_category: match proto::CostCategory::from_i32(value.cost_category).unwrap() {
+            cost_category: match proto::CostCategory::try_from(value.cost_category).unwrap() {
                 proto::CostCategory::ActionCost => "ACTION_COST",
                 proto::CostCategory::WasmHostCost => "WASM_HOST_COST",
             }
             .to_owned(),
             cost: match value.cost.unwrap().variant.unwrap() {
-                proto::cost::Variant::ActionCost(v) => match proto::ActionCosts::from_i32(v.value).unwrap() {
+                proto::cost::Variant::ActionCost(v) => match proto::ActionCosts::try_from(v.value).unwrap() {
                     proto::ActionCosts::CreateAccount => "CREATE_ACCOUNT",
                     proto::ActionCosts::DeleteAccount => "DELETE_ACCOUNT",
                     proto::ActionCosts::DeployContract => "DEPLOY_CONTRACT",
@@ -682,7 +678,7 @@ impl From<proto::CostGasUsed> for CostGasUsed {
                     proto::ActionCosts::FunctionCallByte => "FUNCTION_CALL_BYTE",
                     proto::ActionCosts::Delegate => "DELEGATE",
                 },
-                proto::cost::Variant::ExtCost(v) => match proto::ExtCosts::from_i32(v.value).unwrap() {
+                proto::cost::Variant::ExtCost(v) => match proto::ExtCosts::try_from(v.value).unwrap() {
                     proto::ExtCosts::Base => "BASE",
                     proto::ExtCosts::ContractCompileBase => "CONTRACT_COMPILE_BASE",
                     proto::ExtCosts::ContractCompileBytes => "CONTRACT_COMPILE_BYTES",
@@ -770,7 +766,7 @@ impl From<proto::MerklePathItem> for MerklePathItem {
     fn from(value: proto::MerklePathItem) -> Self {
         Self {
             hash: CryptoHash(value.h256_hash.try_into().unwrap()),
-            direction: Direction::from(proto::Direction::from_i32(value.direction).unwrap()),
+            direction: Direction::from(proto::Direction::try_from(value.direction).unwrap()),
         }
     }
 }
