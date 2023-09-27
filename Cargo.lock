@@ -166,45 +166,11 @@ dependencies = [
  "itoa",
  "memchr",
  "nkeys",
- "nuid 0.3.2",
+ "nuid",
  "once_cell",
  "rand 0.8.5",
  "regex",
  "ring",
- "rustls-native-certs",
- "rustls-pemfile",
- "rustls-webpki",
- "serde",
- "serde_json",
- "serde_nanos",
- "serde_repr",
- "thiserror",
- "time",
- "tokio",
- "tokio-retry",
- "tokio-rustls",
- "tracing",
- "url",
-]
-
-[[package]]
-name = "async-nats"
-version = "0.32.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "df2ea11ebe42f65b91c125042bdf8cfb0cccbd344c75e64b98fa3177040e0de9"
-dependencies = [
- "base64 0.21.4",
- "bytes",
- "futures",
- "http",
- "memchr",
- "nkeys",
- "nuid 0.5.0",
- "once_cell",
- "rand 0.8.5",
- "regex",
- "ring",
- "rustls",
  "rustls-native-certs",
  "rustls-pemfile",
  "rustls-webpki",
@@ -500,7 +466,7 @@ name = "borealis-proto-migrate"
 version = "0.10.8-rc.0"
 dependencies = [
  "anyhow",
- "async-nats 0.32.0",
+ "async-nats",
  "aurora-refiner-types",
  "borealis-proto-types",
  "borealis-rs",
@@ -521,7 +487,7 @@ dependencies = [
 name = "borealis-proto-types"
 version = "0.10.8-rc.0"
 dependencies = [
- "async-nats 0.32.0",
+ "async-nats",
  "async-trait",
  "aurora-refiner-types",
  "borealis-rs",
@@ -551,7 +517,7 @@ version = "0.16.8"
 source = "git+ssh://git@github.com/aurora-is-near/borealis.rs.git?tag=v0.16.9-rc.0#88372e9944908a2667254950a4ec46ff3b046ce8"
 dependencies = [
  "anyhow",
- "async-nats 0.31.0",
+ "async-nats",
  "aurora-engine-types",
  "aurora-refiner-types",
  "base64 0.20.0",
@@ -2841,15 +2807,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "20c1bb65186718d348306bf1afdeb20d9ab45b2ab80fb793c0fdcf59ffbb4f38"
 dependencies = [
  "lazy_static",
- "rand 0.8.5",
-]
-
-[[package]]
-name = "nuid"
-version = "0.5.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fc895af95856f929163a0aa20c26a78d26bfdc839f51b9d5aa7a5b79e52b7e83"
-dependencies = [
  "rand 0.8.5",
 ]
 
