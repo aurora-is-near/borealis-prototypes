@@ -1,3 +1,7 @@
+[workspace.package]
+version = "0.10.8-rc.0"
+edition = "2021"
+
 [workspace]
 resolver = "2"
 members = [
@@ -5,18 +9,14 @@ members = [
     "types",
 ]
 
-[workspace.package]
-version = "0.10.7"
-
 [workspace.dependencies]
-async-nats = "0.31"
-aurora-refiner-types = { git = "https://github.com/aurora-is-near/borealis-engine-lib.git", tag = "v0.23.6" }
-borealis-rs = { git = "ssh://git@github.com/aurora-is-near/borealis.rs.git", tag = "v0.16.8" }
+async-nats = "0.32"
+aurora-refiner-types = { git = "https://github.com/aurora-is-near/borealis-engine-lib.git", tag = "v0.23.7-rc.0" }
+borealis-rs = { git = "ssh://git@github.com/aurora-is-near/borealis.rs.git", tag = "v0.16.9-rc.0" }
 bytes = "1"
 futures-util = "0.3"
-near-crypto = { git = "https://github.com/near/nearcore", tag = "1.35.0" }
-near-primitives = { git = "https://github.com/near/nearcore", tag = "1.35.0" }
-near-vm-errors = { git = "https://github.com/near/nearcore", tag = "1.35.0" }
-prost = "0.11"
+near-crypto = { git = "https://github.com/near/nearcore", tag = "1.36.0-rc.1" }
+near-primitives = { git = "https://github.com/near/nearcore", tag = "1.36.0-rc.1" }
+prost = "0.12"
 zstd = "0.12"
 zstd-sys = "2"

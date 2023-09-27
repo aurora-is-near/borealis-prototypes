@@ -21,8 +21,10 @@ use borealis_rs::bus_message::BusMessage;
 use near_crypto::{PublicKey, Signature};
 use near_primitives::challenge::SlashedValidator;
 use near_primitives::delegate_action::{DelegateAction, NonDelegateAction};
+use near_primitives::errors::{
+    CompilationError, FunctionCallError, HostError, MethodResolveError, PrepareError, WasmTrap,
+};
 use near_primitives::merkle::{Direction, MerklePathItem};
-use near_vm_errors::{CompilationError, FunctionCallErrorSer, HostError, MethodResolveError, PrepareError, WasmTrap};
 use std::iter::once;
 
 impl From<BusMessage<NEARBlock>> for proto::Messages {
@@ -483,48 +485,46 @@ impl From<ActionsValidationError> for proto::ActionsValidationError {
     }
 }
 
-impl From<FunctionCallErrorSer> for proto::FunctionCallErrorSer {
-    fn from(value: FunctionCallErrorSer) -> Self {
+impl From<FunctionCallError> for proto::FunctionCallErrorSer {
+    fn from(value: FunctionCallError) -> Self {
         Self {
             variant: Some(match value {
-                FunctionCallErrorSer::CompilationError(error) => {
+                FunctionCallError::CompilationError(error) => {
                     proto::function_call_error_ser::Variant::CompilationError(
                         proto::function_call_error_ser::CompilationError {
                             error: Some(error.into()),
                         },
                     )
                 }
-                FunctionCallErrorSer::LinkError { msg } => {
+                FunctionCallError::LinkError { msg } => {
                     proto::function_call_error_ser::Variant::LinkError(proto::function_call_error_ser::LinkError {
                         msg,
                     })
                 }
-                FunctionCallErrorSer::MethodResolveError(error) => {
+                FunctionCallError::MethodResolveError(error) => {
                     proto::function_call_error_ser::Variant::MethodResolveError(
                         proto::function_call_error_ser::MethodResolveError {
                             error: proto::MethodResolveError::from(error) as i32,
                         },
                     )
                 }
-                FunctionCallErrorSer::WasmTrap(error) => {
+                FunctionCallError::WasmTrap(error) => {
                     proto::function_call_error_ser::Variant::WasmTrap(proto::function_call_error_ser::WasmTrap {
                         error: proto::WasmTrap::from(error) as i32,
                     })
                 }
-                FunctionCallErrorSer::WasmUnknownError => proto::function_call_error_ser::Variant::WasmUnknownError(
+                FunctionCallError::WasmUnknownError => proto::function_call_error_ser::Variant::WasmUnknownError(
                     proto::function_call_error_ser::WasmUnknownError {},
                 ),
-                FunctionCallErrorSer::HostError(error) => {
+                FunctionCallError::HostError(error) => {
                     proto::function_call_error_ser::Variant::HostError(proto::function_call_error_ser::HostError {
                         error: Some(error.into()),
                     })
                 }
-                FunctionCallErrorSer::_EVMError => panic!("Deprecated error _EVMError"),
-                FunctionCallErrorSer::ExecutionError(message) => {
-                    proto::function_call_error_ser::Variant::ExecutionError(
-                        proto::function_call_error_ser::ExecutionError { message },
-                    )
-                }
+                FunctionCallError::_EVMError => panic!("Deprecated error _EVMError"),
+                FunctionCallError::ExecutionError(message) => proto::function_call_error_ser::Variant::ExecutionError(
+                    proto::function_call_error_ser::ExecutionError { message },
+                ),
             }),
         }
     }
