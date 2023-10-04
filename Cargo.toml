@@ -1,5 +1,5 @@
 [workspace.package]
-version = "0.10.8-rc.0"
+version = "0.10.9-silo-rc0"
 edition = "2021"
 
 [workspace]
@@ -11,8 +11,8 @@ members = [
 
 [workspace.dependencies]
 async-nats = "0.31"
-aurora-refiner-types = { git = "https://github.com/aurora-is-near/borealis-engine-lib.git", rev = "fe61c8f6d7ddedd16088e5e0fb07e61a473e2daf" }
-borealis-rs = { git = "ssh://git@github.com/aurora-is-near/borealis.rs.git", rev = "7e4c0c2d297993df3a9b55a27f77d9db1b745977" }
+aurora-refiner-types = { git = "https://github.com/aurora-is-near/borealis-engine-lib.git", tag = "v0.24.0-silo-rc0" }
+borealis-rs = { git = "ssh://git@github.com/aurora-is-near/borealis.rs.git", tag = "v0.17.0-silo-rc0" }
 bytes = "1"
 futures-util = "0.3"
 near-crypto = { git = "https://github.com/near/nearcore", tag = "1.36.0-rc.1" }

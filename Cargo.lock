@@ -311,8 +311,8 @@ dependencies = [
 
 [[package]]
 name = "aurora-refiner-types"
-version = "0.23.6"
-source = "git+https://github.com/aurora-is-near/borealis-engine-lib.git?rev=fe61c8f6d7ddedd16088e5e0fb07e61a473e2daf#fe61c8f6d7ddedd16088e5e0fb07e61a473e2daf"
+version = "0.24.0"
+source = "git+https://github.com/aurora-is-near/borealis-engine-lib.git?tag=v0.24.0-silo-rc0#68cb7dd92f9fbe414eed535712d6e10bf4ae5217"
 dependencies = [
  "aurora-engine",
  "aurora-engine-sdk",
@@ -463,7 +463,7 @@ dependencies = [
 
 [[package]]
 name = "borealis-proto-migrate"
-version = "0.10.8-rc.0"
+version = "0.10.9-silo-rc.0"
 dependencies = [
  "anyhow",
  "async-nats",
@@ -485,7 +485,7 @@ dependencies = [
 
 [[package]]
 name = "borealis-proto-types"
-version = "0.10.8-rc.0"
+version = "0.10.9-silo-rc.0"
 dependencies = [
  "async-nats",
  "async-trait",
@@ -513,8 +513,8 @@ dependencies = [
 
 [[package]]
 name = "borealis-rs"
-version = "0.17.0"
-source = "git+ssh://git@github.com/aurora-is-near/borealis.rs.git?rev=7e4c0c2d297993df3a9b55a27f77d9db1b745977#7e4c0c2d297993df3a9b55a27f77d9db1b745977"
+version = "0.17.0-silo-rc0"
+source = "git+ssh://git@github.com/aurora-is-near/borealis.rs.git?tag=v0.17.0-silo-rc0#3bbd99f170a0469ef163ec7c4a0f0acde0e8f292"
 dependencies = [
  "anyhow",
  "async-nats",
