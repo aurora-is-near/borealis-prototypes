@@ -8,7 +8,7 @@ use aurora_refiner_types::near_primitives::errors::{
     ActionErrorKind, ActionsValidationError, InvalidAccessKeyError, InvalidTxError, ReceiptValidationError,
     TxExecutionError,
 };
-use aurora_refiner_types::near_primitives::views::validator_stake_view::ValidatorStakeView;
+use aurora_refiner_types::near_primitives::{self, views::validator_stake_view::ValidatorStakeView};
 use aurora_refiner_types::near_primitives::views::{
     AccessKeyPermissionView, AccessKeyView, AccountView, ActionView, CostGasUsed, DataReceiverView, ReceiptEnumView,
     SignedTransactionView,
@@ -18,13 +18,13 @@ use aurora_refiner_types::near_primitives::views::{
     StateChangeCauseView, StateChangeValueView, StateChangeWithCauseView,
 };
 use borealis_rs::bus_message::BusMessage;
-use near_crypto::{PublicKey, Signature};
-use near_primitives::challenge::SlashedValidator;
-use near_primitives::delegate_action::{DelegateAction, NonDelegateAction};
-use near_primitives::errors::{
+use aurora_refiner_types::near_crypto::{PublicKey, Signature};
+use aurora_refiner_types::near_primitives::challenge::SlashedValidator;
+use aurora_refiner_types::near_primitives::delegate_action::{DelegateAction, NonDelegateAction};
+use aurora_refiner_types::near_primitives::errors::{
     CompilationError, FunctionCallError, HostError, MethodResolveError, PrepareError, WasmTrap,
 };
-use near_primitives::merkle::{Direction, MerklePathItem};
+use aurora_refiner_types::near_primitives::merkle::{Direction, MerklePathItem};
 use std::iter::once;
 
 impl From<BusMessage<NEARBlock>> for proto::Messages {
@@ -1799,8 +1799,8 @@ impl From<AccountView> for proto::AccountView {
 mod tests {
     use super::*;
     use crate::proto::signature::Variant;
-    use near_crypto::{KeyType, Secp256K1Signature, SecretKey};
-    use near_primitives::config::{ActionCosts, ExtCosts};
+    use aurora_refiner_types:: near_crypto::{KeyType, Secp256K1Signature, SecretKey};
+    use aurora_refiner_types:: near_primitives::config::{ActionCosts, ExtCosts};
     use sha2::Digest;
     use strum::IntoEnumIterator;
 

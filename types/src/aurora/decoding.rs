@@ -6,7 +6,7 @@ use aurora_refiner_types::near_block::{
 };
 use aurora_refiner_types::near_primitives::hash::CryptoHash;
 use aurora_refiner_types::near_primitives::types::{AccountId, StoreKey, StoreValue};
-use aurora_refiner_types::near_primitives::views::validator_stake_view::ValidatorStakeView;
+use aurora_refiner_types::near_primitives::{self,views::validator_stake_view::ValidatorStakeView};
 use aurora_refiner_types::near_primitives::views::{
     AccessKeyPermissionView, AccessKeyView, AccountView, ActionView, CostGasUsed, DataReceiverView,
     ExecutionMetadataView, ExecutionOutcomeView, ExecutionOutcomeWithIdView, ExecutionStatusView, ReceiptEnumView,
@@ -14,16 +14,16 @@ use aurora_refiner_types::near_primitives::views::{
     ValidatorStakeViewV1,
 };
 use itertools::{Either, Itertools};
-use near_crypto::{ED25519PublicKey, PublicKey, Secp256K1PublicKey, Signature};
-use near_primitives::account::{AccessKeyPermission, FunctionCallPermission};
-use near_primitives::challenge::SlashedValidator;
-use near_primitives::errors::{
+use aurora_refiner_types::near_crypto::{ED25519PublicKey, PublicKey, Secp256K1PublicKey, Signature};
+use aurora_refiner_types::near_primitives::account::{AccessKeyPermission, FunctionCallPermission};
+use aurora_refiner_types::near_primitives::challenge::SlashedValidator;
+use aurora_refiner_types::near_primitives::errors::{
     ActionError, ActionErrorKind, ActionsValidationError, CompilationError, FunctionCallError, HostError,
     InvalidAccessKeyError, InvalidTxError, MethodResolveError, PrepareError, ReceiptValidationError, TxExecutionError,
     WasmTrap,
 };
-use near_primitives::merkle::{Direction, MerklePathItem};
-use near_primitives::transaction::{
+use aurora_refiner_types::near_primitives::merkle::{Direction, MerklePathItem};
+use aurora_refiner_types::near_primitives::transaction::{
     Action, AddKeyAction, CreateAccountAction, DeleteAccountAction, DeleteKeyAction, DeployContractAction,
     FunctionCallAction, StakeAction, TransferAction,
 };

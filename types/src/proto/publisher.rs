@@ -4,7 +4,7 @@ use async_nats::HeaderMap;
 use async_trait::async_trait;
 use bytes::Bytes;
 use itertools::Itertools;
-use near_primitives::types::ShardId;
+use aurora_refiner_types::near_primitives::types::ShardId;
 use prost::Message;
 use std::error::Error;
 use thiserror::Error;
@@ -141,7 +141,7 @@ mod tests {
     use super::*;
     use async_trait::async_trait;
     use aurora_refiner_types::near_block::{BlockView, IndexerBlockHeaderView, NEARBlock, Shard};
-    use near_primitives::types::AccountId;
+    use aurora_refiner_types::near_primitives::types::AccountId;
     use std::iter::once;
     use std::ops::Deref;
     use std::str::FromStr;
