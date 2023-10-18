@@ -4,7 +4,20 @@ use aurora_refiner_types::near_block::{
     BlockView, ChunkHeaderView, ChunkView, ExecutionOutcomeWithOptionalReceipt, ExecutionOutcomeWithReceipt,
     IndexerBlockHeaderView, NEARBlock, Shard, TransactionWithOutcome,
 };
+use aurora_refiner_types::near_crypto::{ED25519PublicKey, PublicKey, Secp256K1PublicKey, Signature};
+use aurora_refiner_types::near_primitives::account::{AccessKeyPermission, FunctionCallPermission};
+use aurora_refiner_types::near_primitives::challenge::SlashedValidator;
+use aurora_refiner_types::near_primitives::errors::{
+    ActionError, ActionErrorKind, ActionsValidationError, CompilationError, FunctionCallError, HostError,
+    InvalidAccessKeyError, InvalidTxError, MethodResolveError, PrepareError, ReceiptValidationError, TxExecutionError,
+    WasmTrap,
+};
 use aurora_refiner_types::near_primitives::hash::CryptoHash;
+use aurora_refiner_types::near_primitives::merkle::{Direction, MerklePathItem};
+use aurora_refiner_types::near_primitives::transaction::{
+    Action, AddKeyAction, CreateAccountAction, DeleteAccountAction, DeleteKeyAction, DeployContractAction,
+    FunctionCallAction, StakeAction, TransferAction,
+};
 use aurora_refiner_types::near_primitives::types::{AccountId, StoreKey, StoreValue};
 use aurora_refiner_types::near_primitives::views::validator_stake_view::ValidatorStakeView;
 use aurora_refiner_types::near_primitives::views::{
@@ -14,19 +27,6 @@ use aurora_refiner_types::near_primitives::views::{
     ValidatorStakeViewV1,
 };
 use itertools::{Either, Itertools};
-use near_crypto::{ED25519PublicKey, PublicKey, Secp256K1PublicKey, Signature};
-use near_primitives::account::{AccessKeyPermission, FunctionCallPermission};
-use near_primitives::challenge::SlashedValidator;
-use near_primitives::errors::{
-    ActionError, ActionErrorKind, ActionsValidationError, CompilationError, FunctionCallError, HostError,
-    InvalidAccessKeyError, InvalidTxError, MethodResolveError, PrepareError, ReceiptValidationError, TxExecutionError,
-    WasmTrap,
-};
-use near_primitives::merkle::{Direction, MerklePathItem};
-use near_primitives::transaction::{
-    Action, AddKeyAction, CreateAccountAction, DeleteAccountAction, DeleteKeyAction, DeployContractAction,
-    FunctionCallAction, StakeAction, TransferAction,
-};
 
 impl From<proto::Messages> for NEARBlock {
     fn from(value: proto::Messages) -> Self {
@@ -1040,7 +1040,7 @@ impl From<proto::DataReceiverView> for DataReceiverView {
 }
 
 impl From<proto::action_view::delegate::delegate_action::NonDelegateAction>
-    for near_primitives::delegate_action::NonDelegateAction
+    for aurora_refiner_types::near_primitives::delegate_action::NonDelegateAction
 {
     fn from(value: proto::action_view::delegate::delegate_action::NonDelegateAction) -> Self {
         Self::try_from(match value.action.unwrap().variant.unwrap() {
@@ -1077,7 +1077,7 @@ impl From<proto::action_view::delegate::delegate_action::NonDelegateAction>
     }
 }
 
-impl From<proto::AccessKeyView> for near_primitives::account::AccessKey {
+impl From<proto::AccessKeyView> for aurora_refiner_types::near_primitives::account::AccessKey {
     fn from(value: proto::AccessKeyView) -> Self {
         Self {
             nonce: value.nonce,
@@ -1105,7 +1105,9 @@ impl From<proto::access_key_permission_view::FunctionCall> for FunctionCallPermi
     }
 }
 
-impl From<proto::action_view::delegate::DelegateAction> for near_primitives::delegate_action::DelegateAction {
+impl From<proto::action_view::delegate::DelegateAction>
+    for aurora_refiner_types::near_primitives::delegate_action::DelegateAction
+{
     fn from(value: proto::action_view::delegate::DelegateAction) -> Self {
         Self {
             sender_id: AccountId::try_from(value.sender_id).unwrap(),
