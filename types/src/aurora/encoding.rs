@@ -4,11 +4,18 @@ use aurora_refiner_types::near_block::{
     BlockView, ChunkHeaderView, ChunkView, ExecutionOutcomeWithOptionalReceipt, ExecutionOutcomeWithReceipt,
     IndexerBlockHeaderView, NEARBlock, Shard, TransactionWithOutcome,
 };
+use aurora_refiner_types::near_crypto::{PublicKey, Signature};
+use aurora_refiner_types::near_primitives::challenge::SlashedValidator;
+use aurora_refiner_types::near_primitives::delegate_action::{DelegateAction, NonDelegateAction};
 use aurora_refiner_types::near_primitives::errors::{
     ActionErrorKind, ActionsValidationError, InvalidAccessKeyError, InvalidTxError, ReceiptValidationError,
     TxExecutionError,
 };
-use aurora_refiner_types::near_primitives::{self, views::validator_stake_view::ValidatorStakeView};
+use aurora_refiner_types::near_primitives::errors::{
+    CompilationError, FunctionCallError, HostError, MethodResolveError, PrepareError, WasmTrap,
+};
+use aurora_refiner_types::near_primitives::merkle::{Direction, MerklePathItem};
+use aurora_refiner_types::near_primitives::views::validator_stake_view::ValidatorStakeView;
 use aurora_refiner_types::near_primitives::views::{
     AccessKeyPermissionView, AccessKeyView, AccountView, ActionView, CostGasUsed, DataReceiverView, ReceiptEnumView,
     SignedTransactionView,
@@ -18,13 +25,6 @@ use aurora_refiner_types::near_primitives::views::{
     StateChangeCauseView, StateChangeValueView, StateChangeWithCauseView,
 };
 use borealis_rs::bus_message::BusMessage;
-use aurora_refiner_types::near_crypto::{PublicKey, Signature};
-use aurora_refiner_types::near_primitives::challenge::SlashedValidator;
-use aurora_refiner_types::near_primitives::delegate_action::{DelegateAction, NonDelegateAction};
-use aurora_refiner_types::near_primitives::errors::{
-    CompilationError, FunctionCallError, HostError, MethodResolveError, PrepareError, WasmTrap,
-};
-use aurora_refiner_types::near_primitives::merkle::{Direction, MerklePathItem};
 use std::iter::once;
 
 impl From<BusMessage<NEARBlock>> for proto::Messages {
@@ -1583,7 +1583,9 @@ impl From<DelegateAction> for proto::action_view::delegate::DelegateAction {
 impl From<NonDelegateAction> for proto::action_view::delegate::delegate_action::NonDelegateAction {
     fn from(value: NonDelegateAction) -> Self {
         Self {
-            action: Some(ActionView::from(near_primitives::transaction::Action::from(value)).into()),
+            action: Some(
+                ActionView::from(aurora_refiner_types::near_primitives::transaction::Action::from(value)).into(),
+            ),
         }
     }
 }
@@ -1799,8 +1801,8 @@ impl From<AccountView> for proto::AccountView {
 mod tests {
     use super::*;
     use crate::proto::signature::Variant;
-    use aurora_refiner_types:: near_crypto::{KeyType, Secp256K1Signature, SecretKey};
-    use aurora_refiner_types:: near_primitives::config::{ActionCosts, ExtCosts};
+    use aurora_refiner_types::near_crypto::{KeyType, Secp256K1Signature, SecretKey};
+    use aurora_refiner_types::near_primitives::config::{ActionCosts, ExtCosts};
     use sha2::Digest;
     use strum::IntoEnumIterator;
 

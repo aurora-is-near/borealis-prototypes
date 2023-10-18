@@ -19,8 +19,8 @@
 use crate::message::Payload::{NearBlockHeader, NearBlockShard};
 use crate::{CompressedMessage, DecodeError, Message as ProtoMsg};
 use aurora_refiner_types::near_block::{BlockView, NEARBlock, Shard};
-use bytes::Bytes;
 use aurora_refiner_types::near_primitives::types::ShardId;
+use bytes::Bytes;
 use std::collections::HashMap;
 
 /// Collects messages, each one containing a part of a block data. There are multiple parts, one for a header and one
@@ -190,7 +190,7 @@ mod tests {
     use crate::{proto, BlockShard, PartialBlockHeaderView, PartialIndexerBlockHeaderView};
     use async_nats::Message;
     use aurora_refiner_types::near_block::IndexerBlockHeaderView;
-    use aurora_refiner_types:: near_primitives::types::AccountId;
+    use aurora_refiner_types::near_primitives::types::AccountId;
     use std::str::FromStr;
     use test_case::test_case;
 

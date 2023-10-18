@@ -6,8 +6,8 @@ edition.workspace = true
 [dependencies]
 async-nats = { workspace = true, optional = true }
 async-trait = { version = "0.1", optional = true }
-aurora-refiner-types = { workspace = true }
-borealis-rs = { workspace = true }
+aurora-refiner-types.workspace = true
+borealis-rs.workspace = true
 bs58 = "0.5"
 bytes = "1"
 chrono = "0.4"
@@ -23,6 +23,7 @@ zstd-sys = { workspace = true }
 [features]
 default = []
 async-nats-publish = ["async-nats", "async-trait"]
+ext-connector = ["aurora-refiner-types/ext-connector", "borealis-rs/ext-connector"]
 
 [dev-dependencies]
 sha2 = "0.10"
