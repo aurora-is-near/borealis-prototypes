@@ -69,8 +69,8 @@ dependencies = [
  "actix-rt",
  "actix-service",
  "actix-utils",
- "ahash 0.8.3",
- "base64 0.21.4",
+ "ahash 0.8.5",
+ "base64 0.21.5",
  "bitflags 2.4.1",
  "brotli",
  "bytes",
@@ -144,7 +144,7 @@ dependencies = [
  "futures-core",
  "futures-util",
  "mio",
- "socket2 0.5.4",
+ "socket2 0.5.5",
  "tokio",
  "tracing",
 ]
@@ -207,7 +207,7 @@ dependencies = [
  "actix-service",
  "actix-utils",
  "actix-web-codegen",
- "ahash 0.8.3",
+ "ahash 0.8.5",
  "bytes",
  "bytestring",
  "cfg-if 1.0.0",
@@ -227,7 +227,7 @@ dependencies = [
  "serde_json",
  "serde_urlencoded",
  "smallvec",
- "socket2 0.5.4",
+ "socket2 0.5.5",
  "time",
  "url",
 ]
@@ -281,9 +281,9 @@ checksum = "f26201604c87b1e01bd3d98f8d5d9a8fcbb815e8cedb41ffccbeb4bf593a35fe"
 
 [[package]]
 name = "ahash"
-version = "0.7.6"
+version = "0.7.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fcb51a0695d8f838b1ee009b3fbf66bda078cd64590202a864a8f3e8c4315c47"
+checksum = "5a824f2aa7e75a0c98c5a504fceb80649e9c35265d44525b5f94de4771a395cd"
 dependencies = [
  "getrandom 0.2.10",
  "once_cell",
@@ -292,14 +292,15 @@ dependencies = [
 
 [[package]]
 name = "ahash"
-version = "0.8.3"
+version = "0.8.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2c99f64d1e06488f620f932677e24bc6e2897582980441ae90a671415bd7ec2f"
+checksum = "cd7d5a2cecb58716e47d67d5703a249964b14c7be1ec3cad3affc295b2d1c35d"
 dependencies = [
  "cfg-if 1.0.0",
  "getrandom 0.2.10",
  "once_cell",
  "version_check",
+ "zerocopy",
 ]
 
 [[package]]
@@ -449,7 +450,7 @@ version = "0.31.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8257238e2a3629ee5618502a75d1b91f8017c24638c75349fc8d2d80cf1f7c4c"
 dependencies = [
- "base64 0.21.4",
+ "base64 0.21.5",
  "bytes",
  "futures",
  "http",
@@ -539,8 +540,8 @@ dependencies = [
 
 [[package]]
 name = "aurora-engine"
-version = "3.2.0"
-source = "git+https://github.com/aurora-is-near/aurora-engine.git?tag=3.2.0#9b3a2d96b53339010471f107e18a26e35e92dcb0"
+version = "3.3.0"
+source = "git+https://github.com/aurora-is-near/aurora-engine.git?tag=3.3.0#1aad2a057ab3bb5cb10ffac3a9ffa09ee64bfba3"
 dependencies = [
  "aurora-engine-hashchain",
  "aurora-engine-modexp",
@@ -562,7 +563,7 @@ dependencies = [
 [[package]]
 name = "aurora-engine-hashchain"
 version = "1.0.0"
-source = "git+https://github.com/aurora-is-near/aurora-engine.git?tag=3.2.0#9b3a2d96b53339010471f107e18a26e35e92dcb0"
+source = "git+https://github.com/aurora-is-near/aurora-engine.git?tag=3.3.0#1aad2a057ab3bb5cb10ffac3a9ffa09ee64bfba3"
 dependencies = [
  "aurora-engine-sdk",
  "aurora-engine-types",
@@ -573,7 +574,7 @@ dependencies = [
 [[package]]
 name = "aurora-engine-modexp"
 version = "1.0.0"
-source = "git+https://github.com/aurora-is-near/aurora-engine.git?tag=3.2.0#9b3a2d96b53339010471f107e18a26e35e92dcb0"
+source = "git+https://github.com/aurora-is-near/aurora-engine.git?tag=3.3.0#1aad2a057ab3bb5cb10ffac3a9ffa09ee64bfba3"
 dependencies = [
  "hex",
  "num",
@@ -582,7 +583,7 @@ dependencies = [
 [[package]]
 name = "aurora-engine-precompiles"
 version = "1.0.0"
-source = "git+https://github.com/aurora-is-near/aurora-engine.git?tag=3.2.0#9b3a2d96b53339010471f107e18a26e35e92dcb0"
+source = "git+https://github.com/aurora-is-near/aurora-engine.git?tag=3.3.0#1aad2a057ab3bb5cb10ffac3a9ffa09ee64bfba3"
 dependencies = [
  "aurora-engine-modexp",
  "aurora-engine-sdk",
@@ -601,10 +602,10 @@ dependencies = [
 [[package]]
 name = "aurora-engine-sdk"
 version = "1.0.0"
-source = "git+https://github.com/aurora-is-near/aurora-engine.git?tag=3.2.0#9b3a2d96b53339010471f107e18a26e35e92dcb0"
+source = "git+https://github.com/aurora-is-near/aurora-engine.git?tag=3.3.0#1aad2a057ab3bb5cb10ffac3a9ffa09ee64bfba3"
 dependencies = [
  "aurora-engine-types",
- "base64 0.21.4",
+ "base64 0.21.5",
  "sha2 0.10.8",
  "sha3",
 ]
@@ -612,7 +613,7 @@ dependencies = [
 [[package]]
 name = "aurora-engine-transactions"
 version = "1.0.0"
-source = "git+https://github.com/aurora-is-near/aurora-engine.git?tag=3.2.0#9b3a2d96b53339010471f107e18a26e35e92dcb0"
+source = "git+https://github.com/aurora-is-near/aurora-engine.git?tag=3.3.0#1aad2a057ab3bb5cb10ffac3a9ffa09ee64bfba3"
 dependencies = [
  "aurora-engine-precompiles",
  "aurora-engine-sdk",
@@ -625,9 +626,9 @@ dependencies = [
 [[package]]
 name = "aurora-engine-types"
 version = "1.0.0"
-source = "git+https://github.com/aurora-is-near/aurora-engine.git?tag=3.2.0#9b3a2d96b53339010471f107e18a26e35e92dcb0"
+source = "git+https://github.com/aurora-is-near/aurora-engine.git?tag=3.3.0#1aad2a057ab3bb5cb10ffac3a9ffa09ee64bfba3"
 dependencies = [
- "base64 0.21.4",
+ "base64 0.21.5",
  "borsh 0.10.3",
  "bs58 0.5.0",
  "hex",
@@ -639,8 +640,8 @@ dependencies = [
 
 [[package]]
 name = "aurora-refiner-types"
-version = "0.24.0"
-source = "git+https://github.com/aurora-is-near/borealis-engine-lib.git?tag=v0.24.0#683e9792e1c6071f0e84ba625ea3a469971fa7f9"
+version = "0.25.0"
+source = "git+https://github.com/aurora-is-near/borealis-engine-lib.git?tag=v0.25.0#dd93ad4c5a3f42119c91ed3463dde903c47ac1a8"
 dependencies = [
  "aurora-engine",
  "aurora-engine-sdk",
@@ -691,7 +692,7 @@ dependencies = [
  "actix-service",
  "actix-tls",
  "actix-utils",
- "base64 0.21.4",
+ "base64 0.21.5",
  "bytes",
  "cfg-if 1.0.0",
  "cookie",
@@ -767,9 +768,9 @@ checksum = "9e1b586273c5702936fe7b7d6896644d8be71e6314cfe09d3167c95f712589e8"
 
 [[package]]
 name = "base64"
-version = "0.21.4"
+version = "0.21.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9ba43ea6f343b788c8764558649e08df62f86c6ef251fdaeb1ffd010a9ae50a2"
+checksum = "35636a1494ede3b646cc98f74f8e62c773a38a659ebc777a2cf26b9b74171df9"
 
 [[package]]
 name = "base64ct"
@@ -896,7 +897,7 @@ dependencies = [
 
 [[package]]
 name = "borealis-proto-migrate"
-version = "0.11.0"
+version = "0.12.0"
 dependencies = [
  "anyhow",
  "async-nats",
@@ -918,7 +919,7 @@ dependencies = [
 
 [[package]]
 name = "borealis-proto-types"
-version = "0.11.0"
+version = "0.12.0"
 dependencies = [
  "async-nats",
  "async-trait",
@@ -944,8 +945,8 @@ dependencies = [
 
 [[package]]
 name = "borealis-rs"
-version = "0.17.0"
-source = "git+ssh://git@github.com/aurora-is-near/borealis.rs.git?tag=v0.17.0#dcbf4b45d1f89c89d119fe7f3db026f88a3719d0"
+version = "0.18.0"
+source = "git+ssh://git@github.com/aurora-is-near/borealis.rs.git?tag=v0.18.0#4243af9a9d7c9a7f689d75f6fd76c081793c99c5"
 dependencies = [
  "anyhow",
  "async-nats",
@@ -1440,9 +1441,9 @@ dependencies = [
 
 [[package]]
 name = "cpufeatures"
-version = "0.2.9"
+version = "0.2.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a17b76ff3a4162b0b27f354a0c87015ddad39d35f9c0c36607a3bdd175dde1f1"
+checksum = "3fbc60abd742b35f2492f808e1abbb83d45f72db402e14c55057edc9c7b1e9e4"
 dependencies = [
  "libc",
 ]
@@ -1474,7 +1475,7 @@ dependencies = [
  "log",
  "regalloc2",
  "smallvec",
- "target-lexicon 0.12.11",
+ "target-lexicon 0.12.12",
 ]
 
 [[package]]
@@ -1519,7 +1520,7 @@ dependencies = [
  "cranelift-codegen",
  "log",
  "smallvec",
- "target-lexicon 0.12.11",
+ "target-lexicon 0.12.12",
 ]
 
 [[package]]
@@ -1536,7 +1537,7 @@ checksum = "3f40b57f187f0fe1ffaf281df4adba2b4bc623a0f6651954da9f3c184be72761"
 dependencies = [
  "cranelift-codegen",
  "libc",
- "target-lexicon 0.12.11",
+ "target-lexicon 0.12.12",
 ]
 
 [[package]]
@@ -1799,8 +1800,8 @@ dependencies = [
 
 [[package]]
 name = "delay-detector"
-version = "1.36.0-rc.1"
-source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.1#f97e1ab46de694504ce3baeea7e0f724f1658b5f"
+version = "1.36.0-rc.2"
+source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.2#2571d914d2228a02301e80caa5e0e434e46751d0"
 dependencies = [
  "cpu-time",
  "tracing",
@@ -2095,9 +2096,9 @@ dependencies = [
 
 [[package]]
 name = "enum-map"
-version = "2.6.3"
+version = "2.7.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c188012f8542dee7b3996e44dd89461d64aa471b0a7c71a1ae2f595d259e96e5"
+checksum = "53337c2dbf26a3c31eccc73a37b10c1614e8d4ae99b6a50d553e8936423c1f16"
 dependencies = [
  "enum-map-derive",
 ]
@@ -2660,7 +2661,7 @@ version = "0.11.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ab5ef0d4909ef3724cc8cce6ccc8572c5c817592e9285f5464f8e86f8bd3726e"
 dependencies = [
- "ahash 0.7.6",
+ "ahash 0.7.7",
 ]
 
 [[package]]
@@ -2669,7 +2670,7 @@ version = "0.12.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8a9ee70c43aaf417c914396645a0fa852624801b24ebb7ae78fe8272889ac888"
 dependencies = [
- "ahash 0.7.6",
+ "ahash 0.7.7",
 ]
 
 [[package]]
@@ -2678,14 +2679,14 @@ version = "0.13.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "43a3c133739dddd0d2990f9a4bdf8eb4b21ef50e4851ca85ab661199821d510e"
 dependencies = [
- "ahash 0.8.3",
+ "ahash 0.8.5",
 ]
 
 [[package]]
 name = "hashbrown"
-version = "0.14.1"
+version = "0.14.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7dfda62a12f55daeae5015f81b0baea145391cb4520f86c248fc615d72640d12"
+checksum = "f93e7192158dbcda357bdec5fb5788eebf8bbac027f3f33e719d29135ae84156"
 
 [[package]]
 name = "heapsize"
@@ -2831,7 +2832,7 @@ dependencies = [
  "httpdate",
  "itoa",
  "pin-project-lite",
- "socket2 0.4.9",
+ "socket2 0.4.10",
  "tokio",
  "tower-service",
  "tracing",
@@ -2989,7 +2990,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8adf3ddd720272c6ea8bf59463c04e0f93d0bbf7c5439b691bca2987e0270897"
 dependencies = [
  "equivalent",
- "hashbrown 0.14.1",
+ "hashbrown 0.14.2",
  "serde",
 ]
 
@@ -3019,9 +3020,9 @@ dependencies = [
 
 [[package]]
 name = "ipnet"
-version = "2.8.0"
+version = "2.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "28b29a3cd74f0f4598934efe3aeba42bae0eb4680554128851ebbecb02af14e6"
+checksum = "8f518f335dce6725a761382244631d86cf0ccb2863413590b31338feb467f9c3"
 
 [[package]]
 name = "is-terminal"
@@ -3030,7 +3031,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "cb0889898416213fab133e1d33a0e5858a48177452750691bde3666d0fdbaf8b"
 dependencies = [
  "hermit-abi 0.3.3",
- "rustix 0.38.19",
+ "rustix 0.38.20",
  "windows-sys 0.48.0",
 ]
 
@@ -3401,7 +3402,7 @@ version = "0.6.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b2cffa4ad52c6f791f4f8b15f0c05f9824b2ced1160e88cc393d64fff9a8ac64"
 dependencies = [
- "rustix 0.38.19",
+ "rustix 0.38.20",
 ]
 
 [[package]]
@@ -3498,9 +3499,9 @@ dependencies = [
 
 [[package]]
 name = "mio"
-version = "0.8.8"
+version = "0.8.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "927a765cd3fc26206e66b296465fa9d3e5ab003e651c1b3c060e7956d96b19d2"
+checksum = "3dce281c5e46beae905d4de1870d8b1509a9142b62eedf18b443b011ca8343d0"
 dependencies = [
  "libc",
  "log",
@@ -3540,8 +3541,8 @@ dependencies = [
 
 [[package]]
 name = "near-account-id"
-version = "1.36.0-rc.1"
-source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.1#f97e1ab46de694504ce3baeea7e0f724f1658b5f"
+version = "1.36.0-rc.2"
+source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.2#2571d914d2228a02301e80caa5e0e434e46751d0"
 dependencies = [
  "borsh 0.10.3",
  "serde",
@@ -3549,8 +3550,8 @@ dependencies = [
 
 [[package]]
 name = "near-async"
-version = "1.36.0-rc.1"
-source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.1#f97e1ab46de694504ce3baeea7e0f724f1658b5f"
+version = "1.36.0-rc.2"
+source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.2#2571d914d2228a02301e80caa5e0e434e46751d0"
 dependencies = [
  "actix",
  "derive-enum-from-into",
@@ -3568,16 +3569,16 @@ dependencies = [
 
 [[package]]
 name = "near-cache"
-version = "1.36.0-rc.1"
-source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.1#f97e1ab46de694504ce3baeea7e0f724f1658b5f"
+version = "1.36.0-rc.2"
+source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.2#2571d914d2228a02301e80caa5e0e434e46751d0"
 dependencies = [
  "lru",
 ]
 
 [[package]]
 name = "near-chain"
-version = "1.36.0-rc.1"
-source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.1#f97e1ab46de694504ce3baeea7e0f724f1658b5f"
+version = "1.36.0-rc.2"
+source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.2#2571d914d2228a02301e80caa5e0e434e46751d0"
 dependencies = [
  "actix",
  "ansi_term",
@@ -3612,8 +3613,8 @@ dependencies = [
 
 [[package]]
 name = "near-chain-configs"
-version = "1.36.0-rc.1"
-source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.1#f97e1ab46de694504ce3baeea7e0f724f1658b5f"
+version = "1.36.0-rc.2"
+source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.2#2571d914d2228a02301e80caa5e0e434e46751d0"
 dependencies = [
  "anyhow",
  "chrono",
@@ -3633,8 +3634,8 @@ dependencies = [
 
 [[package]]
 name = "near-chain-primitives"
-version = "1.36.0-rc.1"
-source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.1#f97e1ab46de694504ce3baeea7e0f724f1658b5f"
+version = "1.36.0-rc.2"
+source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.2#2571d914d2228a02301e80caa5e0e434e46751d0"
 dependencies = [
  "chrono",
  "near-crypto",
@@ -3645,8 +3646,8 @@ dependencies = [
 
 [[package]]
 name = "near-chunks"
-version = "1.36.0-rc.1"
-source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.1#f97e1ab46de694504ce3baeea7e0f724f1658b5f"
+version = "1.36.0-rc.2"
+source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.2#2571d914d2228a02301e80caa5e0e434e46751d0"
 dependencies = [
  "actix",
  "borsh 0.10.3",
@@ -3676,8 +3677,8 @@ dependencies = [
 
 [[package]]
 name = "near-chunks-primitives"
-version = "1.36.0-rc.1"
-source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.1#f97e1ab46de694504ce3baeea7e0f724f1658b5f"
+version = "1.36.0-rc.2"
+source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.2#2571d914d2228a02301e80caa5e0e434e46751d0"
 dependencies = [
  "near-chain-primitives",
  "near-primitives",
@@ -3685,8 +3686,8 @@ dependencies = [
 
 [[package]]
 name = "near-client"
-version = "1.36.0-rc.1"
-source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.1#f97e1ab46de694504ce3baeea7e0f724f1658b5f"
+version = "1.36.0-rc.2"
+source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.2#2571d914d2228a02301e80caa5e0e434e46751d0"
 dependencies = [
  "actix",
  "actix-rt",
@@ -3737,8 +3738,8 @@ dependencies = [
 
 [[package]]
 name = "near-client-primitives"
-version = "1.36.0-rc.1"
-source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.1#f97e1ab46de694504ce3baeea7e0f724f1658b5f"
+version = "1.36.0-rc.2"
+source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.2#2571d914d2228a02301e80caa5e0e434e46751d0"
 dependencies = [
  "actix",
  "ansi_term",
@@ -3756,8 +3757,8 @@ dependencies = [
 
 [[package]]
 name = "near-config-utils"
-version = "1.36.0-rc.1"
-source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.1#f97e1ab46de694504ce3baeea7e0f724f1658b5f"
+version = "1.36.0-rc.2"
+source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.2#2571d914d2228a02301e80caa5e0e434e46751d0"
 dependencies = [
  "anyhow",
  "json_comments",
@@ -3767,8 +3768,8 @@ dependencies = [
 
 [[package]]
 name = "near-crypto"
-version = "1.36.0-rc.1"
-source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.1#f97e1ab46de694504ce3baeea7e0f724f1658b5f"
+version = "1.36.0-rc.2"
+source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.2#2571d914d2228a02301e80caa5e0e434e46751d0"
 dependencies = [
  "blake2",
  "borsh 0.10.3",
@@ -3793,8 +3794,8 @@ dependencies = [
 
 [[package]]
 name = "near-dyn-configs"
-version = "1.36.0-rc.1"
-source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.1#f97e1ab46de694504ce3baeea7e0f724f1658b5f"
+version = "1.36.0-rc.2"
+source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.2#2571d914d2228a02301e80caa5e0e434e46751d0"
 dependencies = [
  "anyhow",
  "near-chain-configs",
@@ -3811,8 +3812,8 @@ dependencies = [
 
 [[package]]
 name = "near-epoch-manager"
-version = "1.36.0-rc.1"
-source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.1#f97e1ab46de694504ce3baeea7e0f724f1658b5f"
+version = "1.36.0-rc.2"
+source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.2#2571d914d2228a02301e80caa5e0e434e46751d0"
 dependencies = [
  "borsh 0.10.3",
  "near-cache",
@@ -3832,16 +3833,16 @@ dependencies = [
 
 [[package]]
 name = "near-fmt"
-version = "1.36.0-rc.1"
-source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.1#f97e1ab46de694504ce3baeea7e0f724f1658b5f"
+version = "1.36.0-rc.2"
+source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.2#2571d914d2228a02301e80caa5e0e434e46751d0"
 dependencies = [
  "near-primitives-core",
 ]
 
 [[package]]
 name = "near-jsonrpc"
-version = "1.36.0-rc.1"
-source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.1#f97e1ab46de694504ce3baeea7e0f724f1658b5f"
+version = "1.36.0-rc.2"
+source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.2#2571d914d2228a02301e80caa5e0e434e46751d0"
 dependencies = [
  "actix",
  "actix-cors",
@@ -3870,8 +3871,8 @@ dependencies = [
 
 [[package]]
 name = "near-jsonrpc-client"
-version = "1.36.0-rc.1"
-source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.1#f97e1ab46de694504ce3baeea7e0f724f1658b5f"
+version = "1.36.0-rc.2"
+source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.2#2571d914d2228a02301e80caa5e0e434e46751d0"
 dependencies = [
  "actix-http",
  "awc",
@@ -3884,8 +3885,8 @@ dependencies = [
 
 [[package]]
 name = "near-jsonrpc-primitives"
-version = "1.36.0-rc.1"
-source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.1#f97e1ab46de694504ce3baeea7e0f724f1658b5f"
+version = "1.36.0-rc.2"
+source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.2#2571d914d2228a02301e80caa5e0e434e46751d0"
 dependencies = [
  "arbitrary",
  "near-chain-configs",
@@ -3900,8 +3901,8 @@ dependencies = [
 
 [[package]]
 name = "near-mainnet-res"
-version = "1.36.0-rc.1"
-source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.1#f97e1ab46de694504ce3baeea7e0f724f1658b5f"
+version = "1.36.0-rc.2"
+source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.2#2571d914d2228a02301e80caa5e0e434e46751d0"
 dependencies = [
  "near-account-id",
  "near-chain-configs",
@@ -3911,8 +3912,8 @@ dependencies = [
 
 [[package]]
 name = "near-network"
-version = "1.36.0-rc.1"
-source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.1#f97e1ab46de694504ce3baeea7e0f724f1658b5f"
+version = "1.36.0-rc.2"
+source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.2#2571d914d2228a02301e80caa5e0e434e46751d0"
 dependencies = [
  "actix",
  "anyhow",
@@ -3963,12 +3964,12 @@ dependencies = [
 
 [[package]]
 name = "near-o11y"
-version = "1.36.0-rc.1"
-source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.1#f97e1ab46de694504ce3baeea7e0f724f1658b5f"
+version = "1.36.0-rc.2"
+source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.2#2571d914d2228a02301e80caa5e0e434e46751d0"
 dependencies = [
  "actix",
  "atty",
- "base64 0.21.4",
+ "base64 0.21.5",
  "clap 4.4.6",
  "near-crypto",
  "near-fmt",
@@ -3991,8 +3992,8 @@ dependencies = [
 
 [[package]]
 name = "near-performance-metrics"
-version = "1.36.0-rc.1"
-source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.1#f97e1ab46de694504ce3baeea7e0f724f1658b5f"
+version = "1.36.0-rc.2"
+source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.2#2571d914d2228a02301e80caa5e0e434e46751d0"
 dependencies = [
  "actix",
  "bitflags 1.3.2",
@@ -4008,8 +4009,8 @@ dependencies = [
 
 [[package]]
 name = "near-performance-metrics-macros"
-version = "1.36.0-rc.1"
-source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.1#f97e1ab46de694504ce3baeea7e0f724f1658b5f"
+version = "1.36.0-rc.2"
+source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.2#2571d914d2228a02301e80caa5e0e434e46751d0"
 dependencies = [
  "quote",
  "syn 2.0.38",
@@ -4017,8 +4018,8 @@ dependencies = [
 
 [[package]]
 name = "near-pool"
-version = "1.36.0-rc.1"
-source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.1#f97e1ab46de694504ce3baeea7e0f724f1658b5f"
+version = "1.36.0-rc.2"
+source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.2#2571d914d2228a02301e80caa5e0e434e46751d0"
 dependencies = [
  "borsh 0.10.3",
  "near-crypto",
@@ -4030,8 +4031,8 @@ dependencies = [
 
 [[package]]
 name = "near-primitives"
-version = "1.36.0-rc.1"
-source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.1#f97e1ab46de694504ce3baeea7e0f724f1658b5f"
+version = "1.36.0-rc.2"
+source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.2#2571d914d2228a02301e80caa5e0e434e46751d0"
 dependencies = [
  "arbitrary",
  "borsh 0.10.3",
@@ -4066,11 +4067,11 @@ dependencies = [
 
 [[package]]
 name = "near-primitives-core"
-version = "1.36.0-rc.1"
-source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.1#f97e1ab46de694504ce3baeea7e0f724f1658b5f"
+version = "1.36.0-rc.2"
+source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.2#2571d914d2228a02301e80caa5e0e434e46751d0"
 dependencies = [
  "arbitrary",
- "base64 0.21.4",
+ "base64 0.21.5",
  "borsh 0.10.3",
  "bs58 0.4.0",
  "derive_more",
@@ -4087,8 +4088,8 @@ dependencies = [
 
 [[package]]
 name = "near-rosetta-rpc"
-version = "1.36.0-rc.1"
-source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.1#f97e1ab46de694504ce3baeea7e0f724f1658b5f"
+version = "1.36.0-rc.2"
+source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.2#2571d914d2228a02301e80caa5e0e434e46751d0"
 dependencies = [
  "actix",
  "actix-cors",
@@ -4118,8 +4119,8 @@ dependencies = [
 
 [[package]]
 name = "near-rpc-error-core"
-version = "1.36.0-rc.1"
-source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.1#f97e1ab46de694504ce3baeea7e0f724f1658b5f"
+version = "1.36.0-rc.2"
+source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.2#2571d914d2228a02301e80caa5e0e434e46751d0"
 dependencies = [
  "quote",
  "serde",
@@ -4128,8 +4129,8 @@ dependencies = [
 
 [[package]]
 name = "near-rpc-error-macro"
-version = "1.36.0-rc.1"
-source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.1#f97e1ab46de694504ce3baeea7e0f724f1658b5f"
+version = "1.36.0-rc.2"
+source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.2#2571d914d2228a02301e80caa5e0e434e46751d0"
 dependencies = [
  "fs2",
  "near-rpc-error-core",
@@ -4139,18 +4140,18 @@ dependencies = [
 
 [[package]]
 name = "near-stable-hasher"
-version = "1.36.0-rc.1"
-source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.1#f97e1ab46de694504ce3baeea7e0f724f1658b5f"
+version = "1.36.0-rc.2"
+source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.2#2571d914d2228a02301e80caa5e0e434e46751d0"
 
 [[package]]
 name = "near-stdx"
-version = "1.36.0-rc.1"
-source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.1#f97e1ab46de694504ce3baeea7e0f724f1658b5f"
+version = "1.36.0-rc.2"
+source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.2#2571d914d2228a02301e80caa5e0e434e46751d0"
 
 [[package]]
 name = "near-store"
-version = "1.36.0-rc.1"
-source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.1#f97e1ab46de694504ce3baeea7e0f724f1658b5f"
+version = "1.36.0-rc.2"
+source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.2#2571d914d2228a02301e80caa5e0e434e46751d0"
 dependencies = [
  "actix",
  "actix-rt",
@@ -4189,8 +4190,8 @@ dependencies = [
 
 [[package]]
 name = "near-telemetry"
-version = "1.36.0-rc.1"
-source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.1#f97e1ab46de694504ce3baeea7e0f724f1658b5f"
+version = "1.36.0-rc.2"
+source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.2#2571d914d2228a02301e80caa5e0e434e46751d0"
 dependencies = [
  "actix",
  "awc",
@@ -4208,8 +4209,8 @@ dependencies = [
 
 [[package]]
 name = "near-vm-compiler"
-version = "1.36.0-rc.1"
-source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.1#f97e1ab46de694504ce3baeea7e0f724f1658b5f"
+version = "1.36.0-rc.2"
+source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.2#2571d914d2228a02301e80caa5e0e434e46751d0"
 dependencies = [
  "enumset",
  "finite-wasm",
@@ -4217,7 +4218,7 @@ dependencies = [
  "near-vm-vm",
  "rkyv",
  "smallvec",
- "target-lexicon 0.12.11",
+ "target-lexicon 0.12.12",
  "thiserror",
  "tracing",
  "wasmparser 0.99.0",
@@ -4225,8 +4226,8 @@ dependencies = [
 
 [[package]]
 name = "near-vm-compiler-singlepass"
-version = "1.36.0-rc.1"
-source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.1#f97e1ab46de694504ce3baeea7e0f724f1658b5f"
+version = "1.36.0-rc.2"
+source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.2#2571d914d2228a02301e80caa5e0e434e46751d0"
 dependencies = [
  "dynasm 2.0.0",
  "dynasmrt 2.0.0",
@@ -4246,8 +4247,8 @@ dependencies = [
 
 [[package]]
 name = "near-vm-engine"
-version = "1.36.0-rc.1"
-source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.1#f97e1ab46de694504ce3baeea7e0f724f1658b5f"
+version = "1.36.0-rc.2"
+source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.2#2571d914d2228a02301e80caa5e0e434e46751d0"
 dependencies = [
  "backtrace",
  "cfg-if 1.0.0",
@@ -4262,18 +4263,18 @@ dependencies = [
  "region",
  "rkyv",
  "rustc-demangle",
- "target-lexicon 0.12.11",
+ "target-lexicon 0.12.12",
  "thiserror",
  "tracing",
 ]
 
 [[package]]
 name = "near-vm-runner"
-version = "1.36.0-rc.1"
-source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.1#f97e1ab46de694504ce3baeea7e0f724f1658b5f"
+version = "1.36.0-rc.2"
+source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.2#2571d914d2228a02301e80caa5e0e434e46751d0"
 dependencies = [
  "anyhow",
- "base64 0.21.4",
+ "base64 0.21.5",
  "borsh 0.10.3",
  "ed25519-dalek 1.0.1",
  "finite-wasm",
@@ -4317,8 +4318,8 @@ dependencies = [
 
 [[package]]
 name = "near-vm-types"
-version = "1.36.0-rc.1"
-source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.1#f97e1ab46de694504ce3baeea7e0f724f1658b5f"
+version = "1.36.0-rc.2"
+source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.2#2571d914d2228a02301e80caa5e0e434e46751d0"
 dependencies = [
  "indexmap 1.9.3",
  "num-traits",
@@ -4328,8 +4329,8 @@ dependencies = [
 
 [[package]]
 name = "near-vm-vm"
-version = "1.36.0-rc.1"
-source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.1#f97e1ab46de694504ce3baeea7e0f724f1658b5f"
+version = "1.36.0-rc.2"
+source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.2#2571d914d2228a02301e80caa5e0e434e46751d0"
 dependencies = [
  "backtrace",
  "cc",
@@ -4350,8 +4351,8 @@ dependencies = [
 
 [[package]]
 name = "nearcore"
-version = "1.36.0-rc.1"
-source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.1#f97e1ab46de694504ce3baeea7e0f724f1658b5f"
+version = "1.36.0-rc.2"
+source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.2#2571d914d2228a02301e80caa5e0e434e46751d0"
 dependencies = [
  "actix",
  "actix-rt",
@@ -4455,8 +4456,8 @@ dependencies = [
 
 [[package]]
 name = "node-runtime"
-version = "1.36.0-rc.1"
-source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.1#f97e1ab46de694504ce3baeea7e0f724f1658b5f"
+version = "1.36.0-rc.2"
+source = "git+https://github.com/near/nearcore?tag=1.36.0-rc.2#2571d914d2228a02301e80caa5e0e434e46751d0"
 dependencies = [
  "borsh 0.10.3",
  "hex",
@@ -4576,13 +4577,13 @@ dependencies = [
 
 [[package]]
 name = "num-derive"
-version = "0.3.3"
+version = "0.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "876a53fff98e03a936a674b29568b0e605f06b29372c2489ff4de23f1949743d"
+checksum = "cfb77679af88f8b125209d354a202862602672222e7f2313fdd6dc349bad4712"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 1.0.109",
+ "syn 2.0.38",
 ]
 
 [[package]]
@@ -5676,7 +5677,7 @@ version = "0.11.22"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "046cd98826c46c2ac8ddecae268eb5c2e58628688a5fc7a2643704a73faba95b"
 dependencies = [
- "base64 0.21.4",
+ "base64 0.21.5",
  "bytes",
  "encoding_rs",
  "futures-core",
@@ -5883,9 +5884,9 @@ dependencies = [
 
 [[package]]
 name = "rustix"
-version = "0.37.25"
+version = "0.37.26"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d4eb579851244c2c03e7c24f501c3432bed80b8f720af1d6e5b0e0f01555a035"
+checksum = "84f3f8f960ed3b5a59055428714943298bf3fa2d4a1d53135084e0544829d995"
 dependencies = [
  "bitflags 1.3.2",
  "errno 0.3.5",
@@ -5897,9 +5898,9 @@ dependencies = [
 
 [[package]]
 name = "rustix"
-version = "0.38.19"
+version = "0.38.20"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "745ecfa778e66b2b63c88a61cb36e0eea109e803b0b86bf9879fbc77c70e86ed"
+checksum = "67ce50cb2e16c2903e30d1cbccfd8387a74b9d4c938b6a4c5ec6cc7556f7a8a0"
 dependencies = [
  "bitflags 2.4.1",
  "errno 0.3.5",
@@ -5938,7 +5939,7 @@ version = "1.0.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2d3987094b1d07b653b7dfdc3f70ce9a1da9c51ac18c1b06b662e4f9a0e9f4b2"
 dependencies = [
- "base64 0.21.4",
+ "base64 0.21.5",
 ]
 
 [[package]]
@@ -5982,9 +5983,9 @@ checksum = "1ad4cc8da4ef723ed60bced201181d83791ad433213d8c24efffda1eec85d741"
 
 [[package]]
 name = "scale-info"
-version = "2.9.0"
+version = "2.10.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "35c0a159d0c45c12b20c5a844feb1fe4bea86e28f17b92a5f0c42193634d3782"
+checksum = "7f7d66a1128282b7ef025a8ead62a4a9fcf017382ec53b8ffbf4d7bf77bd3c60"
 dependencies = [
  "bitvec",
  "cfg-if 1.0.0",
@@ -5995,9 +5996,9 @@ dependencies = [
 
 [[package]]
 name = "scale-info-derive"
-version = "2.9.0"
+version = "2.10.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "912e55f6d20e0e80d63733872b40e1227c0bce1e1ab81ba67d696339bfd7fd29"
+checksum = "abf2c68b89cafb3b8d918dd07b42be0da66ff202cf1155c5739a4e0c1ea0dc19"
 dependencies = [
  "proc-macro-crate 1.3.1",
  "proc-macro2",
@@ -6218,7 +6219,7 @@ version = "3.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "64cd236ccc1b7a29e7e2739f27c0b2dd199804abc4290e32f59f3b68d6405c23"
 dependencies = [
- "base64 0.21.4",
+ "base64 0.21.5",
  "chrono",
  "hex",
  "indexmap 1.9.3",
@@ -6422,9 +6423,9 @@ dependencies = [
 
 [[package]]
 name = "socket2"
-version = "0.4.9"
+version = "0.4.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "64a4a911eed85daf18834cfaa86a79b7d266ff93ff5ba14005426219480ed662"
+checksum = "9f7916fc008ca5542385b89a3d3ce689953c143e9304a9bf8beec1de48994c0d"
 dependencies = [
  "libc",
  "winapi",
@@ -6432,9 +6433,9 @@ dependencies = [
 
 [[package]]
 name = "socket2"
-version = "0.5.4"
+version = "0.5.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4031e820eb552adee9295814c0ced9e5cf38ddf1e8b7d566d6de8e2538ea989e"
+checksum = "7b5fac59a5cb5dd637972e5fca70daf0523c9067fcdc4842f053dae04a18f8e9"
 dependencies = [
  "libc",
  "windows-sys 0.48.0",
@@ -6593,9 +6594,9 @@ checksum = "ab0e7238dcc7b40a7be719a25365910f6807bd864f4cce6b2e6b873658e2b19d"
 
 [[package]]
 name = "target-lexicon"
-version = "0.12.11"
+version = "0.12.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9d0e916b1148c8e263850e1ebcbd046f333e0683c724876bb0da63ea4373dc8a"
+checksum = "14c39fd04924ca3a864207c66fc2cd7d22d7c016007f9ce846cbb9326331930a"
 
 [[package]]
 name = "tempfile"
@@ -6606,7 +6607,7 @@ dependencies = [
  "cfg-if 1.0.0",
  "fastrand",
  "redox_syscall 0.3.5",
- "rustix 0.38.19",
+ "rustix 0.38.20",
  "windows-sys 0.48.0",
 ]
 
@@ -6662,18 +6663,18 @@ checksum = "222a222a5bfe1bba4a77b45ec488a741b3cb8872e5e499451fd7d0129c9c7c3d"
 
 [[package]]
 name = "thiserror"
-version = "1.0.49"
+version = "1.0.50"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1177e8c6d7ede7afde3585fd2513e611227efd6481bd78d2e82ba1ce16557ed4"
+checksum = "f9a7210f5c9a7156bb50aa36aed4c95afb51df0df00713949448cf9e97d382d2"
 dependencies = [
  "thiserror-impl",
 ]
 
 [[package]]
 name = "thiserror-impl"
-version = "1.0.49"
+version = "1.0.50"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "10712f02019e9288794769fba95cd6847df9874d49d871d062172f9dd41bc4cc"
+checksum = "266b2e40bc00e5a6c09c3584011e08b06f123c00362c92b975ba9843aaaa14b8"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -6767,7 +6768,7 @@ dependencies = [
  "parking_lot 0.12.1",
  "pin-project-lite",
  "signal-hook-registry",
- "socket2 0.4.9",
+ "socket2 0.4.10",
  "tokio-macros",
  "windows-sys 0.48.0",
 ]
@@ -6886,9 +6887,9 @@ dependencies = [
 
 [[package]]
 name = "toml_datetime"
-version = "0.6.3"
+version = "0.6.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7cda73e2f1397b1262d6dfdcef8aafae14d1de7748d66822d3bfeeb6d03e5e4b"
+checksum = "3550f4e9685620ac18a50ed434eb3aec30db8ba93b0287467bca5826ea25baf1"
 
 [[package]]
 name = "toml_edit"
@@ -6978,9 +6979,9 @@ checksum = "b6bc1c9ce2b5135ac7f93c72918fc37feb872bdc6a5533a8b85eb4b86bfdae52"
 
 [[package]]
 name = "tracing"
-version = "0.1.39"
+version = "0.1.40"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ee2ef2af84856a50c1d430afce2fdded0a4ec7eda868db86409b4543df0797f9"
+checksum = "c3523ab5a71916ccf420eebdf5521fcef02141234bbc0b8a49f2fdc4544364ef"
 dependencies = [
  "log",
  "pin-project-lite",
@@ -7032,12 +7033,12 @@ dependencies = [
 
 [[package]]
 name = "tracing-log"
-version = "0.1.3"
+version = "0.1.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "78ddad33d2d10b1ed7eb9d1f518a5674713876e97e5bb9b7345a7984fbb4f922"
+checksum = "f751112709b4e791d8ce53e32c4ed2d353565a795ce84da2285393f41557bdf2"
 dependencies = [
- "lazy_static",
  "log",
+ "once_cell",
  "tracing-core",
 ]
 
@@ -7180,9 +7181,9 @@ checksum = "711b9620af191e0cdc7468a8d14e709c3dcdb115b36f838e601583af800a370a"
 
 [[package]]
 name = "uuid"
-version = "1.4.1"
+version = "1.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "79daa5ed5740825c40b389c5e50312b9c86df53fccd33f281df655642b43869d"
+checksum = "88ad59a7560b41a70d191093a945f0b87bc1deeda46fb237479708a1d6b6cdfc"
 
 [[package]]
 name = "validator"
@@ -7348,7 +7349,7 @@ dependencies = [
  "enumset",
  "rkyv",
  "smallvec",
- "target-lexicon 0.12.11",
+ "target-lexicon 0.12.12",
  "thiserror",
  "wasmer-types-near",
  "wasmer-vm-near",
@@ -7386,7 +7387,7 @@ dependencies = [
  "memmap2",
  "more-asserts",
  "rustc-demangle",
- "target-lexicon 0.12.11",
+ "target-lexicon 0.12.12",
  "thiserror",
  "wasmer-compiler-near",
  "wasmer-types-near",
@@ -7579,7 +7580,7 @@ dependencies = [
  "psm",
  "serde",
  "serde_json",
- "target-lexicon 0.12.11",
+ "target-lexicon 0.12.12",
  "wasmparser 0.103.0",
  "wasmtime-cranelift",
  "wasmtime-environ",
@@ -7613,7 +7614,7 @@ dependencies = [
  "gimli 0.27.3",
  "log",
  "object 0.30.4",
- "target-lexicon 0.12.11",
+ "target-lexicon 0.12.12",
  "thiserror",
  "wasmparser 0.103.0",
  "wasmtime-cranelift-shared",
@@ -7632,7 +7633,7 @@ dependencies = [
  "cranelift-native",
  "gimli 0.27.3",
  "object 0.30.4",
- "target-lexicon 0.12.11",
+ "target-lexicon 0.12.12",
  "wasmtime-environ",
 ]
 
@@ -7649,7 +7650,7 @@ dependencies = [
  "log",
  "object 0.30.4",
  "serde",
- "target-lexicon 0.12.11",
+ "target-lexicon 0.12.12",
  "thiserror",
  "wasmparser 0.103.0",
  "wasmtime-types",
@@ -7671,7 +7672,7 @@ dependencies = [
  "object 0.30.4",
  "rustc-demangle",
  "serde",
- "target-lexicon 0.12.11",
+ "target-lexicon 0.12.12",
  "wasmtime-environ",
  "wasmtime-jit-icache-coherence",
  "wasmtime-runtime",
@@ -7715,7 +7716,7 @@ dependencies = [
  "memoffset 0.8.0",
  "paste",
  "rand 0.8.5",
- "rustix 0.37.25",
+ "rustix 0.37.26",
  "wasmtime-asm-macros",
  "wasmtime-environ",
  "wasmtime-jit-debug",
@@ -7786,7 +7787,7 @@ dependencies = [
  "either",
  "home",
  "once_cell",
- "rustix 0.38.19",
+ "rustix 0.38.20",
 ]
 
 [[package]]
@@ -8008,6 +8009,26 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "388c44dc09d76f1536602ead6d325eb532f5c122f17782bd57fb47baeeb767e2"
 dependencies = [
  "lzma-sys",
+]
+
+[[package]]
+name = "zerocopy"
+version = "0.7.11"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4c19fae0c8a9efc6a8281f2e623db8af1db9e57852e04cde3e754dd2dc29340f"
+dependencies = [
+ "zerocopy-derive",
+]
+
+[[package]]
+name = "zerocopy-derive"
+version = "0.7.11"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fc56589e9ddd1f1c28d4b4b5c773ce232910a6bb67a70133d61c9e347585efe9"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 2.0.38",
 ]
 
 [[package]]
