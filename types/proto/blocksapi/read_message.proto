@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+import "blocksapi/message.proto";
+
+option go_package = "github.com/aurora-is-near/borealis-prototypes/go/blocksapi;blocksapi";
+
+enum ReadMessageErrorClass {
+    // Default error class
+    READ_ERROR_UNKNOWN = 0;
+    // Given message ID is lower than earliest available
+    READ_ERROR_LOW_ID = 1;
+    // Given message ID is greater than latest available
+    READ_ERROR_HIGH_ID = 2;
+    // Message ID is within given range but not present
+    READ_ERROR_NOT_FOUND = 3;
+}
+
+message ReadMessageRequest {
+    string stream_name = 1;
+    BlockMessageID message_id = 2;
+    BlockMessageContentSettings content_settings = 3;
+}
+
+message ReadMessageError {
+    ReadMessageErrorClass error_class = 1;
+    string description = 2;
+}
+
+message ReadMessageResult {
+    BlockMessage message = 1;
+    // any additional info goes there
+}
+
+message ReadMessageResponse {
+    oneof response {
+        ReadMessageResult result = 1;
+        ReadMessageError error = 2;
+    }
+}

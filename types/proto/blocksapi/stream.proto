@@ -1,0 +1,109 @@
+syntax = "proto3";
+
+import "blocksapi/message.proto";
+
+option go_package = "github.com/aurora-is-near/borealis-prototypes/go/blocksapi;blocksapi";
+
+// Defines initial stream seek behavior for given target message ID
+enum BlockStreamStartPolicy {
+    // Start on earliest available message
+    START_ON_EARLIEST_AVAILABLE = 0;
+    // Start on latest available message
+    START_ON_LATEST_AVAILABLE = 1;
+    // Start exactly on target, return error if no such target
+    START_EXACTLY_ON_TARGET = 2;
+    // Start on message which comes exactly after target, return error if no such target
+    START_EXACTLY_AFTER_TARGET = 3;
+    // Start on earliest available message that is greater or equal to target
+    START_ON_CLOSEST_TO_TARGET = 4;
+    // Start on earliest available message that is strictly greater than target
+    START_ON_EARLIEST_AFTER_TARGET = 5;
+}
+
+// Defines how service should behave if start target is not yet available
+enum BlockStreamCatchUpPolicy {
+    // Return error if catch up needed
+    CATCH_UP_PANIC = 0;
+    // Don't send anything until catch up
+    CATCH_UP_WAIT = 1;
+    // Stream normally from whatever is available before start target
+    CATCH_UP_STREAM = 2;
+}
+
+// Defines when stream has to stop
+enum BlockStreamStopPolicy {
+    // Follow new blocks
+    STOP_NEVER = 0;
+    // Don't send messages greater than target
+    STOP_AFTER_TARGET = 1;
+    // Don't send messages greater or equal to target
+    STOP_BEFORE_TARGET = 2;
+}
+
+enum BlockStreamErrorClass {
+    // Default error class
+    STREAM_ERROR_UNKNOWN = 0;
+    // Catch up required, but policy is CATCH_UP_PANIC
+    STREAM_ERROR_CATCHUP_REQUIRED = 1;
+    // Bad request (BlockStreamRequest)
+    STREAM_ERROR_BAD_REQUEST = 2;
+    
+}
+
+message BlockStreamFilter {
+    bool exclude_shards = 1;
+    repeated uint64 filter_shards = 2;
+    
+    // TODO:
+    // - filter by account(s)
+    // - other criterias
+    // - different filter modes maybe? (AND/OR/etc)
+    // IMHO all of this is excessive on first iteration
+}
+
+message BlockStreamSettings {
+    BlockStreamFilter filter = 1;
+    BlockMessageContentSettings content = 2;
+}
+
+message BlockStreamRequest {
+    string stream_name = 1;
+
+    BlockStreamStartPolicy start_policy = 2;
+    optional BlockMessageID start_target = 3;
+
+    BlockStreamStopPolicy stop_policy = 4;
+    optional BlockMessageID stop_target = 5;
+
+    BlockStreamSettings settings = 6;
+
+    BlockStreamCatchUpPolicy catchup_policy = 7;
+    // If not provided - default settings are used during catchup
+    optional BlockStreamSettings catchup_settings = 8;
+}
+
+message BlockStreamEnd {
+    string description = 1;
+    // TODO: end reason?
+    // TODO: stats? etc?
+    // TODO: next message id?
+}
+
+message BlockStreamError {
+    BlockStreamErrorClass error_class = 1;
+    string description = 2;
+}
+
+message BlockStreamMessage {
+    BlockMessage message = 1;
+    bool catchup_in_progress = 2;
+    // TODO: maybe add auxiliary info that helps understanding distance to latest block
+}
+
+message BlockStreamResponse {
+    oneof response {
+        BlockStreamMessage message = 1;
+        BlockStreamEnd stream_end = 2;
+        BlockStreamError error = 3;
+    }
+}

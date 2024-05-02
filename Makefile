@@ -11,7 +11,7 @@ install-protoc-gen-go:
 	go install github.com/planetscale/vtprotobuf/cmd/protoc-gen-go-vtproto@latest
 
 gen-proto-go:
-	rm $(shell find go -name "*pb.go")
+	rm -f $(shell find go -name "*pb.go")
 	protoc \
 		--proto_path=types/proto/. \
 		--go_out=paths=source_relative:go/. \
