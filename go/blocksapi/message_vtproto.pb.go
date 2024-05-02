@@ -19,12 +19,12 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-func (m *BlockMessageID) CloneVT() *BlockMessageID {
+func (m *BlockMessage_ID) CloneVT() *BlockMessage_ID {
 	if m == nil {
-		return (*BlockMessageID)(nil)
+		return (*BlockMessage_ID)(nil)
 	}
-	r := new(BlockMessageID)
-	r.MessageType = m.MessageType
+	r := new(BlockMessage_ID)
+	r.Kind = m.Kind
 	r.Height = m.Height
 	r.ShardId = m.ShardId
 	if len(m.unknownFields) > 0 {
@@ -34,29 +34,7 @@ func (m *BlockMessageID) CloneVT() *BlockMessageID {
 	return r
 }
 
-func (m *BlockMessageID) CloneMessageVT() proto.Message {
-	return m.CloneVT()
-}
-
-func (m *BlockMessageContentSettings) CloneVT() *BlockMessageContentSettings {
-	if m == nil {
-		return (*BlockMessageContentSettings)(nil)
-	}
-	r := new(BlockMessageContentSettings)
-	r.ExcludePayload = m.ExcludePayload
-	r.ZstdCompression = m.ZstdCompression
-	if rhs := m.RequireFormat; rhs != nil {
-		tmpVal := *rhs
-		r.RequireFormat = &tmpVal
-	}
-	if len(m.unknownFields) > 0 {
-		r.unknownFields = make([]byte, len(m.unknownFields))
-		copy(r.unknownFields, m.unknownFields)
-	}
-	return r
-}
-
-func (m *BlockMessageContentSettings) CloneMessageVT() proto.Message {
+func (m *BlockMessage_ID) CloneMessageVT() proto.Message {
 	return m.CloneVT()
 }
 
@@ -95,13 +73,35 @@ func (m *BlockMessage_RawPayload) CloneVT() isBlockMessage_Payload {
 	return r
 }
 
-func (this *BlockMessageID) EqualVT(that *BlockMessageID) bool {
+func (m *BlockMessageDeliverySettings) CloneVT() *BlockMessageDeliverySettings {
+	if m == nil {
+		return (*BlockMessageDeliverySettings)(nil)
+	}
+	r := new(BlockMessageDeliverySettings)
+	r.ExcludePayload = m.ExcludePayload
+	r.ZstdCompression = m.ZstdCompression
+	if rhs := m.RequireFormat; rhs != nil {
+		tmpVal := *rhs
+		r.RequireFormat = &tmpVal
+	}
+	if len(m.unknownFields) > 0 {
+		r.unknownFields = make([]byte, len(m.unknownFields))
+		copy(r.unknownFields, m.unknownFields)
+	}
+	return r
+}
+
+func (m *BlockMessageDeliverySettings) CloneMessageVT() proto.Message {
+	return m.CloneVT()
+}
+
+func (this *BlockMessage_ID) EqualVT(that *BlockMessage_ID) bool {
 	if this == that {
 		return true
 	} else if this == nil || that == nil {
 		return false
 	}
-	if this.MessageType != that.MessageType {
+	if this.Kind != that.Kind {
 		return false
 	}
 	if this.Height != that.Height {
@@ -113,33 +113,8 @@ func (this *BlockMessageID) EqualVT(that *BlockMessageID) bool {
 	return string(this.unknownFields) == string(that.unknownFields)
 }
 
-func (this *BlockMessageID) EqualMessageVT(thatMsg proto.Message) bool {
-	that, ok := thatMsg.(*BlockMessageID)
-	if !ok {
-		return false
-	}
-	return this.EqualVT(that)
-}
-func (this *BlockMessageContentSettings) EqualVT(that *BlockMessageContentSettings) bool {
-	if this == that {
-		return true
-	} else if this == nil || that == nil {
-		return false
-	}
-	if this.ExcludePayload != that.ExcludePayload {
-		return false
-	}
-	if this.ZstdCompression != that.ZstdCompression {
-		return false
-	}
-	if p, q := this.RequireFormat, that.RequireFormat; (p == nil && q != nil) || (p != nil && (q == nil || *p != *q)) {
-		return false
-	}
-	return string(this.unknownFields) == string(that.unknownFields)
-}
-
-func (this *BlockMessageContentSettings) EqualMessageVT(thatMsg proto.Message) bool {
-	that, ok := thatMsg.(*BlockMessageContentSettings)
+func (this *BlockMessage_ID) EqualMessageVT(thatMsg proto.Message) bool {
+	that, ok := thatMsg.(*BlockMessage_ID)
 	if !ok {
 		return false
 	}
@@ -199,7 +174,32 @@ func (this *BlockMessage_RawPayload) EqualVT(thatIface isBlockMessage_Payload) b
 	return true
 }
 
-func (m *BlockMessageID) MarshalVT() (dAtA []byte, err error) {
+func (this *BlockMessageDeliverySettings) EqualVT(that *BlockMessageDeliverySettings) bool {
+	if this == that {
+		return true
+	} else if this == nil || that == nil {
+		return false
+	}
+	if this.ExcludePayload != that.ExcludePayload {
+		return false
+	}
+	if this.ZstdCompression != that.ZstdCompression {
+		return false
+	}
+	if p, q := this.RequireFormat, that.RequireFormat; (p == nil && q != nil) || (p != nil && (q == nil || *p != *q)) {
+		return false
+	}
+	return string(this.unknownFields) == string(that.unknownFields)
+}
+
+func (this *BlockMessageDeliverySettings) EqualMessageVT(thatMsg proto.Message) bool {
+	that, ok := thatMsg.(*BlockMessageDeliverySettings)
+	if !ok {
+		return false
+	}
+	return this.EqualVT(that)
+}
+func (m *BlockMessage_ID) MarshalVT() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -212,12 +212,12 @@ func (m *BlockMessageID) MarshalVT() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *BlockMessageID) MarshalToVT(dAtA []byte) (int, error) {
+func (m *BlockMessage_ID) MarshalToVT(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVT(dAtA[:size])
 }
 
-func (m *BlockMessageID) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+func (m *BlockMessage_ID) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	if m == nil {
 		return 0, nil
 	}
@@ -239,66 +239,8 @@ func (m *BlockMessageID) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i--
 		dAtA[i] = 0x10
 	}
-	if m.MessageType != 0 {
-		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.MessageType))
-		i--
-		dAtA[i] = 0x8
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *BlockMessageContentSettings) MarshalVT() (dAtA []byte, err error) {
-	if m == nil {
-		return nil, nil
-	}
-	size := m.SizeVT()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *BlockMessageContentSettings) MarshalToVT(dAtA []byte) (int, error) {
-	size := m.SizeVT()
-	return m.MarshalToSizedBufferVT(dAtA[:size])
-}
-
-func (m *BlockMessageContentSettings) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
-	if m == nil {
-		return 0, nil
-	}
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.unknownFields != nil {
-		i -= len(m.unknownFields)
-		copy(dAtA[i:], m.unknownFields)
-	}
-	if m.RequireFormat != nil {
-		i = protohelpers.EncodeVarint(dAtA, i, uint64(*m.RequireFormat))
-		i--
-		dAtA[i] = 0x18
-	}
-	if m.ZstdCompression {
-		i--
-		if m.ZstdCompression {
-			dAtA[i] = 1
-		} else {
-			dAtA[i] = 0
-		}
-		i--
-		dAtA[i] = 0x10
-	}
-	if m.ExcludePayload {
-		i--
-		if m.ExcludePayload {
-			dAtA[i] = 1
-		} else {
-			dAtA[i] = 0
-		}
+	if m.Kind != 0 {
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.Kind))
 		i--
 		dAtA[i] = 0x8
 	}
@@ -386,73 +328,25 @@ func (m *BlockMessage_RawPayload) MarshalToSizedBufferVT(dAtA []byte) (int, erro
 	dAtA[i] = 0x22
 	return len(dAtA) - i, nil
 }
-func (m *BlockMessageID) MarshalVTStrict() (dAtA []byte, err error) {
+func (m *BlockMessageDeliverySettings) MarshalVT() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
 	}
 	size := m.SizeVT()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBufferVTStrict(dAtA[:size])
+	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
 	return dAtA[:n], nil
 }
 
-func (m *BlockMessageID) MarshalToVTStrict(dAtA []byte) (int, error) {
+func (m *BlockMessageDeliverySettings) MarshalToVT(dAtA []byte) (int, error) {
 	size := m.SizeVT()
-	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+	return m.MarshalToSizedBufferVT(dAtA[:size])
 }
 
-func (m *BlockMessageID) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
-	if m == nil {
-		return 0, nil
-	}
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.unknownFields != nil {
-		i -= len(m.unknownFields)
-		copy(dAtA[i:], m.unknownFields)
-	}
-	if m.ShardId != 0 {
-		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.ShardId))
-		i--
-		dAtA[i] = 0x18
-	}
-	if m.Height != 0 {
-		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.Height))
-		i--
-		dAtA[i] = 0x10
-	}
-	if m.MessageType != 0 {
-		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.MessageType))
-		i--
-		dAtA[i] = 0x8
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *BlockMessageContentSettings) MarshalVTStrict() (dAtA []byte, err error) {
-	if m == nil {
-		return nil, nil
-	}
-	size := m.SizeVT()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBufferVTStrict(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *BlockMessageContentSettings) MarshalToVTStrict(dAtA []byte) (int, error) {
-	size := m.SizeVT()
-	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
-}
-
-func (m *BlockMessageContentSettings) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+func (m *BlockMessageDeliverySettings) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	if m == nil {
 		return 0, nil
 	}
@@ -486,6 +380,54 @@ func (m *BlockMessageContentSettings) MarshalToSizedBufferVTStrict(dAtA []byte) 
 		} else {
 			dAtA[i] = 0
 		}
+		i--
+		dAtA[i] = 0x8
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *BlockMessage_ID) MarshalVTStrict() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVTStrict(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *BlockMessage_ID) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *BlockMessage_ID) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	if m.ShardId != 0 {
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.ShardId))
+		i--
+		dAtA[i] = 0x18
+	}
+	if m.Height != 0 {
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.Height))
+		i--
+		dAtA[i] = 0x10
+	}
+	if m.Kind != 0 {
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.Kind))
 		i--
 		dAtA[i] = 0x8
 	}
@@ -571,39 +513,78 @@ func (m *BlockMessage_RawPayload) MarshalToSizedBufferVTStrict(dAtA []byte) (int
 	dAtA[i] = 0x22
 	return len(dAtA) - i, nil
 }
-func (m *BlockMessageID) SizeVT() (n int) {
+func (m *BlockMessageDeliverySettings) MarshalVTStrict() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVTStrict(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *BlockMessageDeliverySettings) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *BlockMessageDeliverySettings) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	if m.RequireFormat != nil {
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(*m.RequireFormat))
+		i--
+		dAtA[i] = 0x18
+	}
+	if m.ZstdCompression {
+		i--
+		if m.ZstdCompression {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i--
+		dAtA[i] = 0x10
+	}
+	if m.ExcludePayload {
+		i--
+		if m.ExcludePayload {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i--
+		dAtA[i] = 0x8
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *BlockMessage_ID) SizeVT() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
-	if m.MessageType != 0 {
-		n += 1 + protohelpers.SizeOfVarint(uint64(m.MessageType))
+	if m.Kind != 0 {
+		n += 1 + protohelpers.SizeOfVarint(uint64(m.Kind))
 	}
 	if m.Height != 0 {
 		n += 1 + protohelpers.SizeOfVarint(uint64(m.Height))
 	}
 	if m.ShardId != 0 {
 		n += 1 + protohelpers.SizeOfVarint(uint64(m.ShardId))
-	}
-	n += len(m.unknownFields)
-	return n
-}
-
-func (m *BlockMessageContentSettings) SizeVT() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.ExcludePayload {
-		n += 2
-	}
-	if m.ZstdCompression {
-		n += 2
-	}
-	if m.RequireFormat != nil {
-		n += 1 + protohelpers.SizeOfVarint(uint64(*m.RequireFormat))
 	}
 	n += len(m.unknownFields)
 	return n
@@ -642,7 +623,26 @@ func (m *BlockMessage_RawPayload) SizeVT() (n int) {
 	n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
 	return n
 }
-func (m *BlockMessageID) UnmarshalVT(dAtA []byte) error {
+func (m *BlockMessageDeliverySettings) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.ExcludePayload {
+		n += 2
+	}
+	if m.ZstdCompression {
+		n += 2
+	}
+	if m.RequireFormat != nil {
+		n += 1 + protohelpers.SizeOfVarint(uint64(*m.RequireFormat))
+	}
+	n += len(m.unknownFields)
+	return n
+}
+
+func (m *BlockMessage_ID) UnmarshalVT(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -665,17 +665,17 @@ func (m *BlockMessageID) UnmarshalVT(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: BlockMessageID: wiretype end group for non-group")
+			return fmt.Errorf("proto: BlockMessage_ID: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: BlockMessageID: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: BlockMessage_ID: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
 			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field MessageType", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Kind", wireType)
 			}
-			m.MessageType = 0
+			m.Kind = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return protohelpers.ErrIntOverflow
@@ -685,7 +685,7 @@ func (m *BlockMessageID) UnmarshalVT(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.MessageType |= BlockMessageType(b&0x7F) << shift
+				m.Kind |= BlockMessage_Kind(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -728,117 +728,6 @@ func (m *BlockMessageID) UnmarshalVT(dAtA []byte) error {
 					break
 				}
 			}
-		default:
-			iNdEx = preIndex
-			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return protohelpers.ErrInvalidLength
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *BlockMessageContentSettings) UnmarshalVT(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return protohelpers.ErrIntOverflow
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: BlockMessageContentSettings: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: BlockMessageContentSettings: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ExcludePayload", wireType)
-			}
-			var v int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return protohelpers.ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				v |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			m.ExcludePayload = bool(v != 0)
-		case 2:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ZstdCompression", wireType)
-			}
-			var v int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return protohelpers.ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				v |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			m.ZstdCompression = bool(v != 0)
-		case 3:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field RequireFormat", wireType)
-			}
-			var v BlockMessagePayloadFormat
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return protohelpers.ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				v |= BlockMessagePayloadFormat(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			m.RequireFormat = &v
 		default:
 			iNdEx = preIndex
 			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
@@ -920,7 +809,7 @@ func (m *BlockMessage) UnmarshalVT(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.Id == nil {
-				m.Id = &BlockMessageID{}
+				m.Id = &BlockMessage_ID{}
 			}
 			if err := m.Id.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 				return err
@@ -940,7 +829,7 @@ func (m *BlockMessage) UnmarshalVT(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.Format |= BlockMessagePayloadFormat(b&0x7F) << shift
+				m.Format |= BlockMessage_Format(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1020,7 +909,7 @@ func (m *BlockMessage) UnmarshalVT(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *BlockMessageID) UnmarshalVTUnsafe(dAtA []byte) error {
+func (m *BlockMessageDeliverySettings) UnmarshalVT(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1043,118 +932,10 @@ func (m *BlockMessageID) UnmarshalVTUnsafe(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: BlockMessageID: wiretype end group for non-group")
+			return fmt.Errorf("proto: BlockMessageDeliverySettings: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: BlockMessageID: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field MessageType", wireType)
-			}
-			m.MessageType = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return protohelpers.ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.MessageType |= BlockMessageType(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 2:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Height", wireType)
-			}
-			m.Height = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return protohelpers.ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Height |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 3:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ShardId", wireType)
-			}
-			m.ShardId = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return protohelpers.ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.ShardId |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		default:
-			iNdEx = preIndex
-			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return protohelpers.ErrInvalidLength
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *BlockMessageContentSettings) UnmarshalVTUnsafe(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return protohelpers.ErrIntOverflow
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: BlockMessageContentSettings: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: BlockMessageContentSettings: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: BlockMessageDeliverySettings: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -1201,7 +982,7 @@ func (m *BlockMessageContentSettings) UnmarshalVTUnsafe(dAtA []byte) error {
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field RequireFormat", wireType)
 			}
-			var v BlockMessagePayloadFormat
+			var v BlockMessage_Format
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return protohelpers.ErrIntOverflow
@@ -1211,12 +992,120 @@ func (m *BlockMessageContentSettings) UnmarshalVTUnsafe(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				v |= BlockMessagePayloadFormat(b&0x7F) << shift
+				v |= BlockMessage_Format(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
 			m.RequireFormat = &v
+		default:
+			iNdEx = preIndex
+			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *BlockMessage_ID) UnmarshalVTUnsafe(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return protohelpers.ErrIntOverflow
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: BlockMessage_ID: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: BlockMessage_ID: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Kind", wireType)
+			}
+			m.Kind = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Kind |= BlockMessage_Kind(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Height", wireType)
+			}
+			m.Height = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Height |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 3:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ShardId", wireType)
+			}
+			m.ShardId = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.ShardId |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
 		default:
 			iNdEx = preIndex
 			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
@@ -1298,7 +1187,7 @@ func (m *BlockMessage) UnmarshalVTUnsafe(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.Id == nil {
-				m.Id = &BlockMessageID{}
+				m.Id = &BlockMessage_ID{}
 			}
 			if err := m.Id.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 				return err
@@ -1318,7 +1207,7 @@ func (m *BlockMessage) UnmarshalVTUnsafe(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.Format |= BlockMessagePayloadFormat(b&0x7F) << shift
+				m.Format |= BlockMessage_Format(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1375,6 +1264,117 @@ func (m *BlockMessage) UnmarshalVTUnsafe(dAtA []byte) error {
 			v := dAtA[iNdEx:postIndex]
 			m.Payload = &BlockMessage_RawPayload{RawPayload: v}
 			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *BlockMessageDeliverySettings) UnmarshalVTUnsafe(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return protohelpers.ErrIntOverflow
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: BlockMessageDeliverySettings: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: BlockMessageDeliverySettings: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ExcludePayload", wireType)
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.ExcludePayload = bool(v != 0)
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ZstdCompression", wireType)
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.ZstdCompression = bool(v != 0)
+		case 3:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field RequireFormat", wireType)
+			}
+			var v BlockMessage_Format
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= BlockMessage_Format(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.RequireFormat = &v
 		default:
 			iNdEx = preIndex
 			skippy, err := protohelpers.Skip(dAtA[iNdEx:])

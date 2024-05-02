@@ -20,48 +20,48 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type ListBlockStreamsErrorClass int32
+type ListBlockStreamsResponse_Error_Kind int32
 
 const (
-	// Default error class
-	ListBlockStreamsErrorClass_LIST_ERROR_UNKNOWN ListBlockStreamsErrorClass = 0
+	// Default error kind
+	ListBlockStreamsResponse_Error_UNKNOWN ListBlockStreamsResponse_Error_Kind = 0
 )
 
-// Enum value maps for ListBlockStreamsErrorClass.
+// Enum value maps for ListBlockStreamsResponse_Error_Kind.
 var (
-	ListBlockStreamsErrorClass_name = map[int32]string{
-		0: "LIST_ERROR_UNKNOWN",
+	ListBlockStreamsResponse_Error_Kind_name = map[int32]string{
+		0: "UNKNOWN",
 	}
-	ListBlockStreamsErrorClass_value = map[string]int32{
-		"LIST_ERROR_UNKNOWN": 0,
+	ListBlockStreamsResponse_Error_Kind_value = map[string]int32{
+		"UNKNOWN": 0,
 	}
 )
 
-func (x ListBlockStreamsErrorClass) Enum() *ListBlockStreamsErrorClass {
-	p := new(ListBlockStreamsErrorClass)
+func (x ListBlockStreamsResponse_Error_Kind) Enum() *ListBlockStreamsResponse_Error_Kind {
+	p := new(ListBlockStreamsResponse_Error_Kind)
 	*p = x
 	return p
 }
 
-func (x ListBlockStreamsErrorClass) String() string {
+func (x ListBlockStreamsResponse_Error_Kind) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (ListBlockStreamsErrorClass) Descriptor() protoreflect.EnumDescriptor {
+func (ListBlockStreamsResponse_Error_Kind) Descriptor() protoreflect.EnumDescriptor {
 	return file_blocksapi_stream_list_proto_enumTypes[0].Descriptor()
 }
 
-func (ListBlockStreamsErrorClass) Type() protoreflect.EnumType {
+func (ListBlockStreamsResponse_Error_Kind) Type() protoreflect.EnumType {
 	return &file_blocksapi_stream_list_proto_enumTypes[0]
 }
 
-func (x ListBlockStreamsErrorClass) Number() protoreflect.EnumNumber {
+func (x ListBlockStreamsResponse_Error_Kind) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use ListBlockStreamsErrorClass.Descriptor instead.
-func (ListBlockStreamsErrorClass) EnumDescriptor() ([]byte, []int) {
-	return file_blocksapi_stream_list_proto_rawDescGZIP(), []int{0}
+// Deprecated: Use ListBlockStreamsResponse_Error_Kind.Descriptor instead.
+func (ListBlockStreamsResponse_Error_Kind) EnumDescriptor() ([]byte, []int) {
+	return file_blocksapi_stream_list_proto_rawDescGZIP(), []int{1, 1, 0}
 }
 
 type ListBlockStreamsRequest struct {
@@ -111,108 +111,6 @@ func (x *ListBlockStreamsRequest) GetStreamFilter() []string {
 	return nil
 }
 
-type ListBlockStreamsError struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	ErrorClass  ListBlockStreamsErrorClass `protobuf:"varint,1,opt,name=error_class,json=errorClass,proto3,enum=ListBlockStreamsErrorClass" json:"error_class,omitempty"`
-	Description string                     `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
-}
-
-func (x *ListBlockStreamsError) Reset() {
-	*x = ListBlockStreamsError{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_blocksapi_stream_list_proto_msgTypes[1]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *ListBlockStreamsError) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListBlockStreamsError) ProtoMessage() {}
-
-func (x *ListBlockStreamsError) ProtoReflect() protoreflect.Message {
-	mi := &file_blocksapi_stream_list_proto_msgTypes[1]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListBlockStreamsError.ProtoReflect.Descriptor instead.
-func (*ListBlockStreamsError) Descriptor() ([]byte, []int) {
-	return file_blocksapi_stream_list_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *ListBlockStreamsError) GetErrorClass() ListBlockStreamsErrorClass {
-	if x != nil {
-		return x.ErrorClass
-	}
-	return ListBlockStreamsErrorClass_LIST_ERROR_UNKNOWN
-}
-
-func (x *ListBlockStreamsError) GetDescription() string {
-	if x != nil {
-		return x.Description
-	}
-	return ""
-}
-
-type ListBlockStreamsResult struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Response map[string]*BlockStreamInfo `protobuf:"bytes,1,rep,name=response,proto3" json:"response,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-}
-
-func (x *ListBlockStreamsResult) Reset() {
-	*x = ListBlockStreamsResult{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_blocksapi_stream_list_proto_msgTypes[2]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *ListBlockStreamsResult) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListBlockStreamsResult) ProtoMessage() {}
-
-func (x *ListBlockStreamsResult) ProtoReflect() protoreflect.Message {
-	mi := &file_blocksapi_stream_list_proto_msgTypes[2]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListBlockStreamsResult.ProtoReflect.Descriptor instead.
-func (*ListBlockStreamsResult) Descriptor() ([]byte, []int) {
-	return file_blocksapi_stream_list_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *ListBlockStreamsResult) GetResponse() map[string]*BlockStreamInfo {
-	if x != nil {
-		return x.Response
-	}
-	return nil
-}
-
 type ListBlockStreamsResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -220,15 +118,15 @@ type ListBlockStreamsResponse struct {
 
 	// Types that are assignable to Response:
 	//
-	//	*ListBlockStreamsResponse_Result
-	//	*ListBlockStreamsResponse_Error
+	//	*ListBlockStreamsResponse_Result_
+	//	*ListBlockStreamsResponse_Error_
 	Response isListBlockStreamsResponse_Response `protobuf_oneof:"response"`
 }
 
 func (x *ListBlockStreamsResponse) Reset() {
 	*x = ListBlockStreamsResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_blocksapi_stream_list_proto_msgTypes[3]
+		mi := &file_blocksapi_stream_list_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -241,7 +139,7 @@ func (x *ListBlockStreamsResponse) String() string {
 func (*ListBlockStreamsResponse) ProtoMessage() {}
 
 func (x *ListBlockStreamsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_blocksapi_stream_list_proto_msgTypes[3]
+	mi := &file_blocksapi_stream_list_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -254,7 +152,7 @@ func (x *ListBlockStreamsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListBlockStreamsResponse.ProtoReflect.Descriptor instead.
 func (*ListBlockStreamsResponse) Descriptor() ([]byte, []int) {
-	return file_blocksapi_stream_list_proto_rawDescGZIP(), []int{3}
+	return file_blocksapi_stream_list_proto_rawDescGZIP(), []int{1}
 }
 
 func (m *ListBlockStreamsResponse) GetResponse() isListBlockStreamsResponse_Response {
@@ -264,15 +162,15 @@ func (m *ListBlockStreamsResponse) GetResponse() isListBlockStreamsResponse_Resp
 	return nil
 }
 
-func (x *ListBlockStreamsResponse) GetResult() *ListBlockStreamsResult {
-	if x, ok := x.GetResponse().(*ListBlockStreamsResponse_Result); ok {
+func (x *ListBlockStreamsResponse) GetResult() *ListBlockStreamsResponse_Result {
+	if x, ok := x.GetResponse().(*ListBlockStreamsResponse_Result_); ok {
 		return x.Result
 	}
 	return nil
 }
 
-func (x *ListBlockStreamsResponse) GetError() *ListBlockStreamsError {
-	if x, ok := x.GetResponse().(*ListBlockStreamsResponse_Error); ok {
+func (x *ListBlockStreamsResponse) GetError() *ListBlockStreamsResponse_Error {
+	if x, ok := x.GetResponse().(*ListBlockStreamsResponse_Error_); ok {
 		return x.Error
 	}
 	return nil
@@ -282,17 +180,119 @@ type isListBlockStreamsResponse_Response interface {
 	isListBlockStreamsResponse_Response()
 }
 
+type ListBlockStreamsResponse_Result_ struct {
+	Result *ListBlockStreamsResponse_Result `protobuf:"bytes,1,opt,name=result,proto3,oneof"`
+}
+
+type ListBlockStreamsResponse_Error_ struct {
+	Error *ListBlockStreamsResponse_Error `protobuf:"bytes,2,opt,name=error,proto3,oneof"`
+}
+
+func (*ListBlockStreamsResponse_Result_) isListBlockStreamsResponse_Response() {}
+
+func (*ListBlockStreamsResponse_Error_) isListBlockStreamsResponse_Response() {}
+
 type ListBlockStreamsResponse_Result struct {
-	Result *ListBlockStreamsResult `protobuf:"bytes,1,opt,name=result,proto3,oneof"`
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Response map[string]*BlockStreamInfo `protobuf:"bytes,1,rep,name=response,proto3" json:"response,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+}
+
+func (x *ListBlockStreamsResponse_Result) Reset() {
+	*x = ListBlockStreamsResponse_Result{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_blocksapi_stream_list_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListBlockStreamsResponse_Result) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListBlockStreamsResponse_Result) ProtoMessage() {}
+
+func (x *ListBlockStreamsResponse_Result) ProtoReflect() protoreflect.Message {
+	mi := &file_blocksapi_stream_list_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListBlockStreamsResponse_Result.ProtoReflect.Descriptor instead.
+func (*ListBlockStreamsResponse_Result) Descriptor() ([]byte, []int) {
+	return file_blocksapi_stream_list_proto_rawDescGZIP(), []int{1, 0}
+}
+
+func (x *ListBlockStreamsResponse_Result) GetResponse() map[string]*BlockStreamInfo {
+	if x != nil {
+		return x.Response
+	}
+	return nil
 }
 
 type ListBlockStreamsResponse_Error struct {
-	Error *ListBlockStreamsError `protobuf:"bytes,2,opt,name=error,proto3,oneof"`
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ErrorClass  ListBlockStreamsResponse_Error_Kind `protobuf:"varint,1,opt,name=error_class,json=errorClass,proto3,enum=ListBlockStreamsResponse_Error_Kind" json:"error_class,omitempty"`
+	Description string                              `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
 }
 
-func (*ListBlockStreamsResponse_Result) isListBlockStreamsResponse_Response() {}
+func (x *ListBlockStreamsResponse_Error) Reset() {
+	*x = ListBlockStreamsResponse_Error{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_blocksapi_stream_list_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
 
-func (*ListBlockStreamsResponse_Error) isListBlockStreamsResponse_Response() {}
+func (x *ListBlockStreamsResponse_Error) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListBlockStreamsResponse_Error) ProtoMessage() {}
+
+func (x *ListBlockStreamsResponse_Error) ProtoReflect() protoreflect.Message {
+	mi := &file_blocksapi_stream_list_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListBlockStreamsResponse_Error.ProtoReflect.Descriptor instead.
+func (*ListBlockStreamsResponse_Error) Descriptor() ([]byte, []int) {
+	return file_blocksapi_stream_list_proto_rawDescGZIP(), []int{1, 1}
+}
+
+func (x *ListBlockStreamsResponse_Error) GetErrorClass() ListBlockStreamsResponse_Error_Kind {
+	if x != nil {
+		return x.ErrorClass
+	}
+	return ListBlockStreamsResponse_Error_UNKNOWN
+}
+
+func (x *ListBlockStreamsResponse_Error) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
 
 var File_blocksapi_stream_list_proto protoreflect.FileDescriptor
 
@@ -304,43 +304,41 @@ var file_blocksapi_stream_list_proto_rawDesc = []byte{
 	0x73, 0x74, 0x42, 0x6c, 0x6f, 0x63, 0x6b, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x73, 0x52, 0x65,
 	0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x23, 0x0a, 0x0d, 0x73, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x5f,
 	0x66, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x18, 0x01, 0x20, 0x03, 0x28, 0x09, 0x52, 0x0c, 0x73, 0x74,
-	0x72, 0x65, 0x61, 0x6d, 0x46, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x22, 0x77, 0x0a, 0x15, 0x4c, 0x69,
-	0x73, 0x74, 0x42, 0x6c, 0x6f, 0x63, 0x6b, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x73, 0x45, 0x72,
-	0x72, 0x6f, 0x72, 0x12, 0x3c, 0x0a, 0x0b, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x5f, 0x63, 0x6c, 0x61,
-	0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x1b, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x42,
-	0x6c, 0x6f, 0x63, 0x6b, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x73, 0x45, 0x72, 0x72, 0x6f, 0x72,
-	0x43, 0x6c, 0x61, 0x73, 0x73, 0x52, 0x0a, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x43, 0x6c, 0x61, 0x73,
-	0x73, 0x12, 0x20, 0x0a, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e,
-	0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74,
-	0x69, 0x6f, 0x6e, 0x22, 0xaa, 0x01, 0x0a, 0x16, 0x4c, 0x69, 0x73, 0x74, 0x42, 0x6c, 0x6f, 0x63,
-	0x6b, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x41,
-	0x0a, 0x08, 0x72, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b,
-	0x32, 0x25, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x42, 0x6c, 0x6f, 0x63, 0x6b, 0x53, 0x74, 0x72, 0x65,
-	0x61, 0x6d, 0x73, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x2e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
-	0x73, 0x65, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x52, 0x08, 0x72, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
-	0x65, 0x1a, 0x4d, 0x0a, 0x0d, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x45, 0x6e, 0x74,
-	0x72, 0x79, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x03, 0x6b, 0x65, 0x79, 0x12, 0x26, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20,
-	0x01, 0x28, 0x0b, 0x32, 0x10, 0x2e, 0x42, 0x6c, 0x6f, 0x63, 0x6b, 0x53, 0x74, 0x72, 0x65, 0x61,
-	0x6d, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38, 0x01,
-	0x22, 0x89, 0x01, 0x0a, 0x18, 0x4c, 0x69, 0x73, 0x74, 0x42, 0x6c, 0x6f, 0x63, 0x6b, 0x53, 0x74,
-	0x72, 0x65, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x31, 0x0a,
-	0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x17, 0x2e,
-	0x4c, 0x69, 0x73, 0x74, 0x42, 0x6c, 0x6f, 0x63, 0x6b, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x73,
-	0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x48, 0x00, 0x52, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74,
-	0x12, 0x2e, 0x0a, 0x05, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32,
-	0x16, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x42, 0x6c, 0x6f, 0x63, 0x6b, 0x53, 0x74, 0x72, 0x65, 0x61,
-	0x6d, 0x73, 0x45, 0x72, 0x72, 0x6f, 0x72, 0x48, 0x00, 0x52, 0x05, 0x65, 0x72, 0x72, 0x6f, 0x72,
-	0x42, 0x0a, 0x0a, 0x08, 0x72, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2a, 0x34, 0x0a, 0x1a,
-	0x4c, 0x69, 0x73, 0x74, 0x42, 0x6c, 0x6f, 0x63, 0x6b, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x73,
-	0x45, 0x72, 0x72, 0x6f, 0x72, 0x43, 0x6c, 0x61, 0x73, 0x73, 0x12, 0x16, 0x0a, 0x12, 0x4c, 0x49,
-	0x53, 0x54, 0x5f, 0x45, 0x52, 0x52, 0x4f, 0x52, 0x5f, 0x55, 0x4e, 0x4b, 0x4e, 0x4f, 0x57, 0x4e,
-	0x10, 0x00, 0x42, 0x46, 0x5a, 0x44, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d,
-	0x2f, 0x61, 0x75, 0x72, 0x6f, 0x72, 0x61, 0x2d, 0x69, 0x73, 0x2d, 0x6e, 0x65, 0x61, 0x72, 0x2f,
-	0x62, 0x6f, 0x72, 0x65, 0x61, 0x6c, 0x69, 0x73, 0x2d, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x74, 0x79,
-	0x70, 0x65, 0x73, 0x2f, 0x67, 0x6f, 0x2f, 0x62, 0x6c, 0x6f, 0x63, 0x6b, 0x73, 0x61, 0x70, 0x69,
-	0x3b, 0x62, 0x6c, 0x6f, 0x63, 0x6b, 0x73, 0x61, 0x70, 0x69, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x33,
+	0x72, 0x65, 0x61, 0x6d, 0x46, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x22, 0xc9, 0x03, 0x0a, 0x18, 0x4c,
+	0x69, 0x73, 0x74, 0x42, 0x6c, 0x6f, 0x63, 0x6b, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x73, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x3a, 0x0a, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c,
+	0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x20, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x42, 0x6c,
+	0x6f, 0x63, 0x6b, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x2e, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x48, 0x00, 0x52, 0x06, 0x72, 0x65, 0x73,
+	0x75, 0x6c, 0x74, 0x12, 0x37, 0x0a, 0x05, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x0b, 0x32, 0x1f, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x42, 0x6c, 0x6f, 0x63, 0x6b, 0x53, 0x74,
+	0x72, 0x65, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x45, 0x72,
+	0x72, 0x6f, 0x72, 0x48, 0x00, 0x52, 0x05, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x1a, 0xa3, 0x01, 0x0a,
+	0x06, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x4a, 0x0a, 0x08, 0x72, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x2e, 0x2e, 0x4c, 0x69, 0x73, 0x74,
+	0x42, 0x6c, 0x6f, 0x63, 0x6b, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x2e, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x52, 0x08, 0x72, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x1a, 0x4d, 0x0a, 0x0d, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x45,
+	0x6e, 0x74, 0x72, 0x79, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x26, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x10, 0x2e, 0x42, 0x6c, 0x6f, 0x63, 0x6b, 0x53, 0x74, 0x72,
+	0x65, 0x61, 0x6d, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02,
+	0x38, 0x01, 0x1a, 0x85, 0x01, 0x0a, 0x05, 0x45, 0x72, 0x72, 0x6f, 0x72, 0x12, 0x45, 0x0a, 0x0b,
+	0x65, 0x72, 0x72, 0x6f, 0x72, 0x5f, 0x63, 0x6c, 0x61, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x0e, 0x32, 0x24, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x42, 0x6c, 0x6f, 0x63, 0x6b, 0x53, 0x74, 0x72,
+	0x65, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x45, 0x72, 0x72,
+	0x6f, 0x72, 0x2e, 0x4b, 0x69, 0x6e, 0x64, 0x52, 0x0a, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x43, 0x6c,
+	0x61, 0x73, 0x73, 0x12, 0x20, 0x0a, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69,
+	0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69,
+	0x70, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x13, 0x0a, 0x04, 0x4b, 0x69, 0x6e, 0x64, 0x12, 0x0b, 0x0a,
+	0x07, 0x55, 0x4e, 0x4b, 0x4e, 0x4f, 0x57, 0x4e, 0x10, 0x00, 0x42, 0x0a, 0x0a, 0x08, 0x72, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x46, 0x5a, 0x44, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62,
+	0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x61, 0x75, 0x72, 0x6f, 0x72, 0x61, 0x2d, 0x69, 0x73, 0x2d, 0x6e,
+	0x65, 0x61, 0x72, 0x2f, 0x62, 0x6f, 0x72, 0x65, 0x61, 0x6c, 0x69, 0x73, 0x2d, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x74, 0x79, 0x70, 0x65, 0x73, 0x2f, 0x67, 0x6f, 0x2f, 0x62, 0x6c, 0x6f, 0x63, 0x6b,
+	0x73, 0x61, 0x70, 0x69, 0x3b, 0x62, 0x6c, 0x6f, 0x63, 0x6b, 0x73, 0x61, 0x70, 0x69, 0x62, 0x06,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -358,20 +356,20 @@ func file_blocksapi_stream_list_proto_rawDescGZIP() []byte {
 var file_blocksapi_stream_list_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_blocksapi_stream_list_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_blocksapi_stream_list_proto_goTypes = []interface{}{
-	(ListBlockStreamsErrorClass)(0),  // 0: ListBlockStreamsErrorClass
-	(*ListBlockStreamsRequest)(nil),  // 1: ListBlockStreamsRequest
-	(*ListBlockStreamsError)(nil),    // 2: ListBlockStreamsError
-	(*ListBlockStreamsResult)(nil),   // 3: ListBlockStreamsResult
-	(*ListBlockStreamsResponse)(nil), // 4: ListBlockStreamsResponse
-	nil,                              // 5: ListBlockStreamsResult.ResponseEntry
-	(*BlockStreamInfo)(nil),          // 6: BlockStreamInfo
+	(ListBlockStreamsResponse_Error_Kind)(0), // 0: ListBlockStreamsResponse.Error.Kind
+	(*ListBlockStreamsRequest)(nil),          // 1: ListBlockStreamsRequest
+	(*ListBlockStreamsResponse)(nil),         // 2: ListBlockStreamsResponse
+	(*ListBlockStreamsResponse_Result)(nil),  // 3: ListBlockStreamsResponse.Result
+	(*ListBlockStreamsResponse_Error)(nil),   // 4: ListBlockStreamsResponse.Error
+	nil,                                      // 5: ListBlockStreamsResponse.Result.ResponseEntry
+	(*BlockStreamInfo)(nil),                  // 6: BlockStreamInfo
 }
 var file_blocksapi_stream_list_proto_depIdxs = []int32{
-	0, // 0: ListBlockStreamsError.error_class:type_name -> ListBlockStreamsErrorClass
-	5, // 1: ListBlockStreamsResult.response:type_name -> ListBlockStreamsResult.ResponseEntry
-	3, // 2: ListBlockStreamsResponse.result:type_name -> ListBlockStreamsResult
-	2, // 3: ListBlockStreamsResponse.error:type_name -> ListBlockStreamsError
-	6, // 4: ListBlockStreamsResult.ResponseEntry.value:type_name -> BlockStreamInfo
+	3, // 0: ListBlockStreamsResponse.result:type_name -> ListBlockStreamsResponse.Result
+	4, // 1: ListBlockStreamsResponse.error:type_name -> ListBlockStreamsResponse.Error
+	5, // 2: ListBlockStreamsResponse.Result.response:type_name -> ListBlockStreamsResponse.Result.ResponseEntry
+	0, // 3: ListBlockStreamsResponse.Error.error_class:type_name -> ListBlockStreamsResponse.Error.Kind
+	6, // 4: ListBlockStreamsResponse.Result.ResponseEntry.value:type_name -> BlockStreamInfo
 	5, // [5:5] is the sub-list for method output_type
 	5, // [5:5] is the sub-list for method input_type
 	5, // [5:5] is the sub-list for extension type_name
@@ -399,30 +397,6 @@ func file_blocksapi_stream_list_proto_init() {
 			}
 		}
 		file_blocksapi_stream_list_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListBlockStreamsError); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_blocksapi_stream_list_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListBlockStreamsResult); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_blocksapi_stream_list_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ListBlockStreamsResponse); i {
 			case 0:
 				return &v.state
@@ -434,10 +408,34 @@ func file_blocksapi_stream_list_proto_init() {
 				return nil
 			}
 		}
+		file_blocksapi_stream_list_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListBlockStreamsResponse_Result); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_blocksapi_stream_list_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListBlockStreamsResponse_Error); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
-	file_blocksapi_stream_list_proto_msgTypes[3].OneofWrappers = []interface{}{
-		(*ListBlockStreamsResponse_Result)(nil),
-		(*ListBlockStreamsResponse_Error)(nil),
+	file_blocksapi_stream_list_proto_msgTypes[1].OneofWrappers = []interface{}{
+		(*ListBlockStreamsResponse_Result_)(nil),
+		(*ListBlockStreamsResponse_Error_)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

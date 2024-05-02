@@ -42,11 +42,11 @@ func (m *BlockStreamFilter) CloneMessageVT() proto.Message {
 	return m.CloneVT()
 }
 
-func (m *BlockStreamSettings) CloneVT() *BlockStreamSettings {
+func (m *BlockStreamDeliverySettings) CloneVT() *BlockStreamDeliverySettings {
 	if m == nil {
-		return (*BlockStreamSettings)(nil)
+		return (*BlockStreamDeliverySettings)(nil)
 	}
-	r := new(BlockStreamSettings)
+	r := new(BlockStreamDeliverySettings)
 	r.Filter = m.Filter.CloneVT()
 	r.Content = m.Content.CloneVT()
 	if len(m.unknownFields) > 0 {
@@ -56,7 +56,7 @@ func (m *BlockStreamSettings) CloneVT() *BlockStreamSettings {
 	return r
 }
 
-func (m *BlockStreamSettings) CloneMessageVT() proto.Message {
+func (m *BlockStreamDeliverySettings) CloneMessageVT() proto.Message {
 	return m.CloneVT()
 }
 
@@ -70,9 +70,9 @@ func (m *BlockStreamRequest) CloneVT() *BlockStreamRequest {
 	r.StartTarget = m.StartTarget.CloneVT()
 	r.StopPolicy = m.StopPolicy
 	r.StopTarget = m.StopTarget.CloneVT()
-	r.Settings = m.Settings.CloneVT()
+	r.DeliverySettings = m.DeliverySettings.CloneVT()
 	r.CatchupPolicy = m.CatchupPolicy
-	r.CatchupSettings = m.CatchupSettings.CloneVT()
+	r.CatchupDeliverySettings = m.CatchupDeliverySettings.CloneVT()
 	if len(m.unknownFields) > 0 {
 		r.unknownFields = make([]byte, len(m.unknownFields))
 		copy(r.unknownFields, m.unknownFields)
@@ -84,46 +84,11 @@ func (m *BlockStreamRequest) CloneMessageVT() proto.Message {
 	return m.CloneVT()
 }
 
-func (m *BlockStreamEnd) CloneVT() *BlockStreamEnd {
+func (m *BlockStreamResponse_Result) CloneVT() *BlockStreamResponse_Result {
 	if m == nil {
-		return (*BlockStreamEnd)(nil)
+		return (*BlockStreamResponse_Result)(nil)
 	}
-	r := new(BlockStreamEnd)
-	r.Description = m.Description
-	if len(m.unknownFields) > 0 {
-		r.unknownFields = make([]byte, len(m.unknownFields))
-		copy(r.unknownFields, m.unknownFields)
-	}
-	return r
-}
-
-func (m *BlockStreamEnd) CloneMessageVT() proto.Message {
-	return m.CloneVT()
-}
-
-func (m *BlockStreamError) CloneVT() *BlockStreamError {
-	if m == nil {
-		return (*BlockStreamError)(nil)
-	}
-	r := new(BlockStreamError)
-	r.ErrorClass = m.ErrorClass
-	r.Description = m.Description
-	if len(m.unknownFields) > 0 {
-		r.unknownFields = make([]byte, len(m.unknownFields))
-		copy(r.unknownFields, m.unknownFields)
-	}
-	return r
-}
-
-func (m *BlockStreamError) CloneMessageVT() proto.Message {
-	return m.CloneVT()
-}
-
-func (m *BlockStreamMessage) CloneVT() *BlockStreamMessage {
-	if m == nil {
-		return (*BlockStreamMessage)(nil)
-	}
-	r := new(BlockStreamMessage)
+	r := new(BlockStreamResponse_Result)
 	r.Message = m.Message.CloneVT()
 	r.CatchupInProgress = m.CatchupInProgress
 	if len(m.unknownFields) > 0 {
@@ -133,7 +98,42 @@ func (m *BlockStreamMessage) CloneVT() *BlockStreamMessage {
 	return r
 }
 
-func (m *BlockStreamMessage) CloneMessageVT() proto.Message {
+func (m *BlockStreamResponse_Result) CloneMessageVT() proto.Message {
+	return m.CloneVT()
+}
+
+func (m *BlockStreamResponse_Done) CloneVT() *BlockStreamResponse_Done {
+	if m == nil {
+		return (*BlockStreamResponse_Done)(nil)
+	}
+	r := new(BlockStreamResponse_Done)
+	r.Description = m.Description
+	if len(m.unknownFields) > 0 {
+		r.unknownFields = make([]byte, len(m.unknownFields))
+		copy(r.unknownFields, m.unknownFields)
+	}
+	return r
+}
+
+func (m *BlockStreamResponse_Done) CloneMessageVT() proto.Message {
+	return m.CloneVT()
+}
+
+func (m *BlockStreamResponse_Error) CloneVT() *BlockStreamResponse_Error {
+	if m == nil {
+		return (*BlockStreamResponse_Error)(nil)
+	}
+	r := new(BlockStreamResponse_Error)
+	r.Kind = m.Kind
+	r.Description = m.Description
+	if len(m.unknownFields) > 0 {
+		r.unknownFields = make([]byte, len(m.unknownFields))
+		copy(r.unknownFields, m.unknownFields)
+	}
+	return r
+}
+
+func (m *BlockStreamResponse_Error) CloneMessageVT() proto.Message {
 	return m.CloneVT()
 }
 
@@ -167,20 +167,20 @@ func (m *BlockStreamResponse_Message) CloneVT() isBlockStreamResponse_Response {
 	return r
 }
 
-func (m *BlockStreamResponse_StreamEnd) CloneVT() isBlockStreamResponse_Response {
+func (m *BlockStreamResponse_Done_) CloneVT() isBlockStreamResponse_Response {
 	if m == nil {
-		return (*BlockStreamResponse_StreamEnd)(nil)
+		return (*BlockStreamResponse_Done_)(nil)
 	}
-	r := new(BlockStreamResponse_StreamEnd)
-	r.StreamEnd = m.StreamEnd.CloneVT()
+	r := new(BlockStreamResponse_Done_)
+	r.Done = m.Done.CloneVT()
 	return r
 }
 
-func (m *BlockStreamResponse_Error) CloneVT() isBlockStreamResponse_Response {
+func (m *BlockStreamResponse_Error_) CloneVT() isBlockStreamResponse_Response {
 	if m == nil {
-		return (*BlockStreamResponse_Error)(nil)
+		return (*BlockStreamResponse_Error_)(nil)
 	}
-	r := new(BlockStreamResponse_Error)
+	r := new(BlockStreamResponse_Error_)
 	r.Error = m.Error.CloneVT()
 	return r
 }
@@ -213,7 +213,7 @@ func (this *BlockStreamFilter) EqualMessageVT(thatMsg proto.Message) bool {
 	}
 	return this.EqualVT(that)
 }
-func (this *BlockStreamSettings) EqualVT(that *BlockStreamSettings) bool {
+func (this *BlockStreamDeliverySettings) EqualVT(that *BlockStreamDeliverySettings) bool {
 	if this == that {
 		return true
 	} else if this == nil || that == nil {
@@ -228,8 +228,8 @@ func (this *BlockStreamSettings) EqualVT(that *BlockStreamSettings) bool {
 	return string(this.unknownFields) == string(that.unknownFields)
 }
 
-func (this *BlockStreamSettings) EqualMessageVT(thatMsg proto.Message) bool {
-	that, ok := thatMsg.(*BlockStreamSettings)
+func (this *BlockStreamDeliverySettings) EqualMessageVT(thatMsg proto.Message) bool {
+	that, ok := thatMsg.(*BlockStreamDeliverySettings)
 	if !ok {
 		return false
 	}
@@ -256,13 +256,13 @@ func (this *BlockStreamRequest) EqualVT(that *BlockStreamRequest) bool {
 	if !this.StopTarget.EqualVT(that.StopTarget) {
 		return false
 	}
-	if !this.Settings.EqualVT(that.Settings) {
+	if !this.DeliverySettings.EqualVT(that.DeliverySettings) {
 		return false
 	}
 	if this.CatchupPolicy != that.CatchupPolicy {
 		return false
 	}
-	if !this.CatchupSettings.EqualVT(that.CatchupSettings) {
+	if !this.CatchupDeliverySettings.EqualVT(that.CatchupDeliverySettings) {
 		return false
 	}
 	return string(this.unknownFields) == string(that.unknownFields)
@@ -275,48 +275,7 @@ func (this *BlockStreamRequest) EqualMessageVT(thatMsg proto.Message) bool {
 	}
 	return this.EqualVT(that)
 }
-func (this *BlockStreamEnd) EqualVT(that *BlockStreamEnd) bool {
-	if this == that {
-		return true
-	} else if this == nil || that == nil {
-		return false
-	}
-	if this.Description != that.Description {
-		return false
-	}
-	return string(this.unknownFields) == string(that.unknownFields)
-}
-
-func (this *BlockStreamEnd) EqualMessageVT(thatMsg proto.Message) bool {
-	that, ok := thatMsg.(*BlockStreamEnd)
-	if !ok {
-		return false
-	}
-	return this.EqualVT(that)
-}
-func (this *BlockStreamError) EqualVT(that *BlockStreamError) bool {
-	if this == that {
-		return true
-	} else if this == nil || that == nil {
-		return false
-	}
-	if this.ErrorClass != that.ErrorClass {
-		return false
-	}
-	if this.Description != that.Description {
-		return false
-	}
-	return string(this.unknownFields) == string(that.unknownFields)
-}
-
-func (this *BlockStreamError) EqualMessageVT(thatMsg proto.Message) bool {
-	that, ok := thatMsg.(*BlockStreamError)
-	if !ok {
-		return false
-	}
-	return this.EqualVT(that)
-}
-func (this *BlockStreamMessage) EqualVT(that *BlockStreamMessage) bool {
+func (this *BlockStreamResponse_Result) EqualVT(that *BlockStreamResponse_Result) bool {
 	if this == that {
 		return true
 	} else if this == nil || that == nil {
@@ -331,8 +290,49 @@ func (this *BlockStreamMessage) EqualVT(that *BlockStreamMessage) bool {
 	return string(this.unknownFields) == string(that.unknownFields)
 }
 
-func (this *BlockStreamMessage) EqualMessageVT(thatMsg proto.Message) bool {
-	that, ok := thatMsg.(*BlockStreamMessage)
+func (this *BlockStreamResponse_Result) EqualMessageVT(thatMsg proto.Message) bool {
+	that, ok := thatMsg.(*BlockStreamResponse_Result)
+	if !ok {
+		return false
+	}
+	return this.EqualVT(that)
+}
+func (this *BlockStreamResponse_Done) EqualVT(that *BlockStreamResponse_Done) bool {
+	if this == that {
+		return true
+	} else if this == nil || that == nil {
+		return false
+	}
+	if this.Description != that.Description {
+		return false
+	}
+	return string(this.unknownFields) == string(that.unknownFields)
+}
+
+func (this *BlockStreamResponse_Done) EqualMessageVT(thatMsg proto.Message) bool {
+	that, ok := thatMsg.(*BlockStreamResponse_Done)
+	if !ok {
+		return false
+	}
+	return this.EqualVT(that)
+}
+func (this *BlockStreamResponse_Error) EqualVT(that *BlockStreamResponse_Error) bool {
+	if this == that {
+		return true
+	} else if this == nil || that == nil {
+		return false
+	}
+	if this.Kind != that.Kind {
+		return false
+	}
+	if this.Description != that.Description {
+		return false
+	}
+	return string(this.unknownFields) == string(that.unknownFields)
+}
+
+func (this *BlockStreamResponse_Error) EqualMessageVT(thatMsg proto.Message) bool {
+	that, ok := thatMsg.(*BlockStreamResponse_Error)
 	if !ok {
 		return false
 	}
@@ -379,10 +379,10 @@ func (this *BlockStreamResponse_Message) EqualVT(thatIface isBlockStreamResponse
 	}
 	if p, q := this.Message, that.Message; p != q {
 		if p == nil {
-			p = &BlockStreamMessage{}
+			p = &BlockStreamResponse_Result{}
 		}
 		if q == nil {
-			q = &BlockStreamMessage{}
+			q = &BlockStreamResponse_Result{}
 		}
 		if !p.EqualVT(q) {
 			return false
@@ -391,8 +391,8 @@ func (this *BlockStreamResponse_Message) EqualVT(thatIface isBlockStreamResponse
 	return true
 }
 
-func (this *BlockStreamResponse_StreamEnd) EqualVT(thatIface isBlockStreamResponse_Response) bool {
-	that, ok := thatIface.(*BlockStreamResponse_StreamEnd)
+func (this *BlockStreamResponse_Done_) EqualVT(thatIface isBlockStreamResponse_Response) bool {
+	that, ok := thatIface.(*BlockStreamResponse_Done_)
 	if !ok {
 		return false
 	}
@@ -402,12 +402,12 @@ func (this *BlockStreamResponse_StreamEnd) EqualVT(thatIface isBlockStreamRespon
 	if this == nil && that != nil || this != nil && that == nil {
 		return false
 	}
-	if p, q := this.StreamEnd, that.StreamEnd; p != q {
+	if p, q := this.Done, that.Done; p != q {
 		if p == nil {
-			p = &BlockStreamEnd{}
+			p = &BlockStreamResponse_Done{}
 		}
 		if q == nil {
-			q = &BlockStreamEnd{}
+			q = &BlockStreamResponse_Done{}
 		}
 		if !p.EqualVT(q) {
 			return false
@@ -416,8 +416,8 @@ func (this *BlockStreamResponse_StreamEnd) EqualVT(thatIface isBlockStreamRespon
 	return true
 }
 
-func (this *BlockStreamResponse_Error) EqualVT(thatIface isBlockStreamResponse_Response) bool {
-	that, ok := thatIface.(*BlockStreamResponse_Error)
+func (this *BlockStreamResponse_Error_) EqualVT(thatIface isBlockStreamResponse_Response) bool {
+	that, ok := thatIface.(*BlockStreamResponse_Error_)
 	if !ok {
 		return false
 	}
@@ -429,10 +429,10 @@ func (this *BlockStreamResponse_Error) EqualVT(thatIface isBlockStreamResponse_R
 	}
 	if p, q := this.Error, that.Error; p != q {
 		if p == nil {
-			p = &BlockStreamError{}
+			p = &BlockStreamResponse_Error{}
 		}
 		if q == nil {
-			q = &BlockStreamError{}
+			q = &BlockStreamResponse_Error{}
 		}
 		if !p.EqualVT(q) {
 			return false
@@ -504,7 +504,7 @@ func (m *BlockStreamFilter) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *BlockStreamSettings) MarshalVT() (dAtA []byte, err error) {
+func (m *BlockStreamDeliverySettings) MarshalVT() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -517,12 +517,12 @@ func (m *BlockStreamSettings) MarshalVT() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *BlockStreamSettings) MarshalToVT(dAtA []byte) (int, error) {
+func (m *BlockStreamDeliverySettings) MarshalToVT(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVT(dAtA[:size])
 }
 
-func (m *BlockStreamSettings) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+func (m *BlockStreamDeliverySettings) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	if m == nil {
 		return 0, nil
 	}
@@ -587,8 +587,8 @@ func (m *BlockStreamRequest) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
-	if m.CatchupSettings != nil {
-		size, err := m.CatchupSettings.MarshalToSizedBufferVT(dAtA[:i])
+	if m.CatchupDeliverySettings != nil {
+		size, err := m.CatchupDeliverySettings.MarshalToSizedBufferVT(dAtA[:i])
 		if err != nil {
 			return 0, err
 		}
@@ -602,8 +602,8 @@ func (m *BlockStreamRequest) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i--
 		dAtA[i] = 0x38
 	}
-	if m.Settings != nil {
-		size, err := m.Settings.MarshalToSizedBufferVT(dAtA[:i])
+	if m.DeliverySettings != nil {
+		size, err := m.DeliverySettings.MarshalToSizedBufferVT(dAtA[:i])
 		if err != nil {
 			return 0, err
 		}
@@ -652,7 +652,7 @@ func (m *BlockStreamRequest) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *BlockStreamEnd) MarshalVT() (dAtA []byte, err error) {
+func (m *BlockStreamResponse_Result) MarshalVT() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -665,97 +665,12 @@ func (m *BlockStreamEnd) MarshalVT() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *BlockStreamEnd) MarshalToVT(dAtA []byte) (int, error) {
+func (m *BlockStreamResponse_Result) MarshalToVT(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVT(dAtA[:size])
 }
 
-func (m *BlockStreamEnd) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
-	if m == nil {
-		return 0, nil
-	}
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.unknownFields != nil {
-		i -= len(m.unknownFields)
-		copy(dAtA[i:], m.unknownFields)
-	}
-	if len(m.Description) > 0 {
-		i -= len(m.Description)
-		copy(dAtA[i:], m.Description)
-		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(m.Description)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *BlockStreamError) MarshalVT() (dAtA []byte, err error) {
-	if m == nil {
-		return nil, nil
-	}
-	size := m.SizeVT()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *BlockStreamError) MarshalToVT(dAtA []byte) (int, error) {
-	size := m.SizeVT()
-	return m.MarshalToSizedBufferVT(dAtA[:size])
-}
-
-func (m *BlockStreamError) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
-	if m == nil {
-		return 0, nil
-	}
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.unknownFields != nil {
-		i -= len(m.unknownFields)
-		copy(dAtA[i:], m.unknownFields)
-	}
-	if len(m.Description) > 0 {
-		i -= len(m.Description)
-		copy(dAtA[i:], m.Description)
-		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(m.Description)))
-		i--
-		dAtA[i] = 0x12
-	}
-	if m.ErrorClass != 0 {
-		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.ErrorClass))
-		i--
-		dAtA[i] = 0x8
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *BlockStreamMessage) MarshalVT() (dAtA []byte, err error) {
-	if m == nil {
-		return nil, nil
-	}
-	size := m.SizeVT()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *BlockStreamMessage) MarshalToVT(dAtA []byte) (int, error) {
-	size := m.SizeVT()
-	return m.MarshalToSizedBufferVT(dAtA[:size])
-}
-
-func (m *BlockStreamMessage) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+func (m *BlockStreamResponse_Result) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	if m == nil {
 		return 0, nil
 	}
@@ -786,6 +701,91 @@ func (m *BlockStreamMessage) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i = protohelpers.EncodeVarint(dAtA, i, uint64(size))
 		i--
 		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *BlockStreamResponse_Done) MarshalVT() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *BlockStreamResponse_Done) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *BlockStreamResponse_Done) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	if len(m.Description) > 0 {
+		i -= len(m.Description)
+		copy(dAtA[i:], m.Description)
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(m.Description)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *BlockStreamResponse_Error) MarshalVT() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *BlockStreamResponse_Error) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *BlockStreamResponse_Error) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	if len(m.Description) > 0 {
+		i -= len(m.Description)
+		copy(dAtA[i:], m.Description)
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(m.Description)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if m.Kind != 0 {
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.Kind))
+		i--
+		dAtA[i] = 0x8
 	}
 	return len(dAtA) - i, nil
 }
@@ -851,15 +851,15 @@ func (m *BlockStreamResponse_Message) MarshalToSizedBufferVT(dAtA []byte) (int, 
 	}
 	return len(dAtA) - i, nil
 }
-func (m *BlockStreamResponse_StreamEnd) MarshalToVT(dAtA []byte) (int, error) {
+func (m *BlockStreamResponse_Done_) MarshalToVT(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVT(dAtA[:size])
 }
 
-func (m *BlockStreamResponse_StreamEnd) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+func (m *BlockStreamResponse_Done_) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	i := len(dAtA)
-	if m.StreamEnd != nil {
-		size, err := m.StreamEnd.MarshalToSizedBufferVT(dAtA[:i])
+	if m.Done != nil {
+		size, err := m.Done.MarshalToSizedBufferVT(dAtA[:i])
 		if err != nil {
 			return 0, err
 		}
@@ -870,12 +870,12 @@ func (m *BlockStreamResponse_StreamEnd) MarshalToSizedBufferVT(dAtA []byte) (int
 	}
 	return len(dAtA) - i, nil
 }
-func (m *BlockStreamResponse_Error) MarshalToVT(dAtA []byte) (int, error) {
+func (m *BlockStreamResponse_Error_) MarshalToVT(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVT(dAtA[:size])
 }
 
-func (m *BlockStreamResponse_Error) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+func (m *BlockStreamResponse_Error_) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	if m.Error != nil {
 		size, err := m.Error.MarshalToSizedBufferVT(dAtA[:i])
@@ -952,7 +952,7 @@ func (m *BlockStreamFilter) MarshalToSizedBufferVTStrict(dAtA []byte) (int, erro
 	return len(dAtA) - i, nil
 }
 
-func (m *BlockStreamSettings) MarshalVTStrict() (dAtA []byte, err error) {
+func (m *BlockStreamDeliverySettings) MarshalVTStrict() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -965,12 +965,12 @@ func (m *BlockStreamSettings) MarshalVTStrict() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *BlockStreamSettings) MarshalToVTStrict(dAtA []byte) (int, error) {
+func (m *BlockStreamDeliverySettings) MarshalToVTStrict(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
 }
 
-func (m *BlockStreamSettings) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+func (m *BlockStreamDeliverySettings) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 	if m == nil {
 		return 0, nil
 	}
@@ -1035,8 +1035,8 @@ func (m *BlockStreamRequest) MarshalToSizedBufferVTStrict(dAtA []byte) (int, err
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
-	if m.CatchupSettings != nil {
-		size, err := m.CatchupSettings.MarshalToSizedBufferVTStrict(dAtA[:i])
+	if m.CatchupDeliverySettings != nil {
+		size, err := m.CatchupDeliverySettings.MarshalToSizedBufferVTStrict(dAtA[:i])
 		if err != nil {
 			return 0, err
 		}
@@ -1050,8 +1050,8 @@ func (m *BlockStreamRequest) MarshalToSizedBufferVTStrict(dAtA []byte) (int, err
 		i--
 		dAtA[i] = 0x38
 	}
-	if m.Settings != nil {
-		size, err := m.Settings.MarshalToSizedBufferVTStrict(dAtA[:i])
+	if m.DeliverySettings != nil {
+		size, err := m.DeliverySettings.MarshalToSizedBufferVTStrict(dAtA[:i])
 		if err != nil {
 			return 0, err
 		}
@@ -1100,7 +1100,7 @@ func (m *BlockStreamRequest) MarshalToSizedBufferVTStrict(dAtA []byte) (int, err
 	return len(dAtA) - i, nil
 }
 
-func (m *BlockStreamEnd) MarshalVTStrict() (dAtA []byte, err error) {
+func (m *BlockStreamResponse_Result) MarshalVTStrict() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -1113,97 +1113,12 @@ func (m *BlockStreamEnd) MarshalVTStrict() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *BlockStreamEnd) MarshalToVTStrict(dAtA []byte) (int, error) {
+func (m *BlockStreamResponse_Result) MarshalToVTStrict(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
 }
 
-func (m *BlockStreamEnd) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
-	if m == nil {
-		return 0, nil
-	}
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.unknownFields != nil {
-		i -= len(m.unknownFields)
-		copy(dAtA[i:], m.unknownFields)
-	}
-	if len(m.Description) > 0 {
-		i -= len(m.Description)
-		copy(dAtA[i:], m.Description)
-		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(m.Description)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *BlockStreamError) MarshalVTStrict() (dAtA []byte, err error) {
-	if m == nil {
-		return nil, nil
-	}
-	size := m.SizeVT()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBufferVTStrict(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *BlockStreamError) MarshalToVTStrict(dAtA []byte) (int, error) {
-	size := m.SizeVT()
-	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
-}
-
-func (m *BlockStreamError) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
-	if m == nil {
-		return 0, nil
-	}
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.unknownFields != nil {
-		i -= len(m.unknownFields)
-		copy(dAtA[i:], m.unknownFields)
-	}
-	if len(m.Description) > 0 {
-		i -= len(m.Description)
-		copy(dAtA[i:], m.Description)
-		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(m.Description)))
-		i--
-		dAtA[i] = 0x12
-	}
-	if m.ErrorClass != 0 {
-		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.ErrorClass))
-		i--
-		dAtA[i] = 0x8
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *BlockStreamMessage) MarshalVTStrict() (dAtA []byte, err error) {
-	if m == nil {
-		return nil, nil
-	}
-	size := m.SizeVT()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBufferVTStrict(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *BlockStreamMessage) MarshalToVTStrict(dAtA []byte) (int, error) {
-	size := m.SizeVT()
-	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
-}
-
-func (m *BlockStreamMessage) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+func (m *BlockStreamResponse_Result) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 	if m == nil {
 		return 0, nil
 	}
@@ -1238,6 +1153,91 @@ func (m *BlockStreamMessage) MarshalToSizedBufferVTStrict(dAtA []byte) (int, err
 	return len(dAtA) - i, nil
 }
 
+func (m *BlockStreamResponse_Done) MarshalVTStrict() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVTStrict(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *BlockStreamResponse_Done) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *BlockStreamResponse_Done) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	if len(m.Description) > 0 {
+		i -= len(m.Description)
+		copy(dAtA[i:], m.Description)
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(m.Description)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *BlockStreamResponse_Error) MarshalVTStrict() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVTStrict(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *BlockStreamResponse_Error) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *BlockStreamResponse_Error) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	if len(m.Description) > 0 {
+		i -= len(m.Description)
+		copy(dAtA[i:], m.Description)
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(m.Description)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if m.Kind != 0 {
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.Kind))
+		i--
+		dAtA[i] = 0x8
+	}
+	return len(dAtA) - i, nil
+}
+
 func (m *BlockStreamResponse) MarshalVTStrict() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
@@ -1268,14 +1268,14 @@ func (m *BlockStreamResponse) MarshalToSizedBufferVTStrict(dAtA []byte) (int, er
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
-	if msg, ok := m.Response.(*BlockStreamResponse_Error); ok {
+	if msg, ok := m.Response.(*BlockStreamResponse_Error_); ok {
 		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
 		if err != nil {
 			return 0, err
 		}
 		i -= size
 	}
-	if msg, ok := m.Response.(*BlockStreamResponse_StreamEnd); ok {
+	if msg, ok := m.Response.(*BlockStreamResponse_Done_); ok {
 		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
 		if err != nil {
 			return 0, err
@@ -1311,15 +1311,15 @@ func (m *BlockStreamResponse_Message) MarshalToSizedBufferVTStrict(dAtA []byte) 
 	}
 	return len(dAtA) - i, nil
 }
-func (m *BlockStreamResponse_StreamEnd) MarshalToVTStrict(dAtA []byte) (int, error) {
+func (m *BlockStreamResponse_Done_) MarshalToVTStrict(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
 }
 
-func (m *BlockStreamResponse_StreamEnd) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+func (m *BlockStreamResponse_Done_) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 	i := len(dAtA)
-	if m.StreamEnd != nil {
-		size, err := m.StreamEnd.MarshalToSizedBufferVTStrict(dAtA[:i])
+	if m.Done != nil {
+		size, err := m.Done.MarshalToSizedBufferVTStrict(dAtA[:i])
 		if err != nil {
 			return 0, err
 		}
@@ -1330,12 +1330,12 @@ func (m *BlockStreamResponse_StreamEnd) MarshalToSizedBufferVTStrict(dAtA []byte
 	}
 	return len(dAtA) - i, nil
 }
-func (m *BlockStreamResponse_Error) MarshalToVTStrict(dAtA []byte) (int, error) {
+func (m *BlockStreamResponse_Error_) MarshalToVTStrict(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
 }
 
-func (m *BlockStreamResponse_Error) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+func (m *BlockStreamResponse_Error_) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	if m.Error != nil {
 		size, err := m.Error.MarshalToSizedBufferVTStrict(dAtA[:i])
@@ -1369,7 +1369,7 @@ func (m *BlockStreamFilter) SizeVT() (n int) {
 	return n
 }
 
-func (m *BlockStreamSettings) SizeVT() (n int) {
+func (m *BlockStreamDeliverySettings) SizeVT() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1411,53 +1411,22 @@ func (m *BlockStreamRequest) SizeVT() (n int) {
 		l = m.StopTarget.SizeVT()
 		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
 	}
-	if m.Settings != nil {
-		l = m.Settings.SizeVT()
+	if m.DeliverySettings != nil {
+		l = m.DeliverySettings.SizeVT()
 		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
 	}
 	if m.CatchupPolicy != 0 {
 		n += 1 + protohelpers.SizeOfVarint(uint64(m.CatchupPolicy))
 	}
-	if m.CatchupSettings != nil {
-		l = m.CatchupSettings.SizeVT()
+	if m.CatchupDeliverySettings != nil {
+		l = m.CatchupDeliverySettings.SizeVT()
 		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
 	}
 	n += len(m.unknownFields)
 	return n
 }
 
-func (m *BlockStreamEnd) SizeVT() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.Description)
-	if l > 0 {
-		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
-	}
-	n += len(m.unknownFields)
-	return n
-}
-
-func (m *BlockStreamError) SizeVT() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.ErrorClass != 0 {
-		n += 1 + protohelpers.SizeOfVarint(uint64(m.ErrorClass))
-	}
-	l = len(m.Description)
-	if l > 0 {
-		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
-	}
-	n += len(m.unknownFields)
-	return n
-}
-
-func (m *BlockStreamMessage) SizeVT() (n int) {
+func (m *BlockStreamResponse_Result) SizeVT() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1469,6 +1438,37 @@ func (m *BlockStreamMessage) SizeVT() (n int) {
 	}
 	if m.CatchupInProgress {
 		n += 2
+	}
+	n += len(m.unknownFields)
+	return n
+}
+
+func (m *BlockStreamResponse_Done) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Description)
+	if l > 0 {
+		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
+	}
+	n += len(m.unknownFields)
+	return n
+}
+
+func (m *BlockStreamResponse_Error) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Kind != 0 {
+		n += 1 + protohelpers.SizeOfVarint(uint64(m.Kind))
+	}
+	l = len(m.Description)
+	if l > 0 {
+		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
 	}
 	n += len(m.unknownFields)
 	return n
@@ -1499,19 +1499,19 @@ func (m *BlockStreamResponse_Message) SizeVT() (n int) {
 	}
 	return n
 }
-func (m *BlockStreamResponse_StreamEnd) SizeVT() (n int) {
+func (m *BlockStreamResponse_Done_) SizeVT() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
-	if m.StreamEnd != nil {
-		l = m.StreamEnd.SizeVT()
+	if m.Done != nil {
+		l = m.Done.SizeVT()
 		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
 	}
 	return n
 }
-func (m *BlockStreamResponse_Error) SizeVT() (n int) {
+func (m *BlockStreamResponse_Error_) SizeVT() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1670,7 +1670,7 @@ func (m *BlockStreamFilter) UnmarshalVT(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *BlockStreamSettings) UnmarshalVT(dAtA []byte) error {
+func (m *BlockStreamDeliverySettings) UnmarshalVT(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1693,10 +1693,10 @@ func (m *BlockStreamSettings) UnmarshalVT(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: BlockStreamSettings: wiretype end group for non-group")
+			return fmt.Errorf("proto: BlockStreamDeliverySettings: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: BlockStreamSettings: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: BlockStreamDeliverySettings: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -1765,7 +1765,7 @@ func (m *BlockStreamSettings) UnmarshalVT(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.Content == nil {
-				m.Content = &BlockMessageContentSettings{}
+				m.Content = &BlockMessageDeliverySettings{}
 			}
 			if err := m.Content.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 				return err
@@ -1868,7 +1868,7 @@ func (m *BlockStreamRequest) UnmarshalVT(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.StartPolicy |= BlockStreamStartPolicy(b&0x7F) << shift
+				m.StartPolicy |= BlockStreamRequest_StartPolicy(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1903,7 +1903,7 @@ func (m *BlockStreamRequest) UnmarshalVT(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.StartTarget == nil {
-				m.StartTarget = &BlockMessageID{}
+				m.StartTarget = &BlockMessage_ID{}
 			}
 			if err := m.StartTarget.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 				return err
@@ -1923,7 +1923,7 @@ func (m *BlockStreamRequest) UnmarshalVT(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.StopPolicy |= BlockStreamStopPolicy(b&0x7F) << shift
+				m.StopPolicy |= BlockStreamRequest_StopPolicy(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1958,7 +1958,7 @@ func (m *BlockStreamRequest) UnmarshalVT(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.StopTarget == nil {
-				m.StopTarget = &BlockMessageID{}
+				m.StopTarget = &BlockMessage_ID{}
 			}
 			if err := m.StopTarget.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 				return err
@@ -1966,7 +1966,7 @@ func (m *BlockStreamRequest) UnmarshalVT(dAtA []byte) error {
 			iNdEx = postIndex
 		case 6:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Settings", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field DeliverySettings", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -1993,10 +1993,10 @@ func (m *BlockStreamRequest) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if m.Settings == nil {
-				m.Settings = &BlockStreamSettings{}
+			if m.DeliverySettings == nil {
+				m.DeliverySettings = &BlockStreamDeliverySettings{}
 			}
-			if err := m.Settings.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+			if err := m.DeliverySettings.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -2014,14 +2014,14 @@ func (m *BlockStreamRequest) UnmarshalVT(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.CatchupPolicy |= BlockStreamCatchUpPolicy(b&0x7F) << shift
+				m.CatchupPolicy |= BlockStreamRequest_CatchupPolicy(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
 		case 8:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field CatchupSettings", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field CatchupDeliverySettings", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -2048,10 +2048,10 @@ func (m *BlockStreamRequest) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if m.CatchupSettings == nil {
-				m.CatchupSettings = &BlockStreamSettings{}
+			if m.CatchupDeliverySettings == nil {
+				m.CatchupDeliverySettings = &BlockStreamDeliverySettings{}
 			}
-			if err := m.CatchupSettings.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+			if err := m.CatchupDeliverySettings.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -2077,7 +2077,7 @@ func (m *BlockStreamRequest) UnmarshalVT(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *BlockStreamEnd) UnmarshalVT(dAtA []byte) error {
+func (m *BlockStreamResponse_Result) UnmarshalVT(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -2100,195 +2100,10 @@ func (m *BlockStreamEnd) UnmarshalVT(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: BlockStreamEnd: wiretype end group for non-group")
+			return fmt.Errorf("proto: BlockStreamResponse_Result: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: BlockStreamEnd: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Description", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return protohelpers.ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return protohelpers.ErrInvalidLength
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return protohelpers.ErrInvalidLength
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Description = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return protohelpers.ErrInvalidLength
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *BlockStreamError) UnmarshalVT(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return protohelpers.ErrIntOverflow
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: BlockStreamError: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: BlockStreamError: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ErrorClass", wireType)
-			}
-			m.ErrorClass = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return protohelpers.ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.ErrorClass |= BlockStreamErrorClass(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Description", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return protohelpers.ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return protohelpers.ErrInvalidLength
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return protohelpers.ErrInvalidLength
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Description = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return protohelpers.ErrInvalidLength
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *BlockStreamMessage) UnmarshalVT(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return protohelpers.ErrIntOverflow
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: BlockStreamMessage: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: BlockStreamMessage: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: BlockStreamResponse_Result: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -2347,6 +2162,191 @@ func (m *BlockStreamMessage) UnmarshalVT(dAtA []byte) error {
 				}
 			}
 			m.CatchupInProgress = bool(v != 0)
+		default:
+			iNdEx = preIndex
+			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *BlockStreamResponse_Done) UnmarshalVT(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return protohelpers.ErrIntOverflow
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: BlockStreamResponse_Done: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: BlockStreamResponse_Done: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Description", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Description = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *BlockStreamResponse_Error) UnmarshalVT(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return protohelpers.ErrIntOverflow
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: BlockStreamResponse_Error: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: BlockStreamResponse_Error: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Kind", wireType)
+			}
+			m.Kind = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Kind |= BlockStreamResponse_Error_Kind(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Description", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Description = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
@@ -2432,7 +2432,7 @@ func (m *BlockStreamResponse) UnmarshalVT(dAtA []byte) error {
 					return err
 				}
 			} else {
-				v := &BlockStreamMessage{}
+				v := &BlockStreamResponse_Result{}
 				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
@@ -2441,7 +2441,7 @@ func (m *BlockStreamResponse) UnmarshalVT(dAtA []byte) error {
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field StreamEnd", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Done", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -2468,16 +2468,16 @@ func (m *BlockStreamResponse) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if oneof, ok := m.Response.(*BlockStreamResponse_StreamEnd); ok {
-				if err := oneof.StreamEnd.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+			if oneof, ok := m.Response.(*BlockStreamResponse_Done_); ok {
+				if err := oneof.Done.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
 			} else {
-				v := &BlockStreamEnd{}
+				v := &BlockStreamResponse_Done{}
 				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
-				m.Response = &BlockStreamResponse_StreamEnd{StreamEnd: v}
+				m.Response = &BlockStreamResponse_Done_{Done: v}
 			}
 			iNdEx = postIndex
 		case 3:
@@ -2509,16 +2509,16 @@ func (m *BlockStreamResponse) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if oneof, ok := m.Response.(*BlockStreamResponse_Error); ok {
+			if oneof, ok := m.Response.(*BlockStreamResponse_Error_); ok {
 				if err := oneof.Error.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
 			} else {
-				v := &BlockStreamError{}
+				v := &BlockStreamResponse_Error{}
 				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
-				m.Response = &BlockStreamResponse_Error{Error: v}
+				m.Response = &BlockStreamResponse_Error_{Error: v}
 			}
 			iNdEx = postIndex
 		default:
@@ -2690,7 +2690,7 @@ func (m *BlockStreamFilter) UnmarshalVTUnsafe(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *BlockStreamSettings) UnmarshalVTUnsafe(dAtA []byte) error {
+func (m *BlockStreamDeliverySettings) UnmarshalVTUnsafe(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -2713,10 +2713,10 @@ func (m *BlockStreamSettings) UnmarshalVTUnsafe(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: BlockStreamSettings: wiretype end group for non-group")
+			return fmt.Errorf("proto: BlockStreamDeliverySettings: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: BlockStreamSettings: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: BlockStreamDeliverySettings: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -2785,7 +2785,7 @@ func (m *BlockStreamSettings) UnmarshalVTUnsafe(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.Content == nil {
-				m.Content = &BlockMessageContentSettings{}
+				m.Content = &BlockMessageDeliverySettings{}
 			}
 			if err := m.Content.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 				return err
@@ -2892,7 +2892,7 @@ func (m *BlockStreamRequest) UnmarshalVTUnsafe(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.StartPolicy |= BlockStreamStartPolicy(b&0x7F) << shift
+				m.StartPolicy |= BlockStreamRequest_StartPolicy(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2927,7 +2927,7 @@ func (m *BlockStreamRequest) UnmarshalVTUnsafe(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.StartTarget == nil {
-				m.StartTarget = &BlockMessageID{}
+				m.StartTarget = &BlockMessage_ID{}
 			}
 			if err := m.StartTarget.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 				return err
@@ -2947,7 +2947,7 @@ func (m *BlockStreamRequest) UnmarshalVTUnsafe(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.StopPolicy |= BlockStreamStopPolicy(b&0x7F) << shift
+				m.StopPolicy |= BlockStreamRequest_StopPolicy(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2982,7 +2982,7 @@ func (m *BlockStreamRequest) UnmarshalVTUnsafe(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.StopTarget == nil {
-				m.StopTarget = &BlockMessageID{}
+				m.StopTarget = &BlockMessage_ID{}
 			}
 			if err := m.StopTarget.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 				return err
@@ -2990,7 +2990,7 @@ func (m *BlockStreamRequest) UnmarshalVTUnsafe(dAtA []byte) error {
 			iNdEx = postIndex
 		case 6:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Settings", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field DeliverySettings", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -3017,10 +3017,10 @@ func (m *BlockStreamRequest) UnmarshalVTUnsafe(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if m.Settings == nil {
-				m.Settings = &BlockStreamSettings{}
+			if m.DeliverySettings == nil {
+				m.DeliverySettings = &BlockStreamDeliverySettings{}
 			}
-			if err := m.Settings.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
+			if err := m.DeliverySettings.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -3038,14 +3038,14 @@ func (m *BlockStreamRequest) UnmarshalVTUnsafe(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.CatchupPolicy |= BlockStreamCatchUpPolicy(b&0x7F) << shift
+				m.CatchupPolicy |= BlockStreamRequest_CatchupPolicy(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
 		case 8:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field CatchupSettings", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field CatchupDeliverySettings", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -3072,10 +3072,10 @@ func (m *BlockStreamRequest) UnmarshalVTUnsafe(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if m.CatchupSettings == nil {
-				m.CatchupSettings = &BlockStreamSettings{}
+			if m.CatchupDeliverySettings == nil {
+				m.CatchupDeliverySettings = &BlockStreamDeliverySettings{}
 			}
-			if err := m.CatchupSettings.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
+			if err := m.CatchupDeliverySettings.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -3101,7 +3101,7 @@ func (m *BlockStreamRequest) UnmarshalVTUnsafe(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *BlockStreamEnd) UnmarshalVTUnsafe(dAtA []byte) error {
+func (m *BlockStreamResponse_Result) UnmarshalVTUnsafe(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -3124,203 +3124,10 @@ func (m *BlockStreamEnd) UnmarshalVTUnsafe(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: BlockStreamEnd: wiretype end group for non-group")
+			return fmt.Errorf("proto: BlockStreamResponse_Result: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: BlockStreamEnd: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Description", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return protohelpers.ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return protohelpers.ErrInvalidLength
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return protohelpers.ErrInvalidLength
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			var stringValue string
-			if intStringLen > 0 {
-				stringValue = unsafe.String(&dAtA[iNdEx], intStringLen)
-			}
-			m.Description = stringValue
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return protohelpers.ErrInvalidLength
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *BlockStreamError) UnmarshalVTUnsafe(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return protohelpers.ErrIntOverflow
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: BlockStreamError: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: BlockStreamError: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ErrorClass", wireType)
-			}
-			m.ErrorClass = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return protohelpers.ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.ErrorClass |= BlockStreamErrorClass(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Description", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return protohelpers.ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return protohelpers.ErrInvalidLength
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return protohelpers.ErrInvalidLength
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			var stringValue string
-			if intStringLen > 0 {
-				stringValue = unsafe.String(&dAtA[iNdEx], intStringLen)
-			}
-			m.Description = stringValue
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return protohelpers.ErrInvalidLength
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *BlockStreamMessage) UnmarshalVTUnsafe(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return protohelpers.ErrIntOverflow
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: BlockStreamMessage: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: BlockStreamMessage: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: BlockStreamResponse_Result: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -3379,6 +3186,199 @@ func (m *BlockStreamMessage) UnmarshalVTUnsafe(dAtA []byte) error {
 				}
 			}
 			m.CatchupInProgress = bool(v != 0)
+		default:
+			iNdEx = preIndex
+			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *BlockStreamResponse_Done) UnmarshalVTUnsafe(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return protohelpers.ErrIntOverflow
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: BlockStreamResponse_Done: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: BlockStreamResponse_Done: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Description", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			var stringValue string
+			if intStringLen > 0 {
+				stringValue = unsafe.String(&dAtA[iNdEx], intStringLen)
+			}
+			m.Description = stringValue
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *BlockStreamResponse_Error) UnmarshalVTUnsafe(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return protohelpers.ErrIntOverflow
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: BlockStreamResponse_Error: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: BlockStreamResponse_Error: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Kind", wireType)
+			}
+			m.Kind = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Kind |= BlockStreamResponse_Error_Kind(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Description", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			var stringValue string
+			if intStringLen > 0 {
+				stringValue = unsafe.String(&dAtA[iNdEx], intStringLen)
+			}
+			m.Description = stringValue
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
@@ -3464,7 +3464,7 @@ func (m *BlockStreamResponse) UnmarshalVTUnsafe(dAtA []byte) error {
 					return err
 				}
 			} else {
-				v := &BlockStreamMessage{}
+				v := &BlockStreamResponse_Result{}
 				if err := v.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
@@ -3473,7 +3473,7 @@ func (m *BlockStreamResponse) UnmarshalVTUnsafe(dAtA []byte) error {
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field StreamEnd", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Done", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -3500,16 +3500,16 @@ func (m *BlockStreamResponse) UnmarshalVTUnsafe(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if oneof, ok := m.Response.(*BlockStreamResponse_StreamEnd); ok {
-				if err := oneof.StreamEnd.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
+			if oneof, ok := m.Response.(*BlockStreamResponse_Done_); ok {
+				if err := oneof.Done.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
 			} else {
-				v := &BlockStreamEnd{}
+				v := &BlockStreamResponse_Done{}
 				if err := v.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
-				m.Response = &BlockStreamResponse_StreamEnd{StreamEnd: v}
+				m.Response = &BlockStreamResponse_Done_{Done: v}
 			}
 			iNdEx = postIndex
 		case 3:
@@ -3541,16 +3541,16 @@ func (m *BlockStreamResponse) UnmarshalVTUnsafe(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if oneof, ok := m.Response.(*BlockStreamResponse_Error); ok {
+			if oneof, ok := m.Response.(*BlockStreamResponse_Error_); ok {
 				if err := oneof.Error.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
 			} else {
-				v := &BlockStreamError{}
+				v := &BlockStreamResponse_Error{}
 				if err := v.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
-				m.Response = &BlockStreamResponse_Error{Error: v}
+				m.Response = &BlockStreamResponse_Error_{Error: v}
 			}
 			iNdEx = postIndex
 		default:

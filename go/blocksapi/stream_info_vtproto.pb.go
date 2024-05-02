@@ -440,7 +440,7 @@ func (m *BlockStreamState) UnmarshalVT(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.EarliestMessage == nil {
-				m.EarliestMessage = &BlockMessageID{}
+				m.EarliestMessage = &BlockMessage_ID{}
 			}
 			if err := m.EarliestMessage.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 				return err
@@ -476,7 +476,7 @@ func (m *BlockStreamState) UnmarshalVT(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.LatestMessage == nil {
-				m.LatestMessage = &BlockMessageID{}
+				m.LatestMessage = &BlockMessage_ID{}
 			}
 			if err := m.LatestMessage.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 				return err
@@ -611,7 +611,7 @@ func (m *BlockStreamInfo) UnmarshalVT(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.Format |= BlockMessagePayloadFormat(b&0x7F) << shift
+				m.Format |= BlockMessage_Format(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -733,7 +733,7 @@ func (m *BlockStreamState) UnmarshalVTUnsafe(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.EarliestMessage == nil {
-				m.EarliestMessage = &BlockMessageID{}
+				m.EarliestMessage = &BlockMessage_ID{}
 			}
 			if err := m.EarliestMessage.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 				return err
@@ -769,7 +769,7 @@ func (m *BlockStreamState) UnmarshalVTUnsafe(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.LatestMessage == nil {
-				m.LatestMessage = &BlockMessageID{}
+				m.LatestMessage = &BlockMessage_ID{}
 			}
 			if err := m.LatestMessage.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 				return err
@@ -912,7 +912,7 @@ func (m *BlockStreamInfo) UnmarshalVTUnsafe(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.Format |= BlockMessagePayloadFormat(b&0x7F) << shift
+				m.Format |= BlockMessage_Format(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}

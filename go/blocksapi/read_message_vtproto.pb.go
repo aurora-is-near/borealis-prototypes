@@ -27,7 +27,7 @@ func (m *ReadMessageRequest) CloneVT() *ReadMessageRequest {
 	r := new(ReadMessageRequest)
 	r.StreamName = m.StreamName
 	r.MessageId = m.MessageId.CloneVT()
-	r.ContentSettings = m.ContentSettings.CloneVT()
+	r.DeliverySettings = m.DeliverySettings.CloneVT()
 	if len(m.unknownFields) > 0 {
 		r.unknownFields = make([]byte, len(m.unknownFields))
 		copy(r.unknownFields, m.unknownFields)
@@ -39,29 +39,11 @@ func (m *ReadMessageRequest) CloneMessageVT() proto.Message {
 	return m.CloneVT()
 }
 
-func (m *ReadMessageError) CloneVT() *ReadMessageError {
+func (m *ReadMessageResponse_Result) CloneVT() *ReadMessageResponse_Result {
 	if m == nil {
-		return (*ReadMessageError)(nil)
+		return (*ReadMessageResponse_Result)(nil)
 	}
-	r := new(ReadMessageError)
-	r.ErrorClass = m.ErrorClass
-	r.Description = m.Description
-	if len(m.unknownFields) > 0 {
-		r.unknownFields = make([]byte, len(m.unknownFields))
-		copy(r.unknownFields, m.unknownFields)
-	}
-	return r
-}
-
-func (m *ReadMessageError) CloneMessageVT() proto.Message {
-	return m.CloneVT()
-}
-
-func (m *ReadMessageResult) CloneVT() *ReadMessageResult {
-	if m == nil {
-		return (*ReadMessageResult)(nil)
-	}
-	r := new(ReadMessageResult)
+	r := new(ReadMessageResponse_Result)
 	r.Message = m.Message.CloneVT()
 	if len(m.unknownFields) > 0 {
 		r.unknownFields = make([]byte, len(m.unknownFields))
@@ -70,7 +52,25 @@ func (m *ReadMessageResult) CloneVT() *ReadMessageResult {
 	return r
 }
 
-func (m *ReadMessageResult) CloneMessageVT() proto.Message {
+func (m *ReadMessageResponse_Result) CloneMessageVT() proto.Message {
+	return m.CloneVT()
+}
+
+func (m *ReadMessageResponse_Error) CloneVT() *ReadMessageResponse_Error {
+	if m == nil {
+		return (*ReadMessageResponse_Error)(nil)
+	}
+	r := new(ReadMessageResponse_Error)
+	r.Kind = m.Kind
+	r.Description = m.Description
+	if len(m.unknownFields) > 0 {
+		r.unknownFields = make([]byte, len(m.unknownFields))
+		copy(r.unknownFields, m.unknownFields)
+	}
+	return r
+}
+
+func (m *ReadMessageResponse_Error) CloneMessageVT() proto.Message {
 	return m.CloneVT()
 }
 
@@ -95,20 +95,20 @@ func (m *ReadMessageResponse) CloneMessageVT() proto.Message {
 	return m.CloneVT()
 }
 
-func (m *ReadMessageResponse_Result) CloneVT() isReadMessageResponse_Response {
+func (m *ReadMessageResponse_Result_) CloneVT() isReadMessageResponse_Response {
 	if m == nil {
-		return (*ReadMessageResponse_Result)(nil)
+		return (*ReadMessageResponse_Result_)(nil)
 	}
-	r := new(ReadMessageResponse_Result)
+	r := new(ReadMessageResponse_Result_)
 	r.Result = m.Result.CloneVT()
 	return r
 }
 
-func (m *ReadMessageResponse_Error) CloneVT() isReadMessageResponse_Response {
+func (m *ReadMessageResponse_Error_) CloneVT() isReadMessageResponse_Response {
 	if m == nil {
-		return (*ReadMessageResponse_Error)(nil)
+		return (*ReadMessageResponse_Error_)(nil)
 	}
-	r := new(ReadMessageResponse_Error)
+	r := new(ReadMessageResponse_Error_)
 	r.Error = m.Error.CloneVT()
 	return r
 }
@@ -125,7 +125,7 @@ func (this *ReadMessageRequest) EqualVT(that *ReadMessageRequest) bool {
 	if !this.MessageId.EqualVT(that.MessageId) {
 		return false
 	}
-	if !this.ContentSettings.EqualVT(that.ContentSettings) {
+	if !this.DeliverySettings.EqualVT(that.DeliverySettings) {
 		return false
 	}
 	return string(this.unknownFields) == string(that.unknownFields)
@@ -138,29 +138,7 @@ func (this *ReadMessageRequest) EqualMessageVT(thatMsg proto.Message) bool {
 	}
 	return this.EqualVT(that)
 }
-func (this *ReadMessageError) EqualVT(that *ReadMessageError) bool {
-	if this == that {
-		return true
-	} else if this == nil || that == nil {
-		return false
-	}
-	if this.ErrorClass != that.ErrorClass {
-		return false
-	}
-	if this.Description != that.Description {
-		return false
-	}
-	return string(this.unknownFields) == string(that.unknownFields)
-}
-
-func (this *ReadMessageError) EqualMessageVT(thatMsg proto.Message) bool {
-	that, ok := thatMsg.(*ReadMessageError)
-	if !ok {
-		return false
-	}
-	return this.EqualVT(that)
-}
-func (this *ReadMessageResult) EqualVT(that *ReadMessageResult) bool {
+func (this *ReadMessageResponse_Result) EqualVT(that *ReadMessageResponse_Result) bool {
 	if this == that {
 		return true
 	} else if this == nil || that == nil {
@@ -172,8 +150,30 @@ func (this *ReadMessageResult) EqualVT(that *ReadMessageResult) bool {
 	return string(this.unknownFields) == string(that.unknownFields)
 }
 
-func (this *ReadMessageResult) EqualMessageVT(thatMsg proto.Message) bool {
-	that, ok := thatMsg.(*ReadMessageResult)
+func (this *ReadMessageResponse_Result) EqualMessageVT(thatMsg proto.Message) bool {
+	that, ok := thatMsg.(*ReadMessageResponse_Result)
+	if !ok {
+		return false
+	}
+	return this.EqualVT(that)
+}
+func (this *ReadMessageResponse_Error) EqualVT(that *ReadMessageResponse_Error) bool {
+	if this == that {
+		return true
+	} else if this == nil || that == nil {
+		return false
+	}
+	if this.Kind != that.Kind {
+		return false
+	}
+	if this.Description != that.Description {
+		return false
+	}
+	return string(this.unknownFields) == string(that.unknownFields)
+}
+
+func (this *ReadMessageResponse_Error) EqualMessageVT(thatMsg proto.Message) bool {
+	that, ok := thatMsg.(*ReadMessageResponse_Error)
 	if !ok {
 		return false
 	}
@@ -207,8 +207,8 @@ func (this *ReadMessageResponse) EqualMessageVT(thatMsg proto.Message) bool {
 	}
 	return this.EqualVT(that)
 }
-func (this *ReadMessageResponse_Result) EqualVT(thatIface isReadMessageResponse_Response) bool {
-	that, ok := thatIface.(*ReadMessageResponse_Result)
+func (this *ReadMessageResponse_Result_) EqualVT(thatIface isReadMessageResponse_Response) bool {
+	that, ok := thatIface.(*ReadMessageResponse_Result_)
 	if !ok {
 		return false
 	}
@@ -220,10 +220,10 @@ func (this *ReadMessageResponse_Result) EqualVT(thatIface isReadMessageResponse_
 	}
 	if p, q := this.Result, that.Result; p != q {
 		if p == nil {
-			p = &ReadMessageResult{}
+			p = &ReadMessageResponse_Result{}
 		}
 		if q == nil {
-			q = &ReadMessageResult{}
+			q = &ReadMessageResponse_Result{}
 		}
 		if !p.EqualVT(q) {
 			return false
@@ -232,8 +232,8 @@ func (this *ReadMessageResponse_Result) EqualVT(thatIface isReadMessageResponse_
 	return true
 }
 
-func (this *ReadMessageResponse_Error) EqualVT(thatIface isReadMessageResponse_Response) bool {
-	that, ok := thatIface.(*ReadMessageResponse_Error)
+func (this *ReadMessageResponse_Error_) EqualVT(thatIface isReadMessageResponse_Response) bool {
+	that, ok := thatIface.(*ReadMessageResponse_Error_)
 	if !ok {
 		return false
 	}
@@ -245,10 +245,10 @@ func (this *ReadMessageResponse_Error) EqualVT(thatIface isReadMessageResponse_R
 	}
 	if p, q := this.Error, that.Error; p != q {
 		if p == nil {
-			p = &ReadMessageError{}
+			p = &ReadMessageResponse_Error{}
 		}
 		if q == nil {
-			q = &ReadMessageError{}
+			q = &ReadMessageResponse_Error{}
 		}
 		if !p.EqualVT(q) {
 			return false
@@ -287,8 +287,8 @@ func (m *ReadMessageRequest) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
-	if m.ContentSettings != nil {
-		size, err := m.ContentSettings.MarshalToSizedBufferVT(dAtA[:i])
+	if m.DeliverySettings != nil {
+		size, err := m.DeliverySettings.MarshalToSizedBufferVT(dAtA[:i])
 		if err != nil {
 			return 0, err
 		}
@@ -317,7 +317,7 @@ func (m *ReadMessageRequest) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *ReadMessageError) MarshalVT() (dAtA []byte, err error) {
+func (m *ReadMessageResponse_Result) MarshalVT() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -330,57 +330,12 @@ func (m *ReadMessageError) MarshalVT() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *ReadMessageError) MarshalToVT(dAtA []byte) (int, error) {
+func (m *ReadMessageResponse_Result) MarshalToVT(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVT(dAtA[:size])
 }
 
-func (m *ReadMessageError) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
-	if m == nil {
-		return 0, nil
-	}
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.unknownFields != nil {
-		i -= len(m.unknownFields)
-		copy(dAtA[i:], m.unknownFields)
-	}
-	if len(m.Description) > 0 {
-		i -= len(m.Description)
-		copy(dAtA[i:], m.Description)
-		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(m.Description)))
-		i--
-		dAtA[i] = 0x12
-	}
-	if m.ErrorClass != 0 {
-		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.ErrorClass))
-		i--
-		dAtA[i] = 0x8
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *ReadMessageResult) MarshalVT() (dAtA []byte, err error) {
-	if m == nil {
-		return nil, nil
-	}
-	size := m.SizeVT()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *ReadMessageResult) MarshalToVT(dAtA []byte) (int, error) {
-	size := m.SizeVT()
-	return m.MarshalToSizedBufferVT(dAtA[:size])
-}
-
-func (m *ReadMessageResult) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+func (m *ReadMessageResponse_Result) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	if m == nil {
 		return 0, nil
 	}
@@ -401,6 +356,51 @@ func (m *ReadMessageResult) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i = protohelpers.EncodeVarint(dAtA, i, uint64(size))
 		i--
 		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *ReadMessageResponse_Error) MarshalVT() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ReadMessageResponse_Error) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *ReadMessageResponse_Error) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	if len(m.Description) > 0 {
+		i -= len(m.Description)
+		copy(dAtA[i:], m.Description)
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(m.Description)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if m.Kind != 0 {
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.Kind))
+		i--
+		dAtA[i] = 0x8
 	}
 	return len(dAtA) - i, nil
 }
@@ -447,12 +447,12 @@ func (m *ReadMessageResponse) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *ReadMessageResponse_Result) MarshalToVT(dAtA []byte) (int, error) {
+func (m *ReadMessageResponse_Result_) MarshalToVT(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVT(dAtA[:size])
 }
 
-func (m *ReadMessageResponse_Result) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+func (m *ReadMessageResponse_Result_) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	if m.Result != nil {
 		size, err := m.Result.MarshalToSizedBufferVT(dAtA[:i])
@@ -466,12 +466,12 @@ func (m *ReadMessageResponse_Result) MarshalToSizedBufferVT(dAtA []byte) (int, e
 	}
 	return len(dAtA) - i, nil
 }
-func (m *ReadMessageResponse_Error) MarshalToVT(dAtA []byte) (int, error) {
+func (m *ReadMessageResponse_Error_) MarshalToVT(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVT(dAtA[:size])
 }
 
-func (m *ReadMessageResponse_Error) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+func (m *ReadMessageResponse_Error_) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	if m.Error != nil {
 		size, err := m.Error.MarshalToSizedBufferVT(dAtA[:i])
@@ -515,8 +515,8 @@ func (m *ReadMessageRequest) MarshalToSizedBufferVTStrict(dAtA []byte) (int, err
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
-	if m.ContentSettings != nil {
-		size, err := m.ContentSettings.MarshalToSizedBufferVTStrict(dAtA[:i])
+	if m.DeliverySettings != nil {
+		size, err := m.DeliverySettings.MarshalToSizedBufferVTStrict(dAtA[:i])
 		if err != nil {
 			return 0, err
 		}
@@ -545,7 +545,7 @@ func (m *ReadMessageRequest) MarshalToSizedBufferVTStrict(dAtA []byte) (int, err
 	return len(dAtA) - i, nil
 }
 
-func (m *ReadMessageError) MarshalVTStrict() (dAtA []byte, err error) {
+func (m *ReadMessageResponse_Result) MarshalVTStrict() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -558,57 +558,12 @@ func (m *ReadMessageError) MarshalVTStrict() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *ReadMessageError) MarshalToVTStrict(dAtA []byte) (int, error) {
+func (m *ReadMessageResponse_Result) MarshalToVTStrict(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
 }
 
-func (m *ReadMessageError) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
-	if m == nil {
-		return 0, nil
-	}
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.unknownFields != nil {
-		i -= len(m.unknownFields)
-		copy(dAtA[i:], m.unknownFields)
-	}
-	if len(m.Description) > 0 {
-		i -= len(m.Description)
-		copy(dAtA[i:], m.Description)
-		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(m.Description)))
-		i--
-		dAtA[i] = 0x12
-	}
-	if m.ErrorClass != 0 {
-		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.ErrorClass))
-		i--
-		dAtA[i] = 0x8
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *ReadMessageResult) MarshalVTStrict() (dAtA []byte, err error) {
-	if m == nil {
-		return nil, nil
-	}
-	size := m.SizeVT()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBufferVTStrict(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *ReadMessageResult) MarshalToVTStrict(dAtA []byte) (int, error) {
-	size := m.SizeVT()
-	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
-}
-
-func (m *ReadMessageResult) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+func (m *ReadMessageResponse_Result) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 	if m == nil {
 		return 0, nil
 	}
@@ -629,6 +584,51 @@ func (m *ReadMessageResult) MarshalToSizedBufferVTStrict(dAtA []byte) (int, erro
 		i = protohelpers.EncodeVarint(dAtA, i, uint64(size))
 		i--
 		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *ReadMessageResponse_Error) MarshalVTStrict() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVTStrict(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ReadMessageResponse_Error) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *ReadMessageResponse_Error) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	if len(m.Description) > 0 {
+		i -= len(m.Description)
+		copy(dAtA[i:], m.Description)
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(m.Description)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if m.Kind != 0 {
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.Kind))
+		i--
+		dAtA[i] = 0x8
 	}
 	return len(dAtA) - i, nil
 }
@@ -663,14 +663,14 @@ func (m *ReadMessageResponse) MarshalToSizedBufferVTStrict(dAtA []byte) (int, er
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
-	if msg, ok := m.Response.(*ReadMessageResponse_Error); ok {
+	if msg, ok := m.Response.(*ReadMessageResponse_Error_); ok {
 		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
 		if err != nil {
 			return 0, err
 		}
 		i -= size
 	}
-	if msg, ok := m.Response.(*ReadMessageResponse_Result); ok {
+	if msg, ok := m.Response.(*ReadMessageResponse_Result_); ok {
 		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
 		if err != nil {
 			return 0, err
@@ -680,12 +680,12 @@ func (m *ReadMessageResponse) MarshalToSizedBufferVTStrict(dAtA []byte) (int, er
 	return len(dAtA) - i, nil
 }
 
-func (m *ReadMessageResponse_Result) MarshalToVTStrict(dAtA []byte) (int, error) {
+func (m *ReadMessageResponse_Result_) MarshalToVTStrict(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
 }
 
-func (m *ReadMessageResponse_Result) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+func (m *ReadMessageResponse_Result_) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	if m.Result != nil {
 		size, err := m.Result.MarshalToSizedBufferVTStrict(dAtA[:i])
@@ -699,12 +699,12 @@ func (m *ReadMessageResponse_Result) MarshalToSizedBufferVTStrict(dAtA []byte) (
 	}
 	return len(dAtA) - i, nil
 }
-func (m *ReadMessageResponse_Error) MarshalToVTStrict(dAtA []byte) (int, error) {
+func (m *ReadMessageResponse_Error_) MarshalToVTStrict(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
 }
 
-func (m *ReadMessageResponse_Error) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+func (m *ReadMessageResponse_Error_) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	if m.Error != nil {
 		size, err := m.Error.MarshalToSizedBufferVTStrict(dAtA[:i])
@@ -732,32 +732,15 @@ func (m *ReadMessageRequest) SizeVT() (n int) {
 		l = m.MessageId.SizeVT()
 		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
 	}
-	if m.ContentSettings != nil {
-		l = m.ContentSettings.SizeVT()
+	if m.DeliverySettings != nil {
+		l = m.DeliverySettings.SizeVT()
 		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
 	}
 	n += len(m.unknownFields)
 	return n
 }
 
-func (m *ReadMessageError) SizeVT() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.ErrorClass != 0 {
-		n += 1 + protohelpers.SizeOfVarint(uint64(m.ErrorClass))
-	}
-	l = len(m.Description)
-	if l > 0 {
-		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
-	}
-	n += len(m.unknownFields)
-	return n
-}
-
-func (m *ReadMessageResult) SizeVT() (n int) {
+func (m *ReadMessageResponse_Result) SizeVT() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -765,6 +748,23 @@ func (m *ReadMessageResult) SizeVT() (n int) {
 	_ = l
 	if m.Message != nil {
 		l = m.Message.SizeVT()
+		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
+	}
+	n += len(m.unknownFields)
+	return n
+}
+
+func (m *ReadMessageResponse_Error) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Kind != 0 {
+		n += 1 + protohelpers.SizeOfVarint(uint64(m.Kind))
+	}
+	l = len(m.Description)
+	if l > 0 {
 		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
 	}
 	n += len(m.unknownFields)
@@ -784,7 +784,7 @@ func (m *ReadMessageResponse) SizeVT() (n int) {
 	return n
 }
 
-func (m *ReadMessageResponse_Result) SizeVT() (n int) {
+func (m *ReadMessageResponse_Result_) SizeVT() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -796,7 +796,7 @@ func (m *ReadMessageResponse_Result) SizeVT() (n int) {
 	}
 	return n
 }
-func (m *ReadMessageResponse_Error) SizeVT() (n int) {
+func (m *ReadMessageResponse_Error_) SizeVT() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -899,7 +899,7 @@ func (m *ReadMessageRequest) UnmarshalVT(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.MessageId == nil {
-				m.MessageId = &BlockMessageID{}
+				m.MessageId = &BlockMessage_ID{}
 			}
 			if err := m.MessageId.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 				return err
@@ -907,7 +907,7 @@ func (m *ReadMessageRequest) UnmarshalVT(dAtA []byte) error {
 			iNdEx = postIndex
 		case 3:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ContentSettings", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field DeliverySettings", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -934,10 +934,10 @@ func (m *ReadMessageRequest) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if m.ContentSettings == nil {
-				m.ContentSettings = &BlockMessageContentSettings{}
+			if m.DeliverySettings == nil {
+				m.DeliverySettings = &BlockMessageDeliverySettings{}
 			}
-			if err := m.ContentSettings.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+			if err := m.DeliverySettings.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -963,7 +963,7 @@ func (m *ReadMessageRequest) UnmarshalVT(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *ReadMessageError) UnmarshalVT(dAtA []byte) error {
+func (m *ReadMessageResponse_Result) UnmarshalVT(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -986,112 +986,10 @@ func (m *ReadMessageError) UnmarshalVT(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: ReadMessageError: wiretype end group for non-group")
+			return fmt.Errorf("proto: ReadMessageResponse_Result: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: ReadMessageError: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ErrorClass", wireType)
-			}
-			m.ErrorClass = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return protohelpers.ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.ErrorClass |= ReadMessageErrorClass(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Description", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return protohelpers.ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return protohelpers.ErrInvalidLength
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return protohelpers.ErrInvalidLength
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Description = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return protohelpers.ErrInvalidLength
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *ReadMessageResult) UnmarshalVT(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return protohelpers.ErrIntOverflow
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: ReadMessageResult: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: ReadMessageResult: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: ReadMessageResponse_Result: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -1129,6 +1027,108 @@ func (m *ReadMessageResult) UnmarshalVT(dAtA []byte) error {
 			if err := m.Message.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *ReadMessageResponse_Error) UnmarshalVT(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return protohelpers.ErrIntOverflow
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: ReadMessageResponse_Error: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: ReadMessageResponse_Error: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Kind", wireType)
+			}
+			m.Kind = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Kind |= ReadMessageResponse_Error_Kind(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Description", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Description = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -1210,16 +1210,16 @@ func (m *ReadMessageResponse) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if oneof, ok := m.Response.(*ReadMessageResponse_Result); ok {
+			if oneof, ok := m.Response.(*ReadMessageResponse_Result_); ok {
 				if err := oneof.Result.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
 			} else {
-				v := &ReadMessageResult{}
+				v := &ReadMessageResponse_Result{}
 				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
-				m.Response = &ReadMessageResponse_Result{Result: v}
+				m.Response = &ReadMessageResponse_Result_{Result: v}
 			}
 			iNdEx = postIndex
 		case 2:
@@ -1251,16 +1251,16 @@ func (m *ReadMessageResponse) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if oneof, ok := m.Response.(*ReadMessageResponse_Error); ok {
+			if oneof, ok := m.Response.(*ReadMessageResponse_Error_); ok {
 				if err := oneof.Error.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
 			} else {
-				v := &ReadMessageError{}
+				v := &ReadMessageResponse_Error{}
 				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
-				m.Response = &ReadMessageResponse_Error{Error: v}
+				m.Response = &ReadMessageResponse_Error_{Error: v}
 			}
 			iNdEx = postIndex
 		default:
@@ -1380,7 +1380,7 @@ func (m *ReadMessageRequest) UnmarshalVTUnsafe(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.MessageId == nil {
-				m.MessageId = &BlockMessageID{}
+				m.MessageId = &BlockMessage_ID{}
 			}
 			if err := m.MessageId.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 				return err
@@ -1388,7 +1388,7 @@ func (m *ReadMessageRequest) UnmarshalVTUnsafe(dAtA []byte) error {
 			iNdEx = postIndex
 		case 3:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ContentSettings", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field DeliverySettings", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -1415,10 +1415,10 @@ func (m *ReadMessageRequest) UnmarshalVTUnsafe(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if m.ContentSettings == nil {
-				m.ContentSettings = &BlockMessageContentSettings{}
+			if m.DeliverySettings == nil {
+				m.DeliverySettings = &BlockMessageDeliverySettings{}
 			}
-			if err := m.ContentSettings.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
+			if err := m.DeliverySettings.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -1444,7 +1444,7 @@ func (m *ReadMessageRequest) UnmarshalVTUnsafe(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *ReadMessageError) UnmarshalVTUnsafe(dAtA []byte) error {
+func (m *ReadMessageResponse_Result) UnmarshalVTUnsafe(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1467,17 +1467,17 @@ func (m *ReadMessageError) UnmarshalVTUnsafe(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: ReadMessageError: wiretype end group for non-group")
+			return fmt.Errorf("proto: ReadMessageResponse_Result: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: ReadMessageError: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: ReadMessageResponse_Result: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ErrorClass", wireType)
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Message", wireType)
 			}
-			m.ErrorClass = 0
+			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return protohelpers.ErrIntOverflow
@@ -1487,7 +1487,94 @@ func (m *ReadMessageError) UnmarshalVTUnsafe(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.ErrorClass |= ReadMessageErrorClass(b&0x7F) << shift
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Message == nil {
+				m.Message = &BlockMessage{}
+			}
+			if err := m.Message.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *ReadMessageResponse_Error) UnmarshalVTUnsafe(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return protohelpers.ErrIntOverflow
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: ReadMessageResponse_Error: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: ReadMessageResponse_Error: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Kind", wireType)
+			}
+			m.Kind = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Kind |= ReadMessageResponse_Error_Kind(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1527,93 +1614,6 @@ func (m *ReadMessageError) UnmarshalVTUnsafe(dAtA []byte) error {
 				stringValue = unsafe.String(&dAtA[iNdEx], intStringLen)
 			}
 			m.Description = stringValue
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return protohelpers.ErrInvalidLength
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *ReadMessageResult) UnmarshalVTUnsafe(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return protohelpers.ErrIntOverflow
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: ReadMessageResult: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: ReadMessageResult: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Message", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return protohelpers.ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return protohelpers.ErrInvalidLength
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return protohelpers.ErrInvalidLength
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.Message == nil {
-				m.Message = &BlockMessage{}
-			}
-			if err := m.Message.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -1695,16 +1695,16 @@ func (m *ReadMessageResponse) UnmarshalVTUnsafe(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if oneof, ok := m.Response.(*ReadMessageResponse_Result); ok {
+			if oneof, ok := m.Response.(*ReadMessageResponse_Result_); ok {
 				if err := oneof.Result.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
 			} else {
-				v := &ReadMessageResult{}
+				v := &ReadMessageResponse_Result{}
 				if err := v.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
-				m.Response = &ReadMessageResponse_Result{Result: v}
+				m.Response = &ReadMessageResponse_Result_{Result: v}
 			}
 			iNdEx = postIndex
 		case 2:
@@ -1736,16 +1736,16 @@ func (m *ReadMessageResponse) UnmarshalVTUnsafe(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if oneof, ok := m.Response.(*ReadMessageResponse_Error); ok {
+			if oneof, ok := m.Response.(*ReadMessageResponse_Error_); ok {
 				if err := oneof.Error.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
 			} else {
-				v := &ReadMessageError{}
+				v := &ReadMessageResponse_Error{}
 				if err := v.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
-				m.Response = &ReadMessageResponse_Error{Error: v}
+				m.Response = &ReadMessageResponse_Error_{Error: v}
 			}
 			iNdEx = postIndex
 		default:

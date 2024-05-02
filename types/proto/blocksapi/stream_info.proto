@@ -5,14 +5,14 @@ import "blocksapi/message.proto";
 option go_package = "github.com/aurora-is-near/borealis-prototypes/go/blocksapi;blocksapi";
 
 message BlockStreamState {
-    optional BlockMessageID earliest_message = 1;
-    optional BlockMessageID latest_message = 2;
+    optional BlockMessage.ID earliest_message = 1;
+    optional BlockMessage.ID latest_message = 2;
 }
 
 message BlockStreamInfo {
     string name = 1;
     string description = 2;
-    BlockMessagePayloadFormat format = 3;
+    BlockMessage.Format format = 3;
     BlockStreamState state = 4;
 }
 

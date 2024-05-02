@@ -41,29 +41,11 @@ func (m *ListBlockStreamsRequest) CloneMessageVT() proto.Message {
 	return m.CloneVT()
 }
 
-func (m *ListBlockStreamsError) CloneVT() *ListBlockStreamsError {
+func (m *ListBlockStreamsResponse_Result) CloneVT() *ListBlockStreamsResponse_Result {
 	if m == nil {
-		return (*ListBlockStreamsError)(nil)
+		return (*ListBlockStreamsResponse_Result)(nil)
 	}
-	r := new(ListBlockStreamsError)
-	r.ErrorClass = m.ErrorClass
-	r.Description = m.Description
-	if len(m.unknownFields) > 0 {
-		r.unknownFields = make([]byte, len(m.unknownFields))
-		copy(r.unknownFields, m.unknownFields)
-	}
-	return r
-}
-
-func (m *ListBlockStreamsError) CloneMessageVT() proto.Message {
-	return m.CloneVT()
-}
-
-func (m *ListBlockStreamsResult) CloneVT() *ListBlockStreamsResult {
-	if m == nil {
-		return (*ListBlockStreamsResult)(nil)
-	}
-	r := new(ListBlockStreamsResult)
+	r := new(ListBlockStreamsResponse_Result)
 	if rhs := m.Response; rhs != nil {
 		tmpContainer := make(map[string]*BlockStreamInfo, len(rhs))
 		for k, v := range rhs {
@@ -78,7 +60,25 @@ func (m *ListBlockStreamsResult) CloneVT() *ListBlockStreamsResult {
 	return r
 }
 
-func (m *ListBlockStreamsResult) CloneMessageVT() proto.Message {
+func (m *ListBlockStreamsResponse_Result) CloneMessageVT() proto.Message {
+	return m.CloneVT()
+}
+
+func (m *ListBlockStreamsResponse_Error) CloneVT() *ListBlockStreamsResponse_Error {
+	if m == nil {
+		return (*ListBlockStreamsResponse_Error)(nil)
+	}
+	r := new(ListBlockStreamsResponse_Error)
+	r.ErrorClass = m.ErrorClass
+	r.Description = m.Description
+	if len(m.unknownFields) > 0 {
+		r.unknownFields = make([]byte, len(m.unknownFields))
+		copy(r.unknownFields, m.unknownFields)
+	}
+	return r
+}
+
+func (m *ListBlockStreamsResponse_Error) CloneMessageVT() proto.Message {
 	return m.CloneVT()
 }
 
@@ -103,20 +103,20 @@ func (m *ListBlockStreamsResponse) CloneMessageVT() proto.Message {
 	return m.CloneVT()
 }
 
-func (m *ListBlockStreamsResponse_Result) CloneVT() isListBlockStreamsResponse_Response {
+func (m *ListBlockStreamsResponse_Result_) CloneVT() isListBlockStreamsResponse_Response {
 	if m == nil {
-		return (*ListBlockStreamsResponse_Result)(nil)
+		return (*ListBlockStreamsResponse_Result_)(nil)
 	}
-	r := new(ListBlockStreamsResponse_Result)
+	r := new(ListBlockStreamsResponse_Result_)
 	r.Result = m.Result.CloneVT()
 	return r
 }
 
-func (m *ListBlockStreamsResponse_Error) CloneVT() isListBlockStreamsResponse_Response {
+func (m *ListBlockStreamsResponse_Error_) CloneVT() isListBlockStreamsResponse_Response {
 	if m == nil {
-		return (*ListBlockStreamsResponse_Error)(nil)
+		return (*ListBlockStreamsResponse_Error_)(nil)
 	}
-	r := new(ListBlockStreamsResponse_Error)
+	r := new(ListBlockStreamsResponse_Error_)
 	r.Error = m.Error.CloneVT()
 	return r
 }
@@ -146,29 +146,7 @@ func (this *ListBlockStreamsRequest) EqualMessageVT(thatMsg proto.Message) bool 
 	}
 	return this.EqualVT(that)
 }
-func (this *ListBlockStreamsError) EqualVT(that *ListBlockStreamsError) bool {
-	if this == that {
-		return true
-	} else if this == nil || that == nil {
-		return false
-	}
-	if this.ErrorClass != that.ErrorClass {
-		return false
-	}
-	if this.Description != that.Description {
-		return false
-	}
-	return string(this.unknownFields) == string(that.unknownFields)
-}
-
-func (this *ListBlockStreamsError) EqualMessageVT(thatMsg proto.Message) bool {
-	that, ok := thatMsg.(*ListBlockStreamsError)
-	if !ok {
-		return false
-	}
-	return this.EqualVT(that)
-}
-func (this *ListBlockStreamsResult) EqualVT(that *ListBlockStreamsResult) bool {
+func (this *ListBlockStreamsResponse_Result) EqualVT(that *ListBlockStreamsResponse_Result) bool {
 	if this == that {
 		return true
 	} else if this == nil || that == nil {
@@ -197,8 +175,30 @@ func (this *ListBlockStreamsResult) EqualVT(that *ListBlockStreamsResult) bool {
 	return string(this.unknownFields) == string(that.unknownFields)
 }
 
-func (this *ListBlockStreamsResult) EqualMessageVT(thatMsg proto.Message) bool {
-	that, ok := thatMsg.(*ListBlockStreamsResult)
+func (this *ListBlockStreamsResponse_Result) EqualMessageVT(thatMsg proto.Message) bool {
+	that, ok := thatMsg.(*ListBlockStreamsResponse_Result)
+	if !ok {
+		return false
+	}
+	return this.EqualVT(that)
+}
+func (this *ListBlockStreamsResponse_Error) EqualVT(that *ListBlockStreamsResponse_Error) bool {
+	if this == that {
+		return true
+	} else if this == nil || that == nil {
+		return false
+	}
+	if this.ErrorClass != that.ErrorClass {
+		return false
+	}
+	if this.Description != that.Description {
+		return false
+	}
+	return string(this.unknownFields) == string(that.unknownFields)
+}
+
+func (this *ListBlockStreamsResponse_Error) EqualMessageVT(thatMsg proto.Message) bool {
+	that, ok := thatMsg.(*ListBlockStreamsResponse_Error)
 	if !ok {
 		return false
 	}
@@ -232,8 +232,8 @@ func (this *ListBlockStreamsResponse) EqualMessageVT(thatMsg proto.Message) bool
 	}
 	return this.EqualVT(that)
 }
-func (this *ListBlockStreamsResponse_Result) EqualVT(thatIface isListBlockStreamsResponse_Response) bool {
-	that, ok := thatIface.(*ListBlockStreamsResponse_Result)
+func (this *ListBlockStreamsResponse_Result_) EqualVT(thatIface isListBlockStreamsResponse_Response) bool {
+	that, ok := thatIface.(*ListBlockStreamsResponse_Result_)
 	if !ok {
 		return false
 	}
@@ -245,10 +245,10 @@ func (this *ListBlockStreamsResponse_Result) EqualVT(thatIface isListBlockStream
 	}
 	if p, q := this.Result, that.Result; p != q {
 		if p == nil {
-			p = &ListBlockStreamsResult{}
+			p = &ListBlockStreamsResponse_Result{}
 		}
 		if q == nil {
-			q = &ListBlockStreamsResult{}
+			q = &ListBlockStreamsResponse_Result{}
 		}
 		if !p.EqualVT(q) {
 			return false
@@ -257,8 +257,8 @@ func (this *ListBlockStreamsResponse_Result) EqualVT(thatIface isListBlockStream
 	return true
 }
 
-func (this *ListBlockStreamsResponse_Error) EqualVT(thatIface isListBlockStreamsResponse_Response) bool {
-	that, ok := thatIface.(*ListBlockStreamsResponse_Error)
+func (this *ListBlockStreamsResponse_Error_) EqualVT(thatIface isListBlockStreamsResponse_Response) bool {
+	that, ok := thatIface.(*ListBlockStreamsResponse_Error_)
 	if !ok {
 		return false
 	}
@@ -270,10 +270,10 @@ func (this *ListBlockStreamsResponse_Error) EqualVT(thatIface isListBlockStreams
 	}
 	if p, q := this.Error, that.Error; p != q {
 		if p == nil {
-			p = &ListBlockStreamsError{}
+			p = &ListBlockStreamsResponse_Error{}
 		}
 		if q == nil {
-			q = &ListBlockStreamsError{}
+			q = &ListBlockStreamsResponse_Error{}
 		}
 		if !p.EqualVT(q) {
 			return false
@@ -324,7 +324,7 @@ func (m *ListBlockStreamsRequest) MarshalToSizedBufferVT(dAtA []byte) (int, erro
 	return len(dAtA) - i, nil
 }
 
-func (m *ListBlockStreamsError) MarshalVT() (dAtA []byte, err error) {
+func (m *ListBlockStreamsResponse_Result) MarshalVT() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -337,57 +337,12 @@ func (m *ListBlockStreamsError) MarshalVT() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *ListBlockStreamsError) MarshalToVT(dAtA []byte) (int, error) {
+func (m *ListBlockStreamsResponse_Result) MarshalToVT(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVT(dAtA[:size])
 }
 
-func (m *ListBlockStreamsError) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
-	if m == nil {
-		return 0, nil
-	}
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.unknownFields != nil {
-		i -= len(m.unknownFields)
-		copy(dAtA[i:], m.unknownFields)
-	}
-	if len(m.Description) > 0 {
-		i -= len(m.Description)
-		copy(dAtA[i:], m.Description)
-		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(m.Description)))
-		i--
-		dAtA[i] = 0x12
-	}
-	if m.ErrorClass != 0 {
-		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.ErrorClass))
-		i--
-		dAtA[i] = 0x8
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *ListBlockStreamsResult) MarshalVT() (dAtA []byte, err error) {
-	if m == nil {
-		return nil, nil
-	}
-	size := m.SizeVT()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *ListBlockStreamsResult) MarshalToVT(dAtA []byte) (int, error) {
-	size := m.SizeVT()
-	return m.MarshalToSizedBufferVT(dAtA[:size])
-}
-
-func (m *ListBlockStreamsResult) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+func (m *ListBlockStreamsResponse_Result) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	if m == nil {
 		return 0, nil
 	}
@@ -420,6 +375,51 @@ func (m *ListBlockStreamsResult) MarshalToSizedBufferVT(dAtA []byte) (int, error
 			i--
 			dAtA[i] = 0xa
 		}
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *ListBlockStreamsResponse_Error) MarshalVT() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ListBlockStreamsResponse_Error) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *ListBlockStreamsResponse_Error) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	if len(m.Description) > 0 {
+		i -= len(m.Description)
+		copy(dAtA[i:], m.Description)
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(m.Description)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if m.ErrorClass != 0 {
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.ErrorClass))
+		i--
+		dAtA[i] = 0x8
 	}
 	return len(dAtA) - i, nil
 }
@@ -466,12 +466,12 @@ func (m *ListBlockStreamsResponse) MarshalToSizedBufferVT(dAtA []byte) (int, err
 	return len(dAtA) - i, nil
 }
 
-func (m *ListBlockStreamsResponse_Result) MarshalToVT(dAtA []byte) (int, error) {
+func (m *ListBlockStreamsResponse_Result_) MarshalToVT(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVT(dAtA[:size])
 }
 
-func (m *ListBlockStreamsResponse_Result) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+func (m *ListBlockStreamsResponse_Result_) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	if m.Result != nil {
 		size, err := m.Result.MarshalToSizedBufferVT(dAtA[:i])
@@ -485,12 +485,12 @@ func (m *ListBlockStreamsResponse_Result) MarshalToSizedBufferVT(dAtA []byte) (i
 	}
 	return len(dAtA) - i, nil
 }
-func (m *ListBlockStreamsResponse_Error) MarshalToVT(dAtA []byte) (int, error) {
+func (m *ListBlockStreamsResponse_Error_) MarshalToVT(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVT(dAtA[:size])
 }
 
-func (m *ListBlockStreamsResponse_Error) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+func (m *ListBlockStreamsResponse_Error_) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	if m.Error != nil {
 		size, err := m.Error.MarshalToSizedBufferVT(dAtA[:i])
@@ -546,7 +546,7 @@ func (m *ListBlockStreamsRequest) MarshalToSizedBufferVTStrict(dAtA []byte) (int
 	return len(dAtA) - i, nil
 }
 
-func (m *ListBlockStreamsError) MarshalVTStrict() (dAtA []byte, err error) {
+func (m *ListBlockStreamsResponse_Result) MarshalVTStrict() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -559,57 +559,12 @@ func (m *ListBlockStreamsError) MarshalVTStrict() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *ListBlockStreamsError) MarshalToVTStrict(dAtA []byte) (int, error) {
+func (m *ListBlockStreamsResponse_Result) MarshalToVTStrict(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
 }
 
-func (m *ListBlockStreamsError) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
-	if m == nil {
-		return 0, nil
-	}
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.unknownFields != nil {
-		i -= len(m.unknownFields)
-		copy(dAtA[i:], m.unknownFields)
-	}
-	if len(m.Description) > 0 {
-		i -= len(m.Description)
-		copy(dAtA[i:], m.Description)
-		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(m.Description)))
-		i--
-		dAtA[i] = 0x12
-	}
-	if m.ErrorClass != 0 {
-		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.ErrorClass))
-		i--
-		dAtA[i] = 0x8
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *ListBlockStreamsResult) MarshalVTStrict() (dAtA []byte, err error) {
-	if m == nil {
-		return nil, nil
-	}
-	size := m.SizeVT()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBufferVTStrict(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *ListBlockStreamsResult) MarshalToVTStrict(dAtA []byte) (int, error) {
-	size := m.SizeVT()
-	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
-}
-
-func (m *ListBlockStreamsResult) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+func (m *ListBlockStreamsResponse_Result) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 	if m == nil {
 		return 0, nil
 	}
@@ -646,6 +601,51 @@ func (m *ListBlockStreamsResult) MarshalToSizedBufferVTStrict(dAtA []byte) (int,
 	return len(dAtA) - i, nil
 }
 
+func (m *ListBlockStreamsResponse_Error) MarshalVTStrict() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVTStrict(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ListBlockStreamsResponse_Error) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *ListBlockStreamsResponse_Error) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	if len(m.Description) > 0 {
+		i -= len(m.Description)
+		copy(dAtA[i:], m.Description)
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(len(m.Description)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if m.ErrorClass != 0 {
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.ErrorClass))
+		i--
+		dAtA[i] = 0x8
+	}
+	return len(dAtA) - i, nil
+}
+
 func (m *ListBlockStreamsResponse) MarshalVTStrict() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
@@ -676,14 +676,14 @@ func (m *ListBlockStreamsResponse) MarshalToSizedBufferVTStrict(dAtA []byte) (in
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
-	if msg, ok := m.Response.(*ListBlockStreamsResponse_Error); ok {
+	if msg, ok := m.Response.(*ListBlockStreamsResponse_Error_); ok {
 		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
 		if err != nil {
 			return 0, err
 		}
 		i -= size
 	}
-	if msg, ok := m.Response.(*ListBlockStreamsResponse_Result); ok {
+	if msg, ok := m.Response.(*ListBlockStreamsResponse_Result_); ok {
 		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
 		if err != nil {
 			return 0, err
@@ -693,12 +693,12 @@ func (m *ListBlockStreamsResponse) MarshalToSizedBufferVTStrict(dAtA []byte) (in
 	return len(dAtA) - i, nil
 }
 
-func (m *ListBlockStreamsResponse_Result) MarshalToVTStrict(dAtA []byte) (int, error) {
+func (m *ListBlockStreamsResponse_Result_) MarshalToVTStrict(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
 }
 
-func (m *ListBlockStreamsResponse_Result) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+func (m *ListBlockStreamsResponse_Result_) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	if m.Result != nil {
 		size, err := m.Result.MarshalToSizedBufferVTStrict(dAtA[:i])
@@ -712,12 +712,12 @@ func (m *ListBlockStreamsResponse_Result) MarshalToSizedBufferVTStrict(dAtA []by
 	}
 	return len(dAtA) - i, nil
 }
-func (m *ListBlockStreamsResponse_Error) MarshalToVTStrict(dAtA []byte) (int, error) {
+func (m *ListBlockStreamsResponse_Error_) MarshalToVTStrict(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
 }
 
-func (m *ListBlockStreamsResponse_Error) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+func (m *ListBlockStreamsResponse_Error_) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	if m.Error != nil {
 		size, err := m.Error.MarshalToSizedBufferVTStrict(dAtA[:i])
@@ -747,24 +747,7 @@ func (m *ListBlockStreamsRequest) SizeVT() (n int) {
 	return n
 }
 
-func (m *ListBlockStreamsError) SizeVT() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.ErrorClass != 0 {
-		n += 1 + protohelpers.SizeOfVarint(uint64(m.ErrorClass))
-	}
-	l = len(m.Description)
-	if l > 0 {
-		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
-	}
-	n += len(m.unknownFields)
-	return n
-}
-
-func (m *ListBlockStreamsResult) SizeVT() (n int) {
+func (m *ListBlockStreamsResponse_Result) SizeVT() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -787,6 +770,23 @@ func (m *ListBlockStreamsResult) SizeVT() (n int) {
 	return n
 }
 
+func (m *ListBlockStreamsResponse_Error) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.ErrorClass != 0 {
+		n += 1 + protohelpers.SizeOfVarint(uint64(m.ErrorClass))
+	}
+	l = len(m.Description)
+	if l > 0 {
+		n += 1 + l + protohelpers.SizeOfVarint(uint64(l))
+	}
+	n += len(m.unknownFields)
+	return n
+}
+
 func (m *ListBlockStreamsResponse) SizeVT() (n int) {
 	if m == nil {
 		return 0
@@ -800,7 +800,7 @@ func (m *ListBlockStreamsResponse) SizeVT() (n int) {
 	return n
 }
 
-func (m *ListBlockStreamsResponse_Result) SizeVT() (n int) {
+func (m *ListBlockStreamsResponse_Result_) SizeVT() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -812,7 +812,7 @@ func (m *ListBlockStreamsResponse_Result) SizeVT() (n int) {
 	}
 	return n
 }
-func (m *ListBlockStreamsResponse_Error) SizeVT() (n int) {
+func (m *ListBlockStreamsResponse_Error_) SizeVT() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -907,7 +907,7 @@ func (m *ListBlockStreamsRequest) UnmarshalVT(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *ListBlockStreamsError) UnmarshalVT(dAtA []byte) error {
+func (m *ListBlockStreamsResponse_Result) UnmarshalVT(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -930,112 +930,10 @@ func (m *ListBlockStreamsError) UnmarshalVT(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: ListBlockStreamsError: wiretype end group for non-group")
+			return fmt.Errorf("proto: ListBlockStreamsResponse_Result: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: ListBlockStreamsError: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ErrorClass", wireType)
-			}
-			m.ErrorClass = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return protohelpers.ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.ErrorClass |= ListBlockStreamsErrorClass(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Description", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return protohelpers.ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return protohelpers.ErrInvalidLength
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return protohelpers.ErrInvalidLength
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Description = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return protohelpers.ErrInvalidLength
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *ListBlockStreamsResult) UnmarshalVT(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return protohelpers.ErrIntOverflow
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: ListBlockStreamsResult: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: ListBlockStreamsResult: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: ListBlockStreamsResponse_Result: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -1189,6 +1087,108 @@ func (m *ListBlockStreamsResult) UnmarshalVT(dAtA []byte) error {
 	}
 	return nil
 }
+func (m *ListBlockStreamsResponse_Error) UnmarshalVT(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return protohelpers.ErrIntOverflow
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: ListBlockStreamsResponse_Error: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: ListBlockStreamsResponse_Error: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ErrorClass", wireType)
+			}
+			m.ErrorClass = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.ErrorClass |= ListBlockStreamsResponse_Error_Kind(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Description", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Description = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
 func (m *ListBlockStreamsResponse) UnmarshalVT(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -1247,16 +1247,16 @@ func (m *ListBlockStreamsResponse) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if oneof, ok := m.Response.(*ListBlockStreamsResponse_Result); ok {
+			if oneof, ok := m.Response.(*ListBlockStreamsResponse_Result_); ok {
 				if err := oneof.Result.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
 			} else {
-				v := &ListBlockStreamsResult{}
+				v := &ListBlockStreamsResponse_Result{}
 				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
-				m.Response = &ListBlockStreamsResponse_Result{Result: v}
+				m.Response = &ListBlockStreamsResponse_Result_{Result: v}
 			}
 			iNdEx = postIndex
 		case 2:
@@ -1288,16 +1288,16 @@ func (m *ListBlockStreamsResponse) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if oneof, ok := m.Response.(*ListBlockStreamsResponse_Error); ok {
+			if oneof, ok := m.Response.(*ListBlockStreamsResponse_Error_); ok {
 				if err := oneof.Error.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
 			} else {
-				v := &ListBlockStreamsError{}
+				v := &ListBlockStreamsResponse_Error{}
 				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
-				m.Response = &ListBlockStreamsResponse_Error{Error: v}
+				m.Response = &ListBlockStreamsResponse_Error_{Error: v}
 			}
 			iNdEx = postIndex
 		default:
@@ -1409,7 +1409,7 @@ func (m *ListBlockStreamsRequest) UnmarshalVTUnsafe(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *ListBlockStreamsError) UnmarshalVTUnsafe(dAtA []byte) error {
+func (m *ListBlockStreamsResponse_Result) UnmarshalVTUnsafe(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1432,116 +1432,10 @@ func (m *ListBlockStreamsError) UnmarshalVTUnsafe(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: ListBlockStreamsError: wiretype end group for non-group")
+			return fmt.Errorf("proto: ListBlockStreamsResponse_Result: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: ListBlockStreamsError: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ErrorClass", wireType)
-			}
-			m.ErrorClass = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return protohelpers.ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.ErrorClass |= ListBlockStreamsErrorClass(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Description", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return protohelpers.ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return protohelpers.ErrInvalidLength
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return protohelpers.ErrInvalidLength
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			var stringValue string
-			if intStringLen > 0 {
-				stringValue = unsafe.String(&dAtA[iNdEx], intStringLen)
-			}
-			m.Description = stringValue
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return protohelpers.ErrInvalidLength
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *ListBlockStreamsResult) UnmarshalVTUnsafe(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return protohelpers.ErrIntOverflow
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: ListBlockStreamsResult: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: ListBlockStreamsResult: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: ListBlockStreamsResponse_Result: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -1699,6 +1593,112 @@ func (m *ListBlockStreamsResult) UnmarshalVTUnsafe(dAtA []byte) error {
 	}
 	return nil
 }
+func (m *ListBlockStreamsResponse_Error) UnmarshalVTUnsafe(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return protohelpers.ErrIntOverflow
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: ListBlockStreamsResponse_Error: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: ListBlockStreamsResponse_Error: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ErrorClass", wireType)
+			}
+			m.ErrorClass = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.ErrorClass |= ListBlockStreamsResponse_Error_Kind(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Description", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			var stringValue string
+			if intStringLen > 0 {
+				stringValue = unsafe.String(&dAtA[iNdEx], intStringLen)
+			}
+			m.Description = stringValue
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := protohelpers.Skip(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return protohelpers.ErrInvalidLength
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
 func (m *ListBlockStreamsResponse) UnmarshalVTUnsafe(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -1757,16 +1757,16 @@ func (m *ListBlockStreamsResponse) UnmarshalVTUnsafe(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if oneof, ok := m.Response.(*ListBlockStreamsResponse_Result); ok {
+			if oneof, ok := m.Response.(*ListBlockStreamsResponse_Result_); ok {
 				if err := oneof.Result.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
 			} else {
-				v := &ListBlockStreamsResult{}
+				v := &ListBlockStreamsResponse_Result{}
 				if err := v.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
-				m.Response = &ListBlockStreamsResponse_Result{Result: v}
+				m.Response = &ListBlockStreamsResponse_Result_{Result: v}
 			}
 			iNdEx = postIndex
 		case 2:
@@ -1798,16 +1798,16 @@ func (m *ListBlockStreamsResponse) UnmarshalVTUnsafe(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if oneof, ok := m.Response.(*ListBlockStreamsResponse_Error); ok {
+			if oneof, ok := m.Response.(*ListBlockStreamsResponse_Error_); ok {
 				if err := oneof.Error.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
 			} else {
-				v := &ListBlockStreamsError{}
+				v := &ListBlockStreamsResponse_Error{}
 				if err := v.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
-				m.Response = &ListBlockStreamsResponse_Error{Error: v}
+				m.Response = &ListBlockStreamsResponse_Error_{Error: v}
 			}
 			iNdEx = postIndex
 		default:
