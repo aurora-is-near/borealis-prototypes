@@ -21,10 +21,14 @@ message BlockMessage {
         // protobuf (block headers + block shards)
         PAYLOAD_NEAR_BLOCK_V3 = 2;
     }
+    enum Compression {
+        COMPRESSION_NONE = 0;
+        COMPRESSION_ZSTD = 1;
+    }
 
     ID id = 1;
     Format format = 2;
-    bool zstd_compressed = 3;
+    Compression compression = 3;
 
     oneof payload {
         bytes raw_payload = 4;
@@ -33,6 +37,6 @@ message BlockMessage {
 
 message BlockMessageDeliverySettings {
     bool exclude_payload = 1;
-    bool zstd_compression = 2;
+    repeated BlockMessage.Compression allow_compression = 2;
     optional BlockMessage.Format require_format = 3;
 }
