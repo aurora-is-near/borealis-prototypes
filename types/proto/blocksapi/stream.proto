@@ -20,7 +20,7 @@ message BlockStreamDeliverySettings {
     BlockMessageDeliverySettings content = 2;
 }
 
-message BlockStreamRequest {
+message GetBlockStreamRequest {
 
     // Defines initial stream seek behavior for given target message ID
     enum StartPolicy {
@@ -73,7 +73,7 @@ message BlockStreamRequest {
     optional BlockStreamDeliverySettings catchup_delivery_settings = 8;
 }
 
-message BlockStreamResponse {
+message GetBlockStreamResponse {
     message Result {
         BlockMessage message = 1;
         bool catchup_in_progress = 2;

@@ -37,6 +37,6 @@ message BlockMessage {
 
 message BlockMessageDeliverySettings {
     bool exclude_payload = 1;
-    repeated BlockMessage.Compression allow_compression = 2;
+    BlockMessage.Compression allow_compression = 2;
     optional BlockMessage.Format require_format = 3;
 }

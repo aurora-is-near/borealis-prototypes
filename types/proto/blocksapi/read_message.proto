@@ -4,13 +4,13 @@ import "blocksapi/message.proto";
 
 option go_package = "github.com/aurora-is-near/borealis-prototypes/go/blocksapi;blocksapi";
 
-message ReadMessageRequest {
+message ReadBlockMessageRequest {
     string stream_name = 1;
     BlockMessage.ID message_id = 2;
     BlockMessageDeliverySettings delivery_settings = 3;
 }
 
-message ReadMessageResponse {
+message ReadBlockMessageResponse {
     message Result {
         BlockMessage message = 1;
     }
