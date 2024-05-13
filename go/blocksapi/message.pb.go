@@ -263,9 +263,9 @@ type BlockMessageDeliverySettings struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ExcludePayload   bool                       `protobuf:"varint,1,opt,name=exclude_payload,json=excludePayload,proto3" json:"exclude_payload,omitempty"`
-	AllowCompression []BlockMessage_Compression `protobuf:"varint,2,rep,packed,name=allow_compression,json=allowCompression,proto3,enum=BlockMessage_Compression" json:"allow_compression,omitempty"`
-	RequireFormat    *BlockMessage_Format       `protobuf:"varint,3,opt,name=require_format,json=requireFormat,proto3,enum=BlockMessage_Format,oneof" json:"require_format,omitempty"`
+	ExcludePayload   bool                     `protobuf:"varint,1,opt,name=exclude_payload,json=excludePayload,proto3" json:"exclude_payload,omitempty"`
+	AllowCompression BlockMessage_Compression `protobuf:"varint,2,opt,name=allow_compression,json=allowCompression,proto3,enum=BlockMessage_Compression" json:"allow_compression,omitempty"`
+	RequireFormat    *BlockMessage_Format     `protobuf:"varint,3,opt,name=require_format,json=requireFormat,proto3,enum=BlockMessage_Format,oneof" json:"require_format,omitempty"`
 }
 
 func (x *BlockMessageDeliverySettings) Reset() {
@@ -307,11 +307,11 @@ func (x *BlockMessageDeliverySettings) GetExcludePayload() bool {
 	return false
 }
 
-func (x *BlockMessageDeliverySettings) GetAllowCompression() []BlockMessage_Compression {
+func (x *BlockMessageDeliverySettings) GetAllowCompression() BlockMessage_Compression {
 	if x != nil {
 		return x.AllowCompression
 	}
-	return nil
+	return BlockMessage_COMPRESSION_NONE
 }
 
 func (x *BlockMessageDeliverySettings) GetRequireFormat() BlockMessage_Format {
@@ -426,7 +426,7 @@ var file_blocksapi_message_proto_rawDesc = []byte{
 	0x5f, 0x70, 0x61, 0x79, 0x6c, 0x6f, 0x61, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x0e,
 	0x65, 0x78, 0x63, 0x6c, 0x75, 0x64, 0x65, 0x50, 0x61, 0x79, 0x6c, 0x6f, 0x61, 0x64, 0x12, 0x46,
 	0x0a, 0x11, 0x61, 0x6c, 0x6c, 0x6f, 0x77, 0x5f, 0x63, 0x6f, 0x6d, 0x70, 0x72, 0x65, 0x73, 0x73,
-	0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0e, 0x32, 0x19, 0x2e, 0x42, 0x6c, 0x6f, 0x63,
+	0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x19, 0x2e, 0x42, 0x6c, 0x6f, 0x63,
 	0x6b, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x2e, 0x43, 0x6f, 0x6d, 0x70, 0x72, 0x65, 0x73,
 	0x73, 0x69, 0x6f, 0x6e, 0x52, 0x10, 0x61, 0x6c, 0x6c, 0x6f, 0x77, 0x43, 0x6f, 0x6d, 0x70, 0x72,
 	0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x12, 0x40, 0x0a, 0x0e, 0x72, 0x65, 0x71, 0x75, 0x69, 0x72,

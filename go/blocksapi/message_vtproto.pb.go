@@ -79,11 +79,7 @@ func (m *BlockMessageDeliverySettings) CloneVT() *BlockMessageDeliverySettings {
 	}
 	r := new(BlockMessageDeliverySettings)
 	r.ExcludePayload = m.ExcludePayload
-	if rhs := m.AllowCompression; rhs != nil {
-		tmpContainer := make([]BlockMessage_Compression, len(rhs))
-		copy(tmpContainer, rhs)
-		r.AllowCompression = tmpContainer
-	}
+	r.AllowCompression = m.AllowCompression
 	if rhs := m.RequireFormat; rhs != nil {
 		tmpVal := *rhs
 		r.RequireFormat = &tmpVal
@@ -187,14 +183,8 @@ func (this *BlockMessageDeliverySettings) EqualVT(that *BlockMessageDeliverySett
 	if this.ExcludePayload != that.ExcludePayload {
 		return false
 	}
-	if len(this.AllowCompression) != len(that.AllowCompression) {
+	if this.AllowCompression != that.AllowCompression {
 		return false
-	}
-	for i, vx := range this.AllowCompression {
-		vy := that.AllowCompression[i]
-		if vx != vy {
-			return false
-		}
 	}
 	if p, q := this.RequireFormat, that.RequireFormat; (p == nil && q != nil) || (p != nil && (q == nil || *p != *q)) {
 		return false
@@ -368,26 +358,10 @@ func (m *BlockMessageDeliverySettings) MarshalToSizedBufferVT(dAtA []byte) (int,
 		i--
 		dAtA[i] = 0x18
 	}
-	if len(m.AllowCompression) > 0 {
-		var pksize2 int
-		for _, num := range m.AllowCompression {
-			pksize2 += protohelpers.SizeOfVarint(uint64(num))
-		}
-		i -= pksize2
-		j1 := i
-		for _, num1 := range m.AllowCompression {
-			num := uint64(num1)
-			for num >= 1<<7 {
-				dAtA[j1] = uint8(uint64(num)&0x7f | 0x80)
-				num >>= 7
-				j1++
-			}
-			dAtA[j1] = uint8(num)
-			j1++
-		}
-		i = protohelpers.EncodeVarint(dAtA, i, uint64(pksize2))
+	if m.AllowCompression != 0 {
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.AllowCompression))
 		i--
-		dAtA[i] = 0x12
+		dAtA[i] = 0x10
 	}
 	if m.ExcludePayload {
 		i--
@@ -559,26 +533,10 @@ func (m *BlockMessageDeliverySettings) MarshalToSizedBufferVTStrict(dAtA []byte)
 		i--
 		dAtA[i] = 0x18
 	}
-	if len(m.AllowCompression) > 0 {
-		var pksize2 int
-		for _, num := range m.AllowCompression {
-			pksize2 += protohelpers.SizeOfVarint(uint64(num))
-		}
-		i -= pksize2
-		j1 := i
-		for _, num1 := range m.AllowCompression {
-			num := uint64(num1)
-			for num >= 1<<7 {
-				dAtA[j1] = uint8(uint64(num)&0x7f | 0x80)
-				num >>= 7
-				j1++
-			}
-			dAtA[j1] = uint8(num)
-			j1++
-		}
-		i = protohelpers.EncodeVarint(dAtA, i, uint64(pksize2))
+	if m.AllowCompression != 0 {
+		i = protohelpers.EncodeVarint(dAtA, i, uint64(m.AllowCompression))
 		i--
-		dAtA[i] = 0x12
+		dAtA[i] = 0x10
 	}
 	if m.ExcludePayload {
 		i--
@@ -654,12 +612,8 @@ func (m *BlockMessageDeliverySettings) SizeVT() (n int) {
 	if m.ExcludePayload {
 		n += 2
 	}
-	if len(m.AllowCompression) > 0 {
-		l = 0
-		for _, e := range m.AllowCompression {
-			l += protohelpers.SizeOfVarint(uint64(e))
-		}
-		n += 1 + protohelpers.SizeOfVarint(uint64(l)) + l
+	if m.AllowCompression != 0 {
+		n += 1 + protohelpers.SizeOfVarint(uint64(m.AllowCompression))
 	}
 	if m.RequireFormat != nil {
 		n += 1 + protohelpers.SizeOfVarint(uint64(*m.RequireFormat))
@@ -984,73 +938,23 @@ func (m *BlockMessageDeliverySettings) UnmarshalVT(dAtA []byte) error {
 			}
 			m.ExcludePayload = bool(v != 0)
 		case 2:
-			if wireType == 0 {
-				var v BlockMessage_Compression
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return protohelpers.ErrIntOverflow
-					}
-					if iNdEx >= l {
-						return io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					v |= BlockMessage_Compression(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field AllowCompression", wireType)
+			}
+			m.AllowCompression = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
 				}
-				m.AllowCompression = append(m.AllowCompression, v)
-			} else if wireType == 2 {
-				var packedLen int
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return protohelpers.ErrIntOverflow
-					}
-					if iNdEx >= l {
-						return io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					packedLen |= int(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				if packedLen < 0 {
-					return protohelpers.ErrInvalidLength
-				}
-				postIndex := iNdEx + packedLen
-				if postIndex < 0 {
-					return protohelpers.ErrInvalidLength
-				}
-				if postIndex > l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				var elementCount int
-				if elementCount != 0 && len(m.AllowCompression) == 0 {
-					m.AllowCompression = make([]BlockMessage_Compression, 0, elementCount)
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.AllowCompression |= BlockMessage_Compression(b&0x7F) << shift
+				if b < 0x80 {
+					break
 				}
-				for iNdEx < postIndex {
-					var v BlockMessage_Compression
-					for shift := uint(0); ; shift += 7 {
-						if shift >= 64 {
-							return protohelpers.ErrIntOverflow
-						}
-						if iNdEx >= l {
-							return io.ErrUnexpectedEOF
-						}
-						b := dAtA[iNdEx]
-						iNdEx++
-						v |= BlockMessage_Compression(b&0x7F) << shift
-						if b < 0x80 {
-							break
-						}
-					}
-					m.AllowCompression = append(m.AllowCompression, v)
-				}
-			} else {
-				return fmt.Errorf("proto: wrong wireType = %d for field AllowCompression", wireType)
 			}
 		case 3:
 			if wireType != 0 {
@@ -1409,73 +1313,23 @@ func (m *BlockMessageDeliverySettings) UnmarshalVTUnsafe(dAtA []byte) error {
 			}
 			m.ExcludePayload = bool(v != 0)
 		case 2:
-			if wireType == 0 {
-				var v BlockMessage_Compression
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return protohelpers.ErrIntOverflow
-					}
-					if iNdEx >= l {
-						return io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					v |= BlockMessage_Compression(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field AllowCompression", wireType)
+			}
+			m.AllowCompression = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protohelpers.ErrIntOverflow
 				}
-				m.AllowCompression = append(m.AllowCompression, v)
-			} else if wireType == 2 {
-				var packedLen int
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return protohelpers.ErrIntOverflow
-					}
-					if iNdEx >= l {
-						return io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					packedLen |= int(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				if packedLen < 0 {
-					return protohelpers.ErrInvalidLength
-				}
-				postIndex := iNdEx + packedLen
-				if postIndex < 0 {
-					return protohelpers.ErrInvalidLength
-				}
-				if postIndex > l {
+				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
-				var elementCount int
-				if elementCount != 0 && len(m.AllowCompression) == 0 {
-					m.AllowCompression = make([]BlockMessage_Compression, 0, elementCount)
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.AllowCompression |= BlockMessage_Compression(b&0x7F) << shift
+				if b < 0x80 {
+					break
 				}
-				for iNdEx < postIndex {
-					var v BlockMessage_Compression
-					for shift := uint(0); ; shift += 7 {
-						if shift >= 64 {
-							return protohelpers.ErrIntOverflow
-						}
-						if iNdEx >= l {
-							return io.ErrUnexpectedEOF
-						}
-						b := dAtA[iNdEx]
-						iNdEx++
-						v |= BlockMessage_Compression(b&0x7F) << shift
-						if b < 0x80 {
-							break
-						}
-					}
-					m.AllowCompression = append(m.AllowCompression, v)
-				}
-			} else {
-				return fmt.Errorf("proto: wrong wireType = %d for field AllowCompression", wireType)
 			}
 		case 3:
 			if wireType != 0 {

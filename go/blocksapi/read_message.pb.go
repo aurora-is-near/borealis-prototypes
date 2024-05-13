@@ -20,28 +20,28 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type ReadMessageResponse_Error_Kind int32
+type ReadBlockMessageResponse_Error_Kind int32
 
 const (
 	// Default error kind
-	ReadMessageResponse_Error_UNKNOWN ReadMessageResponse_Error_Kind = 0
+	ReadBlockMessageResponse_Error_UNKNOWN ReadBlockMessageResponse_Error_Kind = 0
 	// Given message ID is lower than earliest available
-	ReadMessageResponse_Error_LOW_ID ReadMessageResponse_Error_Kind = 1
+	ReadBlockMessageResponse_Error_LOW_ID ReadBlockMessageResponse_Error_Kind = 1
 	// Given message ID is greater than latest available
-	ReadMessageResponse_Error_HIGH_ID ReadMessageResponse_Error_Kind = 2
+	ReadBlockMessageResponse_Error_HIGH_ID ReadBlockMessageResponse_Error_Kind = 2
 	// Message ID is within given range but not present
-	ReadMessageResponse_Error_NOT_FOUND ReadMessageResponse_Error_Kind = 3
+	ReadBlockMessageResponse_Error_NOT_FOUND ReadBlockMessageResponse_Error_Kind = 3
 )
 
-// Enum value maps for ReadMessageResponse_Error_Kind.
+// Enum value maps for ReadBlockMessageResponse_Error_Kind.
 var (
-	ReadMessageResponse_Error_Kind_name = map[int32]string{
+	ReadBlockMessageResponse_Error_Kind_name = map[int32]string{
 		0: "UNKNOWN",
 		1: "LOW_ID",
 		2: "HIGH_ID",
 		3: "NOT_FOUND",
 	}
-	ReadMessageResponse_Error_Kind_value = map[string]int32{
+	ReadBlockMessageResponse_Error_Kind_value = map[string]int32{
 		"UNKNOWN":   0,
 		"LOW_ID":    1,
 		"HIGH_ID":   2,
@@ -49,34 +49,34 @@ var (
 	}
 )
 
-func (x ReadMessageResponse_Error_Kind) Enum() *ReadMessageResponse_Error_Kind {
-	p := new(ReadMessageResponse_Error_Kind)
+func (x ReadBlockMessageResponse_Error_Kind) Enum() *ReadBlockMessageResponse_Error_Kind {
+	p := new(ReadBlockMessageResponse_Error_Kind)
 	*p = x
 	return p
 }
 
-func (x ReadMessageResponse_Error_Kind) String() string {
+func (x ReadBlockMessageResponse_Error_Kind) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (ReadMessageResponse_Error_Kind) Descriptor() protoreflect.EnumDescriptor {
+func (ReadBlockMessageResponse_Error_Kind) Descriptor() protoreflect.EnumDescriptor {
 	return file_blocksapi_read_message_proto_enumTypes[0].Descriptor()
 }
 
-func (ReadMessageResponse_Error_Kind) Type() protoreflect.EnumType {
+func (ReadBlockMessageResponse_Error_Kind) Type() protoreflect.EnumType {
 	return &file_blocksapi_read_message_proto_enumTypes[0]
 }
 
-func (x ReadMessageResponse_Error_Kind) Number() protoreflect.EnumNumber {
+func (x ReadBlockMessageResponse_Error_Kind) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use ReadMessageResponse_Error_Kind.Descriptor instead.
-func (ReadMessageResponse_Error_Kind) EnumDescriptor() ([]byte, []int) {
+// Deprecated: Use ReadBlockMessageResponse_Error_Kind.Descriptor instead.
+func (ReadBlockMessageResponse_Error_Kind) EnumDescriptor() ([]byte, []int) {
 	return file_blocksapi_read_message_proto_rawDescGZIP(), []int{1, 1, 0}
 }
 
-type ReadMessageRequest struct {
+type ReadBlockMessageRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -86,8 +86,8 @@ type ReadMessageRequest struct {
 	DeliverySettings *BlockMessageDeliverySettings `protobuf:"bytes,3,opt,name=delivery_settings,json=deliverySettings,proto3" json:"delivery_settings,omitempty"`
 }
 
-func (x *ReadMessageRequest) Reset() {
-	*x = ReadMessageRequest{}
+func (x *ReadBlockMessageRequest) Reset() {
+	*x = ReadBlockMessageRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_blocksapi_read_message_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -95,13 +95,13 @@ func (x *ReadMessageRequest) Reset() {
 	}
 }
 
-func (x *ReadMessageRequest) String() string {
+func (x *ReadBlockMessageRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ReadMessageRequest) ProtoMessage() {}
+func (*ReadBlockMessageRequest) ProtoMessage() {}
 
-func (x *ReadMessageRequest) ProtoReflect() protoreflect.Message {
+func (x *ReadBlockMessageRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_blocksapi_read_message_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -113,46 +113,46 @@ func (x *ReadMessageRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ReadMessageRequest.ProtoReflect.Descriptor instead.
-func (*ReadMessageRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use ReadBlockMessageRequest.ProtoReflect.Descriptor instead.
+func (*ReadBlockMessageRequest) Descriptor() ([]byte, []int) {
 	return file_blocksapi_read_message_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *ReadMessageRequest) GetStreamName() string {
+func (x *ReadBlockMessageRequest) GetStreamName() string {
 	if x != nil {
 		return x.StreamName
 	}
 	return ""
 }
 
-func (x *ReadMessageRequest) GetMessageId() *BlockMessage_ID {
+func (x *ReadBlockMessageRequest) GetMessageId() *BlockMessage_ID {
 	if x != nil {
 		return x.MessageId
 	}
 	return nil
 }
 
-func (x *ReadMessageRequest) GetDeliverySettings() *BlockMessageDeliverySettings {
+func (x *ReadBlockMessageRequest) GetDeliverySettings() *BlockMessageDeliverySettings {
 	if x != nil {
 		return x.DeliverySettings
 	}
 	return nil
 }
 
-type ReadMessageResponse struct {
+type ReadBlockMessageResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
 	// Types that are assignable to Response:
 	//
-	//	*ReadMessageResponse_Result_
-	//	*ReadMessageResponse_Error_
-	Response isReadMessageResponse_Response `protobuf_oneof:"response"`
+	//	*ReadBlockMessageResponse_Result_
+	//	*ReadBlockMessageResponse_Error_
+	Response isReadBlockMessageResponse_Response `protobuf_oneof:"response"`
 }
 
-func (x *ReadMessageResponse) Reset() {
-	*x = ReadMessageResponse{}
+func (x *ReadBlockMessageResponse) Reset() {
+	*x = ReadBlockMessageResponse{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_blocksapi_read_message_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -160,13 +160,13 @@ func (x *ReadMessageResponse) Reset() {
 	}
 }
 
-func (x *ReadMessageResponse) String() string {
+func (x *ReadBlockMessageResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ReadMessageResponse) ProtoMessage() {}
+func (*ReadBlockMessageResponse) ProtoMessage() {}
 
-func (x *ReadMessageResponse) ProtoReflect() protoreflect.Message {
+func (x *ReadBlockMessageResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_blocksapi_read_message_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -178,49 +178,49 @@ func (x *ReadMessageResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ReadMessageResponse.ProtoReflect.Descriptor instead.
-func (*ReadMessageResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use ReadBlockMessageResponse.ProtoReflect.Descriptor instead.
+func (*ReadBlockMessageResponse) Descriptor() ([]byte, []int) {
 	return file_blocksapi_read_message_proto_rawDescGZIP(), []int{1}
 }
 
-func (m *ReadMessageResponse) GetResponse() isReadMessageResponse_Response {
+func (m *ReadBlockMessageResponse) GetResponse() isReadBlockMessageResponse_Response {
 	if m != nil {
 		return m.Response
 	}
 	return nil
 }
 
-func (x *ReadMessageResponse) GetResult() *ReadMessageResponse_Result {
-	if x, ok := x.GetResponse().(*ReadMessageResponse_Result_); ok {
+func (x *ReadBlockMessageResponse) GetResult() *ReadBlockMessageResponse_Result {
+	if x, ok := x.GetResponse().(*ReadBlockMessageResponse_Result_); ok {
 		return x.Result
 	}
 	return nil
 }
 
-func (x *ReadMessageResponse) GetError() *ReadMessageResponse_Error {
-	if x, ok := x.GetResponse().(*ReadMessageResponse_Error_); ok {
+func (x *ReadBlockMessageResponse) GetError() *ReadBlockMessageResponse_Error {
+	if x, ok := x.GetResponse().(*ReadBlockMessageResponse_Error_); ok {
 		return x.Error
 	}
 	return nil
 }
 
-type isReadMessageResponse_Response interface {
-	isReadMessageResponse_Response()
+type isReadBlockMessageResponse_Response interface {
+	isReadBlockMessageResponse_Response()
 }
 
-type ReadMessageResponse_Result_ struct {
-	Result *ReadMessageResponse_Result `protobuf:"bytes,1,opt,name=result,proto3,oneof"`
+type ReadBlockMessageResponse_Result_ struct {
+	Result *ReadBlockMessageResponse_Result `protobuf:"bytes,1,opt,name=result,proto3,oneof"`
 }
 
-type ReadMessageResponse_Error_ struct {
-	Error *ReadMessageResponse_Error `protobuf:"bytes,2,opt,name=error,proto3,oneof"`
+type ReadBlockMessageResponse_Error_ struct {
+	Error *ReadBlockMessageResponse_Error `protobuf:"bytes,2,opt,name=error,proto3,oneof"`
 }
 
-func (*ReadMessageResponse_Result_) isReadMessageResponse_Response() {}
+func (*ReadBlockMessageResponse_Result_) isReadBlockMessageResponse_Response() {}
 
-func (*ReadMessageResponse_Error_) isReadMessageResponse_Response() {}
+func (*ReadBlockMessageResponse_Error_) isReadBlockMessageResponse_Response() {}
 
-type ReadMessageResponse_Result struct {
+type ReadBlockMessageResponse_Result struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -228,8 +228,8 @@ type ReadMessageResponse_Result struct {
 	Message *BlockMessage `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
 }
 
-func (x *ReadMessageResponse_Result) Reset() {
-	*x = ReadMessageResponse_Result{}
+func (x *ReadBlockMessageResponse_Result) Reset() {
+	*x = ReadBlockMessageResponse_Result{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_blocksapi_read_message_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -237,13 +237,13 @@ func (x *ReadMessageResponse_Result) Reset() {
 	}
 }
 
-func (x *ReadMessageResponse_Result) String() string {
+func (x *ReadBlockMessageResponse_Result) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ReadMessageResponse_Result) ProtoMessage() {}
+func (*ReadBlockMessageResponse_Result) ProtoMessage() {}
 
-func (x *ReadMessageResponse_Result) ProtoReflect() protoreflect.Message {
+func (x *ReadBlockMessageResponse_Result) ProtoReflect() protoreflect.Message {
 	mi := &file_blocksapi_read_message_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -255,29 +255,29 @@ func (x *ReadMessageResponse_Result) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ReadMessageResponse_Result.ProtoReflect.Descriptor instead.
-func (*ReadMessageResponse_Result) Descriptor() ([]byte, []int) {
+// Deprecated: Use ReadBlockMessageResponse_Result.ProtoReflect.Descriptor instead.
+func (*ReadBlockMessageResponse_Result) Descriptor() ([]byte, []int) {
 	return file_blocksapi_read_message_proto_rawDescGZIP(), []int{1, 0}
 }
 
-func (x *ReadMessageResponse_Result) GetMessage() *BlockMessage {
+func (x *ReadBlockMessageResponse_Result) GetMessage() *BlockMessage {
 	if x != nil {
 		return x.Message
 	}
 	return nil
 }
 
-type ReadMessageResponse_Error struct {
+type ReadBlockMessageResponse_Error struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Kind        ReadMessageResponse_Error_Kind `protobuf:"varint,1,opt,name=kind,proto3,enum=ReadMessageResponse_Error_Kind" json:"kind,omitempty"`
-	Description string                         `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
+	Kind        ReadBlockMessageResponse_Error_Kind `protobuf:"varint,1,opt,name=kind,proto3,enum=ReadBlockMessageResponse_Error_Kind" json:"kind,omitempty"`
+	Description string                              `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
 }
 
-func (x *ReadMessageResponse_Error) Reset() {
-	*x = ReadMessageResponse_Error{}
+func (x *ReadBlockMessageResponse_Error) Reset() {
+	*x = ReadBlockMessageResponse_Error{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_blocksapi_read_message_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -285,13 +285,13 @@ func (x *ReadMessageResponse_Error) Reset() {
 	}
 }
 
-func (x *ReadMessageResponse_Error) String() string {
+func (x *ReadBlockMessageResponse_Error) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ReadMessageResponse_Error) ProtoMessage() {}
+func (*ReadBlockMessageResponse_Error) ProtoMessage() {}
 
-func (x *ReadMessageResponse_Error) ProtoReflect() protoreflect.Message {
+func (x *ReadBlockMessageResponse_Error) ProtoReflect() protoreflect.Message {
 	mi := &file_blocksapi_read_message_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -303,19 +303,19 @@ func (x *ReadMessageResponse_Error) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ReadMessageResponse_Error.ProtoReflect.Descriptor instead.
-func (*ReadMessageResponse_Error) Descriptor() ([]byte, []int) {
+// Deprecated: Use ReadBlockMessageResponse_Error.ProtoReflect.Descriptor instead.
+func (*ReadBlockMessageResponse_Error) Descriptor() ([]byte, []int) {
 	return file_blocksapi_read_message_proto_rawDescGZIP(), []int{1, 1}
 }
 
-func (x *ReadMessageResponse_Error) GetKind() ReadMessageResponse_Error_Kind {
+func (x *ReadBlockMessageResponse_Error) GetKind() ReadBlockMessageResponse_Error_Kind {
 	if x != nil {
 		return x.Kind
 	}
-	return ReadMessageResponse_Error_UNKNOWN
+	return ReadBlockMessageResponse_Error_UNKNOWN
 }
 
-func (x *ReadMessageResponse_Error) GetDescription() string {
+func (x *ReadBlockMessageResponse_Error) GetDescription() string {
 	if x != nil {
 		return x.Description
 	}
@@ -328,45 +328,47 @@ var file_blocksapi_read_message_proto_rawDesc = []byte{
 	0x0a, 0x1c, 0x62, 0x6c, 0x6f, 0x63, 0x6b, 0x73, 0x61, 0x70, 0x69, 0x2f, 0x72, 0x65, 0x61, 0x64,
 	0x5f, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x17,
 	0x62, 0x6c, 0x6f, 0x63, 0x6b, 0x73, 0x61, 0x70, 0x69, 0x2f, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67,
-	0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xb2, 0x01, 0x0a, 0x12, 0x52, 0x65, 0x61, 0x64,
-	0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1f,
-	0x0a, 0x0b, 0x73, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x0a, 0x73, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x4e, 0x61, 0x6d, 0x65, 0x12,
-	0x2f, 0x0a, 0x0a, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20,
-	0x01, 0x28, 0x0b, 0x32, 0x10, 0x2e, 0x42, 0x6c, 0x6f, 0x63, 0x6b, 0x4d, 0x65, 0x73, 0x73, 0x61,
-	0x67, 0x65, 0x2e, 0x49, 0x44, 0x52, 0x09, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x49, 0x64,
-	0x12, 0x4a, 0x0a, 0x11, 0x64, 0x65, 0x6c, 0x69, 0x76, 0x65, 0x72, 0x79, 0x5f, 0x73, 0x65, 0x74,
-	0x74, 0x69, 0x6e, 0x67, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1d, 0x2e, 0x42, 0x6c,
-	0x6f, 0x63, 0x6b, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x44, 0x65, 0x6c, 0x69, 0x76, 0x65,
-	0x72, 0x79, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x52, 0x10, 0x64, 0x65, 0x6c, 0x69,
-	0x76, 0x65, 0x72, 0x79, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x22, 0xdd, 0x02, 0x0a,
-	0x13, 0x52, 0x65, 0x61, 0x64, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x52, 0x65, 0x73, 0x70,
-	0x6f, 0x6e, 0x73, 0x65, 0x12, 0x35, 0x0a, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x0b, 0x32, 0x1b, 0x2e, 0x52, 0x65, 0x61, 0x64, 0x4d, 0x65, 0x73, 0x73, 0x61,
-	0x67, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x52, 0x65, 0x73, 0x75, 0x6c,
-	0x74, 0x48, 0x00, 0x52, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x32, 0x0a, 0x05, 0x65,
-	0x72, 0x72, 0x6f, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x52, 0x65, 0x61,
-	0x64, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
-	0x2e, 0x45, 0x72, 0x72, 0x6f, 0x72, 0x48, 0x00, 0x52, 0x05, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x1a,
-	0x31, 0x0a, 0x06, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x27, 0x0a, 0x07, 0x6d, 0x65, 0x73,
-	0x73, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0d, 0x2e, 0x42, 0x6c, 0x6f,
-	0x63, 0x6b, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61,
-	0x67, 0x65, 0x1a, 0x9b, 0x01, 0x0a, 0x05, 0x45, 0x72, 0x72, 0x6f, 0x72, 0x12, 0x33, 0x0a, 0x04,
-	0x6b, 0x69, 0x6e, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x1f, 0x2e, 0x52, 0x65, 0x61,
-	0x64, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
-	0x2e, 0x45, 0x72, 0x72, 0x6f, 0x72, 0x2e, 0x4b, 0x69, 0x6e, 0x64, 0x52, 0x04, 0x6b, 0x69, 0x6e,
-	0x64, 0x12, 0x20, 0x0a, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e,
-	0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74,
-	0x69, 0x6f, 0x6e, 0x22, 0x3b, 0x0a, 0x04, 0x4b, 0x69, 0x6e, 0x64, 0x12, 0x0b, 0x0a, 0x07, 0x55,
-	0x4e, 0x4b, 0x4e, 0x4f, 0x57, 0x4e, 0x10, 0x00, 0x12, 0x0a, 0x0a, 0x06, 0x4c, 0x4f, 0x57, 0x5f,
-	0x49, 0x44, 0x10, 0x01, 0x12, 0x0b, 0x0a, 0x07, 0x48, 0x49, 0x47, 0x48, 0x5f, 0x49, 0x44, 0x10,
-	0x02, 0x12, 0x0d, 0x0a, 0x09, 0x4e, 0x4f, 0x54, 0x5f, 0x46, 0x4f, 0x55, 0x4e, 0x44, 0x10, 0x03,
-	0x42, 0x0a, 0x0a, 0x08, 0x72, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x46, 0x5a, 0x44,
-	0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x61, 0x75, 0x72, 0x6f, 0x72,
-	0x61, 0x2d, 0x69, 0x73, 0x2d, 0x6e, 0x65, 0x61, 0x72, 0x2f, 0x62, 0x6f, 0x72, 0x65, 0x61, 0x6c,
-	0x69, 0x73, 0x2d, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x74, 0x79, 0x70, 0x65, 0x73, 0x2f, 0x67, 0x6f,
-	0x2f, 0x62, 0x6c, 0x6f, 0x63, 0x6b, 0x73, 0x61, 0x70, 0x69, 0x3b, 0x62, 0x6c, 0x6f, 0x63, 0x6b,
-	0x73, 0x61, 0x70, 0x69, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xb7, 0x01, 0x0a, 0x17, 0x52, 0x65, 0x61, 0x64,
+	0x42, 0x6c, 0x6f, 0x63, 0x6b, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x12, 0x1f, 0x0a, 0x0b, 0x73, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x5f, 0x6e, 0x61,
+	0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x73, 0x74, 0x72, 0x65, 0x61, 0x6d,
+	0x4e, 0x61, 0x6d, 0x65, 0x12, 0x2f, 0x0a, 0x0a, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x5f,
+	0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x10, 0x2e, 0x42, 0x6c, 0x6f, 0x63, 0x6b,
+	0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x2e, 0x49, 0x44, 0x52, 0x09, 0x6d, 0x65, 0x73, 0x73,
+	0x61, 0x67, 0x65, 0x49, 0x64, 0x12, 0x4a, 0x0a, 0x11, 0x64, 0x65, 0x6c, 0x69, 0x76, 0x65, 0x72,
+	0x79, 0x5f, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x1d, 0x2e, 0x42, 0x6c, 0x6f, 0x63, 0x6b, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x44,
+	0x65, 0x6c, 0x69, 0x76, 0x65, 0x72, 0x79, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x52,
+	0x10, 0x64, 0x65, 0x6c, 0x69, 0x76, 0x65, 0x72, 0x79, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67,
+	0x73, 0x22, 0xf1, 0x02, 0x0a, 0x18, 0x52, 0x65, 0x61, 0x64, 0x42, 0x6c, 0x6f, 0x63, 0x6b, 0x4d,
+	0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x3a,
+	0x0a, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x20,
+	0x2e, 0x52, 0x65, 0x61, 0x64, 0x42, 0x6c, 0x6f, 0x63, 0x6b, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67,
+	0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74,
+	0x48, 0x00, 0x52, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x37, 0x0a, 0x05, 0x65, 0x72,
+	0x72, 0x6f, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1f, 0x2e, 0x52, 0x65, 0x61, 0x64,
+	0x42, 0x6c, 0x6f, 0x63, 0x6b, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x45, 0x72, 0x72, 0x6f, 0x72, 0x48, 0x00, 0x52, 0x05, 0x65, 0x72,
+	0x72, 0x6f, 0x72, 0x1a, 0x31, 0x0a, 0x06, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x27, 0x0a,
+	0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0d,
+	0x2e, 0x42, 0x6c, 0x6f, 0x63, 0x6b, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x52, 0x07, 0x6d,
+	0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x1a, 0xa0, 0x01, 0x0a, 0x05, 0x45, 0x72, 0x72, 0x6f, 0x72,
+	0x12, 0x38, 0x0a, 0x04, 0x6b, 0x69, 0x6e, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x24,
+	0x2e, 0x52, 0x65, 0x61, 0x64, 0x42, 0x6c, 0x6f, 0x63, 0x6b, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67,
+	0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x45, 0x72, 0x72, 0x6f, 0x72, 0x2e,
+	0x4b, 0x69, 0x6e, 0x64, 0x52, 0x04, 0x6b, 0x69, 0x6e, 0x64, 0x12, 0x20, 0x0a, 0x0b, 0x64, 0x65,
+	0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x3b, 0x0a, 0x04,
+	0x4b, 0x69, 0x6e, 0x64, 0x12, 0x0b, 0x0a, 0x07, 0x55, 0x4e, 0x4b, 0x4e, 0x4f, 0x57, 0x4e, 0x10,
+	0x00, 0x12, 0x0a, 0x0a, 0x06, 0x4c, 0x4f, 0x57, 0x5f, 0x49, 0x44, 0x10, 0x01, 0x12, 0x0b, 0x0a,
+	0x07, 0x48, 0x49, 0x47, 0x48, 0x5f, 0x49, 0x44, 0x10, 0x02, 0x12, 0x0d, 0x0a, 0x09, 0x4e, 0x4f,
+	0x54, 0x5f, 0x46, 0x4f, 0x55, 0x4e, 0x44, 0x10, 0x03, 0x42, 0x0a, 0x0a, 0x08, 0x72, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x46, 0x5a, 0x44, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e,
+	0x63, 0x6f, 0x6d, 0x2f, 0x61, 0x75, 0x72, 0x6f, 0x72, 0x61, 0x2d, 0x69, 0x73, 0x2d, 0x6e, 0x65,
+	0x61, 0x72, 0x2f, 0x62, 0x6f, 0x72, 0x65, 0x61, 0x6c, 0x69, 0x73, 0x2d, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x74, 0x79, 0x70, 0x65, 0x73, 0x2f, 0x67, 0x6f, 0x2f, 0x62, 0x6c, 0x6f, 0x63, 0x6b, 0x73,
+	0x61, 0x70, 0x69, 0x3b, 0x62, 0x6c, 0x6f, 0x63, 0x6b, 0x73, 0x61, 0x70, 0x69, 0x62, 0x06, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -384,22 +386,22 @@ func file_blocksapi_read_message_proto_rawDescGZIP() []byte {
 var file_blocksapi_read_message_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_blocksapi_read_message_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_blocksapi_read_message_proto_goTypes = []interface{}{
-	(ReadMessageResponse_Error_Kind)(0),  // 0: ReadMessageResponse.Error.Kind
-	(*ReadMessageRequest)(nil),           // 1: ReadMessageRequest
-	(*ReadMessageResponse)(nil),          // 2: ReadMessageResponse
-	(*ReadMessageResponse_Result)(nil),   // 3: ReadMessageResponse.Result
-	(*ReadMessageResponse_Error)(nil),    // 4: ReadMessageResponse.Error
-	(*BlockMessage_ID)(nil),              // 5: BlockMessage.ID
-	(*BlockMessageDeliverySettings)(nil), // 6: BlockMessageDeliverySettings
-	(*BlockMessage)(nil),                 // 7: BlockMessage
+	(ReadBlockMessageResponse_Error_Kind)(0), // 0: ReadBlockMessageResponse.Error.Kind
+	(*ReadBlockMessageRequest)(nil),          // 1: ReadBlockMessageRequest
+	(*ReadBlockMessageResponse)(nil),         // 2: ReadBlockMessageResponse
+	(*ReadBlockMessageResponse_Result)(nil),  // 3: ReadBlockMessageResponse.Result
+	(*ReadBlockMessageResponse_Error)(nil),   // 4: ReadBlockMessageResponse.Error
+	(*BlockMessage_ID)(nil),                  // 5: BlockMessage.ID
+	(*BlockMessageDeliverySettings)(nil),     // 6: BlockMessageDeliverySettings
+	(*BlockMessage)(nil),                     // 7: BlockMessage
 }
 var file_blocksapi_read_message_proto_depIdxs = []int32{
-	5, // 0: ReadMessageRequest.message_id:type_name -> BlockMessage.ID
-	6, // 1: ReadMessageRequest.delivery_settings:type_name -> BlockMessageDeliverySettings
-	3, // 2: ReadMessageResponse.result:type_name -> ReadMessageResponse.Result
-	4, // 3: ReadMessageResponse.error:type_name -> ReadMessageResponse.Error
-	7, // 4: ReadMessageResponse.Result.message:type_name -> BlockMessage
-	0, // 5: ReadMessageResponse.Error.kind:type_name -> ReadMessageResponse.Error.Kind
+	5, // 0: ReadBlockMessageRequest.message_id:type_name -> BlockMessage.ID
+	6, // 1: ReadBlockMessageRequest.delivery_settings:type_name -> BlockMessageDeliverySettings
+	3, // 2: ReadBlockMessageResponse.result:type_name -> ReadBlockMessageResponse.Result
+	4, // 3: ReadBlockMessageResponse.error:type_name -> ReadBlockMessageResponse.Error
+	7, // 4: ReadBlockMessageResponse.Result.message:type_name -> BlockMessage
+	0, // 5: ReadBlockMessageResponse.Error.kind:type_name -> ReadBlockMessageResponse.Error.Kind
 	6, // [6:6] is the sub-list for method output_type
 	6, // [6:6] is the sub-list for method input_type
 	6, // [6:6] is the sub-list for extension type_name
@@ -415,7 +417,7 @@ func file_blocksapi_read_message_proto_init() {
 	file_blocksapi_message_proto_init()
 	if !protoimpl.UnsafeEnabled {
 		file_blocksapi_read_message_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ReadMessageRequest); i {
+			switch v := v.(*ReadBlockMessageRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -427,7 +429,7 @@ func file_blocksapi_read_message_proto_init() {
 			}
 		}
 		file_blocksapi_read_message_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ReadMessageResponse); i {
+			switch v := v.(*ReadBlockMessageResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -439,7 +441,7 @@ func file_blocksapi_read_message_proto_init() {
 			}
 		}
 		file_blocksapi_read_message_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ReadMessageResponse_Result); i {
+			switch v := v.(*ReadBlockMessageResponse_Result); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -451,7 +453,7 @@ func file_blocksapi_read_message_proto_init() {
 			}
 		}
 		file_blocksapi_read_message_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ReadMessageResponse_Error); i {
+			switch v := v.(*ReadBlockMessageResponse_Error); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -464,8 +466,8 @@ func file_blocksapi_read_message_proto_init() {
 		}
 	}
 	file_blocksapi_read_message_proto_msgTypes[1].OneofWrappers = []interface{}{
-		(*ReadMessageResponse_Result_)(nil),
-		(*ReadMessageResponse_Error_)(nil),
+		(*ReadBlockMessageResponse_Result_)(nil),
+		(*ReadBlockMessageResponse_Error_)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
