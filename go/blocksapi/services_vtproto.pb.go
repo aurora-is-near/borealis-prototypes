@@ -31,9 +31,9 @@ type BlocksProviderClient interface {
 	// Returns information about available block streams
 	ListBlockStreams(ctx context.Context, in *ListBlockStreamsRequest, opts ...grpc.CallOption) (*ListBlockStreamsResponse, error)
 	// Reads individual message
-	ReadBlockMessage(ctx context.Context, in *ReadBlockMessageRequest, opts ...grpc.CallOption) (*ReadBlockMessageResponse, error)
+	GetBlockMessage(ctx context.Context, in *GetBlockMessageRequest, opts ...grpc.CallOption) (*GetBlockMessageResponse, error)
 	// Streams blocks continiously
-	GetBlockStream(ctx context.Context, in *GetBlockStreamRequest, opts ...grpc.CallOption) (BlocksProvider_GetBlockStreamClient, error)
+	ReceiveBlocks(ctx context.Context, in *ReceiveBlocksRequest, opts ...grpc.CallOption) (BlocksProvider_ReceiveBlocksClient, error)
 }
 
 type blocksProviderClient struct {
@@ -53,21 +53,21 @@ func (c *blocksProviderClient) ListBlockStreams(ctx context.Context, in *ListBlo
 	return out, nil
 }
 
-func (c *blocksProviderClient) ReadBlockMessage(ctx context.Context, in *ReadBlockMessageRequest, opts ...grpc.CallOption) (*ReadBlockMessageResponse, error) {
-	out := new(ReadBlockMessageResponse)
-	err := c.cc.Invoke(ctx, "/BlocksProvider/ReadBlockMessage", in, out, opts...)
+func (c *blocksProviderClient) GetBlockMessage(ctx context.Context, in *GetBlockMessageRequest, opts ...grpc.CallOption) (*GetBlockMessageResponse, error) {
+	out := new(GetBlockMessageResponse)
+	err := c.cc.Invoke(ctx, "/BlocksProvider/GetBlockMessage", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *blocksProviderClient) GetBlockStream(ctx context.Context, in *GetBlockStreamRequest, opts ...grpc.CallOption) (BlocksProvider_GetBlockStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &BlocksProvider_ServiceDesc.Streams[0], "/BlocksProvider/GetBlockStream", opts...)
+func (c *blocksProviderClient) ReceiveBlocks(ctx context.Context, in *ReceiveBlocksRequest, opts ...grpc.CallOption) (BlocksProvider_ReceiveBlocksClient, error) {
+	stream, err := c.cc.NewStream(ctx, &BlocksProvider_ServiceDesc.Streams[0], "/BlocksProvider/ReceiveBlocks", opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &blocksProviderGetBlockStreamClient{stream}
+	x := &blocksProviderReceiveBlocksClient{stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -77,17 +77,17 @@ func (c *blocksProviderClient) GetBlockStream(ctx context.Context, in *GetBlockS
 	return x, nil
 }
 
-type BlocksProvider_GetBlockStreamClient interface {
-	Recv() (*GetBlockStreamResponse, error)
+type BlocksProvider_ReceiveBlocksClient interface {
+	Recv() (*ReceiveBlocksResponse, error)
 	grpc.ClientStream
 }
 
-type blocksProviderGetBlockStreamClient struct {
+type blocksProviderReceiveBlocksClient struct {
 	grpc.ClientStream
 }
 
-func (x *blocksProviderGetBlockStreamClient) Recv() (*GetBlockStreamResponse, error) {
-	m := new(GetBlockStreamResponse)
+func (x *blocksProviderReceiveBlocksClient) Recv() (*ReceiveBlocksResponse, error) {
+	m := new(ReceiveBlocksResponse)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -101,9 +101,9 @@ type BlocksProviderServer interface {
 	// Returns information about available block streams
 	ListBlockStreams(context.Context, *ListBlockStreamsRequest) (*ListBlockStreamsResponse, error)
 	// Reads individual message
-	ReadBlockMessage(context.Context, *ReadBlockMessageRequest) (*ReadBlockMessageResponse, error)
+	GetBlockMessage(context.Context, *GetBlockMessageRequest) (*GetBlockMessageResponse, error)
 	// Streams blocks continiously
-	GetBlockStream(*GetBlockStreamRequest, BlocksProvider_GetBlockStreamServer) error
+	ReceiveBlocks(*ReceiveBlocksRequest, BlocksProvider_ReceiveBlocksServer) error
 	mustEmbedUnimplementedBlocksProviderServer()
 }
 
@@ -114,11 +114,11 @@ type UnimplementedBlocksProviderServer struct {
 func (UnimplementedBlocksProviderServer) ListBlockStreams(context.Context, *ListBlockStreamsRequest) (*ListBlockStreamsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListBlockStreams not implemented")
 }
-func (UnimplementedBlocksProviderServer) ReadBlockMessage(context.Context, *ReadBlockMessageRequest) (*ReadBlockMessageResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ReadBlockMessage not implemented")
+func (UnimplementedBlocksProviderServer) GetBlockMessage(context.Context, *GetBlockMessageRequest) (*GetBlockMessageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetBlockMessage not implemented")
 }
-func (UnimplementedBlocksProviderServer) GetBlockStream(*GetBlockStreamRequest, BlocksProvider_GetBlockStreamServer) error {
-	return status.Errorf(codes.Unimplemented, "method GetBlockStream not implemented")
+func (UnimplementedBlocksProviderServer) ReceiveBlocks(*ReceiveBlocksRequest, BlocksProvider_ReceiveBlocksServer) error {
+	return status.Errorf(codes.Unimplemented, "method ReceiveBlocks not implemented")
 }
 func (UnimplementedBlocksProviderServer) mustEmbedUnimplementedBlocksProviderServer() {}
 
@@ -151,42 +151,42 @@ func _BlocksProvider_ListBlockStreams_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BlocksProvider_ReadBlockMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ReadBlockMessageRequest)
+func _BlocksProvider_GetBlockMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBlockMessageRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BlocksProviderServer).ReadBlockMessage(ctx, in)
+		return srv.(BlocksProviderServer).GetBlockMessage(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/BlocksProvider/ReadBlockMessage",
+		FullMethod: "/BlocksProvider/GetBlockMessage",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BlocksProviderServer).ReadBlockMessage(ctx, req.(*ReadBlockMessageRequest))
+		return srv.(BlocksProviderServer).GetBlockMessage(ctx, req.(*GetBlockMessageRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BlocksProvider_GetBlockStream_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(GetBlockStreamRequest)
+func _BlocksProvider_ReceiveBlocks_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ReceiveBlocksRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(BlocksProviderServer).GetBlockStream(m, &blocksProviderGetBlockStreamServer{stream})
+	return srv.(BlocksProviderServer).ReceiveBlocks(m, &blocksProviderReceiveBlocksServer{stream})
 }
 
-type BlocksProvider_GetBlockStreamServer interface {
-	Send(*GetBlockStreamResponse) error
+type BlocksProvider_ReceiveBlocksServer interface {
+	Send(*ReceiveBlocksResponse) error
 	grpc.ServerStream
 }
 
-type blocksProviderGetBlockStreamServer struct {
+type blocksProviderReceiveBlocksServer struct {
 	grpc.ServerStream
 }
 
-func (x *blocksProviderGetBlockStreamServer) Send(m *GetBlockStreamResponse) error {
+func (x *blocksProviderReceiveBlocksServer) Send(m *ReceiveBlocksResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
@@ -202,14 +202,14 @@ var BlocksProvider_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _BlocksProvider_ListBlockStreams_Handler,
 		},
 		{
-			MethodName: "ReadBlockMessage",
-			Handler:    _BlocksProvider_ReadBlockMessage_Handler,
+			MethodName: "GetBlockMessage",
+			Handler:    _BlocksProvider_GetBlockMessage_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
 		{
-			StreamName:    "GetBlockStream",
-			Handler:       _BlocksProvider_GetBlockStream_Handler,
+			StreamName:    "ReceiveBlocks",
+			Handler:       _BlocksProvider_ReceiveBlocks_Handler,
 			ServerStreams: true,
 		},
 	},

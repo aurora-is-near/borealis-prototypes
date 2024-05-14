@@ -60,11 +60,11 @@ func (m *BlockStreamDeliverySettings) CloneMessageVT() proto.Message {
 	return m.CloneVT()
 }
 
-func (m *GetBlockStreamRequest) CloneVT() *GetBlockStreamRequest {
+func (m *ReceiveBlocksRequest) CloneVT() *ReceiveBlocksRequest {
 	if m == nil {
-		return (*GetBlockStreamRequest)(nil)
+		return (*ReceiveBlocksRequest)(nil)
 	}
-	r := new(GetBlockStreamRequest)
+	r := new(ReceiveBlocksRequest)
 	r.StreamName = m.StreamName
 	r.StartPolicy = m.StartPolicy
 	r.StartTarget = m.StartTarget.CloneVT()
@@ -80,15 +80,15 @@ func (m *GetBlockStreamRequest) CloneVT() *GetBlockStreamRequest {
 	return r
 }
 
-func (m *GetBlockStreamRequest) CloneMessageVT() proto.Message {
+func (m *ReceiveBlocksRequest) CloneMessageVT() proto.Message {
 	return m.CloneVT()
 }
 
-func (m *GetBlockStreamResponse_Result) CloneVT() *GetBlockStreamResponse_Result {
+func (m *ReceiveBlocksResponse_Result) CloneVT() *ReceiveBlocksResponse_Result {
 	if m == nil {
-		return (*GetBlockStreamResponse_Result)(nil)
+		return (*ReceiveBlocksResponse_Result)(nil)
 	}
-	r := new(GetBlockStreamResponse_Result)
+	r := new(ReceiveBlocksResponse_Result)
 	r.Message = m.Message.CloneVT()
 	r.CatchupInProgress = m.CatchupInProgress
 	if len(m.unknownFields) > 0 {
@@ -98,15 +98,15 @@ func (m *GetBlockStreamResponse_Result) CloneVT() *GetBlockStreamResponse_Result
 	return r
 }
 
-func (m *GetBlockStreamResponse_Result) CloneMessageVT() proto.Message {
+func (m *ReceiveBlocksResponse_Result) CloneMessageVT() proto.Message {
 	return m.CloneVT()
 }
 
-func (m *GetBlockStreamResponse_Done) CloneVT() *GetBlockStreamResponse_Done {
+func (m *ReceiveBlocksResponse_Done) CloneVT() *ReceiveBlocksResponse_Done {
 	if m == nil {
-		return (*GetBlockStreamResponse_Done)(nil)
+		return (*ReceiveBlocksResponse_Done)(nil)
 	}
-	r := new(GetBlockStreamResponse_Done)
+	r := new(ReceiveBlocksResponse_Done)
 	r.Description = m.Description
 	if len(m.unknownFields) > 0 {
 		r.unknownFields = make([]byte, len(m.unknownFields))
@@ -115,15 +115,15 @@ func (m *GetBlockStreamResponse_Done) CloneVT() *GetBlockStreamResponse_Done {
 	return r
 }
 
-func (m *GetBlockStreamResponse_Done) CloneMessageVT() proto.Message {
+func (m *ReceiveBlocksResponse_Done) CloneMessageVT() proto.Message {
 	return m.CloneVT()
 }
 
-func (m *GetBlockStreamResponse_Error) CloneVT() *GetBlockStreamResponse_Error {
+func (m *ReceiveBlocksResponse_Error) CloneVT() *ReceiveBlocksResponse_Error {
 	if m == nil {
-		return (*GetBlockStreamResponse_Error)(nil)
+		return (*ReceiveBlocksResponse_Error)(nil)
 	}
-	r := new(GetBlockStreamResponse_Error)
+	r := new(ReceiveBlocksResponse_Error)
 	r.Kind = m.Kind
 	r.Description = m.Description
 	if len(m.unknownFields) > 0 {
@@ -133,18 +133,18 @@ func (m *GetBlockStreamResponse_Error) CloneVT() *GetBlockStreamResponse_Error {
 	return r
 }
 
-func (m *GetBlockStreamResponse_Error) CloneMessageVT() proto.Message {
+func (m *ReceiveBlocksResponse_Error) CloneMessageVT() proto.Message {
 	return m.CloneVT()
 }
 
-func (m *GetBlockStreamResponse) CloneVT() *GetBlockStreamResponse {
+func (m *ReceiveBlocksResponse) CloneVT() *ReceiveBlocksResponse {
 	if m == nil {
-		return (*GetBlockStreamResponse)(nil)
+		return (*ReceiveBlocksResponse)(nil)
 	}
-	r := new(GetBlockStreamResponse)
+	r := new(ReceiveBlocksResponse)
 	if m.Response != nil {
 		r.Response = m.Response.(interface {
-			CloneVT() isGetBlockStreamResponse_Response
+			CloneVT() isReceiveBlocksResponse_Response
 		}).CloneVT()
 	}
 	if len(m.unknownFields) > 0 {
@@ -154,33 +154,33 @@ func (m *GetBlockStreamResponse) CloneVT() *GetBlockStreamResponse {
 	return r
 }
 
-func (m *GetBlockStreamResponse) CloneMessageVT() proto.Message {
+func (m *ReceiveBlocksResponse) CloneMessageVT() proto.Message {
 	return m.CloneVT()
 }
 
-func (m *GetBlockStreamResponse_Message) CloneVT() isGetBlockStreamResponse_Response {
+func (m *ReceiveBlocksResponse_Message) CloneVT() isReceiveBlocksResponse_Response {
 	if m == nil {
-		return (*GetBlockStreamResponse_Message)(nil)
+		return (*ReceiveBlocksResponse_Message)(nil)
 	}
-	r := new(GetBlockStreamResponse_Message)
+	r := new(ReceiveBlocksResponse_Message)
 	r.Message = m.Message.CloneVT()
 	return r
 }
 
-func (m *GetBlockStreamResponse_Done_) CloneVT() isGetBlockStreamResponse_Response {
+func (m *ReceiveBlocksResponse_Done_) CloneVT() isReceiveBlocksResponse_Response {
 	if m == nil {
-		return (*GetBlockStreamResponse_Done_)(nil)
+		return (*ReceiveBlocksResponse_Done_)(nil)
 	}
-	r := new(GetBlockStreamResponse_Done_)
+	r := new(ReceiveBlocksResponse_Done_)
 	r.Done = m.Done.CloneVT()
 	return r
 }
 
-func (m *GetBlockStreamResponse_Error_) CloneVT() isGetBlockStreamResponse_Response {
+func (m *ReceiveBlocksResponse_Error_) CloneVT() isReceiveBlocksResponse_Response {
 	if m == nil {
-		return (*GetBlockStreamResponse_Error_)(nil)
+		return (*ReceiveBlocksResponse_Error_)(nil)
 	}
-	r := new(GetBlockStreamResponse_Error_)
+	r := new(ReceiveBlocksResponse_Error_)
 	r.Error = m.Error.CloneVT()
 	return r
 }
@@ -235,7 +235,7 @@ func (this *BlockStreamDeliverySettings) EqualMessageVT(thatMsg proto.Message) b
 	}
 	return this.EqualVT(that)
 }
-func (this *GetBlockStreamRequest) EqualVT(that *GetBlockStreamRequest) bool {
+func (this *ReceiveBlocksRequest) EqualVT(that *ReceiveBlocksRequest) bool {
 	if this == that {
 		return true
 	} else if this == nil || that == nil {
@@ -268,14 +268,14 @@ func (this *GetBlockStreamRequest) EqualVT(that *GetBlockStreamRequest) bool {
 	return string(this.unknownFields) == string(that.unknownFields)
 }
 
-func (this *GetBlockStreamRequest) EqualMessageVT(thatMsg proto.Message) bool {
-	that, ok := thatMsg.(*GetBlockStreamRequest)
+func (this *ReceiveBlocksRequest) EqualMessageVT(thatMsg proto.Message) bool {
+	that, ok := thatMsg.(*ReceiveBlocksRequest)
 	if !ok {
 		return false
 	}
 	return this.EqualVT(that)
 }
-func (this *GetBlockStreamResponse_Result) EqualVT(that *GetBlockStreamResponse_Result) bool {
+func (this *ReceiveBlocksResponse_Result) EqualVT(that *ReceiveBlocksResponse_Result) bool {
 	if this == that {
 		return true
 	} else if this == nil || that == nil {
@@ -290,14 +290,14 @@ func (this *GetBlockStreamResponse_Result) EqualVT(that *GetBlockStreamResponse_
 	return string(this.unknownFields) == string(that.unknownFields)
 }
 
-func (this *GetBlockStreamResponse_Result) EqualMessageVT(thatMsg proto.Message) bool {
-	that, ok := thatMsg.(*GetBlockStreamResponse_Result)
+func (this *ReceiveBlocksResponse_Result) EqualMessageVT(thatMsg proto.Message) bool {
+	that, ok := thatMsg.(*ReceiveBlocksResponse_Result)
 	if !ok {
 		return false
 	}
 	return this.EqualVT(that)
 }
-func (this *GetBlockStreamResponse_Done) EqualVT(that *GetBlockStreamResponse_Done) bool {
+func (this *ReceiveBlocksResponse_Done) EqualVT(that *ReceiveBlocksResponse_Done) bool {
 	if this == that {
 		return true
 	} else if this == nil || that == nil {
@@ -309,14 +309,14 @@ func (this *GetBlockStreamResponse_Done) EqualVT(that *GetBlockStreamResponse_Do
 	return string(this.unknownFields) == string(that.unknownFields)
 }
 
-func (this *GetBlockStreamResponse_Done) EqualMessageVT(thatMsg proto.Message) bool {
-	that, ok := thatMsg.(*GetBlockStreamResponse_Done)
+func (this *ReceiveBlocksResponse_Done) EqualMessageVT(thatMsg proto.Message) bool {
+	that, ok := thatMsg.(*ReceiveBlocksResponse_Done)
 	if !ok {
 		return false
 	}
 	return this.EqualVT(that)
 }
-func (this *GetBlockStreamResponse_Error) EqualVT(that *GetBlockStreamResponse_Error) bool {
+func (this *ReceiveBlocksResponse_Error) EqualVT(that *ReceiveBlocksResponse_Error) bool {
 	if this == that {
 		return true
 	} else if this == nil || that == nil {
@@ -331,14 +331,14 @@ func (this *GetBlockStreamResponse_Error) EqualVT(that *GetBlockStreamResponse_E
 	return string(this.unknownFields) == string(that.unknownFields)
 }
 
-func (this *GetBlockStreamResponse_Error) EqualMessageVT(thatMsg proto.Message) bool {
-	that, ok := thatMsg.(*GetBlockStreamResponse_Error)
+func (this *ReceiveBlocksResponse_Error) EqualMessageVT(thatMsg proto.Message) bool {
+	that, ok := thatMsg.(*ReceiveBlocksResponse_Error)
 	if !ok {
 		return false
 	}
 	return this.EqualVT(that)
 }
-func (this *GetBlockStreamResponse) EqualVT(that *GetBlockStreamResponse) bool {
+func (this *ReceiveBlocksResponse) EqualVT(that *ReceiveBlocksResponse) bool {
 	if this == that {
 		return true
 	} else if this == nil || that == nil {
@@ -351,7 +351,7 @@ func (this *GetBlockStreamResponse) EqualVT(that *GetBlockStreamResponse) bool {
 			return false
 		}
 		if !this.Response.(interface {
-			EqualVT(isGetBlockStreamResponse_Response) bool
+			EqualVT(isReceiveBlocksResponse_Response) bool
 		}).EqualVT(that.Response) {
 			return false
 		}
@@ -359,15 +359,15 @@ func (this *GetBlockStreamResponse) EqualVT(that *GetBlockStreamResponse) bool {
 	return string(this.unknownFields) == string(that.unknownFields)
 }
 
-func (this *GetBlockStreamResponse) EqualMessageVT(thatMsg proto.Message) bool {
-	that, ok := thatMsg.(*GetBlockStreamResponse)
+func (this *ReceiveBlocksResponse) EqualMessageVT(thatMsg proto.Message) bool {
+	that, ok := thatMsg.(*ReceiveBlocksResponse)
 	if !ok {
 		return false
 	}
 	return this.EqualVT(that)
 }
-func (this *GetBlockStreamResponse_Message) EqualVT(thatIface isGetBlockStreamResponse_Response) bool {
-	that, ok := thatIface.(*GetBlockStreamResponse_Message)
+func (this *ReceiveBlocksResponse_Message) EqualVT(thatIface isReceiveBlocksResponse_Response) bool {
+	that, ok := thatIface.(*ReceiveBlocksResponse_Message)
 	if !ok {
 		return false
 	}
@@ -379,10 +379,10 @@ func (this *GetBlockStreamResponse_Message) EqualVT(thatIface isGetBlockStreamRe
 	}
 	if p, q := this.Message, that.Message; p != q {
 		if p == nil {
-			p = &GetBlockStreamResponse_Result{}
+			p = &ReceiveBlocksResponse_Result{}
 		}
 		if q == nil {
-			q = &GetBlockStreamResponse_Result{}
+			q = &ReceiveBlocksResponse_Result{}
 		}
 		if !p.EqualVT(q) {
 			return false
@@ -391,8 +391,8 @@ func (this *GetBlockStreamResponse_Message) EqualVT(thatIface isGetBlockStreamRe
 	return true
 }
 
-func (this *GetBlockStreamResponse_Done_) EqualVT(thatIface isGetBlockStreamResponse_Response) bool {
-	that, ok := thatIface.(*GetBlockStreamResponse_Done_)
+func (this *ReceiveBlocksResponse_Done_) EqualVT(thatIface isReceiveBlocksResponse_Response) bool {
+	that, ok := thatIface.(*ReceiveBlocksResponse_Done_)
 	if !ok {
 		return false
 	}
@@ -404,10 +404,10 @@ func (this *GetBlockStreamResponse_Done_) EqualVT(thatIface isGetBlockStreamResp
 	}
 	if p, q := this.Done, that.Done; p != q {
 		if p == nil {
-			p = &GetBlockStreamResponse_Done{}
+			p = &ReceiveBlocksResponse_Done{}
 		}
 		if q == nil {
-			q = &GetBlockStreamResponse_Done{}
+			q = &ReceiveBlocksResponse_Done{}
 		}
 		if !p.EqualVT(q) {
 			return false
@@ -416,8 +416,8 @@ func (this *GetBlockStreamResponse_Done_) EqualVT(thatIface isGetBlockStreamResp
 	return true
 }
 
-func (this *GetBlockStreamResponse_Error_) EqualVT(thatIface isGetBlockStreamResponse_Response) bool {
-	that, ok := thatIface.(*GetBlockStreamResponse_Error_)
+func (this *ReceiveBlocksResponse_Error_) EqualVT(thatIface isReceiveBlocksResponse_Response) bool {
+	that, ok := thatIface.(*ReceiveBlocksResponse_Error_)
 	if !ok {
 		return false
 	}
@@ -429,10 +429,10 @@ func (this *GetBlockStreamResponse_Error_) EqualVT(thatIface isGetBlockStreamRes
 	}
 	if p, q := this.Error, that.Error; p != q {
 		if p == nil {
-			p = &GetBlockStreamResponse_Error{}
+			p = &ReceiveBlocksResponse_Error{}
 		}
 		if q == nil {
-			q = &GetBlockStreamResponse_Error{}
+			q = &ReceiveBlocksResponse_Error{}
 		}
 		if !p.EqualVT(q) {
 			return false
@@ -557,7 +557,7 @@ func (m *BlockStreamDeliverySettings) MarshalToSizedBufferVT(dAtA []byte) (int, 
 	return len(dAtA) - i, nil
 }
 
-func (m *GetBlockStreamRequest) MarshalVT() (dAtA []byte, err error) {
+func (m *ReceiveBlocksRequest) MarshalVT() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -570,12 +570,12 @@ func (m *GetBlockStreamRequest) MarshalVT() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *GetBlockStreamRequest) MarshalToVT(dAtA []byte) (int, error) {
+func (m *ReceiveBlocksRequest) MarshalToVT(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVT(dAtA[:size])
 }
 
-func (m *GetBlockStreamRequest) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+func (m *ReceiveBlocksRequest) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	if m == nil {
 		return 0, nil
 	}
@@ -652,7 +652,7 @@ func (m *GetBlockStreamRequest) MarshalToSizedBufferVT(dAtA []byte) (int, error)
 	return len(dAtA) - i, nil
 }
 
-func (m *GetBlockStreamResponse_Result) MarshalVT() (dAtA []byte, err error) {
+func (m *ReceiveBlocksResponse_Result) MarshalVT() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -665,12 +665,12 @@ func (m *GetBlockStreamResponse_Result) MarshalVT() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *GetBlockStreamResponse_Result) MarshalToVT(dAtA []byte) (int, error) {
+func (m *ReceiveBlocksResponse_Result) MarshalToVT(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVT(dAtA[:size])
 }
 
-func (m *GetBlockStreamResponse_Result) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+func (m *ReceiveBlocksResponse_Result) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	if m == nil {
 		return 0, nil
 	}
@@ -705,7 +705,7 @@ func (m *GetBlockStreamResponse_Result) MarshalToSizedBufferVT(dAtA []byte) (int
 	return len(dAtA) - i, nil
 }
 
-func (m *GetBlockStreamResponse_Done) MarshalVT() (dAtA []byte, err error) {
+func (m *ReceiveBlocksResponse_Done) MarshalVT() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -718,12 +718,12 @@ func (m *GetBlockStreamResponse_Done) MarshalVT() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *GetBlockStreamResponse_Done) MarshalToVT(dAtA []byte) (int, error) {
+func (m *ReceiveBlocksResponse_Done) MarshalToVT(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVT(dAtA[:size])
 }
 
-func (m *GetBlockStreamResponse_Done) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+func (m *ReceiveBlocksResponse_Done) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	if m == nil {
 		return 0, nil
 	}
@@ -745,7 +745,7 @@ func (m *GetBlockStreamResponse_Done) MarshalToSizedBufferVT(dAtA []byte) (int, 
 	return len(dAtA) - i, nil
 }
 
-func (m *GetBlockStreamResponse_Error) MarshalVT() (dAtA []byte, err error) {
+func (m *ReceiveBlocksResponse_Error) MarshalVT() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -758,12 +758,12 @@ func (m *GetBlockStreamResponse_Error) MarshalVT() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *GetBlockStreamResponse_Error) MarshalToVT(dAtA []byte) (int, error) {
+func (m *ReceiveBlocksResponse_Error) MarshalToVT(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVT(dAtA[:size])
 }
 
-func (m *GetBlockStreamResponse_Error) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+func (m *ReceiveBlocksResponse_Error) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	if m == nil {
 		return 0, nil
 	}
@@ -790,7 +790,7 @@ func (m *GetBlockStreamResponse_Error) MarshalToSizedBufferVT(dAtA []byte) (int,
 	return len(dAtA) - i, nil
 }
 
-func (m *GetBlockStreamResponse) MarshalVT() (dAtA []byte, err error) {
+func (m *ReceiveBlocksResponse) MarshalVT() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -803,12 +803,12 @@ func (m *GetBlockStreamResponse) MarshalVT() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *GetBlockStreamResponse) MarshalToVT(dAtA []byte) (int, error) {
+func (m *ReceiveBlocksResponse) MarshalToVT(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVT(dAtA[:size])
 }
 
-func (m *GetBlockStreamResponse) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+func (m *ReceiveBlocksResponse) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	if m == nil {
 		return 0, nil
 	}
@@ -832,12 +832,12 @@ func (m *GetBlockStreamResponse) MarshalToSizedBufferVT(dAtA []byte) (int, error
 	return len(dAtA) - i, nil
 }
 
-func (m *GetBlockStreamResponse_Message) MarshalToVT(dAtA []byte) (int, error) {
+func (m *ReceiveBlocksResponse_Message) MarshalToVT(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVT(dAtA[:size])
 }
 
-func (m *GetBlockStreamResponse_Message) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+func (m *ReceiveBlocksResponse_Message) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	if m.Message != nil {
 		size, err := m.Message.MarshalToSizedBufferVT(dAtA[:i])
@@ -851,12 +851,12 @@ func (m *GetBlockStreamResponse_Message) MarshalToSizedBufferVT(dAtA []byte) (in
 	}
 	return len(dAtA) - i, nil
 }
-func (m *GetBlockStreamResponse_Done_) MarshalToVT(dAtA []byte) (int, error) {
+func (m *ReceiveBlocksResponse_Done_) MarshalToVT(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVT(dAtA[:size])
 }
 
-func (m *GetBlockStreamResponse_Done_) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+func (m *ReceiveBlocksResponse_Done_) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	if m.Done != nil {
 		size, err := m.Done.MarshalToSizedBufferVT(dAtA[:i])
@@ -870,12 +870,12 @@ func (m *GetBlockStreamResponse_Done_) MarshalToSizedBufferVT(dAtA []byte) (int,
 	}
 	return len(dAtA) - i, nil
 }
-func (m *GetBlockStreamResponse_Error_) MarshalToVT(dAtA []byte) (int, error) {
+func (m *ReceiveBlocksResponse_Error_) MarshalToVT(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVT(dAtA[:size])
 }
 
-func (m *GetBlockStreamResponse_Error_) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+func (m *ReceiveBlocksResponse_Error_) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	if m.Error != nil {
 		size, err := m.Error.MarshalToSizedBufferVT(dAtA[:i])
@@ -1005,7 +1005,7 @@ func (m *BlockStreamDeliverySettings) MarshalToSizedBufferVTStrict(dAtA []byte) 
 	return len(dAtA) - i, nil
 }
 
-func (m *GetBlockStreamRequest) MarshalVTStrict() (dAtA []byte, err error) {
+func (m *ReceiveBlocksRequest) MarshalVTStrict() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -1018,12 +1018,12 @@ func (m *GetBlockStreamRequest) MarshalVTStrict() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *GetBlockStreamRequest) MarshalToVTStrict(dAtA []byte) (int, error) {
+func (m *ReceiveBlocksRequest) MarshalToVTStrict(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
 }
 
-func (m *GetBlockStreamRequest) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+func (m *ReceiveBlocksRequest) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 	if m == nil {
 		return 0, nil
 	}
@@ -1100,7 +1100,7 @@ func (m *GetBlockStreamRequest) MarshalToSizedBufferVTStrict(dAtA []byte) (int, 
 	return len(dAtA) - i, nil
 }
 
-func (m *GetBlockStreamResponse_Result) MarshalVTStrict() (dAtA []byte, err error) {
+func (m *ReceiveBlocksResponse_Result) MarshalVTStrict() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -1113,12 +1113,12 @@ func (m *GetBlockStreamResponse_Result) MarshalVTStrict() (dAtA []byte, err erro
 	return dAtA[:n], nil
 }
 
-func (m *GetBlockStreamResponse_Result) MarshalToVTStrict(dAtA []byte) (int, error) {
+func (m *ReceiveBlocksResponse_Result) MarshalToVTStrict(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
 }
 
-func (m *GetBlockStreamResponse_Result) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+func (m *ReceiveBlocksResponse_Result) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 	if m == nil {
 		return 0, nil
 	}
@@ -1153,7 +1153,7 @@ func (m *GetBlockStreamResponse_Result) MarshalToSizedBufferVTStrict(dAtA []byte
 	return len(dAtA) - i, nil
 }
 
-func (m *GetBlockStreamResponse_Done) MarshalVTStrict() (dAtA []byte, err error) {
+func (m *ReceiveBlocksResponse_Done) MarshalVTStrict() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -1166,12 +1166,12 @@ func (m *GetBlockStreamResponse_Done) MarshalVTStrict() (dAtA []byte, err error)
 	return dAtA[:n], nil
 }
 
-func (m *GetBlockStreamResponse_Done) MarshalToVTStrict(dAtA []byte) (int, error) {
+func (m *ReceiveBlocksResponse_Done) MarshalToVTStrict(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
 }
 
-func (m *GetBlockStreamResponse_Done) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+func (m *ReceiveBlocksResponse_Done) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 	if m == nil {
 		return 0, nil
 	}
@@ -1193,7 +1193,7 @@ func (m *GetBlockStreamResponse_Done) MarshalToSizedBufferVTStrict(dAtA []byte) 
 	return len(dAtA) - i, nil
 }
 
-func (m *GetBlockStreamResponse_Error) MarshalVTStrict() (dAtA []byte, err error) {
+func (m *ReceiveBlocksResponse_Error) MarshalVTStrict() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -1206,12 +1206,12 @@ func (m *GetBlockStreamResponse_Error) MarshalVTStrict() (dAtA []byte, err error
 	return dAtA[:n], nil
 }
 
-func (m *GetBlockStreamResponse_Error) MarshalToVTStrict(dAtA []byte) (int, error) {
+func (m *ReceiveBlocksResponse_Error) MarshalToVTStrict(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
 }
 
-func (m *GetBlockStreamResponse_Error) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+func (m *ReceiveBlocksResponse_Error) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 	if m == nil {
 		return 0, nil
 	}
@@ -1238,7 +1238,7 @@ func (m *GetBlockStreamResponse_Error) MarshalToSizedBufferVTStrict(dAtA []byte)
 	return len(dAtA) - i, nil
 }
 
-func (m *GetBlockStreamResponse) MarshalVTStrict() (dAtA []byte, err error) {
+func (m *ReceiveBlocksResponse) MarshalVTStrict() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -1251,12 +1251,12 @@ func (m *GetBlockStreamResponse) MarshalVTStrict() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *GetBlockStreamResponse) MarshalToVTStrict(dAtA []byte) (int, error) {
+func (m *ReceiveBlocksResponse) MarshalToVTStrict(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
 }
 
-func (m *GetBlockStreamResponse) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+func (m *ReceiveBlocksResponse) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 	if m == nil {
 		return 0, nil
 	}
@@ -1268,21 +1268,21 @@ func (m *GetBlockStreamResponse) MarshalToSizedBufferVTStrict(dAtA []byte) (int,
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
-	if msg, ok := m.Response.(*GetBlockStreamResponse_Error_); ok {
+	if msg, ok := m.Response.(*ReceiveBlocksResponse_Error_); ok {
 		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
 		if err != nil {
 			return 0, err
 		}
 		i -= size
 	}
-	if msg, ok := m.Response.(*GetBlockStreamResponse_Done_); ok {
+	if msg, ok := m.Response.(*ReceiveBlocksResponse_Done_); ok {
 		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
 		if err != nil {
 			return 0, err
 		}
 		i -= size
 	}
-	if msg, ok := m.Response.(*GetBlockStreamResponse_Message); ok {
+	if msg, ok := m.Response.(*ReceiveBlocksResponse_Message); ok {
 		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
 		if err != nil {
 			return 0, err
@@ -1292,12 +1292,12 @@ func (m *GetBlockStreamResponse) MarshalToSizedBufferVTStrict(dAtA []byte) (int,
 	return len(dAtA) - i, nil
 }
 
-func (m *GetBlockStreamResponse_Message) MarshalToVTStrict(dAtA []byte) (int, error) {
+func (m *ReceiveBlocksResponse_Message) MarshalToVTStrict(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
 }
 
-func (m *GetBlockStreamResponse_Message) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+func (m *ReceiveBlocksResponse_Message) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	if m.Message != nil {
 		size, err := m.Message.MarshalToSizedBufferVTStrict(dAtA[:i])
@@ -1311,12 +1311,12 @@ func (m *GetBlockStreamResponse_Message) MarshalToSizedBufferVTStrict(dAtA []byt
 	}
 	return len(dAtA) - i, nil
 }
-func (m *GetBlockStreamResponse_Done_) MarshalToVTStrict(dAtA []byte) (int, error) {
+func (m *ReceiveBlocksResponse_Done_) MarshalToVTStrict(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
 }
 
-func (m *GetBlockStreamResponse_Done_) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+func (m *ReceiveBlocksResponse_Done_) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	if m.Done != nil {
 		size, err := m.Done.MarshalToSizedBufferVTStrict(dAtA[:i])
@@ -1330,12 +1330,12 @@ func (m *GetBlockStreamResponse_Done_) MarshalToSizedBufferVTStrict(dAtA []byte)
 	}
 	return len(dAtA) - i, nil
 }
-func (m *GetBlockStreamResponse_Error_) MarshalToVTStrict(dAtA []byte) (int, error) {
+func (m *ReceiveBlocksResponse_Error_) MarshalToVTStrict(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
 }
 
-func (m *GetBlockStreamResponse_Error_) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+func (m *ReceiveBlocksResponse_Error_) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	if m.Error != nil {
 		size, err := m.Error.MarshalToSizedBufferVTStrict(dAtA[:i])
@@ -1387,7 +1387,7 @@ func (m *BlockStreamDeliverySettings) SizeVT() (n int) {
 	return n
 }
 
-func (m *GetBlockStreamRequest) SizeVT() (n int) {
+func (m *ReceiveBlocksRequest) SizeVT() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1426,7 +1426,7 @@ func (m *GetBlockStreamRequest) SizeVT() (n int) {
 	return n
 }
 
-func (m *GetBlockStreamResponse_Result) SizeVT() (n int) {
+func (m *ReceiveBlocksResponse_Result) SizeVT() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1443,7 +1443,7 @@ func (m *GetBlockStreamResponse_Result) SizeVT() (n int) {
 	return n
 }
 
-func (m *GetBlockStreamResponse_Done) SizeVT() (n int) {
+func (m *ReceiveBlocksResponse_Done) SizeVT() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1457,7 +1457,7 @@ func (m *GetBlockStreamResponse_Done) SizeVT() (n int) {
 	return n
 }
 
-func (m *GetBlockStreamResponse_Error) SizeVT() (n int) {
+func (m *ReceiveBlocksResponse_Error) SizeVT() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1474,7 +1474,7 @@ func (m *GetBlockStreamResponse_Error) SizeVT() (n int) {
 	return n
 }
 
-func (m *GetBlockStreamResponse) SizeVT() (n int) {
+func (m *ReceiveBlocksResponse) SizeVT() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1487,7 +1487,7 @@ func (m *GetBlockStreamResponse) SizeVT() (n int) {
 	return n
 }
 
-func (m *GetBlockStreamResponse_Message) SizeVT() (n int) {
+func (m *ReceiveBlocksResponse_Message) SizeVT() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1499,7 +1499,7 @@ func (m *GetBlockStreamResponse_Message) SizeVT() (n int) {
 	}
 	return n
 }
-func (m *GetBlockStreamResponse_Done_) SizeVT() (n int) {
+func (m *ReceiveBlocksResponse_Done_) SizeVT() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1511,7 +1511,7 @@ func (m *GetBlockStreamResponse_Done_) SizeVT() (n int) {
 	}
 	return n
 }
-func (m *GetBlockStreamResponse_Error_) SizeVT() (n int) {
+func (m *ReceiveBlocksResponse_Error_) SizeVT() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1793,7 +1793,7 @@ func (m *BlockStreamDeliverySettings) UnmarshalVT(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *GetBlockStreamRequest) UnmarshalVT(dAtA []byte) error {
+func (m *ReceiveBlocksRequest) UnmarshalVT(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1816,10 +1816,10 @@ func (m *GetBlockStreamRequest) UnmarshalVT(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: GetBlockStreamRequest: wiretype end group for non-group")
+			return fmt.Errorf("proto: ReceiveBlocksRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: GetBlockStreamRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: ReceiveBlocksRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -1868,7 +1868,7 @@ func (m *GetBlockStreamRequest) UnmarshalVT(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.StartPolicy |= GetBlockStreamRequest_StartPolicy(b&0x7F) << shift
+				m.StartPolicy |= ReceiveBlocksRequest_StartPolicy(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1923,7 +1923,7 @@ func (m *GetBlockStreamRequest) UnmarshalVT(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.StopPolicy |= GetBlockStreamRequest_StopPolicy(b&0x7F) << shift
+				m.StopPolicy |= ReceiveBlocksRequest_StopPolicy(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2014,7 +2014,7 @@ func (m *GetBlockStreamRequest) UnmarshalVT(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.CatchupPolicy |= GetBlockStreamRequest_CatchupPolicy(b&0x7F) << shift
+				m.CatchupPolicy |= ReceiveBlocksRequest_CatchupPolicy(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2077,7 +2077,7 @@ func (m *GetBlockStreamRequest) UnmarshalVT(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *GetBlockStreamResponse_Result) UnmarshalVT(dAtA []byte) error {
+func (m *ReceiveBlocksResponse_Result) UnmarshalVT(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -2100,10 +2100,10 @@ func (m *GetBlockStreamResponse_Result) UnmarshalVT(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: GetBlockStreamResponse_Result: wiretype end group for non-group")
+			return fmt.Errorf("proto: ReceiveBlocksResponse_Result: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: GetBlockStreamResponse_Result: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: ReceiveBlocksResponse_Result: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -2184,7 +2184,7 @@ func (m *GetBlockStreamResponse_Result) UnmarshalVT(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *GetBlockStreamResponse_Done) UnmarshalVT(dAtA []byte) error {
+func (m *ReceiveBlocksResponse_Done) UnmarshalVT(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -2207,10 +2207,10 @@ func (m *GetBlockStreamResponse_Done) UnmarshalVT(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: GetBlockStreamResponse_Done: wiretype end group for non-group")
+			return fmt.Errorf("proto: ReceiveBlocksResponse_Done: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: GetBlockStreamResponse_Done: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: ReceiveBlocksResponse_Done: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -2267,7 +2267,7 @@ func (m *GetBlockStreamResponse_Done) UnmarshalVT(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *GetBlockStreamResponse_Error) UnmarshalVT(dAtA []byte) error {
+func (m *ReceiveBlocksResponse_Error) UnmarshalVT(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -2290,10 +2290,10 @@ func (m *GetBlockStreamResponse_Error) UnmarshalVT(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: GetBlockStreamResponse_Error: wiretype end group for non-group")
+			return fmt.Errorf("proto: ReceiveBlocksResponse_Error: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: GetBlockStreamResponse_Error: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: ReceiveBlocksResponse_Error: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -2310,7 +2310,7 @@ func (m *GetBlockStreamResponse_Error) UnmarshalVT(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.Kind |= GetBlockStreamResponse_Error_Kind(b&0x7F) << shift
+				m.Kind |= ReceiveBlocksResponse_Error_Kind(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2369,7 +2369,7 @@ func (m *GetBlockStreamResponse_Error) UnmarshalVT(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *GetBlockStreamResponse) UnmarshalVT(dAtA []byte) error {
+func (m *ReceiveBlocksResponse) UnmarshalVT(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -2392,10 +2392,10 @@ func (m *GetBlockStreamResponse) UnmarshalVT(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: GetBlockStreamResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: ReceiveBlocksResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: GetBlockStreamResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: ReceiveBlocksResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -2427,16 +2427,16 @@ func (m *GetBlockStreamResponse) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if oneof, ok := m.Response.(*GetBlockStreamResponse_Message); ok {
+			if oneof, ok := m.Response.(*ReceiveBlocksResponse_Message); ok {
 				if err := oneof.Message.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
 			} else {
-				v := &GetBlockStreamResponse_Result{}
+				v := &ReceiveBlocksResponse_Result{}
 				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
-				m.Response = &GetBlockStreamResponse_Message{Message: v}
+				m.Response = &ReceiveBlocksResponse_Message{Message: v}
 			}
 			iNdEx = postIndex
 		case 2:
@@ -2468,16 +2468,16 @@ func (m *GetBlockStreamResponse) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if oneof, ok := m.Response.(*GetBlockStreamResponse_Done_); ok {
+			if oneof, ok := m.Response.(*ReceiveBlocksResponse_Done_); ok {
 				if err := oneof.Done.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
 			} else {
-				v := &GetBlockStreamResponse_Done{}
+				v := &ReceiveBlocksResponse_Done{}
 				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
-				m.Response = &GetBlockStreamResponse_Done_{Done: v}
+				m.Response = &ReceiveBlocksResponse_Done_{Done: v}
 			}
 			iNdEx = postIndex
 		case 3:
@@ -2509,16 +2509,16 @@ func (m *GetBlockStreamResponse) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if oneof, ok := m.Response.(*GetBlockStreamResponse_Error_); ok {
+			if oneof, ok := m.Response.(*ReceiveBlocksResponse_Error_); ok {
 				if err := oneof.Error.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
 			} else {
-				v := &GetBlockStreamResponse_Error{}
+				v := &ReceiveBlocksResponse_Error{}
 				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
-				m.Response = &GetBlockStreamResponse_Error_{Error: v}
+				m.Response = &ReceiveBlocksResponse_Error_{Error: v}
 			}
 			iNdEx = postIndex
 		default:
@@ -2813,7 +2813,7 @@ func (m *BlockStreamDeliverySettings) UnmarshalVTUnsafe(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *GetBlockStreamRequest) UnmarshalVTUnsafe(dAtA []byte) error {
+func (m *ReceiveBlocksRequest) UnmarshalVTUnsafe(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -2836,10 +2836,10 @@ func (m *GetBlockStreamRequest) UnmarshalVTUnsafe(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: GetBlockStreamRequest: wiretype end group for non-group")
+			return fmt.Errorf("proto: ReceiveBlocksRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: GetBlockStreamRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: ReceiveBlocksRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -2892,7 +2892,7 @@ func (m *GetBlockStreamRequest) UnmarshalVTUnsafe(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.StartPolicy |= GetBlockStreamRequest_StartPolicy(b&0x7F) << shift
+				m.StartPolicy |= ReceiveBlocksRequest_StartPolicy(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2947,7 +2947,7 @@ func (m *GetBlockStreamRequest) UnmarshalVTUnsafe(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.StopPolicy |= GetBlockStreamRequest_StopPolicy(b&0x7F) << shift
+				m.StopPolicy |= ReceiveBlocksRequest_StopPolicy(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -3038,7 +3038,7 @@ func (m *GetBlockStreamRequest) UnmarshalVTUnsafe(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.CatchupPolicy |= GetBlockStreamRequest_CatchupPolicy(b&0x7F) << shift
+				m.CatchupPolicy |= ReceiveBlocksRequest_CatchupPolicy(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -3101,7 +3101,7 @@ func (m *GetBlockStreamRequest) UnmarshalVTUnsafe(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *GetBlockStreamResponse_Result) UnmarshalVTUnsafe(dAtA []byte) error {
+func (m *ReceiveBlocksResponse_Result) UnmarshalVTUnsafe(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -3124,10 +3124,10 @@ func (m *GetBlockStreamResponse_Result) UnmarshalVTUnsafe(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: GetBlockStreamResponse_Result: wiretype end group for non-group")
+			return fmt.Errorf("proto: ReceiveBlocksResponse_Result: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: GetBlockStreamResponse_Result: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: ReceiveBlocksResponse_Result: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -3208,7 +3208,7 @@ func (m *GetBlockStreamResponse_Result) UnmarshalVTUnsafe(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *GetBlockStreamResponse_Done) UnmarshalVTUnsafe(dAtA []byte) error {
+func (m *ReceiveBlocksResponse_Done) UnmarshalVTUnsafe(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -3231,10 +3231,10 @@ func (m *GetBlockStreamResponse_Done) UnmarshalVTUnsafe(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: GetBlockStreamResponse_Done: wiretype end group for non-group")
+			return fmt.Errorf("proto: ReceiveBlocksResponse_Done: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: GetBlockStreamResponse_Done: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: ReceiveBlocksResponse_Done: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -3295,7 +3295,7 @@ func (m *GetBlockStreamResponse_Done) UnmarshalVTUnsafe(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *GetBlockStreamResponse_Error) UnmarshalVTUnsafe(dAtA []byte) error {
+func (m *ReceiveBlocksResponse_Error) UnmarshalVTUnsafe(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -3318,10 +3318,10 @@ func (m *GetBlockStreamResponse_Error) UnmarshalVTUnsafe(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: GetBlockStreamResponse_Error: wiretype end group for non-group")
+			return fmt.Errorf("proto: ReceiveBlocksResponse_Error: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: GetBlockStreamResponse_Error: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: ReceiveBlocksResponse_Error: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -3338,7 +3338,7 @@ func (m *GetBlockStreamResponse_Error) UnmarshalVTUnsafe(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.Kind |= GetBlockStreamResponse_Error_Kind(b&0x7F) << shift
+				m.Kind |= ReceiveBlocksResponse_Error_Kind(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -3401,7 +3401,7 @@ func (m *GetBlockStreamResponse_Error) UnmarshalVTUnsafe(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *GetBlockStreamResponse) UnmarshalVTUnsafe(dAtA []byte) error {
+func (m *ReceiveBlocksResponse) UnmarshalVTUnsafe(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -3424,10 +3424,10 @@ func (m *GetBlockStreamResponse) UnmarshalVTUnsafe(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: GetBlockStreamResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: ReceiveBlocksResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: GetBlockStreamResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: ReceiveBlocksResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -3459,16 +3459,16 @@ func (m *GetBlockStreamResponse) UnmarshalVTUnsafe(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if oneof, ok := m.Response.(*GetBlockStreamResponse_Message); ok {
+			if oneof, ok := m.Response.(*ReceiveBlocksResponse_Message); ok {
 				if err := oneof.Message.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
 			} else {
-				v := &GetBlockStreamResponse_Result{}
+				v := &ReceiveBlocksResponse_Result{}
 				if err := v.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
-				m.Response = &GetBlockStreamResponse_Message{Message: v}
+				m.Response = &ReceiveBlocksResponse_Message{Message: v}
 			}
 			iNdEx = postIndex
 		case 2:
@@ -3500,16 +3500,16 @@ func (m *GetBlockStreamResponse) UnmarshalVTUnsafe(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if oneof, ok := m.Response.(*GetBlockStreamResponse_Done_); ok {
+			if oneof, ok := m.Response.(*ReceiveBlocksResponse_Done_); ok {
 				if err := oneof.Done.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
 			} else {
-				v := &GetBlockStreamResponse_Done{}
+				v := &ReceiveBlocksResponse_Done{}
 				if err := v.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
-				m.Response = &GetBlockStreamResponse_Done_{Done: v}
+				m.Response = &ReceiveBlocksResponse_Done_{Done: v}
 			}
 			iNdEx = postIndex
 		case 3:
@@ -3541,16 +3541,16 @@ func (m *GetBlockStreamResponse) UnmarshalVTUnsafe(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if oneof, ok := m.Response.(*GetBlockStreamResponse_Error_); ok {
+			if oneof, ok := m.Response.(*ReceiveBlocksResponse_Error_); ok {
 				if err := oneof.Error.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
 			} else {
-				v := &GetBlockStreamResponse_Error{}
+				v := &ReceiveBlocksResponse_Error{}
 				if err := v.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 					return err
 				}
-				m.Response = &GetBlockStreamResponse_Error_{Error: v}
+				m.Response = &ReceiveBlocksResponse_Error_{Error: v}
 			}
 			iNdEx = postIndex
 		default:

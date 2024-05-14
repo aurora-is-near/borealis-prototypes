@@ -11,8 +11,8 @@ service BlocksProvider {
     rpc ListBlockStreams(ListBlockStreamsRequest) returns (ListBlockStreamsResponse);
     
     // Reads individual message
-    rpc ReadBlockMessage(ReadBlockMessageRequest) returns (ReadBlockMessageResponse);
+    rpc GetBlockMessage(GetBlockMessageRequest) returns (GetBlockMessageResponse);
 
     // Streams blocks continiously
-    rpc GetBlockStream(GetBlockStreamRequest) returns (stream GetBlockStreamResponse);
+    rpc ReceiveBlocks(ReceiveBlocksRequest) returns (stream ReceiveBlocksResponse);
 }
