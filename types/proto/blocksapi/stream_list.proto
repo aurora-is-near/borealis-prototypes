@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+import "blocksapi/stream_info.proto";
+
+option go_package = "github.com/aurora-is-near/borealis-prototypes/go/blocksapi;blocksapi";
+
+message ListBlockStreamsRequest {
+    repeated string stream_filter = 1;
+}
+
+message ListBlockStreamsResponse {
+    message Result {
+        map<string, BlockStreamInfo> response = 1;
+    }
+    message Error {
+        enum Kind {
+            // Default error kind
+            UNKNOWN = 0;
+        }
+        Kind error_class = 1;
+        string description = 2;
+    }
+    oneof response {
+        Result result = 1;
+        Error error = 2;
+    }
+}

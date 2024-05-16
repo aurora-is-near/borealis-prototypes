@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+import "blocksapi/message.proto";
+
+option go_package = "github.com/aurora-is-near/borealis-prototypes/go/blocksapi;blocksapi";
+
+message GetBlockMessageRequest {
+    string stream_name = 1;
+    BlockMessage.ID message_id = 2;
+    BlockMessageDeliverySettings delivery_settings = 3;
+}
+
+message GetBlockMessageResponse {
+    message Result {
+        BlockMessage message = 1;
+    }
+    message Error {
+        enum Kind {
+            // Default error kind
+            UNKNOWN = 0;
+            // Given message ID is lower than earliest available
+            LOW_ID = 1;
+            // Given message ID is greater than latest available
+            HIGH_ID = 2;
+            // Message ID is within given range but not present
+            NOT_FOUND = 3;
+            // No such stream
+            STREAM_NOT_FOUND = 4;
+            // It's not possible to satisfy provided format requirement
+            UNSATISFIABLE_FORMAT_REQUIREMENT = 5;
+            // Requested message kind is not available
+            UNAVAILABLE_MESSAGE_KIND = 6;
+            // Request is constructed in a wrong way
+            BAD_REQUEST = 7;
+        }
+        Kind kind = 1;
+        string description = 2;
+    }
+    oneof response {
+        Result result = 1;
+        Error error = 2;
+    }
+}
