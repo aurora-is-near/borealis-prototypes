@@ -24,6 +24,14 @@ message GetBlockMessageResponse {
             HIGH_ID = 2;
             // Message ID is within given range but not present
             NOT_FOUND = 3;
+            // No such stream
+            STREAM_NOT_FOUND = 4;
+            // It's not possible to satisfy provided format requirement
+            UNSATISFIABLE_FORMAT_REQUIREMENT = 5;
+            // Requested message kind is not available
+            UNAVAILABLE_MESSAGE_KIND = 6;
+            // Request is constructed in a wrong way
+            BAD_REQUEST = 7;
         }
         Kind kind = 1;
         string description = 2;
