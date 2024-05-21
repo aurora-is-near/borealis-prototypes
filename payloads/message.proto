@@ -2,22 +2,13 @@ syntax = "proto3";
 
 import "payloads/near_block/header.proto";
 import "payloads/near_block/shard.proto";
-import "payloads/rpc/message.proto";
-import "payloads/get_account_status/request.proto";
-import "payloads/get_account_status/response.proto";
 
 option go_package = "github.com/aurora-is-near/borealis-prototypes/go;borealisproto";
 
 message Message {
-  reserved "id", "version";
-  reserved 1, 2;
   oneof payload {
-    bytes generic = 3;
-    RpcMessage rpc_request = 4;
-    RpcMessage rpc_response = 5;
-    GetAccountStatusRequest get_account_status_request = 6;
-    GetAccountStatusResponse get_account_status_response = 7;
-    BlockHeaderView near_block_header = 8;
-    BlockShard near_block_shard = 9;
+    bytes generic = 1;
+    BlockHeaderView near_block_header = 2;
+    BlockShard near_block_shard = 3;
   }
 }
