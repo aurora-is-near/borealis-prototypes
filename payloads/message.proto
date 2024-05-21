@@ -1,14 +1,16 @@
 syntax = "proto3";
 
-import "payloads/near_block/header.proto";
-import "payloads/near_block/shard.proto";
+package borealis.payloads;
+
+import "payloads/near/block/header.proto";
+import "payloads/near/block/shard.proto";
 
 option go_package = "github.com/aurora-is-near/borealis-prototypes/go;borealisproto";
 
 message Message {
   oneof payload {
     bytes generic = 1;
-    BlockHeaderView near_block_header = 2;
-    BlockShard near_block_shard = 3;
+    borealis.payloads.near.BlockHeaderView near_block_header = 2;
+    borealis.payloads.near.BlockShard near_block_shard = 3;
   }
 }

@@ -1,11 +1,13 @@
 syntax = "proto3";
 
-import "common/common.proto";
-import "payloads/near_block/stake.proto";
-import "payloads/near_block/transaction/execution.proto";
-import "payloads/near_block/transaction/state_change.proto";
-import "payloads/near_block/transaction/transaction.proto";
-import "payloads/near_block/transaction/receipt.proto";
+package borealis.payloads.near;
+
+import "payloads/near/common/common.proto";
+import "payloads/near/block/stake.proto";
+import "payloads/near/block/transaction/execution.proto";
+import "payloads/near/block/transaction/state_change.proto";
+import "payloads/near/block/transaction/transaction.proto";
+import "payloads/near/block/transaction/receipt.proto";
 
 option go_package = "github.com/aurora-is-near/borealis-prototypes/go/payloads/near_block;nearblock";
 

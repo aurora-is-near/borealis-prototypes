@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+package borealis.blocksapi;
+
 import "blocksapi/read_message.proto";
 import "blocksapi/stream_list.proto";
 import "blocksapi/stream.proto";

@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+package borealis.blocksapi;
+
 import "blocksapi/stream_info.proto";
 
 option go_package = "github.com/aurora-is-near/borealis-prototypes/go/blocksapi;blocksapi";

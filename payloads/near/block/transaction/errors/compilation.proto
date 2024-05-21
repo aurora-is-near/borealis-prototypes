@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+package borealis.payloads.near;
+
 option go_package = "github.com/aurora-is-near/borealis-prototypes/go/payloads/near_block/transaction/errors;errors";
 
 // Error that can occur while preparing or executing Wasm smart-contract.
@@ -38,7 +40,7 @@ message CompilationError {
     string account_id = 1;
   }
   message PrepareError {
-    .PrepareError error = 1;
+    borealis.payloads.near.PrepareError error = 1;
   }
   message WasmerCompileError {
     string msg = 1;

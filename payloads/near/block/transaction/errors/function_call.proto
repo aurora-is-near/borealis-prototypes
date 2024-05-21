@@ -1,7 +1,9 @@
 syntax = "proto3";
 
-import "payloads/near_block/transaction/errors/host.proto";
-import "payloads/near_block/transaction/errors/compilation.proto";
+package borealis.payloads.near;
+
+import "payloads/near/block/transaction/errors/host.proto";
+import "payloads/near/block/transaction/errors/compilation.proto";
 
 option go_package = "github.com/aurora-is-near/borealis-prototypes/go/payloads/near_block/transaction/errors;errors";
 
@@ -36,7 +38,7 @@ enum MethodResolveError {
 message FunctionCallErrorSer {
   // Wasm compilation error
   message CompilationError {
-    .CompilationError error = 1;
+    borealis.payloads.near.CompilationError error = 1;
   }
   // Wasm binary env link error
   message LinkError {
@@ -44,15 +46,15 @@ message FunctionCallErrorSer {
   }
   // Import/export resolve error
   message MethodResolveError {
-    .MethodResolveError error = 1;
+    borealis.payloads.near.MethodResolveError error = 1;
   }
   // A trap happened during execution of a binary
   message WasmTrap {
-    .WasmTrap error = 1;
+    borealis.payloads.near.WasmTrap error = 1;
   }
   message WasmUnknownError {}
   message HostError {
-    .HostError error = 1;
+    borealis.payloads.near.HostError error = 1;
   }
   message ExecutionError {
     string message = 1;

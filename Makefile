@@ -8,6 +8,6 @@ install-protoc-mac:
 
 protoc-test:
 	protoc \
-		--proto_path=types/proto/. \
+		--proto_path=. \
 		--descriptor_set_out=/dev/null \
-		$(shell find types/proto -name "*.proto")
+		$(shell find . -name "*.proto")

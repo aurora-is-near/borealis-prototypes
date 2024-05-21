@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+package borealis.payloads.near;
+
 option go_package = "github.com/aurora-is-near/borealis-prototypes/go/payloads/near_block/transaction/errors;errors";
 
 message HostError {

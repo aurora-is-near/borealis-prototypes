@@ -1,7 +1,9 @@
 syntax = "proto3";
 
-import "common/common.proto";
-import "payloads/near_block/stake.proto";
+package borealis.payloads.near;
+
+import "payloads/near/common/common.proto";
+import "payloads/near/block/stake.proto";
 
 option go_package = "github.com/aurora-is-near/borealis-prototypes/go/payloads/near_block;nearblock";
 
