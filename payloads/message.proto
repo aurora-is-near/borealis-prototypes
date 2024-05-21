@@ -5,8 +5,6 @@ package borealis.payloads;
 import "payloads/near/block/header.proto";
 import "payloads/near/block/shard.proto";
 
-option go_package = "github.com/aurora-is-near/borealis-prototypes/go;borealisproto";
-
 message Message {
   oneof payload {
     bytes generic = 1;

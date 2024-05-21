@@ -4,8 +4,6 @@ package borealis.blocksapi;
 
 import "blocksapi/message.proto";
 
-option go_package = "github.com/aurora-is-near/borealis-prototypes/go/blocksapi;blocksapi";
-
 message BlockStreamState {
     optional BlockMessage.ID earliest_message = 1;
     optional BlockMessage.ID latest_message = 2;

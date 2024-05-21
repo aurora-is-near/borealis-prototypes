@@ -5,8 +5,6 @@ package borealis.blocksapi;
 import "blocksapi/message.proto";
 import "google/protobuf/Empty.proto";
 
-option go_package = "github.com/aurora-is-near/borealis-prototypes/go/blocksapi;blocksapi";
-
 message BlockStreamFilter {
     message ShardList {
         repeated uint64 shards = 1;

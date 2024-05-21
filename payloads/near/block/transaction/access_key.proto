@@ -2,8 +2,6 @@ syntax = "proto3";
 
 package borealis.payloads.near;
 
-option go_package = "github.com/aurora-is-near/borealis-prototypes/go/payloads/near_block/transaction;transaction";
-
 message AccessKeyView {
   uint64 nonce = 1;
   AccessKeyPermissionView permission = 2;

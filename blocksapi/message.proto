@@ -2,8 +2,6 @@ syntax = "proto3";
 
 package borealis.blocksapi;
 
-option go_package = "github.com/aurora-is-near/borealis-prototypes/go/blocksapi;blocksapi";
-
 message BlockMessage {
     enum Kind {
         MSG_WHOLE = 0;

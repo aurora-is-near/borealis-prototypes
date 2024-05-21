@@ -6,8 +6,6 @@ import "payloads/near/common/common.proto";
 import "payloads/near/block/transaction/errors/receipt_validation.proto";
 import "payloads/near/block/transaction/errors/function_call.proto";
 
-option go_package = "github.com/aurora-is-near/borealis-prototypes/go/payloads/near_block/transaction/errors;errors";
-
 message InvalidAccessKeyError {
   message AccessKeyNotFound {
     string account_id = 1;

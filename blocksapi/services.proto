@@ -6,8 +6,6 @@ import "blocksapi/read_message.proto";
 import "blocksapi/stream_list.proto";
 import "blocksapi/stream.proto";
 
-option go_package = "github.com/aurora-is-near/borealis-prototypes/go/blocksapi;blocksapi";
-
 service BlocksProvider {
     // Returns information about available block streams
     rpc ListBlockStreams(ListBlockStreamsRequest) returns (ListBlockStreamsResponse);

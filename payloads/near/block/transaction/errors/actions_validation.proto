@@ -4,8 +4,6 @@ package borealis.payloads.near;
 
 import "payloads/near/common/common.proto";
 
-option go_package = "github.com/aurora-is-near/borealis-prototypes/go/payloads/near_block/transaction/errors;errors";
-
 // Describes the error for validating a list of actions.
 message ActionsValidationError {
   // The delete action must be a final aciton in transaction

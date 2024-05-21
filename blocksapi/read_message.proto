@@ -4,8 +4,6 @@ package borealis.blocksapi;
 
 import "blocksapi/message.proto";
 
-option go_package = "github.com/aurora-is-near/borealis-prototypes/go/blocksapi;blocksapi";
-
 message GetBlockMessageRequest {
     string stream_name = 1;
     BlockMessage.ID message_id = 2;
