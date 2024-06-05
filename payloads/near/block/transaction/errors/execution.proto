@@ -143,6 +143,10 @@ message TxExecutionError {
         uint64 delegate_nonce = 1;
         uint64 upper_bound = 2;
       }
+      // Non-refundable storage transfer to an existing account is not allowed according to NEP-491.
+      message NonRefundableTransferToExistingAccount {
+        string account_id = 1;
+      }
       oneof variant {
         AccountAlreadyExists account_already_exists = 1;
         AccountDoesNotExist account_does_not_exist = 2;
@@ -166,6 +170,7 @@ message TxExecutionError {
         DelegateActionAccessKeyError delegate_action_access_key_error = 20;
         DelegateActionInvalidNonce delegate_action_invalid_nonce = 21;
         DelegateActionNonceTooLarge delegate_action_nonce_too_large = 22;
+        NonRefundableTransferToExistingAccount non_refundable_transfer_to_existing_account = 23;
       }
     }
     optional uint64 index = 1;

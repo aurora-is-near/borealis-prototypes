@@ -20,10 +20,12 @@ message ReceiptEnumView {
     repeated DataReceiverView output_data_receivers = 4;
     repeated bytes h256_input_data_ids = 5;
     repeated ActionView actions = 6;
+    bool is_promise_yield = 7;
   }
   message Data {
     bytes h256_data_id = 1;
     optional bytes data = 2;
+    bool is_promise_resume = 3;
   }
   oneof variant {
     Action action = 1;
@@ -91,6 +93,9 @@ message ActionView {
     DelegateAction delegate_action = 1;
     Signature signature = 2;
   }
+  message NonrefundableStorageTransfer {
+    bytes u128_deposit = 1;
+  }
   oneof variant {
     CreateAccount create_account = 1;
     DeployContract deploy_contract = 2;
@@ -101,5 +106,6 @@ message ActionView {
     DeleteKey delete_key = 7;
     DeleteAccount delete_account = 8;
     Delegate delegate = 9;
+    NonrefundableStorageTransfer nonrefundable_storage_transfer = 10;
   }
 }
