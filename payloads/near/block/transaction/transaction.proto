@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package borealis.payloads.near;
+
+import "payloads/near/common/common.proto";
+import "payloads/near/block/transaction/execution.proto";
+import "payloads/near/block/transaction/receipt.proto";
+
+message TransactionWithOutcome {
+  SignedTransactionView transaction = 1;
+  ExecutionOutcomeWithOptionalReceipt outcome = 2;
+}
+
+message SignedTransactionView {
+  string signer_id = 1;
+  PublicKey public_key = 2;
+  uint64 nonce = 3;
+  string receiver_id = 4;
+  repeated ActionView actions = 5;
+  Signature signature = 6;
+  bytes h256_hash = 7;
+}

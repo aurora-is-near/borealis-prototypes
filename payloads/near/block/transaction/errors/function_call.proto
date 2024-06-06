@@ -1,0 +1,69 @@
+syntax = "proto3";
+
+package borealis.payloads.near;
+
+import "payloads/near/block/transaction/errors/host.proto";
+import "payloads/near/block/transaction/errors/compilation.proto";
+
+// A kind of a trap happened during execution of a binary
+enum WasmTrap {
+  // An `unreachable` opcode was executed.
+  UNREACHABLE = 0;
+  // Call indirect incorrect signature trap.
+  INCORRECT_CALL_INDIRECT_SIGNATURE = 1;
+  // Memory out of bounds trap.
+  MEMORY_OUT_OF_BOUNDS = 2;
+  // Call indirect out of bounds trap.
+  CALL_INDIRECT_OOB = 3;
+  // An arithmetic exception = 0; e.g. divided by zero.
+  ILLEGAL_ARITHMETIC = 4;
+  // Misaligned atomic access trap.
+  MISALIGNED_ATOMIC_ACCESS = 5;
+  // Indirect call to null.
+  INDIRECT_CALL_TO_NULL = 6;
+  // Stack overflow.
+  STACK_OVERFLOW = 7;
+  // Generic trap.
+  GENERIC_TRAP = 8;
+}
+
+enum MethodResolveError {
+  METHOD_EMPTY_NAME = 0;
+  METHOD_NOT_FOUND = 1;
+  METHOD_INVALID_SIGNATURE = 2;
+}
+
+message FunctionCallErrorSer {
+  // Wasm compilation error
+  message CompilationError {
+    borealis.payloads.near.CompilationError error = 1;
+  }
+  // Wasm binary env link error
+  message LinkError {
+    string msg = 1;
+  }
+  // Import/export resolve error
+  message MethodResolveError {
+    borealis.payloads.near.MethodResolveError error = 1;
+  }
+  // A trap happened during execution of a binary
+  message WasmTrap {
+    borealis.payloads.near.WasmTrap error = 1;
+  }
+  message WasmUnknownError {}
+  message HostError {
+    borealis.payloads.near.HostError error = 1;
+  }
+  message ExecutionError {
+    string message = 1;
+  }
+  oneof variant {
+    CompilationError compilation_error = 1;
+    LinkError link_error = 2;
+    MethodResolveError method_resolve_error = 3;
+    WasmTrap wasm_trap = 4;
+    WasmUnknownError wasm_unknown_error = 5;
+    HostError host_error = 6;
+    ExecutionError execution_error = 7;
+  }
+}

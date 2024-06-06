@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package borealis.blocksapi;
+
+message BlockMessage {
+    enum Kind {
+        MSG_WHOLE = 0;
+        MSG_HEADER = 1;
+        MSG_CHUNK = 2;
+    }
+    message ID {
+        Kind kind = 1;
+        uint64 height = 2;
+        uint64 shard_id = 3;
+    }
+    enum Format {
+        // JSON -> LZ4 -> CBOR bytes -> borealis envelope (whole blocks)
+        PAYLOAD_NEAR_BLOCK_V2 = 0;
+        // CBOR STRUCT -> borealis envelope (whole blocks)
+        PAYLOAD_AURORA_BLOCK_V2 = 1;
+        // protobuf (block headers + block shards)
+        PAYLOAD_NEAR_BLOCK_V3 = 2;
+    }
+    enum Compression {
+        COMPRESSION_NONE = 0;
+        COMPRESSION_ZSTD = 1;
+    }
+
+    ID id = 1;
+    Format format = 2;
+    Compression compression = 3;
+
+    oneof payload {
+        bytes raw_payload = 4;
+    }
+}
+
+message BlockMessageDeliverySettings {
+    bool exclude_payload = 1;
+    BlockMessage.Compression allow_compression = 2;
+    optional BlockMessage.Format require_format = 3;
+}

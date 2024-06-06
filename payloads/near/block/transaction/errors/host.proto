@@ -1,0 +1,109 @@
+syntax = "proto3";
+
+package borealis.payloads.near;
+
+message HostError {
+  // String encoding is bad UTF-16 sequence
+  message BadUTF16 {}
+  // String encoding is bad UTF-8 sequence
+  message BadUTF8 {}
+  // Exceeded the prepaid gas
+  message GasExceeded {}
+  // Exceeded the maximum amount of gas allowed to burn per contract
+  message GasLimitExceeded {}
+  // Exceeded the account balance
+  message BalanceExceeded {}
+  // Tried to call an empty method name
+  message EmptyMethodName {}
+  // Smart contract panicked
+  message GuestPanic { string panic_msg = 1; }
+  // IntegerOverflow happened during a contract execution
+  message IntegerOverflow {}
+  // `promise_idx` does not correspond to existing promises
+  message InvalidPromiseIndex { uint64 promise_idx = 1; }
+  // Actions can only be appended to non-joint promise.
+  message CannotAppendActionToJointPromise {}
+  // Returning joint promise is currently prohibited
+  message CannotReturnJointPromise {}
+  // Accessed invalid promise result index
+  message InvalidPromiseResultIndex { uint64 result_idx = 1; }
+  // Accessed invalid register id
+  message InvalidRegisterId { uint64 register_id = 1; }
+  // Iterator `iterator_index` was invalidated after its creation by performing a mutable operation on trie
+  message IteratorWasInvalidated { uint64 iterator_index = 1; }
+  // Accessed memory outside the bounds
+  message MemoryAccessViolation {}
+  // VM Logic returned an invalid receipt index
+  message InvalidReceiptIndex { uint64 receipt_index = 1; }
+  // Iterator index `iterator_index` does not exist
+  message InvalidIteratorIndex { uint64 iterator_index = 1; }
+  // VM Logic returned an invalid account id
+  message InvalidAccountId {}
+  // VM Logic returned an invalid method name
+  message InvalidMethodName {}
+  // VM Logic provided an invalid public key
+  message InvalidPublicKey {}
+  // `method_name` is not allowed in view calls
+  message ProhibitedInView { string method_name = 1; }
+  // The total number of logs will exceed the limit.
+  message NumberOfLogsExceeded { uint64 limit = 1; }
+  // The storage key length exceeded the limit.
+  message KeyLengthExceeded { uint64 length = 1; uint64 limit = 2; }
+  // The storage value length exceeded the limit.
+  message ValueLengthExceeded { uint64 length = 1; uint64 limit = 2; }
+  // The total log length exceeded the limit.
+  message TotalLogLengthExceeded { uint64 length = 1; uint64 limit = 2; }
+  // The maximum number of promises within a FunctionCall exceeded the limit.
+  message NumberPromisesExceeded { uint64 number_of_promises = 1; uint64 limit = 2; }
+  // The maximum number of input data dependencies exceeded the limit.
+  message NumberInputDataDependenciesExceeded { uint64 number_of_input_data_dependencies = 1; uint64 limit = 2; }
+  // The returned value length exceeded the limit.
+  message ReturnedValueLengthExceeded { uint64 length = 1; uint64 limit = 2; }
+  // The contract size for DeployContract action exceeded the limit.
+  message ContractSizeExceeded { uint64 size = 1; uint64 limit = 2; }
+  // The host function was deprecated.
+  message Deprecated { string method_name = 1; }
+  // General errors for ECDSA recover.
+  message ECRecoverError { string msg = 1; }
+  // Invalid input to alt_bn128 familiy of functions (e.g., point which isn't
+  // on the curve).
+  message AltBn128InvalidInput { string msg = 1; }
+  // Invalid input to ed25519 signature verification function (e.g. signature cannot be
+  // derived from bytes).
+  message Ed25519VerifyInvalidInput { string msg = 1; }
+  oneof variant {
+    BadUTF16 bad_utf16 = 1;
+    BadUTF8 bad_utf8 = 2;
+    GasExceeded gas_exceeded = 3;
+    GasLimitExceeded gas_limit_exceeded = 4;
+    BalanceExceeded balance_exceeded = 5;
+    EmptyMethodName empty_method_name = 6;
+    GuestPanic guest_panic = 7;
+    IntegerOverflow integer_overflow = 8;
+    InvalidPromiseIndex invalid_promise_index = 9;
+    CannotAppendActionToJointPromise cannot_append_action_to_joint_promise = 10;
+    CannotReturnJointPromise cannot_return_joint_promise = 11;
+    InvalidPromiseResultIndex invalid_promise_result_index = 12;
+    InvalidRegisterId invalid_register_id = 13;
+    IteratorWasInvalidated iterator_was_invalidated = 14;
+    MemoryAccessViolation memory_access_violation = 15;
+    InvalidReceiptIndex invalid_receipt_index = 16;
+    InvalidIteratorIndex invalid_iterator_index = 17;
+    InvalidAccountId invalid_account_id = 18;
+    InvalidMethodName invalid_method_name = 19;
+    InvalidPublicKey invalid_public_key = 20;
+    ProhibitedInView prohibited_in_view = 21;
+    NumberOfLogsExceeded number_of_logs_exceeded = 22;
+    KeyLengthExceeded key_length_exceeded = 23;
+    ValueLengthExceeded value_length_exceeded = 24;
+    TotalLogLengthExceeded total_log_length_exceeded = 25;
+    NumberPromisesExceeded number_promises_exceeded = 26;
+    NumberInputDataDependenciesExceeded number_input_data_dependencies_exceeded = 27;
+    ReturnedValueLengthExceeded returned_value_length_exceeded = 28;
+    ContractSizeExceeded contract_size_exceeded = 29;
+    Deprecated deprecated = 30;
+    ECRecoverError ecrecover_error = 31;
+    AltBn128InvalidInput alt_bn_128_invalid_input = 32;
+    Ed25519VerifyInvalidInput ed25519_verify_invalid_input = 33;
+  }
+}

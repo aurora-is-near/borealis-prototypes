@@ -1,0 +1,115 @@
+syntax = "proto3";
+
+package borealis.blocksapi;
+
+import "blocksapi/message.proto";
+import "google/protobuf/Empty.proto";
+
+message BlockStreamFilter {
+    message ShardList {
+        repeated uint64 shards = 1;
+    }
+
+    oneof headers_filter {
+        google.protobuf.Empty exclude_headers = 1;
+    }
+
+    oneof shards_filter {
+        google.protobuf.Empty exclude_all_shards = 2;
+        ShardList include_shard_list = 3;
+        ShardList exclude_shard_list = 4;
+
+        // Later:
+        // AccountList include_shards_with_accounts = 5;
+        // ...
+    }
+}
+
+message BlockStreamDeliverySettings {
+    BlockStreamFilter filter = 1;
+    BlockMessageDeliverySettings content = 2;
+}
+
+message ReceiveBlocksRequest {
+
+    // Defines initial stream seek behavior for given target message ID
+    enum StartPolicy {
+        // Start on earliest available message
+        START_ON_EARLIEST_AVAILABLE = 0;
+        // Start on latest available message
+        START_ON_LATEST_AVAILABLE = 1;
+        // Start exactly on target, return error if no such target
+        START_EXACTLY_ON_TARGET = 2;
+        // Start on message which comes exactly after target, return error if no such target
+        START_EXACTLY_AFTER_TARGET = 3;
+        // Start on earliest available message that is greater or equal to target
+        START_ON_CLOSEST_TO_TARGET = 4;
+        // Start on earliest available message that is strictly greater than target
+        START_ON_EARLIEST_AFTER_TARGET = 5;
+    }
+
+    // Defines how service should behave if start target is not yet available
+    enum CatchupPolicy {
+        // Return error if catch up needed
+        CATCHUP_PANIC = 0;
+        // Don't send anything until catch up
+        CATCHUP_WAIT = 1;
+        // Stream normally from whatever is available before start target
+        CATCHUP_STREAM = 2;
+    }
+
+    // Defines when stream has to stop
+    enum StopPolicy {
+        // Follow new blocks
+        STOP_NEVER = 0;
+        // Don't send messages greater than target
+        STOP_AFTER_TARGET = 1;
+        // Don't send messages greater or equal to target
+        STOP_BEFORE_TARGET = 2;
+    }
+
+    string stream_name = 1;
+
+    StartPolicy start_policy = 2;
+    optional BlockMessage.ID start_target = 3;
+
+    StopPolicy stop_policy = 4;
+    optional BlockMessage.ID stop_target = 5;
+
+    BlockStreamDeliverySettings delivery_settings = 6;
+
+    CatchupPolicy catchup_policy = 7;
+    // If not provided - default delivery settings are used during catchup
+    optional BlockStreamDeliverySettings catchup_delivery_settings = 8;
+}
+
+message ReceiveBlocksResponse {
+    message Result {
+        BlockMessage message = 1;
+        bool catchup_in_progress = 2;
+        // TODO: maybe add auxiliary info that helps understanding distance to latest block
+    }
+    message Done {
+        string description = 1;
+        // TODO: end reason?
+        // TODO: stats? etc?
+        // TODO: next message id?
+    }
+    message Error {
+        enum Kind {
+            // Default error class
+            UNKNOWN = 0;
+            // Catch up required, but catchup policy is PANIC
+            CATCHUP_REQUIRED = 1;
+            // Request is constructed in a wrong way
+            BAD_REQUEST = 2;
+        }
+        Kind kind = 1;
+        string description = 2;
+    }
+    oneof response {
+        Result message = 1;
+        Done done = 2;
+        Error error = 3;
+    }
+}

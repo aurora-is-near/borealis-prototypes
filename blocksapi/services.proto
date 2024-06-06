@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package borealis.blocksapi;
+
+import "blocksapi/read_message.proto";
+import "blocksapi/stream_list.proto";
+import "blocksapi/stream.proto";
+
+service BlocksProvider {
+    // Returns information about available block streams
+    rpc ListBlockStreams(ListBlockStreamsRequest) returns (ListBlockStreamsResponse);
+    
+    // Reads individual message
+    rpc GetBlockMessage(GetBlockMessageRequest) returns (GetBlockMessageResponse);
+
+    // Streams blocks continiously
+    rpc ReceiveBlocks(ReceiveBlocksRequest) returns (stream ReceiveBlocksResponse);
+}

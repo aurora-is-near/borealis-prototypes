@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package borealis.blocksapi;
+
+import "blocksapi/message.proto";
+
+message BlockStreamState {
+    optional BlockMessage.ID earliest_message = 1;
+    optional BlockMessage.ID latest_message = 2;
+}
+
+message BlockStreamInfo {
+    string name = 1;
+    string description = 2;
+    BlockMessage.Format format = 3;
+    BlockStreamState state = 4;
+}
+
+// TODO: add rpc for info/state of individual stream? Not needed now though

@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package borealis.payloads;
+
+import "payloads/near/block/header.proto";
+import "payloads/near/block/shard.proto";
+
+message Message {
+  oneof payload {
+    bytes generic = 1;
+    borealis.payloads.near.BlockHeaderView near_block_header = 2;
+    borealis.payloads.near.BlockShard near_block_shard = 3;
+  }
+}
