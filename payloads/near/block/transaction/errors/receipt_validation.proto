@@ -36,6 +36,11 @@ message ReceiptValidationError {
   message ActionsValidation {
     ActionsValidationError error = 1;
   }
+  // Receipt is bigger than the limit.
+  message ReceiptSizeExceeded {
+    uint64 size = 1;
+    uint64 limit = 2;
+  }
   oneof variant {
     InvalidPredecessorId invalid_predecessor_id = 1;
     InvalidReceiverId invalid_receiver_id = 2;
@@ -44,5 +49,6 @@ message ReceiptValidationError {
     ReturnedValueLengthExceeded returned_value_length_exceeded = 5;
     NumberInputDataDependenciesExceeded number_input_data_dependencies_exceeded = 6;
     ActionsValidation actions_validation = 7;
+    ReceiptSizeExceeded receipt_size_exceeded = 8;
   }
 }

@@ -19,4 +19,5 @@ message SignedTransactionView {
   repeated ActionView actions = 5;
   Signature signature = 6;
   bytes h256_hash = 7;
+  uint64 priority_fee = 8;
 }
