@@ -271,6 +271,52 @@ message TxExecutionError {
       uint64 size = 1;
       uint64 limit = 2;
     }
+    message InvalidTransactionVersion {}
+    message StorageError {
+      message StorageInternalError {}
+      message MissingTrieValueContext {
+        message TrieIterator {}
+        message TriePrefetchingStorage {}
+        message TrieMemoryPartialStorage {}
+        message TrieStorage {}
+        oneof variant {
+          TrieIterator trie_iterator = 1;
+          TriePrefetchingStorage trie_prefetching_storage = 2;
+          TrieMemoryPartialStorage trie_memory_partial_storage = 3;
+          TrieStorage trie_storage = 4;
+        }
+      }
+      message MissingTrieValue {
+        MissingTrieValueContext missing_trie_value_context = 1;
+        bytes h256_hash = 2;
+      }
+      message UnexpectedTrieValue {}
+      message StorageInconsistentState {
+        string message = 1;
+      }
+      message FlatStorageBlockNotSupported {
+        string message = 1;
+      }
+      message MemTrieLoadingError {
+        string message = 1;
+      }
+      oneof variant {
+        StorageInternalError storage_internal_error = 1;
+        MissingTrieValue missing_trie_value = 2;
+        UnexpectedTrieValue unexpected_trie_value = 3;
+        StorageInconsistentState storage_inconsistent_state = 4;
+        FlatStorageBlockNotSupported flat_storage_block_not_supported = 5;
+        MemTrieLoadingError mem_trie_loading_error = 6;
+      }
+    }
+    message ShardCongested {
+      uint32 shard_id = 1;
+      float congestion_level = 2;
+    }
+    message ShardStuck {
+      uint32 shard_id = 1;
+      uint64 missed_chunks = 2;
+    }
     oneof variant {
       InvalidAccessKeyError invalid_access_key_error = 1;
       InvalidSignerId invalid_signer_id = 2;
@@ -286,6 +332,10 @@ message TxExecutionError {
       Expired expired = 12;
       ActionsValidation actions_validation = 13;
       TransactionSizeExceeded transaction_size_exceeded = 14;
+      InvalidTransactionVersion invalid_transaction_version = 15;
+      StorageError storage_error = 16;
+      ShardCongested shard_congested = 17;
+      ShardStuck shard_stuck = 18;
     }
   }
   oneof variant {
