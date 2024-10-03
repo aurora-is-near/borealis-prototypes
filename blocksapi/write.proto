@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+package borealis.blocksapi;
+
+import "blocksapi/message.proto";
+
+message WriteBlocksRequest {
+    message WriteMessage {
+        string stream_name = 1;
+        BlockMessage message = 2;
+        string feedback_id = 3;
+    }
+
+    oneof request {
+        WriteMessage write_message = 1;
+    }
+}
+
+message WriteBlocksResponse {
+    message WriteFeedback {
+        enum Status {
+            // Success
+            WRITE_OK = 0;
+            // Block is already written to storage
+            WRITE_SKIPPED = 1;
+            // Block is dropped from the waiting queue (for example it's too early)
+            WRITE_DROPPED = 2;
+            // Something is wrong with the request itself
+            WRITE_BAD_REQUEST = 3;
+            // No such stream configured
+            WRITE_UNKNOWN_STREAM = 4;
+            // Given format is not compatible with given stream or the endpoint
+            WRITE_INCOMPATIBLE_PAYLOAD_FORMAT = 5;
+            // Block message parsing error
+            WRITE_PARSING_ERR = 6;
+            // Block message validation error
+            WRITE_VALIDATION_ERR = 7;
+            // Can't insert block message
+            WRITE_INSERTION_ERR = 8;
+            // Stream is currently not available for write
+            WRITE_STREAM_UNAVAILABLE = 9;
+            // Backend is currently not available for write
+            WRITE_BACKEND_UNAVAILABLE = 10;
+            // All other errors
+            WRITE_UNKNOWN_ERR = 11;
+        }
+
+        string stream_name = 1;
+        uint64 write_sequence = 2;
+        string feedback_id = 3;
+        BlockMessage.ID message_id = 4;
+
+        Status status = 5;
+        string error_message = 6;
+    }
+
+    oneof response {
+        WriteFeedback feedback = 1;
+    }
+}

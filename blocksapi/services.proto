@@ -5,6 +5,7 @@ package borealis.blocksapi;
 import "blocksapi/read_message.proto";
 import "blocksapi/stream_list.proto";
 import "blocksapi/stream.proto";
+import "blocksapi/write.proto";
 
 service BlocksProvider {
     // Returns information about available block streams
@@ -15,4 +16,24 @@ service BlocksProvider {
 
     // Streams blocks continiously
     rpc ReceiveBlocks(ReceiveBlocksRequest) returns (stream ReceiveBlocksResponse);
+}
+
+service BlocksWriter {
+    // Writes blocks continiously
+    rpc WriteBlocks(stream WriteBlocksRequest) returns (stream WriteBlocksResponse);
+
+    /*
+        Note on why continuous writing should be done in a streaming manner instead of
+        request/response manner:
+        - In contrast to sequential requests/responses model - streaming requires
+            no additional latency between writes.
+        - In contrast to parallel requests/responses model - streaming provides
+            a strict flow control (with strict back-pressure) on writes.
+        - Streaming is generally less resource-consuming and more performant than
+            many requests/responses.
+        - Single streaming session will stick with a single backend (improving
+            latency of writes that depend on each other) in contrast to
+            requests/responses model where each request can be routed to a separate
+            backend in case of load-balancing.
+    */
 }
