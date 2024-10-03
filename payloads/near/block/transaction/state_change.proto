@@ -31,7 +31,7 @@ message StateChangeCauseView {
   message UpdatedDelayedReceipts {}
   message ValidatorAccountsUpdate {}
   message Migration {}
-  message Resharding {}
+  message ReshardingV2 {}
   oneof variant {
     NotWritableToDisk not_writable_to_disk = 1;
     InitialState initial_state = 2;
@@ -43,7 +43,7 @@ message StateChangeCauseView {
     UpdatedDelayedReceipts updated_delayed_receipts = 8;
     ValidatorAccountsUpdate validator_accounts_update = 9;
     Migration migration = 10;
-    Resharding resharding = 11;
+    ReshardingV2 resharding = 11;
   }
 }
 
