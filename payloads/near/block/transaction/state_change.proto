@@ -32,6 +32,7 @@ message StateChangeCauseView {
   message ValidatorAccountsUpdate {}
   message Migration {}
   message ReshardingV2 {}
+  message BandwidthSchedulerStateUpdate {}
   oneof variant {
     NotWritableToDisk not_writable_to_disk = 1;
     InitialState initial_state = 2;
@@ -44,6 +45,7 @@ message StateChangeCauseView {
     ValidatorAccountsUpdate validator_accounts_update = 9;
     Migration migration = 10;
     ReshardingV2 resharding = 11;
+    BandwidthSchedulerStateUpdate bandwidth_scheduler_state_update = 12;
   }
 }
 
