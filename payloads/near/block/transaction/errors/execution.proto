@@ -300,6 +300,7 @@ message TxExecutionError {
       message MemTrieLoadingError {
         string message = 1;
       }
+      message FlatStorageReshardingAlreadyInProgress {}
       oneof variant {
         StorageInternalError storage_internal_error = 1;
         MissingTrieValue missing_trie_value = 2;
@@ -307,6 +308,7 @@ message TxExecutionError {
         StorageInconsistentState storage_inconsistent_state = 4;
         FlatStorageBlockNotSupported flat_storage_block_not_supported = 5;
         MemTrieLoadingError mem_trie_loading_error = 6;
+        FlatStorageReshardingAlreadyInProgress flat_storage_resharding_already_in_progress = 7;
       }
     }
     message ShardCongested {
