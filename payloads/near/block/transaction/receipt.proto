@@ -97,6 +97,18 @@ message ActionView {
   message NonrefundableStorageTransfer {
     bytes u128_deposit = 1;
   }
+  message DeployGlobalContract {
+    bytes code = 1;
+  }
+  message DeployGlobalContractByAccountId {
+    bytes code = 1;
+  }
+  message UseGlobalContract {
+    bytes code_hash = 1;
+  }
+  message UseGlobalContractByAccountId {
+    string account_id = 1;
+  }
   oneof variant {
     CreateAccount create_account = 1;
     DeployContract deploy_contract = 2;
@@ -108,5 +120,9 @@ message ActionView {
     DeleteAccount delete_account = 8;
     Delegate delegate = 9;
     NonrefundableStorageTransfer nonrefundable_storage_transfer = 10;
+    DeployGlobalContract = 11;
+    DeployGlobalContractByAccountId = 12;
+    UseGlobalContract = 13;
+    UseGlobalContractByAccountId = 14;
   }
 }
