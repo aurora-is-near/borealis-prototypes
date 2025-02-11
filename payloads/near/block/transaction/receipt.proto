@@ -98,12 +98,7 @@ message ActionView {
     bytes u128_deposit = 1;
   }
   message DeployGlobalContract {
-    enum GlobalContractDeployMode {
-      CODE_HASH = 0;
-      ACCOUNT_ID = 1;
-    }
     bytes code = 1;
-    GlobalContractDeployMode deploy_mode = 2;
   }
   message DeployGlobalContractByAccountId {
     bytes code = 1;
