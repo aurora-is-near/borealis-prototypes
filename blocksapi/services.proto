@@ -10,16 +10,16 @@ import "blocksapi/write.proto";
 service BlocksProvider {
     // Returns information about available block streams
     rpc ListBlockStreams(ListBlockStreamsRequest) returns (ListBlockStreamsResponse);
-    
+
     // Reads individual message
     rpc GetBlockMessage(GetBlockMessageRequest) returns (GetBlockMessageResponse);
 
-    // Streams blocks continiously
+    // Streams blocks continuously
     rpc ReceiveBlocks(ReceiveBlocksRequest) returns (stream ReceiveBlocksResponse);
 }
 
 service BlocksWriter {
-    // Writes blocks continiously
+    // Writes blocks continuously
     rpc WriteBlocks(stream WriteBlocksRequest) returns (stream WriteBlocksResponse);
 
     /*

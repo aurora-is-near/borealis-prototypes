@@ -3,7 +3,7 @@ syntax = "proto3";
 package borealis.blocksapi;
 
 import "blocksapi/message.proto";
-import "google/protobuf/Empty.proto";
+import "google/protobuf/empty.proto";
 
 message BlockStreamFilter {
     message ShardList {
