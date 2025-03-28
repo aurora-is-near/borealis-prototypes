@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package borealis.blocksapi;
 
+import "blocksapi/cursor.proto";
 import "blocksapi/read_message.proto";
 import "blocksapi/stream_list.proto";
 import "blocksapi/stream.proto";
@@ -35,5 +36,15 @@ service BlocksWriter {
             latency of writes that depend on each other) in contrast to
             requests/responses model where each request can be routed to a separate
             backend in case of load-balancing.
+    */
+}
+
+service CursorProvider {
+    // Provides information about current cursor position
+
+    rpc GetCursorPosition(GetCursorPositionRequest) returns (GetCursorPositionResponse);
+
+    /*
+        Cursors are needed to track relevant state of streams progression
     */
 }

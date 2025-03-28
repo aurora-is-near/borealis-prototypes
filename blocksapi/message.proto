@@ -20,10 +20,15 @@ message BlockMessage {
         PAYLOAD_AURORA_BLOCK_V2 = 1;
         // protobuf (block headers + block shards)
         PAYLOAD_NEAR_BLOCK_V3 = 2;
+        // JSON (block headers separately, shards separately), classic Lake-compatible format
+        PAYLOAD_NEAR_BLOCK_V4 = 3;
+        // JSON (whole blocks)
+        PAYLOAD_AURORA_BLOCK_V3 = 4;
     }
     enum Compression {
         COMPRESSION_NONE = 0;
         COMPRESSION_ZSTD = 1;
+        COMPRESSION_ZSTD_WITH_DICTS = 2;
     }
 
     ID id = 1;
@@ -33,6 +38,9 @@ message BlockMessage {
     oneof payload {
         bytes raw_payload = 4;
     }
+
+    // Little-endian number containing first 8 bytes of SHA-3 256 hash of used compression dictionary
+    optional fixed64 zstd_dict_sha3_hash = 5;
 }
 
 message BlockMessageDeliverySettings {

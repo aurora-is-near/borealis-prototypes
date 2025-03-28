@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package borealis.blocksapi;
+
+import "blocksapi/message.proto";
+
+message GetCursorPositionRequest {
+    string stream_name = 1;
+    // Optional clarification in case if there are multiple streams with same name but from different sources
+    string stream_origin = 2;
+    string cursor_name = 3;
+}
+
+message GetCursorPositionResponse {
+    message Result {
+        BlockMessage.ID message_id = 1;
+    }
+    message Error {
+        enum Kind {
+            // Default error kind
+            UNKNOWN = 0;
+            // No such stream
+            STREAM_NOT_FOUND = 1;
+            // No such cursor
+            CURSOR_NOT_FOUND = 2;
+        }
+        Kind kind = 1;
+        string description = 2;
+    }
+    oneof response {
+        Result result = 1;
+        Error error = 2;
+    }
+}

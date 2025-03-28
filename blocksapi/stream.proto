@@ -38,9 +38,9 @@ message ReceiveBlocksRequest {
         START_ON_EARLIEST_AVAILABLE = 0;
         // Start on latest available message
         START_ON_LATEST_AVAILABLE = 1;
-        // Start exactly on target, return error if no such target
+        // Start exactly on target, return error if no such target (and it's not a skip-block)
         START_EXACTLY_ON_TARGET = 2;
-        // Start on message which comes exactly after target, return error if no such target
+        // Start on message which comes exactly after target, return error if no such target (and it's not a skip-block)
         START_EXACTLY_AFTER_TARGET = 3;
         // Start on earliest available message that is greater or equal to target
         START_ON_CLOSEST_TO_TARGET = 4;
@@ -69,6 +69,8 @@ message ReceiveBlocksRequest {
     }
 
     string stream_name = 1;
+    // Optional clarification in case if there are multiple streams with same name but from different sources
+    string stream_origin = 9;
 
     StartPolicy start_policy = 2;
     optional BlockMessage.ID start_target = 3;
@@ -81,13 +83,15 @@ message ReceiveBlocksRequest {
     CatchupPolicy catchup_policy = 7;
     // If not provided - default delivery settings are used during catchup
     optional BlockStreamDeliverySettings catchup_delivery_settings = 8;
+
+    // Each hash is little-endian number containing first 8 bytes of SHA-3 256 hash of used compression dictionary
+    repeated fixed64 cached_zstd_dicts_sha3_hashes = 10;
 }
 
 message ReceiveBlocksResponse {
     message Result {
         BlockMessage message = 1;
         bool catchup_in_progress = 2;
-        // TODO: maybe add auxiliary info that helps understanding distance to latest block
     }
     message Done {
         string description = 1;
@@ -107,9 +111,15 @@ message ReceiveBlocksResponse {
         Kind kind = 1;
         string description = 2;
     }
+    message ZstdDictionary {
+        bytes data = 1;
+        // Little-endian number containing first 8 bytes of SHA-3 256 hash of data. Used as dictionary identifier
+        fixed64 sha3_hash = 2;
+    }
     oneof response {
         Result message = 1;
         Done done = 2;
         Error error = 3;
+        ZstdDictionary zstd_dict = 4;
     }
 }
