@@ -7,6 +7,8 @@ import "blocksapi/message.proto";
 message WriteBlocksRequest {
     message WriteMessage {
         string stream_name = 1;
+        // Optional clarification in case if there are multiple streams with same name but from different sources
+        string stream_origin = 4;
         BlockMessage message = 2;
         string feedback_id = 3;
     }
@@ -46,6 +48,7 @@ message WriteBlocksResponse {
         }
 
         string stream_name = 1;
+        string stream_origin = 7;
         uint64 write_sequence = 2;
         string feedback_id = 3;
         BlockMessage.ID message_id = 4;
