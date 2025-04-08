@@ -31,3 +31,16 @@ message PublicKey {
     SECP256K1 secp256k1 = 2;
   }
 }
+
+message GlobalContractIdentifier {
+  message CodeHash {
+    bytes value = 1;
+  }
+  message AccountId {
+    string value = 1;
+  }
+  oneof variant {
+    CodeHash code_hash = 1;
+    AccountId account_id = 2;
+  }
+}

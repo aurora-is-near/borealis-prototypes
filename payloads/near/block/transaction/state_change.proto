@@ -100,4 +100,6 @@ message AccountView {
   bytes h256_code_hash = 3;
   uint64 storage_usage = 4;
   uint64 storage_paid_at = 5;
+  optional bytes global_contract_hash = 6;
+  optional string global_contract_account_id = 7;
 }

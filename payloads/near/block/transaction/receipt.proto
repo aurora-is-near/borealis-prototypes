@@ -28,9 +28,16 @@ message ReceiptEnumView {
     optional bytes data = 2;
     bool is_promise_resume = 3;
   }
+  message GlobalContractDistribution {
+    GlobalContractIdentifier global_contract_identifier = 1;
+    uint64 target_shard = 2;
+    repeated uint64 already_delivered_shards = 3;
+    bytes code = 4;
+  }
   oneof variant {
     Action action = 1;
     Data data = 2;
+    GlobalContractDistribution global_contract_distribution = 3;
   }
 }
 
