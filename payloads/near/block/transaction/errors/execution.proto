@@ -147,6 +147,9 @@ message TxExecutionError {
       message NonRefundableTransferToExistingAccount {
         string account_id = 1;
       }
+      message GlobalContractDoesNotExist {
+        GlobalContractIdentifier identifier = 1;
+      }
       oneof variant {
         AccountAlreadyExists account_already_exists = 1;
         AccountDoesNotExist account_does_not_exist = 2;
@@ -171,6 +174,7 @@ message TxExecutionError {
         DelegateActionInvalidNonce delegate_action_invalid_nonce = 21;
         DelegateActionNonceTooLarge delegate_action_nonce_too_large = 22;
         NonRefundableTransferToExistingAccount non_refundable_transfer_to_existing_account = 23;
+        GlobalContractDoesNotExist global_contract_does_not_exist = 24;
       }
     }
     optional uint64 index = 1;
