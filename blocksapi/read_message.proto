@@ -32,6 +32,10 @@ message GetBlockMessageResponse {
             UNAVAILABLE_MESSAGE_KIND = 6;
             // Request is constructed in a wrong way
             BAD_REQUEST = 7;
+            // Requested data is currently unavailable
+            UNAVAILABLE = 8;
+            // Authorization failure
+            ACCESS_DENIED = 9;
         }
         Kind kind = 1;
         string description = 2;

@@ -16,6 +16,10 @@ message ListBlockStreamsResponse {
         enum Kind {
             // Default error kind
             UNKNOWN = 0;
+            // Requested data is currently unavailable
+            UNAVAILABLE = 1;
+            // Authorization failure
+            ACCESS_DENIED = 2;
         }
         Kind error_class = 1;
         string description = 2;
