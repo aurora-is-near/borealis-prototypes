@@ -27,7 +27,7 @@ message GetCursorPositionResponse {
             STREAM_IS_EMPTY = 3;
             // Requested data is currently unavailable
             UNAVAILABLE = 4;
-            // Auhtorization failure
+            // Authorization failure
             ACCESS_DENIED = 5;
         }
         Kind kind = 1;

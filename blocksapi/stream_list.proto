@@ -18,7 +18,7 @@ message ListBlockStreamsResponse {
             UNKNOWN = 0;
             // Requested data is currently unavailable
             UNAVAILABLE = 1;
-            // Auhtorization failure
+            // Authorization failure
             ACCESS_DENIED = 2;
         }
         Kind error_class = 1;

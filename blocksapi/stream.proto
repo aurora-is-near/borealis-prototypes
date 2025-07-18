@@ -109,7 +109,7 @@ message ReceiveBlocksResponse {
             BAD_REQUEST = 2;
             // Requested data is currently unavailable
             UNAVAILABLE = 3;
-            // Auhtorization failure
+            // Authorization failure
             ACCESS_DENIED = 4;
             // No such stream
             STREAM_NOT_FOUND = 5;

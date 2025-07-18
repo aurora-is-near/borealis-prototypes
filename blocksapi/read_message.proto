@@ -34,7 +34,7 @@ message GetBlockMessageResponse {
             BAD_REQUEST = 7;
             // Requested data is currently unavailable
             UNAVAILABLE = 8;
-            // Auhtorization failure
+            // Authorization failure
             ACCESS_DENIED = 9;
         }
         Kind kind = 1;
