@@ -45,6 +45,8 @@ message WriteBlocksResponse {
             WRITE_BACKEND_UNAVAILABLE = 10;
             // All other errors
             WRITE_UNKNOWN_ERR = 11;
+            // Auhtorization failure
+            WRITE_ACCESS_DENIED = 12;
         }
 
         string stream_name = 1;

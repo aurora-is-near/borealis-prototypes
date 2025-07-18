@@ -23,6 +23,12 @@ message GetCursorPositionResponse {
             STREAM_NOT_FOUND = 1;
             // No such cursor
             CURSOR_NOT_FOUND = 2;
+            // Stream has no messages
+            STREAM_IS_EMPTY = 3;
+            // Requested data is currently unavailable
+            UNAVAILABLE = 4;
+            // Auhtorization failure
+            ACCESS_DENIED = 5;
         }
         Kind kind = 1;
         string description = 2;
