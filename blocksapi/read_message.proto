@@ -6,6 +6,7 @@ import "blocksapi/message.proto";
 
 message GetBlockMessageRequest {
     string stream_name = 1;
+    string stream_origin = 4;
     BlockMessage.ID message_id = 2;
     BlockMessageDeliverySettings delivery_settings = 3;
 }
