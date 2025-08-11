@@ -5,12 +5,13 @@ package borealis.blocksapi;
 import "blocksapi/stream_info.proto";
 
 message ListBlockStreamsRequest {
-    repeated string stream_filter = 1;
+    reserved 1; // Deprecated: repeated string stream_filter = 1
 }
 
 message ListBlockStreamsResponse {
     message Result {
-        map<string, BlockStreamInfo> response = 1;
+        reserved 1; // Deprecated: map<string, BlockStreamInfo> response = 1;
+        repeated BlockStreamInfo streams = 2;
     }
     message Error {
         enum Kind {
