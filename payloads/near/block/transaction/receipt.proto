@@ -116,6 +116,15 @@ message ActionView {
   message UseGlobalContractByAccountId {
     string account_id = 1;
   }
+  message DeterministicStateInit {
+    GlobalContractIdentifier code = 1;
+    message DataEntry {
+      bytes key = 1;
+      bytes value = 2;
+      }
+    repeated DataEntry data = 2; // data: BTreeMap<Vec<u8>, Vec<u8>>,
+    bytes u128_deposit = 3;
+  }
   oneof variant {
     CreateAccount create_account = 1;
     DeployContract deploy_contract = 2;
@@ -131,5 +140,6 @@ message ActionView {
     DeployGlobalContractByAccountId deploy_global_contract_by_account_id = 12;
     UseGlobalContract use_global_contract = 13;
     UseGlobalContractByAccountId use_global_contract_by_account_id = 14;
+    DeterministicStateInit deterministic_state_init = 15;
   }
 }
