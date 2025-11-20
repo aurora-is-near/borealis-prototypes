@@ -29,6 +29,10 @@ enum PrepareError {
   TOO_MANY_FUNCTIONS = 7;
   // Contract contains too many locals.
   TOO_MANY_LOCALS = 8;
+  // Contract contains too many tables.
+  TOO_MANY_TABLES = 9;
+  // Contract contains too many table elements.
+  TOO_MANY_TABLE_ELEMENTS = 10;
 }
 
 message CompilationError {

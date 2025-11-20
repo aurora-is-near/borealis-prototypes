@@ -19,3 +19,9 @@ message AccessKeyPermissionView {
     FullAccess full_access = 2;
   }
 }
+
+message GasKeyView {
+  uint32 num_nonces = 1;
+  bytes u128_balance = 2;
+  AccessKeyPermissionView permission = 3;
+}

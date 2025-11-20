@@ -254,6 +254,18 @@ message TxExecutionError {
         string protocol_feature = 1;
         uint32 version = 2;
       }
+      message InvalidDeterministicStateInitReceiver {
+        string receiver_id = 1;
+        string derived_id = 2;
+      }
+      message DeterministicStateInitKeyLengthExceeded {
+        uint64 length = 1;
+        uint64 limit = 2;
+      }
+      message DeterministicStateInitValueLengthExceeded {
+        uint64 length = 1;
+        uint64 limit = 2;
+      }
       oneof variant {
         DeleteActionMustBeFinal delete_action_must_be_final = 1;
         TotalPrepaidGasExceeded total_prepaid_gas_exceeded = 2;
@@ -269,6 +281,9 @@ message TxExecutionError {
         FunctionCallZeroAttachedGas function_call_zero_attached_gas = 12;
         DelegateActionMustBeOnlyOne delegate_action_must_be_only_one = 13;
         UnsupportedProtocolFeature unsupported_protocol_feature = 14;
+        InvalidDeterministicStateInitReceiver invalid_deterministic_state_init_receiver = 15;
+        DeterministicStateInitKeyLengthExceeded deterministic_state_init_key_length_exceeded = 16;
+        DeterministicStateInitValueLengthExceeded deterministic_state_init_value_length_exceeded = 17;
       }
     }
     message TransactionSizeExceeded {

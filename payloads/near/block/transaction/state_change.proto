@@ -82,6 +82,21 @@ message StateChangeValueView {
   message ContractCodeDeletion {
     string account_id = 1;
   }
+  message GasKeyUpdate {
+    string account_id = 1;
+    PublicKey public_key = 2;
+    GasKeyView gas_key = 3;
+  }
+  message GasKeyNonceUpdate {
+    string account_id = 1;
+    PublicKey public_key = 2;
+    uint32 index = 3;
+    uint64 nonce = 4;
+  }
+  message GasKeyDeletion {
+    string account_id = 1;
+    PublicKey public_key = 2;
+  }
   oneof variant {
     AccountUpdate account_update = 1;
     AccountDeletion account_deletion = 2;
@@ -91,6 +106,9 @@ message StateChangeValueView {
     DataDeletion data_deletion = 6;
     ContractCodeUpdate contract_code_update = 7;
     ContractCodeDeletion contract_code_deletion = 8;
+    GasKeyUpdate gas_key_update = 9;
+    GasKeyNonceUpdate gas_key_nonce_update = 10;
+    GasKeyDeletion gas_key_deletion = 11;
   }
 }
 

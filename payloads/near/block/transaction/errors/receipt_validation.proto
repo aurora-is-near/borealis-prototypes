@@ -41,6 +41,11 @@ message ReceiptValidationError {
     uint64 size = 1;
     uint64 limit = 2;
   }
+  // The `refund_to` of an ActionReceipt is not valid.
+  message InvalidRefundTo {
+    string account_id = 1;
+  }
+
   oneof variant {
     InvalidPredecessorId invalid_predecessor_id = 1;
     InvalidReceiverId invalid_receiver_id = 2;
@@ -50,5 +55,6 @@ message ReceiptValidationError {
     NumberInputDataDependenciesExceeded number_input_data_dependencies_exceeded = 6;
     ActionsValidation actions_validation = 7;
     ReceiptSizeExceeded receipt_size_exceeded = 8;
+    InvalidRefundTo invalid_refund_to = 9;
   }
 }
