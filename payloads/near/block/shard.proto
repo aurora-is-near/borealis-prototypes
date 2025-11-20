@@ -22,6 +22,7 @@ message ChunkView {
   ChunkHeaderView header = 2;
   repeated TransactionWithOutcome transactions = 3;
   repeated ReceiptView receipts = 4;
+  repeated ReceiptView local_receipts = 5;
 }
 
 message ChunkHeaderView {
