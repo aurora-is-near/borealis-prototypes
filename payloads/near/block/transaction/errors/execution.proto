@@ -150,6 +150,21 @@ message TxExecutionError {
       message GlobalContractDoesNotExist {
         GlobalContractIdentifier identifier = 1;
       }
+      message GasKeyDoesNotExist {
+        string account_id = 1;
+        PublicKey public_key = 2;
+      }
+      message InsufficientGasKeyBalance {
+        string account_id = 1;
+        PublicKey public_key = 2;
+        bytes u128_balance = 3;
+        bytes u128_required = 4;
+      }
+      message GasKeyBalanceTooHigh {
+        string account_id = 1;
+        PublicKey public_key = 2;
+        bytes u128_balance = 3;
+      }
       oneof variant {
         AccountAlreadyExists account_already_exists = 1;
         AccountDoesNotExist account_does_not_exist = 2;
@@ -175,6 +190,9 @@ message TxExecutionError {
         DelegateActionNonceTooLarge delegate_action_nonce_too_large = 22;
         NonRefundableTransferToExistingAccount non_refundable_transfer_to_existing_account = 23;
         GlobalContractDoesNotExist global_contract_does_not_exist = 24;
+        GasKeyDoesNotExist gas_key_does_not_exist = 25;
+        InsufficientGasKeyBalance insufficient_gas_key_balance = 26;
+        GasKeyBalanceTooHigh gas_key_balance_too_high = 27;
       }
     }
     optional uint64 index = 1;
@@ -266,6 +284,14 @@ message TxExecutionError {
         uint64 length = 1;
         uint64 limit = 2;
       }
+      message GasKeyInvalidNumNonces {
+        uint32 requested_nonces = 1;
+        uint32 limit = 2;
+      }
+      message AddGasKeyWithNonZeroBalance {
+        bytes u128_balance = 1;
+      }
+      message GasKeyFunctionCallAllowanceNotAllowed {}
       oneof variant {
         DeleteActionMustBeFinal delete_action_must_be_final = 1;
         TotalPrepaidGasExceeded total_prepaid_gas_exceeded = 2;
@@ -284,6 +310,9 @@ message TxExecutionError {
         InvalidDeterministicStateInitReceiver invalid_deterministic_state_init_receiver = 15;
         DeterministicStateInitKeyLengthExceeded deterministic_state_init_key_length_exceeded = 16;
         DeterministicStateInitValueLengthExceeded deterministic_state_init_value_length_exceeded = 17;
+        GasKeyInvalidNumNonces gas_key_invalid_num_nonces = 18;
+        AddGasKeyWithNonZeroBalance add_gas_key_with_non_zero_balance = 19;
+        GasKeyFunctionCallAllowanceNotAllowed gas_key_function_call_allowance_not_allowed = 20;
       }
     }
     message TransactionSizeExceeded {
@@ -338,6 +367,29 @@ message TxExecutionError {
       uint32 shard_id = 1;
       uint64 missed_chunks = 2;
     }
+    message InvalidNonceIndex {
+      optional uint32 tx_nonce_index = 1;
+      uint32 num_nonces = 2;
+    }
+    message NotEnoughGasKeyBalance {
+      string signer_id = 1;
+      bytes u128_balance = 2;
+      bytes u128_cost = 3;
+    }
+    message NotEnoughBalanceForDeposit {
+      message DepositCostFailureReason {
+        message NotEnoughBalance {}
+        message LackBalanceForState {}
+        oneof variant {
+          NotEnoughBalance not_enough_balance = 1;
+          LackBalanceForState lack_balance_for_state = 2;
+        }
+      }
+      string signer_id = 1;
+      bytes u128_balance = 2;
+      bytes u128_cost = 3;
+      DepositCostFailureReason reason = 4;
+    }
     oneof variant {
       InvalidAccessKeyError invalid_access_key_error = 1;
       InvalidSignerId invalid_signer_id = 2;
@@ -357,6 +409,9 @@ message TxExecutionError {
       StorageError storage_error = 16;
       ShardCongested shard_congested = 17;
       ShardStuck shard_stuck = 18;
+      InvalidNonceIndex invalid_nonce_index = 19;
+      NotEnoughGasKeyBalance not_enough_gas_key_balance = 20;
+      NotEnoughBalanceForDeposit not_enough_balance_for_deposit = 21;
     }
   }
   oneof variant {

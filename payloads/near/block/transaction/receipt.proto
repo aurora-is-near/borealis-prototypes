@@ -34,6 +34,7 @@ message ReceiptEnumView {
     uint64 target_shard = 2;
     repeated uint64 already_delivered_shards = 3;
     bytes code = 4;
+    optional uint64 nonce = 5;
   }
   oneof variant {
     Action action = 1;
@@ -122,9 +123,17 @@ message ActionView {
     message DataEntry {
       bytes key = 1;
       bytes value = 2;
-      }
+    }
     repeated DataEntry data = 2; // data: BTreeMap<Vec<u8>, Vec<u8>>,
     bytes u128_deposit = 3;
+  }
+  message TransferToGasKey {
+    PublicKey public_key = 1;
+    bytes u128_deposit = 2;
+  }
+  message WithdrawFromGasKey {
+    PublicKey public_key = 1;
+    bytes u128_amount = 2;
   }
   oneof variant {
     CreateAccount create_account = 1;
@@ -142,5 +151,7 @@ message ActionView {
     UseGlobalContract use_global_contract = 13;
     UseGlobalContractByAccountId use_global_contract_by_account_id = 14;
     DeterministicStateInit deterministic_state_init = 15;
+    TransferToGasKey transfer_to_gas_key = 16;
+    WithdrawFromGasKey withdraw_from_gas_key = 17;
   }
 }
