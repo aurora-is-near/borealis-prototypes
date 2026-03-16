@@ -14,14 +14,21 @@ message AccessKeyPermissionView {
     repeated string method_names = 3;
   }
   message FullAccess {}
+  message GasKeyFunctionCall {
+    bytes u128_balance = 1;
+    uint32 num_nonces = 2;
+    optional bytes u128_allowance = 3;
+    string receiver_id = 4;
+    repeated string method_names = 5;
+  }
+  message GasKeyFullAccess {
+    bytes u128_balance = 1;
+    uint32 num_nonces = 2;
+  }
   oneof variant {
     FunctionCall function_call = 1;
     FullAccess full_access = 2;
+    GasKeyFunctionCall gas_key_function_call = 3;
+    GasKeyFullAccess gas_key_full_access = 4;
   }
-}
-
-message GasKeyView {
-  uint32 num_nonces = 1;
-  bytes u128_balance = 2;
-  AccessKeyPermissionView permission = 3;
 }
