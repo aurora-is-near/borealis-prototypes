@@ -71,6 +71,9 @@ message HostError {
   // Invalid input to ed25519 signature verification function (e.g. signature cannot be
   // derived from bytes).
   message Ed25519VerifyInvalidInput { string msg = 1; }
+  // Input length mismatch for p256 signature verification (signature is not 64
+  // bytes or public key is not 33 bytes).
+  message P256VerifyInvalidInput {string msg = 1;}
   oneof variant {
     BadUTF16 bad_utf16 = 1;
     BadUTF8 bad_utf8 = 2;
@@ -105,5 +108,6 @@ message HostError {
     ECRecoverError ecrecover_error = 31;
     AltBn128InvalidInput alt_bn_128_invalid_input = 32;
     Ed25519VerifyInvalidInput ed25519_verify_invalid_input = 33;
+    P256VerifyInvalidInput p256_verify_invalid_input = 34;
   }
 }
