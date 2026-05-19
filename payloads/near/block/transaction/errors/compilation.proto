@@ -33,6 +33,23 @@ enum PrepareError {
   TOO_MANY_TABLES = 9;
   // Contract contains too many table elements.
   TOO_MANY_TABLE_ELEMENTS = 10;
+  // A function body in the contract exceeds the size limit.
+  FUNCTION_BODY_TOO_LARGE = 11;
+  // The instrumented code exceeds the size limit.
+  INSTRUMENTED_CODE_TOO_LARGE = 12;
+  // A function contains too many basic blocks.
+  TOO_MANY_BLOCKS_PER_FUNCTION = 13;
+  // A contract contains too many basic blocks.
+  TOO_MANY_BLOCKS_PER_CONTRACT = 14;
+  // Contract declares too many entries in the wasm type section.
+  TOO_MANY_TYPES = 15;
+  // All contract functions combined have more than `max_params_per_contract` parameters.
+  TOO_MANY_PARAMS_PER_FUNCTION = 16;
+  // A function has more than `max_params_per_function` parameters.
+  TOO_MANY_PARAMS_PER_CONTRACT = 17;
+  // A function's max operand-stack size (in bytes) exceeds
+  // `max_operand_stack_bytes_per_function`.
+  OPERAND_STACK_TOO_LARGE = 18;
 }
 
 message CompilationError {

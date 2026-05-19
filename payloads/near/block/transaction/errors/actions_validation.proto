@@ -87,6 +87,12 @@ message ActionsValidationError {
     bytes u128_balance = 1;
   }
   message GasKeyFunctionCallAllowanceNotAllowed {}
+  // The combined number of `DeployContract` and `DeployGlobalContract`
+  // actions in one receipt exceeded the limit.
+  message TotalNumberOfDeployActionsExceeded {
+    uint64 number_of_deploy_actions = 1;
+    uint64 limit = 2;
+  }
   oneof variant {
     DeleteActionMustBeFinal delete_action_must_be_final = 1;
     TotalPrepaidGasExceeded total_prepaid_gas_exceeded = 2;
@@ -108,5 +114,6 @@ message ActionsValidationError {
     GasKeyInvalidNumNonces gas_key_invalid_num_nonces = 18;
     AddGasKeyWithNonZeroBalance add_gas_key_with_non_zero_balance = 19;
     GasKeyFunctionCallAllowanceNotAllowed gas_key_function_call_allowance_not_allowed = 20;
+    TotalNumberOfDeployActionsExceeded total_number_of_deploy_actions_exceeded = 21;
   }
 }
