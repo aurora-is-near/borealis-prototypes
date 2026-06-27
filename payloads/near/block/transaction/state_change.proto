@@ -59,12 +59,12 @@ message StateChangeValueView {
   }
   message AccessKeyUpdate {
     string account_id = 1;
-    PublicKey public_key = 2;
+    PublicKeyHandle public_key = 2;
     AccessKeyView access_key = 3;
   }
   message AccessKeyDeletion {
     string account_id = 1;
-    PublicKey public_key = 2;
+    PublicKeyHandle public_key = 2;
   }
   message DataUpdate {
     string account_id = 1;
@@ -84,7 +84,7 @@ message StateChangeValueView {
   }
   message GasKeyNonceUpdate {
     string account_id = 1;
-    PublicKey public_key = 2;
+    PublicKeyHandle public_key = 2;
     uint32 index = 3;
     uint64 nonce = 4;
   }

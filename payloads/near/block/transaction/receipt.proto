@@ -103,6 +103,49 @@ message ActionView {
     DelegateAction delegate_action = 1;
     Signature signature = 2;
   }
+  // Delegate action with gas key support. `nonce` is versioned: it selects
+  // either an access key's nonce or one of a gas key's parallel nonces.
+  message DelegateV2 {
+    message DelegateActionV2 {
+      message NonDelegateAction {
+        ActionView action = 1;
+      }
+      // Nonce of the signing key. For a gas key it also selects which of the
+      // parallel nonces to advance (the GasKeyNonce variant).
+      message TransactionNonce {
+        message Nonce {
+          uint64 nonce = 1;
+        }
+        message GasKeyNonce {
+          uint64 nonce = 1;
+          uint32 nonce_index = 2;
+        }
+        oneof variant {
+          Nonce nonce = 1;
+          GasKeyNonce gas_key_nonce = 2;
+        }
+      }
+      // Signer of the delegated actions.
+      string sender_id = 1;
+      // Receiver of the delegated actions.
+      string receiver_id = 2;
+      // List of actions to be executed.
+      repeated NonDelegateAction actions = 3;
+      TransactionNonce nonce = 4;
+      // The maximal height of the block below which the given action is valid.
+      uint64 max_block_height = 5;
+      // Public key used to sign this delegated action.
+      PublicKey public_key = 6;
+    }
+    // Versioned payload carried by `Action::DelegateV2`.
+    message VersionedDelegateActionPayload {
+      oneof variant {
+        DelegateActionV2 v2 = 1;
+      }
+    }
+    VersionedDelegateActionPayload delegate_action = 1;
+    Signature signature = 2;
+  }
   message NonrefundableStorageTransfer {
     bytes u128_deposit = 1;
   }
@@ -153,5 +196,6 @@ message ActionView {
     DeterministicStateInit deterministic_state_init = 15;
     TransferToGasKey transfer_to_gas_key = 16;
     WithdrawFromGasKey withdraw_from_gas_key = 17;
+    DelegateV2 delegate_v2 = 18;
   }
 }
