@@ -13,9 +13,13 @@ message Signature {
   message SECP256K1 {
     bytes h520_value = 1;
   }
+  message MLDSA65 {
+    bytes value = 1;
+  }
   oneof variant {
     ED25519 ed25519 = 1;
     SECP256K1 secp256k1 = 2;
+    MLDSA65 mldsa65 = 3;
   }
 }
 
@@ -26,9 +30,30 @@ message PublicKey {
   message SECP256K1 {
     bytes h512_value = 1;
   }
+  message MLDSA65 {
+    bytes value = 1;
+  }
   oneof variant {
     ED25519 ed25519 = 1;
     SECP256K1 secp256k1 = 2;
+    MLDSA65 mldsa65 = 3;
+  }
+}
+
+message PublicKeyHandle {
+  message ED25519 {
+    bytes h256_value = 1;
+  }
+  message SECP256K1 {
+    bytes h512_value = 1;
+  }
+  message MlDsa65 {
+    bytes hash = 1;
+  }
+  oneof variant {
+    ED25519 ed25519 = 1;
+    SECP256K1 secp256k1 = 2;
+    MlDsa65 ml_dsa65 = 3;
   }
 }
 
